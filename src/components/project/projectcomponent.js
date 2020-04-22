@@ -83,6 +83,7 @@ function ProjectComponent(props) {
     };
     sendMSGtoServer("NEW_PROGRAM", newProgram);
     destroyAll();
+    history.push("/Program");
   };
   const handleOk = (e) => {
     form.submit();

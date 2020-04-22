@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { renderPosOption, newPos } from "./renderPos";
 import { Form, Input, Select, Button } from "antd";
 import { connect } from "dva";
-import { sendMSGtoController, sendMSGtoServer } from "service/network";
+import { sendMSGtoServer } from "service/network";
 
 const mapStateToProps = (state) => {
   return {
