@@ -133,7 +133,7 @@ function Program(props) {
     <div>
       {/* 主界面 */}
       <ConTitle
-        title={intl.get("程序")}
+        title={`${intl.get("程序")} ${props.program.name}`}
         subtitle={intl.get(" ")}
         buttonLink="/Project"
       />
