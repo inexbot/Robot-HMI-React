@@ -56,7 +56,7 @@ function Program(props) {
       key: "name",
       className: "pro_tit",
       render: (text) => (
-        <div className="instructName" type={{ color: "FF00FF" }}>
+        <div className='instructName' type={{ color: "FF00FF" }}>
           {text}
         </div>
       ),
@@ -83,98 +83,57 @@ function Program(props) {
         dataSource = [];
       } else {
         // 遍历获取指令数据
-        instruct.map((value,index) => {
-          if(index === 0){return;}else{
-          if (value === null) {
-            dataSource.push({
-              key: keyOfInstruct,
-              order: keyOfInstruct,
-              name: "未解析指令",
-              para: "未解析指令",
-              insName: "未解析指令",
-            });
+        instruct.map((value, index) => {
+          if (index === 0) {
+            return;
           } else {
-            dataSource.push({
-              key: keyOfInstruct,
-              order: keyOfInstruct,
-              name: intl.get(value.name),
-              para: renderInstruct(value.name, value.para),
-              insName: value.name,
-            });
+            if (value === null) {
+              dataSource.push({
+                key: keyOfInstruct,
+                order: keyOfInstruct,
+                name: "未解析指令",
+                para: "未解析指令",
+                insName: "未解析指令",
+              });
+            } else {
+              dataSource.push({
+                key: keyOfInstruct,
+                order: keyOfInstruct,
+                name: intl.get(value.name),
+                para: renderInstruct(value.name, value.para),
+                insName: value.name,
+              });
+            }
+            keyOfInstruct = keyOfInstruct + 1;
+            return value;
           }
-          keyOfInstruct = keyOfInstruct + 1;
-          return value;
-        }});
+        });
       }
       setDataSourceMain(dataSource);
     }
   }, [props.program]);
 
-  const changevalue = () => {
-    setInsertOrChange("change");
-    setChangeVisible(true);
-  };
-  const onClose = () => {
-    setChangeVisible(false);
-  };
-  const onFinish = () => {
-    form.submit();
-  };
   const insertCommand = () => {
     setInsertOrChange("insert");
     setChangeVisible(true);
   };
-  const deleteCommand= () =>{
-    let deleteData = {
-      line:selectedRow
-    }
-    sendMSGtoServer("DELETE_COMMAND",deleteData);
-  }
+
   return (
     <div>
       {/* 主界面 */}
       <ConTitle
         title={`${intl.get("程序")} ${props.program.name}`}
         subtitle={intl.get(" ")}
-        buttonLink="/Project"
+        buttonLink='/Project'
       />
-      <Button onClick={changevalue}>修改指令</Button>
+      <Button>修改指令</Button>
       <Button onClick={insertCommand}>插入MOVJ</Button>
-      <Button onClick={deleteCommand}>删除</Button>
+      <Button>删除</Button>
       {/* <div id="changeMenu" style={{ visibility: changeVisible }}>
         <ChangeInstructValue name={selectedName} row={selectedRow} />
       </div> */}
-      <ProgramComponent setinsertOrChange={setInsertOrChange} setchangeVisible={setChangeVisible}/>
-      <Drawer
-        title="指令"
-        width={720}
-        onClose={onClose}
-        visible={changeVisible}
-        bodyStyle={{ paddingBottom: 80 }}
-        destroyOnClose={true}
-        closable={false}
-        footer={
-          <div
-            style={{
-              textAlign: "left",
-            }}
-          >
-            <Button onClick={onClose} style={{ marginRight: 8 }}>
-              关闭
-            </Button>
-            <Button onClick={onFinish} style={{ marginRight: 8 }}>
-              保存
-            </Button>
-          </div>
-        }
-      >
-        <ChangeInstructValue
-          name={selectedName}
-          row={selectedRow}
-          form={form}
-          insertOrChange={insertOrChange}
-        />
-      </Drawer>
+      <ProgramComponent selectedName={selectedName} selectedRow={selectedRow} />
+
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
         <Table
           dataSource={dataSourceMain}

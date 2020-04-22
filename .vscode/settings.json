@@ -1,0 +1,6 @@
+{
+    "prettier.jsxSingleQuote": true,
+    "prettier.jsxBracketSameLine": true,
+    "prettier.packageManager": "yarn",
+    "prettier.endOfLine": "auto"
+}

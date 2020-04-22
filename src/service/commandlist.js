@@ -34,7 +34,7 @@ export const CommandList = {
   data:{
     line:12
   } */
-  DELETE_COMMAND:0x1121,
+  DELETE_COMMAND: 0x1121,
   CheckState: 0x1000, // 查询Server端的启动状态
   JOG_OPERATION_MOVE: 0x2901, // 点动开始
   JOG_OPERATION_STOP: 0x2902, // 点动结束
@@ -47,14 +47,14 @@ export const CommandList = {
     "robot":1
     "jobname":"abc.JBR"   //作业文件名
   } */
-  NEW_PROGRAM:0x1115,
+  NEW_PROGRAM: 0x1115,
   /* 删除程序
   data:{
     "robot":1
     "jobname":"abc.JBR"   //作业文件名
   } */
-  DELETE_PROGRAM:0x1116,
-/*插入指令
+  DELETE_PROGRAM: 0x1116,
+  /*插入指令
   data:{
     line:1,
     name:"MOVJ",
@@ -64,7 +64,7 @@ export const CommandList = {
     DEC:12,
     PL:1
   } */
-  INSERT_COMMAND:0x1120,
+  INSERT_COMMAND: 0x1120,
   /* 切换机器人
   data:{
     "mode":0,			//0：单机模式，1：多机模式

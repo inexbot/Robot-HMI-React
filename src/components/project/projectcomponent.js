@@ -100,26 +100,23 @@ function ProjectComponent(props) {
     content: (
       <Form
         {...layout}
-        name="basic"
+        name='basic'
         form={form}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
+        onFinishFailed={onFinishFailed}>
         <Form.Item
-          label="程序名"
-          name="programName"
-          rules={[{ required: true }]}
-        >
+          label='程序名'
+          name='programName'
+          rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item
-          label="程序类型"
-          name="programType"
-          rules={[{ required: true }]}
-        >
+          label='程序类型'
+          name='programType'
+          rules={[{ required: true }]}>
           <Select>
-            <Option value="JBR">主程序</Option>
-            <Option value="JBP">后台程序</Option>
+            <Option value='JBR'>主程序</Option>
+            <Option value='JBP'>后台程序</Option>
           </Select>
         </Form.Item>
       </Form>
@@ -128,13 +125,21 @@ function ProjectComponent(props) {
 
   return (
     <div>
-      <div className="hoverButton1">
-        <Button type={buttonType1} shape="circle" size="large" onClick={showModal}>
+      <div className='hoverButton1'>
+        <Button
+          type={buttonType1}
+          shape='circle'
+          size='large'
+          onClick={showModal}>
           新建
         </Button>
       </div>
-      <div className="hoverButton2">
-        <Button shape="circle" size="large" onClick={openProgram} disabled={openDisabled}>
+      <div className='hoverButton2'>
+        <Button
+          shape='circle'
+          size='large'
+          onClick={openProgram}
+          disabled={openDisabled}>
           打开
         </Button>
       </div>
