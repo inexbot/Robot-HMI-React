@@ -15,6 +15,7 @@
     height: 50px;
     position: absolute;
     bottom: 0px;
+    border-top: rgba(255,255,255,0.4) 1px solid;
 }
 
 .progadd {
@@ -23,11 +24,11 @@
     /* display: none; */
 }
 
-.progadd .progaddLeft{
-    padding:16px;
-}
-.progadd .progaddRight{
-    padding:16px;
+.progadd .progaddLeft,.progadd .progaddRight{
+    padding-left: 16px;
+    overflow:scroll;
+    height: 450px;
+    margin-top: 16px;
 }
 
 .progmore{
