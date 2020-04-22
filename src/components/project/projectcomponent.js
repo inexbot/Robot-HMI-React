@@ -23,6 +23,7 @@ function ProjectComponent(props) {
   const currentRobot = props.currentRobot;
   const selectedProject = props.selectedProject;
   const selectedProgram = props.selectedProgram;
+  const [buttonType1, setButtonType1] = useState("primary");
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -70,6 +71,7 @@ function ProjectComponent(props) {
   };
   const showModal = () => {
     confirm(modalConfig);
+    setButtonType1("dashed");
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -126,12 +128,16 @@ function ProjectComponent(props) {
 
   return (
     <div>
-      <Button shape="circle" onClick={showModal}>
-        新建
-      </Button>
-      <Button shape="circle" onClick={openProgram} disabled={openDisabled}>
-        打开
-      </Button>
+      <div className="hoverButton1">
+        <Button type={buttonType1} shape="circle" size="large" onClick={showModal}>
+          新建
+        </Button>
+      </div>
+      <div className="hoverButton2">
+        <Button shape="circle" size="large" onClick={openProgram} disabled={openDisabled}>
+          打开
+        </Button>
+      </div>
     </div>
   );
 }
