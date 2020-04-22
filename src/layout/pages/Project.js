@@ -7,7 +7,7 @@ import ProjectComponent from "components/project/projectcomponent";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./Project.css";
-const {confirm} = Modal;
+const { confirm } = Modal;
 const { TabPane } = Tabs;
 // 从全局的状态获取当前机器人状态
 const mapStateToProps = (state) => {
@@ -31,20 +31,20 @@ function Project(props) {
   useEffect(() => {
     sendMSGtoServer("Project", { robot: props.currentRobot });
   }, [props.currentRobot]);
-  const deleteProgram=()=>{
-    confirm(modalConfigDeleteProgram)
-  }
-  const handleOkDeleteProgram = () =>{
+  const deleteProgram = () => {
+    confirm(modalConfigDeleteProgram);
+  };
+  const handleOkDeleteProgram = () => {
     let deleteData = {
       robot: props.currentRobot,
       jobname: selectedProgram,
     };
     sendMSGtoServer("DELETE_PROGRAM", deleteData);
     Modal.destroyAll();
-  }
-  const handleCancelDeleteProgram = () =>{
+  };
+  const handleCancelDeleteProgram = () => {
     Modal.destroyAll();
-  }
+  };
   const modalConfigDeleteProgram = {
     title: "确认",
     onOk: handleOkDeleteProgram,
@@ -81,7 +81,7 @@ function Project(props) {
     if (props.project === undefined) {
       setTabPanel(
         <TabPane tab={"无工程"}>
-          <Table columns={columns} key="0" />
+          <Table columns={columns} key='0' />
         </TabPane>
       );
       return;
@@ -146,7 +146,7 @@ function Project(props) {
         selectedProgram={selectedProgram}
       />
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
-        <Tabs tabPosition="left" className="Pro_table">
+        <Tabs tabPosition='left' className='Pro_table'>
           {tabPanel}
         </Tabs>
       </ConfigProvider>

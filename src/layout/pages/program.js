@@ -113,8 +113,6 @@ function Program(props) {
     }
   }, [props.program]);
 
-  
-
   return (
     <div>
       {/* 主界面 */}

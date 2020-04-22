@@ -6,7 +6,9 @@ import {
   EditOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import ChangeInstructValue from "layout/pages/program_changevalue_header";
+import ChangeInstructValue, {
+  instructType,
+} from "layout/pages/program_changevalue_header";
 import { sendMSGtoServer } from "service/network";
 import { changevalue } from "service/network";
 import "./programcomponent.css";
@@ -16,20 +18,7 @@ const mapStateToProps = (state) => {
     program: state.index.program,
   };
 };
-const instructType = [
-  { name: "运动控制", list: ["MOVJ", "MOVL", "MOVC","MOVCA","IMOVE", "MOVS", "MOVABS","MOVJEXT","MOVLEXT", "MOVCEXT","MOVJSYNC","MOVLSYNC", "MOVCSYNC", "MOVCASYNC","MOVCOMM","SPEED"] },
-  { name: "输入输出", list: ["DIN", "DOUT","AIN", "AOUT","PULSEOUT", "READOUT"] },
-  { name: "条件控制", list: ["Delay", "Call", "IF","ELSEIF","ELSE", "Wait", "WHILE","LABEL","JUMP", "UNTIL","CraftLine","CmdNote", "PosReachable", "ClkStart","ClkStop","ClkReset"] },
-  { name: "变量", list: ["SetInt", "SetDouble", "SetBool","ForceSet"] },
-  { name: "运算", list: ["Add", "Sub", "Mul","Div","Mod", "Sin", "Cos","Atan","LogicalOp"] },
-  { name: "坐标切换", list: ["SwitchTool", "SwitchUser", "TransUserCoord"] },
-  { name: "网络通讯", list: ["SendMsg", "ParseMsg", "ReadComm","OpenMsg","CloseMsg", "PrintMsg", "MsgConnSt"] },
-  { name: "位置变量", list: ["SetUserFrame", "SetToolFrame", "ReadPos","PosAdd","PosSub", "PosSet", "CopyPos"] },
-  { name: "程序控制", list: ["TaskRun", "TaskStop", "ProPause","ProContinue","ProStop", "ProRestart"] },
-  { name: "视觉命令", list: ["VinsionStart", "VisionTrg", "VisionPosNum","VisionPos","VisionClear", "VisionEnd"] },
-  { name: "传送带控制", list: ["ConveyorStart", "ConveyorEnd", "ConveyorCheckPos","ConveyorCheckEnd"] },
-  { name: "焊接工艺", list: ["ArcStart", "ArcEnd", "ArcSet","WvStart","WvEnd", "Cil", "TigWeldStart","TigWeldEnd","FeedWire", "SearchInitialize","SearchMeasure","SearchCorr", "SearchCancelCorr", "SearchCalbr","SearchEnd","LaserTrackStart","LaserTrackEnd"] },
-];
+
 function ProgramComponent(props) {
   const [insertOrChange, setInsertOrChange] = useState("insert");
   const [changeVisible, setChangeVisible] = useState(false);
@@ -43,7 +32,11 @@ function ProgramComponent(props) {
     let rightList = [];
     let ins = instructType[type].list;
     ins.map((value) => {
-      rightList.push(<p>{value}</p>);
+      rightList.push(
+        <p onClick={insertCommand.bind(this, value)} key={value}>
+          {value}
+        </p>
+      );
     });
     setInstructList(rightList);
   }, [type]);
@@ -82,7 +75,7 @@ function ProgramComponent(props) {
   const showModalDeleteCommand = () => {
     confirm(modalConfigDeleteCommand);
   };
-  
+
   const changeType = (type) => {
     setType(type);
   };
@@ -90,7 +83,11 @@ function ProgramComponent(props) {
   const renderType = () => {
     let leftList = [];
     instructType.map((value, index) => {
-      leftList.push(<p onClick={changeType.bind(this, index)}>{value.name}</p>);
+      leftList.push(
+        <p onClick={changeType.bind(this, index)} key={value.name}>
+          {value.name}
+        </p>
+      );
     });
     return leftList;
   };
@@ -103,10 +100,10 @@ function ProgramComponent(props) {
     <div className='progcomponent'>
       <div className='progadd'>
         <Row>
-          <Col span={8} className="progaddLeft">
+          <Col span={8} className='progaddLeft'>
             {renderType()}
           </Col>
-          <Col span={16} className="progaddRight">
+          <Col span={16} className='progaddRight'>
             {instructList}
           </Col>
         </Row>
@@ -134,7 +131,7 @@ function ProgramComponent(props) {
         </Row>
       </div>
       <Drawer
-        title='指令'
+        title={`指令`}
         width={720}
         onClose={onClose}
         visible={changeVisible}
@@ -150,7 +147,13 @@ function ProgramComponent(props) {
               关闭
             </Button>
             <Button onClick={onFinish} style={{ marginRight: 8 }}>
-              {()=>{if(insertOrChange === "change"){return "保存"}else{return "插入"}}}
+              {() => {
+                if (insertOrChange === "change") {
+                  return "保存";
+                } else {
+                  return "插入";
+                }
+              }}
             </Button>
           </div>
         }>

@@ -10,20 +10,44 @@ const mapStateToProps = (state) => {
     currentPos: state.index.robotStatus.pos,
   };
 };
+const insertDefaultValue = {
+  POS: "new",
+  VJ: 40,
+  PL: 5,
+  ACC: 10,
+  DEC: 10,
+};
 
 function Movj(props) {
-  const parameter = props.program.instruct[props.row - 1].para;
   const posSum = props.program.var.position;
   useEffect(() => {
+    let para;
+    if (props.insertOrChange === "change") {
+      para = props.program.instruct[props.row - 1].para;
+    } else {
+      para = insertDefaultValue;
+    }
     props.form.setFieldsValue({
-      POS: parameter.POS,
-      VJ: parameter.VJ,
-      PL: parameter.PL,
-      ACC: parameter.ACC,
-      DEC: parameter.DEC,
+      POS: para.POS,
+      VJ: para.VJ,
+      PL: para.PL,
+      ACC: para.ACC,
+      DEC: para.DEC,
     });
-  }, [parameter, props.form]);
+  }, [props.row, props.insertOrChange, props.form]);
   const onFinish = (value) => {
+    let pos;
+    let posType;
+    let posName;
+    if (value.POS === "new") {
+      pos = props.currentPos;
+      posType = 0;
+      posName = newPos(posSum);
+    } else {
+      pos = value.POS;
+      posType = 1;
+      posName = null;
+    }
     if (props.insertOrChange === "change") {
       let sendData = {
         pos: props.row,
@@ -35,18 +59,6 @@ function Movj(props) {
       };
       return;
     } else {
-      let pos;
-      let posType;
-      let posName;
-      if (value.POS === "new") {
-        pos = props.currentPos;
-        posType = 0;
-        posName = newPos(posSum);
-      } else {
-        pos = value.POS;
-        posType = 1;
-        posName = null;
-      }
       let sendInsert = {
         line: props.row,
         name: "MOVJ",
