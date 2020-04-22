@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import { Table, Button, Drawer, Form, notification } from "antd";
+import {
+  Table,
+  Button,
+  Drawer,
+  Form,
+  notification,
+  ConfigProvider,
+} from "antd";
 import { connect } from "dva";
 import { renderInstruct } from "./program_instruct_header";
 import ConTitle from "components/title";
@@ -18,6 +25,13 @@ const mapStateToProps = (state) => {
     program: state.index.program,
   };
 };
+// 空状态
+const customizeRenderEmpty = () => (
+  <div style={{ textAlign: "center" }}>
+    <p>空程序，请插入指令</p>
+  </div>
+);
+
 // 工程界面组件
 
 function Program(props) {
@@ -59,31 +73,36 @@ function Program(props) {
       });
       return;
     } else {
+      let instruct = props.program.instruct;
       let keyOfInstruct = 1;
       // 标签页内表格的表头
       let dataSource = [];
-      // 遍历获取指令数据
-      props.program.instruct.map((value) => {
-        if (value === null) {
-          dataSource.push({
-            key: keyOfInstruct,
-            order: keyOfInstruct,
-            name: "未解析指令",
-            para: "未解析指令",
-            insName: "未解析指令",
-          });
-        } else {
-          dataSource.push({
-            key: keyOfInstruct,
-            order: keyOfInstruct,
-            name: intl.get(value.name),
-            para: renderInstruct(value.name, value.para),
-            insName: value.name,
-          });
-        }
-        keyOfInstruct = keyOfInstruct + 1;
-        return value;
-      });
+      if (instruct === undefined) {
+        dataSource = [];
+      } else {
+        // 遍历获取指令数据
+        instruct.map((value) => {
+          if (value === null) {
+            dataSource.push({
+              key: keyOfInstruct,
+              order: keyOfInstruct,
+              name: "未解析指令",
+              para: "未解析指令",
+              insName: "未解析指令",
+            });
+          } else {
+            dataSource.push({
+              key: keyOfInstruct,
+              order: keyOfInstruct,
+              name: intl.get(value.name),
+              para: renderInstruct(value.name, value.para),
+              insName: value.name,
+            });
+          }
+          keyOfInstruct = keyOfInstruct + 1;
+          return value;
+        });
+      }
       setDataSourceMain(dataSource);
     }
   }, [props.program]);
@@ -105,7 +124,11 @@ function Program(props) {
   return (
     <div>
       {/* 主界面 */}
-      <ConTitle title={intl.get("程序")} subtitle={intl.get(" ")} buttonLink="/Project" />
+      <ConTitle
+        title={intl.get("程序")}
+        subtitle={intl.get(" ")}
+        buttonLink="/Project"
+      />
       <Button onClick={changevalue}>修改指令</Button>
       <Button onClick={insertCommand}>插入MOVJ</Button>
       {/* <div id="changeMenu" style={{ visibility: changeVisible }}>
@@ -141,24 +164,26 @@ function Program(props) {
           insertOrChange={insertOrChange}
         />
       </Drawer>
-      <Table
-        dataSource={dataSourceMain}
-        columns={columns}
-        /* scroll={
+      <ConfigProvider renderEmpty={customizeRenderEmpty}>
+        <Table
+          dataSource={dataSourceMain}
+          columns={columns}
+          /* scroll={
           {y:"500px"}
         } */
-        pagination={false}
-        onRow={(record) => {
-          return {
-            // 点击表格每一行后的回调
-            onClick: (event) => {
-              console.log(record.order, record.insName);
-              setSelectedRow(record.order);
-              setSelectedName(record.insName);
-            },
-          };
-        }}
-      />
+          pagination={false}
+          onRow={(record) => {
+            return {
+              // 点击表格每一行后的回调
+              onClick: (event) => {
+                console.log(record.order, record.insName);
+                setSelectedRow(record.order);
+                setSelectedName(record.insName);
+              },
+            };
+          }}
+        />
+      </ConfigProvider>
     </div>
   );
 }
