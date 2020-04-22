@@ -144,7 +144,7 @@ function Program(props) {
       {/* <div id="changeMenu" style={{ visibility: changeVisible }}>
         <ChangeInstructValue name={selectedName} row={selectedRow} />
       </div> */}
-      <ProgramComponent />
+      <ProgramComponent setinsertOrChange={setInsertOrChange} setchangeVisible={setChangeVisible}/>
       <Drawer
         title="指令"
         width={720}
