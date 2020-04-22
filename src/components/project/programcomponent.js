@@ -1,11 +1,45 @@
-import React from 'react';
-import { Row,Col } from 'antd';
+import React from "react";
+import { Row, Col } from "antd";
+import { connect } from "dva";
+import {
+  PlusOutlined,
+  EditOutlined,
+  EllipsisOutlined,
+} from "@ant-design/icons";
+import { sendMSGtoServer } from "service/network";
+import { changevalue } from "service/network";
 import "./programcomponent.css";
 
-const ProgramComponent = () => (
-  <div className="programcomponent">
-      
-  </div>
-);
+const mapStateToProps = (state) => {
+  return {
+    program: state.index.program,
+  };
+};
+function ProgramComponent(props) {
+  const setinsertOrChange = props.setinsertOrChange;
+  const setchangeVisible = props.setchangeVisible;
+  const changevalue = () => {
+    let deleteData = {
+      setinsertOrChange: setinsertOrChange,
+      setchangeVisible: setchangeVisible,
+    };
+    sendMSGtoServer("DELETE_PROGRAM", deleteData);
+  };
 
-export default ProgramComponent;
+  return (
+    <div className="programcomponent">
+      <Row style={{ width: "100%" }}>
+        <Col span={6} offset={3}>
+          <PlusOutlined className="icon" />
+        </Col>
+        <Col span={6}>
+          <EditOutlined className="icon" onClick={changevalue} />
+        </Col>
+        <Col span={6}>
+          <EllipsisOutlined className="icon" />
+        </Col>
+      </Row>
+    </div>
+  );
+}
+export default connect(mapStateToProps)(ProgramComponent);

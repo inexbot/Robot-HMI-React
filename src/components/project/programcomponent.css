@@ -1,8 +1,17 @@
 .programcomponent{
     background: rgba(0,0,0,0.5);
     display: flex;
-    flex-direction: row-reverse;
     width: 30vw;
     height: 50px;
     border-radius: 25px;
+    position: absolute;
+    bottom: 12vh;
+    right: 10vw;
+}
+
+.programcomponent .icon{
+    color: #ffffff;
+    font-size: 30px;
+    padding: 10px 20px;
+    justify-content: center;
 }
