@@ -5,6 +5,7 @@ import { connect } from "dva";
 import { renderInstruct } from "./program_instruct_header";
 import ConTitle from "components/title";
 import ChangeInstructValue from "./program_changevalue_header";
+import ProgramComponent from "../../components/project/programcomponent";
 import "./Project.css";
 
 // 从全局的状态获取当前机器人状态
@@ -111,6 +112,7 @@ function Program(props) {
       {/* <div id="changeMenu" style={{ visibility: changeVisible }}>
         <ChangeInstructValue name={selectedName} row={selectedRow} />
       </div> */}
+      <ProgramComponent />
       <Drawer
         title="指令"
         width={720}

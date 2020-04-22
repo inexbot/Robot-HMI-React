@@ -42,14 +42,14 @@ function Usercoo(props) {
 
       {/* 主要内容 */}
       <div className="Usercoo">
-        <Row>
-          <Col span={16}>
+        <Row style={{width:"100%"}}>
+          <Col span={20} offset={2}>
             <div style={{ paddingBottom: 10 }}>
               <p>
                 <span>{intl.get("当前用户坐标")}:</span>
                 <Select
                   defaultValue="无"
-                  style={{ width: 200, padding: 20 }}
+                  style={{ width: 200, margin: 20 }}
                   disabled={isDisabled}
                 >
                   <Option value="tool0">{intl.get("无")}</Option>
