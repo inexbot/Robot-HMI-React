@@ -16,15 +16,7 @@ const mapStateToProps = (state) => {
   };
 };
 function ProgramComponent(props) {
-  const setinsertOrChange = props.setinsertOrChange;
-  const setchangeVisible = props.setchangeVisible;
-  const changevalue = () => {
-    let deleteData = {
-      setinsertOrChange: setinsertOrChange,
-      setchangeVisible: setchangeVisible,
-    };
-    sendMSGtoServer("DELETE_PROGRAM", deleteData);
-  };
+  
 
   return (
     <div className="programcomponent">
@@ -33,7 +25,7 @@ function ProgramComponent(props) {
           <PlusOutlined className="icon" />
         </Col>
         <Col span={6}>
-          <EditOutlined className="icon" onClick={changevalue} />
+          <EditOutlined className="icon" />
         </Col>
         <Col span={6}>
           <EllipsisOutlined className="icon" />
