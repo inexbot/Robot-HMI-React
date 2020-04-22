@@ -69,8 +69,8 @@ function ProjectComponent(props) {
     });
     history.push("/Program");
   };
-  const showModal = () => {
-    confirm(modalConfig);
+  const showModalNewProgram = () => {
+    confirm(modalConfigNewProgram);
     setButtonType1("dashed");
   };
   const onFinishFailed = (errorInfo) => {
@@ -85,17 +85,17 @@ function ProjectComponent(props) {
     destroyAll();
     history.push("/Program");
   };
-  const handleOk = (e) => {
+  const handleOkNewProgram = (e) => {
     form.submit();
   };
-  const handleCancel = (e) => {
+  const handleCancelNewProgram = (e) => {
     destroyAll();
   };
 
-  const modalConfig = {
+  const modalConfigNewProgram = {
     title: "权限选择",
-    onOk: handleOk,
-    onCancel: handleCancel,
+    onOk: handleOkNewProgram,
+    onCancel: handleCancelNewProgram,
     destroyOnClose: true,
     content: (
       <Form
@@ -130,7 +130,7 @@ function ProjectComponent(props) {
           type={buttonType1}
           shape='circle'
           size='large'
-          onClick={showModal}>
+          onClick={showModalNewProgram}>
           新建
         </Button>
       </div>

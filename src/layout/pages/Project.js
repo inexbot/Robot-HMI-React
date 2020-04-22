@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Tabs, ConfigProvider } from "antd";
+import { Table, Tabs, ConfigProvider, Modal } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { connect, router } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -7,7 +7,7 @@ import ProjectComponent from "components/project/projectcomponent";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./Project.css";
-
+const {confirm} = Modal;
 const { TabPane } = Tabs;
 // 从全局的状态获取当前机器人状态
 const mapStateToProps = (state) => {
@@ -31,12 +31,31 @@ function Project(props) {
   useEffect(() => {
     sendMSGtoServer("Project", { robot: props.currentRobot });
   }, [props.currentRobot]);
-  const deleteProgram = (programName) => {
+  const deleteProgram=()=>{
+    confirm(modalConfigDeleteProgram)
+  }
+  const handleOkDeleteProgram = () =>{
     let deleteData = {
       robot: props.currentRobot,
-      jobname: programName,
+      jobname: selectedProgram,
     };
     sendMSGtoServer("DELETE_PROGRAM", deleteData);
+    Modal.destroyAll();
+  }
+  const handleCancelDeleteProgram = () =>{
+    Modal.destroyAll();
+  }
+  const modalConfigDeleteProgram = {
+    title: "确认",
+    onOk: handleOkDeleteProgram,
+    onCancel: handleCancelDeleteProgram,
+    destroyOnClose: true,
+    content: (
+      <div>
+        <p>是否确认删除程序</p>
+        <p>{selectedProgram}</p>
+      </div>
+    ),
   };
   useEffect(() => {
     const columns = [
@@ -80,7 +99,7 @@ function Project(props) {
           more: (
             <div>
               <EditOutlined />
-              <DeleteOutlined onClick={deleteProgram.bind(this, value.name)} />
+              <DeleteOutlined onClick={deleteProgram} />
             </div>
           ),
           tabName: tabName,

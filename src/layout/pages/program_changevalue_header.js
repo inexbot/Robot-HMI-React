@@ -3,7 +3,13 @@ import Movj from "./Instruct/movj";
 import Movl from "./Instruct/movl";
 
 function ChangeInstructValue(props) {
-  switch (props.name) {
+  let name;
+  if(props.insertOrChange === "change"){
+    name = props.changeName;
+  }else if(props.insertOrChange === "insert"){
+    name = props.insertName;
+  }
+  switch (name) {
     case "MOVJ":
       return <Movj row={props.row} form={props.form} />;
     case "MOVL":

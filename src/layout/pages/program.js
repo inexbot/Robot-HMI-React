@@ -113,10 +113,7 @@ function Program(props) {
     }
   }, [props.program]);
 
-  const insertCommand = () => {
-    setInsertOrChange("insert");
-    setChangeVisible(true);
-  };
+  
 
   return (
     <div>
@@ -126,14 +123,7 @@ function Program(props) {
         subtitle={intl.get(" ")}
         buttonLink='/Project'
       />
-      <Button>修改指令</Button>
-      <Button onClick={insertCommand}>插入MOVJ</Button>
-      <Button>删除</Button>
-      {/* <div id="changeMenu" style={{ visibility: changeVisible }}>
-        <ChangeInstructValue name={selectedName} row={selectedRow} />
-      </div> */}
       <ProgramComponent selectedName={selectedName} selectedRow={selectedRow} />
-
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
         <Table
           dataSource={dataSourceMain}
