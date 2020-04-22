@@ -1,0 +1,31 @@
+@import '~antd/dist/antd.css';
+.footer {
+  position: fixed;
+  bottom:0;
+  z-index: 999;
+}
+
+.footer-index {
+  background-color: #ffffff;
+  width: 100vw;
+  height: 7vh;
+  line-height: 60px;
+  box-shadow: #dddddd 0px 0px 5px;
+  padding-left: 8%;
+}
+
+.footer-index .ant-row{
+  text-align:center;
+}
+
+.footer-index button {
+  border: none;
+  font-size: 16px;
+  margin: 10px 20px;
+}
+.footer-menu:active{
+  background-color: #cccccc;
+}
+.footer-index a{
+  color:black;
+}

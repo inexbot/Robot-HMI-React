@@ -1,0 +1,17 @@
+.dynamic .ant-tabs{
+    border-radius: 10px;
+}
+
+.dynamic1{
+    width: 30%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.dynamic1 button{
+    margin-top: 20px;
+}
+
+.dynamic2{
+    margin-top: 10px;
+}

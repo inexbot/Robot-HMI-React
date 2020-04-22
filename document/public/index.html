@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Inexbot NexDroid H5Project | 开发Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="机器人,Inexbot,二次开发,H5">
+    <meta name="description" content="纳博特科技H5版界面开发Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Inexbot NexDroid H5Project">
+<meta property="og:url" content="http://mintotea.gitee.io/h5project/">
+<meta property="og:site_name" content="Inexbot NexDroid H5Project">
+<meta property="og:description" content="纳博特科技H5版界面开发Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="inexbot">
+<meta property="article:tag" content="机器人">
+<meta property="article:tag" content="Inexbot">
+<meta property="article:tag" content="二次开发">
+<meta property="article:tag" content="H5">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/h5project/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/h5project/img/brand.jpg)">
+      <div class="brand">
+        <a href="/h5project/about" class="avatar waves-effect waves-circle waves-light">
+          <img src="/h5project/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">inexbot</h5>
+          <a href="mailto:weifan@inexbot.com" title="weifan@inexbot.com" class="mail">weifan@inexbot.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect active">
+              <a href="/h5project/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签检索
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/schedule"  >
+                <i class="icon icon-lg icon-calendar"></i>
+                项目进度
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/demo"  >
+                <i class="icon icon-lg icon-download"></i>
+                演示下载
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                所有文档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mintotea/H5Project" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                项目地址
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Inexbot NexDroid H5Project</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Inexbot NexDroid H5Project</h1>
+        <h5 class="subtitle">
+            
+                开发Blog
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-从关节参数界面看如何根据机器人类型动态加载界面"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-04-02 10:09:44" datetime="2020-04-02T02:09:44.000Z"  itemprop="datePublished">2020-04-02</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/">从关节参数界面看如何根据机器人类型动态加载界面</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前提
+根据机器人类型不同，其所带的轴数也不同。关节参数界面需要根据机器人的轴数来动态渲染当前界面中的轴数。
+
+说明
+使用到了 AntD 提供的 Tabs 组件来实现轴 1-轴 7 的参数展示与修改。
+
+思路
+封装 TabPane 组件 -> 通过轴的个数决定有多少个 TabPane -> 每一个 TabPane 中的空间，如输入框，它们的标签都应该与轴相关
+
+那么基于以上，我们可以确定需要使用到 React Hooks 中的useState()和useEffect()。
+
+更新组件
+首先利用 HooksuseState() 将面板内容定义为状态。
+
+const [tabs, setTabs] 
+    
+
+        <a href="/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-权限的实现"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-31 15:33:46" datetime="2020-03-31T07:33:46.000Z"  itemprop="datePublished">2020-03-31</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/">权限的实现</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        说明
+操作权限我们当前仅仅是简单的分为“操作员”、“技术员”、“管理员”。为了区分各个权限可以做的事情，我们干脆让每个权限能看到的界面不同，看不到也就代表你不能去做。
+
+权限当前主要影响的有上方状态栏的操作，底部界面切换按钮的操作，还有程序运行等操作。
+
+现在完成了对底部界面切换按钮操作的控制。
+
+实现
+底部界面涉及到的文件主要有src/components/footer/index.js、src/components/paraframe/index.js，权限的切换也是在前者中实现的。
+
+权限的切换
+src/components/footer/index.js是底部栏的主要文件，我们在这里利
+    
+
+        <a href="/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-API-机器人状态"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-30 14:31:56" datetime="2020-03-30T06:31:56.000Z"  itemprop="datePublished">2020-03-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/API-%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%8A%B6%E6%80%81/">API-机器人状态</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        机器人状态包含如下内容
+
+ * 机器人总数
+ * 当前的操作模式（示教/运行/远程）
+ * 当前操作机器人
+ * 当前机器人类型
+ * 是否为多机模式
+ * 当前机器人伺服状态
+ * 是否在上电（示教模式按下 Deadman）
+ * 当前机器人运行状态（运行模式的程序运行状态）
+ * 当前机器人手动操作速度
+ * 当前机器人自动运行速度
+ * 当前机器人使用的用户坐标系序号
+ * 当前机器人使用的工具坐标系序号
+ * 当前机器人使用的坐标系
+ * 当前机器人单步运行的顺序（正序/倒叙）
+ * 当前机器人的姿态形式（弧度/角度）
+ * 当前机器人的位置
+ * 当前机器人在姿态为角度下的位置
+
+获
+    
+
+        <a href="/h5project/API-%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%8A%B6%E6%80%81/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/API/" rel="tag">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-API使用方式"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-30 13:56:21" datetime="2020-03-30T05:56:21.000Z"  itemprop="datePublished">2020-03-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/API%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/">API使用方式</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        API 形式
+收发数据采用 WebSocket，页面间采用 Dva(数据交互框架)，根据 Dva 的设计理念，我们将 WebSocket 使用 Dva 的 Models 进行了封装。所以界面获取数据仅需 Models 即可。
+
+API 的展现形式
+在 API 手册或文章中，我们将以以下形式描述我们的 API。
+
+数据的发送
+以改变当前使用的坐标系为例，我们会如下描写。
+
+改变当前坐标系
+命令字："DEADMAN_STATUS_SET"
+数据：
+{
+robot: 1,  // 机器人号
+coord: 0   // 坐标系，0-关节，1-直角，2-工具，3-用户
+}
+
+
+实际使用示例如下：
+
+im
+    
+
+        <a href="/h5project/API%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/API/" rel="tag">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-开机流程"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-26 16:58:05" datetime="2020-03-26T08:58:05.000Z"  itemprop="datePublished">2020-03-26</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B/">开机流程</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        开机流程
+ 1. 发送查询;
+ 2. 如果服务端没有连接到控制器，则回复command:"2b03",data:"unConnectedToController";
+ 3. 如果服务端没有初始化完成，则回复command:"2b03",data:"unInitFinish";
+ 4. 如果版本不匹配，则回复command:"2b03",data:"版本不匹配的字符串";
+ 5. 如果初始化完成没有问题则获取数据： * 控制器 IPcommand:0x4302,data:null;
+     * 控制器 IDcommand:0x5052,data:null;
+     * 获取功能限制comma
+    
+
+        <a href="/h5project/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E6%8E%A7%E5%88%B6%E5%99%A8%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/" rel="tag">控制器数据获取</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91/" rel="tag">数据收发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-点动的实现"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-25 10:49:13" datetime="2020-03-25T02:49:13.000Z"  itemprop="datePublished">2020-03-25</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/%E7%82%B9%E5%8A%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">点动的实现</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        文件
+在src/layout/state/jog.js中做了点动的机制。
+
+代码
+对 Button 的处理
+对于“-”（反向）和“+”（正向）的 Button 控件，里面引入了 3 个方法，分别是onMouseDown、onMouseUp、onMouseLeave，例如对于 1 轴（4 个坐标系下），我们的代码如下：
+
+/* {axis[0]}用来通过当前坐标系来获取当前1轴的名称 *
+在关节、直角、工具、用户坐标系下分别为J1、X、TX、UX */
+{axis[0]}
+
+    
+
+        <a href="/h5project/%E7%82%B9%E5%8A%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91/" rel="tag">数据收发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E7%82%B9%E5%8A%A8/" rel="tag">点动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-实现多语言"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-13 13:42:20" datetime="2020-03-13T05:42:20.000Z"  itemprop="datePublished">2020-03-13</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%AF%AD%E8%A8%80/">实现多语言</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        利用 react-intl-universal 实现国际化
+对所有文本实现多语言，我们引用 react-intl-universal。
+
+实现方式
+引入 intl 对象
+在组件中通过import intl from "react-intl-universal"引入 intl 对象
+
+intl 提供了intl.get()方法，以下为几个场景下的使用示例。
+
+在 HTML 代码中
+在 HTML 代码中引用，需要用{}将intl.get("String")包含起来
+
+{intl.get("程序")}
+    
+
+        <a href="/h5project/%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%AF%AD%E8%A8%80/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" rel="tag">国际化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-界面获取数据方式"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-12 17:05:42" datetime="2020-03-12T09:05:42.000Z"  itemprop="datePublished">2020-03-12</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/%E7%95%8C%E9%9D%A2%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E6%96%B9%E5%BC%8F/">界面获取数据方式</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        方法
+界面获取控制器参数需要通过 Dva 提供的connect方法，将组件（界面）与 models 中的 state 连接起来。
+
+例子
+以 Dh 参数界面(/src/layout/pages/robotpara/dhpara)为例
+
+models
+models/main.js 中 dh 参数相关的代码如下：
+
+命名空间为 index，所以在引用时用 index
+
+namespace: "index";
+
+
+state保存 models 中的参数，robotParameter由 models/default/robotparameter.js 导出，在 main.js 中通过import引用
+
+    
+
+        <a href="/h5project/%E7%95%8C%E9%9D%A2%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E6%96%B9%E5%BC%8F/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E5%8F%82%E6%95%B0/" rel="tag">参数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E6%95%B0%E6%8D%AE%E6%94%B6%E5%8F%91/" rel="tag">数据收发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-如何在这里写新博客"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-02-10 13:58:03" datetime="2020-02-10T05:58:03.000Z"  itemprop="datePublished">2020-02-10</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/h5project/%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%99%E9%87%8C%E5%86%99%E6%96%B0%E5%8D%9A%E5%AE%A2/">如何在这里写新博客</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        下载依赖
+首先在终端中执行以下指令
+
+yarn:yarn
+
+npm:npm i
+
+cnpm:cnpm i
+
+创建新文档
+在document目录下执行指令hexo new 文档名
+
+创建的文档在document/source/_posts目录下。
+
+使用 Markdown 书写
+使用 Markdown 书写请遵循 Markdown 语法，可以先参考目录中的其它文章。
+
+简书网教程：献给写作者的 Markdown 新手指南
+
+菜鸟教程：Markdown 教程
+
+在本地预览
+ 1. 执行 npm 脚本中document/package.json中的server项;
+ 2. 在浏览器中打开localh
+    
+
+        <a href="/h5project/%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%99%E9%87%8C%E5%86%99%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E5%85%B6%E5%AE%83/" rel="tag">其它</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>inexbot &copy; 2020</span>
+            <span>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://mintotea.gitee.io/h5project/&title=Inexbot NexDroid H5Project&pic=http://mintotea.gitee.io/h5project/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://mintotea.gitee.io/h5project/&title=Inexbot NexDroid H5Project&source=纳博特科技H5版界面开发Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://mintotea.gitee.io/h5project/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Inexbot NexDroid H5Project&url=http://mintotea.gitee.io/h5project/&via=http://mintotea.gitee.io/h5project" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://mintotea.gitee.io/h5project/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABx0lEQVR42u3aQW7DMAwEwPz/0+61QBpnSVqKU4xOhRDbox4WEqnHIx7H0/g9//yb/J2PFQMXF3fMPU5HTqm+53z+5RdxcXE3cs+D5vk354tJlnr+/pfzuLi4t+cmYVRdHi4u7n/i5scbXFzcb+H2YigvhfTeiYuL+ylutbi54u8l9V1cXNwW9yiOSYmkWiT94ylcXNwt3DxQemWO8yNT77u4uLiruUnZohpwOSj/evkBXFzcS7mTRsg87KIdGS4u7mJur3CZXKfItzXVZePi4q7m9sof1WVUt01vDj+4uLhbuJOGaz4zb9vg4uLu5L6Jj3g+/3z+73iZu7i4uMu41dsO+WFmQkmiExcXdx23+sA84CYlVFxc3D3cvNA5CbjCNiVpxOLi4m7kJtcmks1KvrxmROLi4m7kVjci+RXMvH1S7gnj4uJu5yabkurCmtua5ESFi4t7EfcojqvaJ3kI4uLi7udWyxP5MSm/qtUrzeDi4q7m9i5j5U2X/FAULRUXF3cjtxc0o3Zp8TCGi4t7f24eXpM4K1RNcHFxb8CtlkGrTxVaKbi4uMu4vfZnEkm95gouLu5nuZPoqV6tSNq6vSMTLi7uRdwfx0jYV65kMEUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/h5project/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我在这，点我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '嘿回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

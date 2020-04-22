@@ -1,0 +1,153 @@
+{
+  "name": "h5project",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main.js",
+  "homepage": ".",
+  "dependencies": {
+    "@ant-design/icons": "^4.0.5",
+    "antd": "^4.1.0",
+    "dotenv": "8.2.0",
+    "dotenv-expand": "5.1.0",
+    "dva": "^2.6.0-beta.20",
+    "echarts": "^4.6.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-app-polyfill": "^1.0.5",
+    "react-dev-utils": "^10.0.0",
+    "react-intl-universal": "^2.2.2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.7.4",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "@umijs/hooks": "^1.7.0",
+    "electron": "^8.2.0",
+    "electron-packager": "^14.2.1",
+    "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "mini-css-extract-plugin": "0.8.0",
+    "optimize-css-assets-webpack-plugin": "5.0.3",
+    "babel-eslint": "10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "8.0.6",
+    "css-loader": "3.2.0",
+    "file-loader": "^5.1.0",
+    "babel-plugin-named-asset-import": "^0.3.5",
+    "babel-preset-react-app": "^9.1.0",
+    "less": "^3.0.0",
+    "less-loader": "^5.0.0",
+    "eslint": "^6.6.0",
+    "eslint-config-react-app": "^5.1.0",
+    "eslint-loader": "3.0.2",
+    "eslint-plugin-flowtype": "3.13.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.16.0",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "postcss-flexbugs-fixes": "4.1.0",
+    "postcss-loader": "3.0.0",
+    "postcss-normalize": "8.0.1",
+    "postcss-preset-env": "6.7.0",
+    "postcss-safe-parser": "4.0.1",
+    "camelcase": "^5.3.1",
+    "jest": "24.9.0",
+    "jest-environment-jsdom-fourteen": "0.1.0",
+    "jest-watch-typeahead": "0.4.2",
+    "sass-loader": "8.0.0",
+    "style-loader": "1.0.0",
+    "webpack": "4.41.2",
+    "html-webpack-plugin": "4.0.0-beta.5",
+    "pnp-webpack-plugin": "1.5.0",
+    "resolve": "1.12.2",
+    "resolve-url-loader": "3.1.1",
+    "terser-webpack-plugin": "2.2.1",
+    "ts-pnp": "1.1.5",
+    "url-loader": "2.3.0",
+    "utf8-byte-length": "^1.0.4",
+    "workbox-webpack-plugin": "4.3.1",
+    "webpack-dev-server": "3.9.0",
+    "webpack-manifest-plugin": "2.2.0"
+  },
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "electron": "electron .",
+    "ele-build-pc-x86": "node scripts/build.js && electron-packager ./ --arch=ia32 --asar --icon=./public/favicon.ico --overwrite --download.mirrorOptions.mirror='https://npm.taobao.org/mirrors/electron/' --download.mirrorOptions.customDir='8.2.0' --ignore=node_modules --ignore=src --ignore=config --ignore=.git --ignore=.gitee --ignore=document --ignore=scripts --ignore=.vscode --ignore=public --ignore=electron-zip",
+    "ele-build-pc-x64": "node scripts/build.js && electron-packager ./ --arch=x64 --asar --icon=./public/favicon.ico --overwrite --download.mirrorOptions.mirror='https://npm.taobao.org/mirrors/electron/' --download.mirrorOptions.customDir='8.2.0' --ignore=node_modules --ignore=src --ignore=config --ignore=.git --ignore=.gitee --ignore=document --ignore=scripts --ignore=.vscode --ignore=public --ignore=electron-zip",
+    "ele-build-linux-x86": "node scripts/build.js && electron-packager ./ --platform=linux --arch=ia32 --asar --icon=./public/favicon.ico --overwrite --download.mirrorOptions.mirror='https://npm.taobao.org/mirrors/electron/' --download.mirrorOptions.customDir='8.2.0' --ignore=node_modules --ignore=src --ignore=config --ignore=.git --ignore=.gitee --ignore=document --ignore=scripts --ignore=.vscode --ignore=public --ignore=electron-zip",
+    "ele-build-linux-arm64": "node scripts/build.js && electron-packager ./ --platform=linux --arch=arm64 --asar --icon=./public/favicon.ico --overwrite --download.mirrorOptions.mirror='https://npm.taobao.org/mirrors/electron/' --download.mirrorOptions.customDir='8.2.0' --ignore=node_modules --ignore=src --ignore=config --ignore=.git --ignore=.gitee --ignore=document --ignore=scripts --ignore=.vscode --ignore=public --ignore=electron-zip",
+    "test": "node scripts/test.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "setupFiles": [
+      "react-app-polyfill/jsdom"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jest-environment-jsdom-fourteen",
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "modulePaths": [],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  }
+}

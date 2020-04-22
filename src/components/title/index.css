@@ -1,0 +1,8 @@
+.con_title{
+    height: 60px !important;
+    line-height: 60px !important;
+  }
+  
+  .con_title .ret{
+    text-align: right !important;
+  }

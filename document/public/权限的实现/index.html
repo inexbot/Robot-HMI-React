@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>权限的实现 | Inexbot NexDroid H5Project | 开发Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="说明,二次开发">
+    <meta name="description" content="说明 操作权限我们当前仅仅是简单的分为“操作员”、“技术员”、“管理员”。为了区分各个权限可以做的事情，我们干脆让每个权限能看到的界面不同，看不到也就代表你不能去做。  权限当前主要影响的有上方状态栏的操作，底部界面切换按钮的操作，还有程序运行等操作。  现在完成了对底部界面切换按钮操作的控制。  实现 底部界面涉及到的文件主要有src&#x2F;components&#x2F;footer&#x2F;index.js、src">
+<meta property="og:type" content="article">
+<meta property="og:title" content="权限的实现">
+<meta property="og:url" content="http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+<meta property="og:site_name" content="Inexbot NexDroid H5Project">
+<meta property="og:description" content="说明 操作权限我们当前仅仅是简单的分为“操作员”、“技术员”、“管理员”。为了区分各个权限可以做的事情，我们干脆让每个权限能看到的界面不同，看不到也就代表你不能去做。  权限当前主要影响的有上方状态栏的操作，底部界面切换按钮的操作，还有程序运行等操作。  现在完成了对底部界面切换按钮操作的控制。  实现 底部界面涉及到的文件主要有src&#x2F;components&#x2F;footer&#x2F;index.js、src">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-31T07:33:46.000Z">
+<meta property="article:modified_time" content="2020-04-03T01:39:54.481Z">
+<meta property="article:author" content="inexbot">
+<meta property="article:tag" content="说明">
+<meta property="article:tag" content="二次开发">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/h5project/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/h5project/img/brand.jpg)">
+      <div class="brand">
+        <a href="/h5project/about" class="avatar waves-effect waves-circle waves-light">
+          <img src="/h5project/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">inexbot</h5>
+          <a href="mailto:weifan@inexbot.com" title="weifan@inexbot.com" class="mail">weifan@inexbot.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签检索
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/schedule"  >
+                <i class="icon icon-lg icon-calendar"></i>
+                项目进度
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/demo"  >
+                <i class="icon icon-lg icon-download"></i>
+                演示下载
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                所有文档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mintotea/H5Project" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                项目地址
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">权限的实现</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">权限的实现</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-31T07:33:46.000Z" itemprop="datePublished" class="page-time">
+  2020-03-31
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#权限的切换"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">权限的切换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#根据权限切换底部栏按钮的显示状态"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">根据权限切换底部栏按钮的显示状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参数窗口中的按钮动态显示的实现"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">参数窗口中的按钮动态显示的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#paraheader-js"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">paraheader.js</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#paraframe-index-js"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">paraframe&#x2F;index.js</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-权限的实现"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">权限的实现</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-31 15:33:46" datetime="2020-03-31T07:33:46.000Z"  itemprop="datePublished">2020-03-31</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>操作权限我们当前仅仅是简单的分为“操作员”、“技术员”、“管理员”。为了区分各个权限可以做的事情，我们干脆让每个权限能看到的界面不同，看不到也就代表你不能去做。</p>
+<p>权限当前主要影响的有上方状态栏的操作，底部界面切换按钮的操作，还有程序运行等操作。</p>
+<p>现在完成了对底部界面切换按钮操作的控制。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>底部界面涉及到的文件主要有<code>src/components/footer/index.js</code>、<code>src/components/paraframe/index.js</code>，权限的切换也是在前者中实现的。</p>
+<h3 id="权限的切换"><a href="#权限的切换" class="headerlink" title="权限的切换"></a>权限的切换</h3><p><code>src/components/footer/index.js</code>是底部栏的主要文件，我们在这里利用<code>mapStateToProps</code>将 models 中 App 命名空间下的 currentAuthority 状态对应到这个组件的 props 中。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function"><span class="params">state</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    currentAuthority: state.App.currentAuthority</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Footer</span>(<span class="params">props</span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps)(Footer);</span><br></pre></td></tr></table></figure>
+
+<p>应用 AntD 的 Modal 组件实现弹出权限切换的窗口，内容使用了 AntD 的 Form 表单。利用 Modal 组件的确定按钮实现表单的提交。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> handleOk = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  form.submit();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>之后提交如果密码正确，则通过<code>dispatch()</code>方法将权限切换到下拉框选择的权限，并隐藏窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> onFinish = <span class="function"><span class="params">values</span> =&gt;</span> &#123;</span><br><span class="line">  props.dispatch(&#123;</span><br><span class="line">    type: <span class="string">"App/changeAuthority"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      currentAuthority: values.username</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  setVisible(<span class="literal">false</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据权限切换底部栏按钮的显示状态"><a href="#根据权限切换底部栏按钮的显示状态" class="headerlink" title="根据权限切换底部栏按钮的显示状态"></a>根据权限切换底部栏按钮的显示状态</h3><p>这里我们使用 React 的 Hooks <code>useState()</code>定义一个 state<code>display</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> [display, setDisplay] = useState(<span class="string">"block"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>将需要根据权限显示的按钮或其容器的 display 状态绑定为<code>display</code>这个 state。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 变量按钮 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"&#123;&#123;display:display&#125;&#125;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">var</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>利用 React 的 Hooks <code>useEffect()</code>，每次权限发生改变时自动更新 state。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> authority = props.currentAuthority;</span><br><span class="line">  <span class="keyword">if</span> (authority === <span class="string">"操作工"</span>) &#123;</span><br><span class="line">    setDisplay(<span class="string">"none"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    setDisplay(<span class="string">"inline"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, [props.currentAuthority]);</span><br></pre></td></tr></table></figure>
+
+<p>这样在权限为“操作工”时绑定了<code>display</code>的按钮或者其他控件将会隐藏，其他权限则显示。</p>
+<h3 id="参数窗口中的按钮动态显示的实现"><a href="#参数窗口中的按钮动态显示的实现" class="headerlink" title="参数窗口中的按钮动态显示的实现"></a>参数窗口中的按钮动态显示的实现</h3><p>参数窗口就是在技术员或管理员权限下点击右下角的按钮弹出来的窗口。</p>
+<p>这个窗口主要在<code>src/components/paraframe/index.js</code>文件中。</p>
+<p>为了方便后面的维护和增加新的按钮，在 paraframe 目录下新建了<code>paraheader.js</code>文件，用来对界面呢中的项目进行定义，<code>index.js</code>文件则只需对 paraheader.js 中的内容进行遍历并显示即可。</p>
+<h4 id="paraheader-js"><a href="#paraheader-js" class="headerlink" title="paraheader.js"></a>paraheader.js</h4><p>这个文件暴露了一个 paraIndex 变量，其结构如下。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    index: <span class="string">"应用参数"</span>,</span><br><span class="line">    className: <span class="string">"paraFrameApplication"</span>,</span><br><span class="line">    paras: [</span><br><span class="line">      &#123;</span><br><span class="line">        type: <span class="string">"para"</span>,</span><br><span class="line">        name: <span class="string">"工具手参数"</span>,</span><br><span class="line">        link: <span class="string">"/Toolhands"</span>,</span><br><span class="line">        authority: <span class="string">"技术员"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        type: <span class="string">"subIndex"</span>,</span><br><span class="line">        subIndex: <span class="string">"远程程序"</span>,</span><br><span class="line">        authority: <span class="string">"管理员"</span>,</span><br><span class="line">        paras: [</span><br><span class="line">          &#123;</span><br><span class="line">            type: <span class="string">"para"</span>,</span><br><span class="line">            name: <span class="string">"IO预约"</span>,</span><br><span class="line">            link: <span class="string">"/Remotepro"</span>,</span><br><span class="line">            authority: <span class="string">"管理员"</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>type:分为“para”和“subIndex”，如果是 para 则为正常的参数，subIndex 则被认为是子栏目，就想远程程序子栏目一样。</li>
+<li>name:显示的名字。</li>
+<li>authority:能够看到这个的权限，如果设置为管理员，则技术员看不到。如果子栏目的 authority 设置为管理员，那么技术员看不到整个子栏目。</li>
+<li>link:路由跳转的地址。</li>
+<li>className:对应 css 中的 class。</li>
+</ul>
+<h4 id="paraframe-index-js"><a href="#paraframe-index-js" class="headerlink" title="paraframe/index.js"></a>paraframe/index.js</h4><p>这个里面首先用<code>renderFrame()</code>方法对 paraIndex 这个数组进行遍历，并根据其中的内容渲染出对应的控件。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> renderFrame = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> paraIndex.map(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=&#123;value.className&#125;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &lt;h3&gt;&#123;intl.get(value.index)&#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">          &#123;value.paras.map(para =&gt; &#123;</span></span><br><span class="line"><span class="regexp">            if (para.type === "para") &#123;</span></span><br><span class="line"><span class="regexp">              return (</span></span><br><span class="line"><span class="regexp">                &lt;li</span></span><br><span class="line"><span class="regexp">                  onClick=&#123;hideParaFrame&#125;</span></span><br><span class="line"><span class="regexp">                  style=&#123;&#123; display: display[para.authority] &#125;&#125;</span></span><br><span class="line"><span class="regexp">                &gt;</span></span><br><span class="line"><span class="regexp">                  &lt;Link to=&#123;para.link&#125;&gt;&#123;intl.get(para.name)&#125;&lt;/</span>Link&gt;</span><br><span class="line">                &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">              );</span></span><br><span class="line"><span class="regexp">            &#125; else if (para.type === "subIndex") &#123;</span></span><br><span class="line"><span class="regexp">              return (</span></span><br><span class="line"><span class="regexp">                &lt;li style=&#123;&#123; display: display[para.authority] &#125;&#125;&gt;</span></span><br><span class="line"><span class="regexp">                  &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">                    &#123;intl.get(para.subIndex)&#125;&#123;" "&#125;</span></span><br><span class="line"><span class="regexp">                    &lt;img src=&#123;require("../</span>../images/drop-down.png<span class="string">")&#125; alt="</span><span class="string">" /&gt;</span></span><br><span class="line"><span class="string">                    &#123;para.paras.map(subPara =&gt; &#123;</span></span><br><span class="line"><span class="string">                      return (</span></span><br><span class="line"><span class="string">                        &lt;li</span></span><br><span class="line"><span class="string">                          onClick=&#123;hideParaFrame&#125;</span></span><br><span class="line"><span class="string">                          style=&#123;&#123; display: display[subPara.authority] &#125;&#125;</span></span><br><span class="line"><span class="string">                        &gt;</span></span><br><span class="line"><span class="string">                          &lt;Link to=&#123;subPara.link&#125;&gt;</span></span><br><span class="line"><span class="string">                            &#123;intl.get(subPara.name)&#125;</span></span><br><span class="line"><span class="string">                          &lt;/Link&gt;</span></span><br><span class="line"><span class="string">                        &lt;/li&gt;</span></span><br><span class="line"><span class="string">                      );</span></span><br><span class="line"><span class="string">                    &#125;)&#125;</span></span><br><span class="line"><span class="string">                  &lt;/ul&gt;</span></span><br><span class="line"><span class="string">                &lt;/li&gt;</span></span><br><span class="line"><span class="string">              );</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">          &#125;)&#125;</span></span><br><span class="line"><span class="string">        &lt;/ul&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    );</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br><span class="line"><span class="string">&#125;;</span></span><br></pre></td></tr></table></figure>
+
+<p>用到 3 重遍历，先对 paraIndex 遍历，在对每一项中的 paras 进行遍历，最后对 type 为 subIndex 的项中的 paras 进行遍历,每次遍历都返回一个串 html。</p>
+<p>使用<code>useState()</code>定义<code>display</code>state。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> [display, setDisplay] = useState(&#123;</span><br><span class="line">  操作员: <span class="string">"none"</span>,</span><br><span class="line">  技术员: <span class="string">"block"</span>,</span><br><span class="line">  管理员: <span class="string">"none"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在遍历中对每一个按钮的容器的 display 属性进行绑定。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;li onClick=&#123;hideParaFrame&#125; style=&#123;&#123; <span class="attr">display</span>: display[subPara.authority] &#125;&#125;&gt;</span><br><span class="line">  &lt;Link to=&#123;subPara.link&#125;&gt;&#123;intl.get(subPara.name)&#125;&lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>li&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最后还是用到<code>useEffect()</code>，每次<code>props.currentAuthority</code>发生改变时自动切换 display state。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (props.currentAuthority === <span class="string">"技术员"</span>) &#123;</span><br><span class="line">    setDisplay(&#123;</span><br><span class="line">      操作员: <span class="string">"block"</span>,</span><br><span class="line">      技术员: <span class="string">"block"</span>,</span><br><span class="line">      管理员: <span class="string">"none"</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (props.currentAuthority === <span class="string">"管理员"</span>) &#123;</span><br><span class="line">    setDisplay(&#123;</span><br><span class="line">      操作员: <span class="string">"block"</span>,</span><br><span class="line">      技术员: <span class="string">"block"</span>,</span><br><span class="line">      管理员: <span class="string">"block"</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, [props.currentAuthority]);</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-03T01:39:54.481Z" itemprop="dateUpdated">2020-04-03 09:39:54</time>
+</span><br>
+
+
+        
+        谢谢您嘞！
+        
+    </div>
+    
+    <footer>
+        <a href="http://mintotea.gitee.io/h5project">
+            <img src="/h5project/img/avatar.png" alt="inexbot">
+            inexbot
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/&title=《权限的实现》 — Inexbot NexDroid H5Project&pic=http://mintotea.gitee.io/h5project/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/&title=《权限的实现》 — Inexbot NexDroid H5Project&source=说明
+操作权限我们当前仅仅是简单的分为“操作员”、“技术员”、“管理员”。为了区分各个权限可以做的事情，我们干脆让每个权限能看到的界面不同，看不到也就代表..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《权限的实现》 — Inexbot NexDroid H5Project&url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/&via=http://mintotea.gitee.io/h5project" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">从关节参数界面看如何根据机器人类型动态加载界面</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/h5project/API-%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%8A%B6%E6%80%81/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">API-机器人状态</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "jfjgeinGvLM0iHgQSbfanth9-gzGzoHsz",
+            appKey: "R1hARNhruI8HSgIuCS8D1Vi6",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>inexbot &copy; 2020</span>
+            <span>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/&title=《权限的实现》 — Inexbot NexDroid H5Project&pic=http://mintotea.gitee.io/h5project/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/&title=《权限的实现》 — Inexbot NexDroid H5Project&source=说明
+操作权限我们当前仅仅是简单的分为“操作员”、“技术员”、“管理员”。为了区分各个权限可以做的事情，我们干脆让每个权限能看到的界面不同，看不到也就代表..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《权限的实现》 — Inexbot NexDroid H5Project&url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/&via=http://mintotea.gitee.io/h5project" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://mintotea.gitee.io/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3aS25bMRAEQN//0gmQVZDPU/cMKWtRWgmyzMeiAXLcw6+v+PXj1+v3939/kv/u3+MkYz4/ZfXCw8PDG0199rDn33qm5rPKl+Yf4+Ph4eFd47WHwewAaBf0ecxo+fDw8PC+lZfUq/vlyMfHw8PD+3zec2E9Gy0pi/Hw8PA+k5cXuO1B0m76ech7OGvBw8PDm6SsRQPse99f7+/h4eHhjbrq7abcTmjW3Cpmi4eHh3eB115vmjWu8m19tsQvxsfDw8M7yts3+GfF7majz7+Dh4eH905euxEnxXHylOemV7tkeHh4eDd4+9A2iRvahllyaSC/ZICHh4d3j9cGsrPHzFr+SREf/cXw8PDw1rxZPNoGB3mpvbkBgYeHh/dOXv7InNGWy+13otAEDw8P7wJv8w//LJLYBBOzfwbw8PDwzvLyic6iijxWyEONYrHw8PDwrvFmZXTbNmsvVA0DiPZvgoeHh1fy8hI5L69PhQ558f1iUfDw8PCO8tqDIZ9WW6DnPy1iZTw8PLwLvP0lqtnDZq21/Pips2Q8PDy8mJdHBu1CbCLd/JMX7/Hw8PAu8PLHt5v17IJU/kkyMh4eHt4NXvLgvHHVFs2nYo7/LgceHh7eG3mzaHXz/VMXufDw8PDew5vFAclxki/B/uCJ7mTh4eHhXeAlW3YSE8w29OSAyctxPDw8vBu8tpGfl8L5hNrGW1tw4+Hh4Z3lFdvr6PBoS+3nZWoPLTw8PLzbvDYamF2laq8FtCFInXbg4eHhTeZzbNOftbWSqbfj4OHh4d3mnW1B5VHCLPbNr4jh4eHh3eZtwtm2YbYJc/MmGR4eHt4n8NqNPj9gWl4RRuDh4eF9AG8fKOTgtum1Kqnx8PDwSl7e9MobUZtLVDn+xSGBh4eHd4G3aYC1UUIeE28OiWP9PTw8PLw/Xz8BfFgiFpAmwYEAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/h5project/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我在这，点我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '嘿回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+.teach1{
+    display: flex;
+    padding-bottom: 12px;
+}
+
+.teach1 .p1{
+    width: 35px;
+}
+
+.teach1 input{
+    width: 100px;
+    margin-right: 10px;
+}
+
+.teachlayout .jogGroup .ant-form-item{
+    margin-bottom: 12px;
+}
+
+.teachlayout .ant-card-body{
+    padding: 10px
+    ;
+}
+
+.teachlayout .loc{
+    background: url("../../images/location-z.png") no-repeat;
+    background-size: 100% auto;
+    height: 70px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.teachlayout .loc2{
+    background: url("../../images/location.png") no-repeat;
+    background-size: 100% auto;
+    height: 20vh;
+    width: 72%;
+    margin: 0 auto;
+}
+
+.teachlayout .post{
+    background: url("../../images/posture.png") no-repeat;
+    background-size: 100% auto;
+    height: 80px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.teachlayout .post2{
+    background: url("../../images/posture2.png") no-repeat;
+    background-size: 100% auto;
+    height: 24vh;
+    width: 72%;
+    margin: 0 auto;
+}

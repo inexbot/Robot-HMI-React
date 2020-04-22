@@ -1,0 +1,113 @@
+.Dhpara1{
+    display: flex;
+    flex-flow: row;
+    margin-top: 16px;
+}
+
+.Dhpara1 input ,.Dhpara1 .ant-select-selection{
+    margin-left: 2px;
+}
+
+.Dhpara1 .p1{
+    width: 90px;
+}
+
+.Dhpara1 .p2{
+    width: 30px;
+}
+
+.Dhpara1 .p3{
+    width: 70px;
+}
+
+.hoverButton1{
+    position: absolute;
+    bottom: 140px;
+    right: 120px;
+    z-index: 999;
+}
+
+.hoverButton2{
+    position: absolute;
+    bottom: 240px;
+    right: 120px;
+    z-index: 999;
+}
+
+
+.hoverButton3{
+    position: absolute;
+    bottom: 340px;
+    right: 120px;
+    z-index: 999;
+}
+
+
+.hoverButton1 .ant-btn-lg{
+    /* background-color: #0AA8EB; */
+    height: 60px;
+    width: 60px;
+    box-shadow: 0px 1px 8px rgba(10,168,235,0.6) ;
+}
+
+.hoverButton2 .ant-btn-lg, .hoverButton3 .ant-btn-lg{
+    height: 60px;
+    width: 60px;
+}
+
+/* 
+.hoverButton .ant-btn-lg:visited{
+    background-color: #ffffff;
+    color: #0AA8EB;
+} */
+
+
+.content .ant-page-header-heading{
+    width: 92% !important;
+    float: left !important;   
+}
+
+.content .ant-page-header-content{
+    padding-top: 0px !important;
+}
+
+.content .ant-skeleton-content{
+    padding: 20px;
+}
+
+
+.ant-popover-title, .ant-popover-inner-content, .ant-popover-arrow{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.ant-popover-title{
+    border-radius: 5px 5px 0 0;
+    color: #ffffff;
+}
+
+.ant-popover-inner-content{
+    border-radius: 0 0 5px 5px;
+    color: #ffffff;
+}
+
+.ant-popover-arrow{
+    display: none;
+}
+
+.Dhpara_hei{
+    margin: 20px 20px 10px 20px;
+}
+
+.Dhpara_hei input{
+    margin: 0 10px;
+    max-width: 170px;
+}
+
+.Dhpara_hei .ant-select,.Dhpara_hei .ant-form-item-explain{
+    width: 170px;
+    margin: 0 10px;
+}
+
+.Dh_lab label{
+    width: 136px;
+}

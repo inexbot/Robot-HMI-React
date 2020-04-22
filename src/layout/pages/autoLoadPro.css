@@ -1,0 +1,12 @@
+.autoLoad {
+    margin: 20px auto;
+}
+
+.autoLoad_hei{
+    margin: 30px 0px;
+}
+
+.autoLoad_hei input ,.autoLoad_hei p ,.autoLoad_hei button{
+    margin: 0 10px;
+    /* width: 200px; */
+}

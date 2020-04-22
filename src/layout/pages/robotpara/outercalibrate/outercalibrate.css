@@ -1,0 +1,14 @@
+.outerCalibrate {
+  height: 536px;
+  background-color: white;
+  box-shadow: #dddddd 0px 0px 5px;
+  border-radius: 10px;
+}
+
+.outerCalibrate table{
+  width: 100%;
+}
+
+.outerCalibrate table tr td{
+  padding: 10px 0;
+}

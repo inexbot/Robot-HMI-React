@@ -1,0 +1,39 @@
+/* 工程样式 */
+.con_title{
+    line-height: 60px !important;
+}
+
+.ret{
+    float: right;
+}
+
+.Pro_table .ant-table{
+    border-radius: 10px;
+    box-shadow: #dddddd 0px 0px 5px;
+}
+
+.Pro_table .ant-table tbody tr td {
+    border: none;
+    line-height: 16px;
+}
+
+
+.Pro_table .ant-table-container table > thead > tr:first-child th:first-child{
+    border-top-left-radius: 10px
+}
+.Pro_table .ant-table-container table > thead > tr:first-child th:last-child{
+    border-top-right-radius: 10px
+}
+
+
+
+/* 程序样式 */
+.pro_id{
+    width: 20px;
+    border: none !important;
+    background-color: #f5f5f5 !important;
+}
+
+/* .pro_tit{
+    width: 10%;
+} */

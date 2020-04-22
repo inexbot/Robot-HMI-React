@@ -1,0 +1,19 @@
+@import '~antd/dist/antd.css';
+.rightbutton-index ul li {
+    list-style: none;
+    height: 13%;
+}
+
+.rightbutton-index ul li button {
+    height: 11vh;
+    width: 70px;
+    border: none;
+    margin-bottom: 10px;
+    padding: 3px;
+    box-shadow: #dddddd 0px 0px 5px;
+    font-size: 16px;
+}
+
+.rightbutton-index ul {
+    padding-left: 15px;
+}

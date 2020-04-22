@@ -1,0 +1,61 @@
+.User .ant-tabs{
+    border-radius: 10px;
+}
+
+.User table{
+    margin: 26px auto 0 auto;
+    width: 94%;
+}
+
+.User table thead th{
+    text-align: center;
+    background-color: #e6f7ff;
+    padding: 10px;
+    border-top: 1px #9FDDF5 solid;
+    border-bottom: 1px #9FDDF5 solid;
+}
+
+.User table tr td{
+    width: 120px;
+    text-align: center;
+    padding: 6px 10px 4px 10px;
+    border-bottom: 1px #9FDDF5 solid;
+}
+
+.user1 {
+    display: flex;
+    flex-flow: row;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+
+.user1 .ant-select{
+    width: 80%;
+}
+.user1 .ant-form-item-label > label{
+    width: 90px;
+}
+
+.user2 {
+    margin: 0 auto;
+    padding-top: 10px;
+  }
+
+.user2 .btn_c{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.user2 .ant-radio-button-wrapper{
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    margin: 0 10px 10px 0;
+    border-left-width: 1px;
+}
+.user2 .ant-radio-button-wrapper:not(:first-child)::before{
+    width: 0px;
+}

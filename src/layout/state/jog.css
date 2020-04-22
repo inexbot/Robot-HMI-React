@@ -1,0 +1,15 @@
+.axisGroup{
+    
+}
+.jogGroup{
+    display: flex;
+    flex-flow: row;
+}
+
+.ant-drawer-body{
+    padding:10px 24px 0 24px;
+}
+
+.jogGroup .ant-form-item{
+    margin-bottom: 20px;
+}

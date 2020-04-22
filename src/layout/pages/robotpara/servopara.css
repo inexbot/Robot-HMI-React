@@ -1,0 +1,16 @@
+.servopara .ant-table-wrapper ul{
+    padding-right: 40px;
+}
+  
+/* .servopara table, .servopara thead th{
+    text-align: center;
+} */
+
+  .servopara1 {
+      display: flex;
+      flex-flow: row;
+    }
+
+.servopara table tbody, .servopara table tfoot{
+  background-color: #fff;
+}

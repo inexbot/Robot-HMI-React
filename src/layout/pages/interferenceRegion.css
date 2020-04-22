@@ -1,0 +1,23 @@
+.interferenceRegion .ant-tabs{
+    border-radius: 10px;
+}
+
+.interferenceRegion table{
+    margin: 0 auto;
+    width: 80%;
+}
+
+.interferenceRegion table thead th{
+    text-align: center;
+    background-color: #e6f7ff;
+    padding: 10px;
+    border-top: 1px #9FDDF5 solid;
+    border-bottom: 1px #9FDDF5 solid;
+}
+
+.interferenceRegion table tr td{
+    width: 120px;
+    text-align: center;
+    padding: 8px 10px 4px 10px;
+    border-bottom: 1px #9FDDF5 solid;
+}

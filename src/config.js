@@ -1,0 +1,12 @@
+export const config ={
+    serverIP: "192.168.0.138",
+    serverPort: "9000",
+    modeDisplay:{
+        示教按钮: "inline",
+        伺服参数: "none",
+        校准屏幕: "none",
+        控制器密钥: "none",
+        安全配置: "block",
+        工艺按钮:"none"
+    }
+}

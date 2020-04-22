@@ -1,0 +1,19 @@
+.linearvel{
+  padding-top: 30px;
+}
+
+.linearvel1 {
+  display: flex;
+  flex-flow: row;
+  width: 400px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.linearvel1 .p1{
+  width: 100px;
+}
+
+.linearvel1 .p2{
+  padding-left: 10px;
+}

@@ -1,0 +1,45 @@
+@import '~antd/dist/antd.css';
+.leftstate-index {
+    height: 68vh;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    /* min-width: 320px; */
+    position: relative;
+}
+
+#hidebutton {
+    position: absolute;
+    right: 0px;
+    top: 310px;
+    z-index: 999;
+    /* float: right;
+  height: 656px;
+  display: flex;
+  align-items: center; */
+}
+
+#hidebutton .leftbtm {
+    height: 36px;
+    padding-right: 6px;
+    z-index: 999;
+}
+
+#leftindex .leftstate-content{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: #dddddd 0px 0px 5px;
+    height: 75vh;
+    width: 26vw;
+}
+
+
+
+#leftindex .leftstate-content canvas{
+    padding: 16px !important;
+    width: 26vw !important;
+}
+
+#leftindex h1{
+    font-size: 18px;
+    padding: 10px;
+}

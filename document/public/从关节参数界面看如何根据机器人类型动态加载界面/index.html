@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>从关节参数界面看如何根据机器人类型动态加载界面 | Inexbot NexDroid H5Project | 开发Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="说明,二次开发">
+    <meta name="description" content="前提 根据机器人类型不同，其所带的轴数也不同。关节参数界面需要根据机器人的轴数来动态渲染当前界面中的轴数。  说明 使用到了 AntD 提供的 Tabs 组件来实现轴 1-轴 7 的参数展示与修改。  思路 封装 TabPane 组件 -&gt; 通过轴的个数决定有多少个 TabPane -&gt; 每一个 TabPane 中的空间，如输入框，它们的标签都应该与轴相关  那么基于以上，我们可以确定需要使用到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从关节参数界面看如何根据机器人类型动态加载界面">
+<meta property="og:url" content="http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/">
+<meta property="og:site_name" content="Inexbot NexDroid H5Project">
+<meta property="og:description" content="前提 根据机器人类型不同，其所带的轴数也不同。关节参数界面需要根据机器人的轴数来动态渲染当前界面中的轴数。  说明 使用到了 AntD 提供的 Tabs 组件来实现轴 1-轴 7 的参数展示与修改。  思路 封装 TabPane 组件 -&gt; 通过轴的个数决定有多少个 TabPane -&gt; 每一个 TabPane 中的空间，如输入框，它们的标签都应该与轴相关  那么基于以上，我们可以确定需要使用到">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-02T02:09:44.000Z">
+<meta property="article:modified_time" content="2020-04-03T01:39:54.480Z">
+<meta property="article:author" content="inexbot">
+<meta property="article:tag" content="说明">
+<meta property="article:tag" content="二次开发">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/h5project/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/h5project/img/brand.jpg)">
+      <div class="brand">
+        <a href="/h5project/about" class="avatar waves-effect waves-circle waves-light">
+          <img src="/h5project/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">inexbot</h5>
+          <a href="mailto:weifan@inexbot.com" title="weifan@inexbot.com" class="mail">weifan@inexbot.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签检索
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/schedule"  >
+                <i class="icon icon-lg icon-calendar"></i>
+                项目进度
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/demo"  >
+                <i class="icon icon-lg icon-download"></i>
+                演示下载
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/h5project/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                所有文档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mintotea/H5Project" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                项目地址
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">从关节参数界面看如何根据机器人类型动态加载界面</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">从关节参数界面看如何根据机器人类型动态加载界面</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-04-02T02:09:44.000Z" itemprop="datePublished" class="page-time">
+  2020-04-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前提"><span class="post-toc-number">1.</span> <span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">2.</span> <span class="post-toc-text">说明</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更新组件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">更新组件</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-从关节参数界面看如何根据机器人类型动态加载界面"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">从关节参数界面看如何根据机器人类型动态加载界面</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-04-02 10:09:44" datetime="2020-04-02T02:09:44.000Z"  itemprop="datePublished">2020-04-02</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>根据机器人类型不同，其所带的轴数也不同。关节参数界面需要根据机器人的轴数来动态渲染当前界面中的轴数。</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>使用到了 AntD 提供的 Tabs 组件来实现轴 1-轴 7 的参数展示与修改。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>封装 TabPane 组件 -&gt; 通过轴的个数决定有多少个 TabPane -&gt; 每一个 TabPane 中的空间，如输入框，它们的标签都应该与轴相关</p>
+<p>那么基于以上，我们可以确定需要使用到 React Hooks 中的<code>useState()</code>和<code>useEffect()</code>。</p>
+<h3 id="更新组件"><a href="#更新组件" class="headerlink" title="更新组件"></a>更新组件</h3><p>首先利用 Hooks<code>useState()</code> 将面板内容定义为状态。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> [tabs, setTabs] = useState([]);</span><br></pre></td></tr></table></figure>
+
+<p>在渲染函数中，直接利用<code>{tabs}</code>即可。</p>
+<p>基于 Tabs 的特性，我们需要将<code>&lt;TabPane /&gt;</code>面板内容组件封装。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> setTab = <span class="function"><span class="params">sum</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> renderTabs = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= sum; i++) &#123;</span><br><span class="line">    renderTabs.push(</span><br><span class="line">      &lt;TabPane tab=&#123;<span class="string">`J<span class="subst">$&#123;i&#125;</span>`</span>&#125; key=&#123;i&#125;&gt;</span><br><span class="line">        &#123;content(i)&#125;</span><br><span class="line">      &lt;<span class="regexp">/TabPane&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  setTabs(renderTabs);</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里通过传递的<code>sum</code>参数，动态地将<code>&lt;TabPane /&gt;</code>组件 push 到<code>renderTabs</code>数组中，并最后使用<code>useState()</code>定义的<code>setTabs()</code>方法更新<code>tabs</code>状态为<code>renderTabs</code>。</p>
+<p>那么每一个 TabPane 中的内容则用到了<code>{content(i)}</code>来将轴数传送到<code>content()</code>方法。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> content = <span class="function"><span class="params">joint</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Form&gt;</span><br><span class="line">      &lt;Form.Item</span><br><span class="line">        name=&#123;<span class="string">`joint<span class="subst">$&#123;joint&#125;</span>PosSWLimit`</span>&#125;</span><br><span class="line">        label=&#123;<span class="string">"正限位"</span>&#125;</span><br><span class="line">        help=&#123;<span class="string">"关节参数/正限位说明"</span>&#125;</span><br><span class="line">      &gt;</span><br><span class="line">        &lt;Input /&gt;</span><br><span class="line">      &lt;<span class="regexp">/Form.Item&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Form&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>那么这样一套方法已经定义好。下面就是如何根据当前机器人改变、当前机器人类型改变来自动更新状态了。</p>
+<p>这里就用到了<code>useEffect()</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (props.currentRobotType) &#123;</span><br><span class="line">      <span class="comment">/* 六轴机器人 */</span></span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        setTab(<span class="number">6</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="comment">/* SCARA机器人 */</span></span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        setTab(<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [props.currentRobot, props.currentRobotType]);</span><br></pre></td></tr></table></figure>
+
+<p>当props.currentRobot、props.currentRobotType这些props更新时，会自动执行这个<code>useEffect()</code>方法，根据机器人类型不同，分别给<code>setTab()</code>传递不同的参数。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-03T01:39:54.480Z" itemprop="dateUpdated">2020-04-03 09:39:54</time>
+</span><br>
+
+
+        
+        谢谢您嘞！
+        
+    </div>
+    
+    <footer>
+        <a href="http://mintotea.gitee.io/h5project">
+            <img src="/h5project/img/avatar.png" alt="inexbot">
+            inexbot
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/" rel="tag">二次开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/h5project/tags/%E8%AF%B4%E6%98%8E/" rel="tag">说明</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/&title=《从关节参数界面看如何根据机器人类型动态加载界面》 — Inexbot NexDroid H5Project&pic=http://mintotea.gitee.io/h5project/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/&title=《从关节参数界面看如何根据机器人类型动态加载界面》 — Inexbot NexDroid H5Project&source=前提
+根据机器人类型不同，其所带的轴数也不同。关节参数界面需要根据机器人的轴数来动态渲染当前界面中的轴数。
+
+说明
+使用到了 AntD 提供的 Tabs ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从关节参数界面看如何根据机器人类型动态加载界面》 — Inexbot NexDroid H5Project&url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/&via=http://mintotea.gitee.io/h5project" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/h5project/%E6%9D%83%E9%99%90%E7%9A%84%E5%AE%9E%E7%8E%B0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">权限的实现</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "jfjgeinGvLM0iHgQSbfanth9-gzGzoHsz",
+            appKey: "R1hARNhruI8HSgIuCS8D1Vi6",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>inexbot &copy; 2020</span>
+            <span>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/&title=《从关节参数界面看如何根据机器人类型动态加载界面》 — Inexbot NexDroid H5Project&pic=http://mintotea.gitee.io/h5project/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/&title=《从关节参数界面看如何根据机器人类型动态加载界面》 — Inexbot NexDroid H5Project&source=前提
+根据机器人类型不同，其所带的轴数也不同。关节参数界面需要根据机器人的轴数来动态渲染当前界面中的轴数。
+
+说明
+使用到了 AntD 提供的 Tabs ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《从关节参数界面看如何根据机器人类型动态加载界面》 — Inexbot NexDroid H5Project&url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/&via=http://mintotea.gitee.io/h5project" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://mintotea.gitee.io/h5project/%E4%BB%8E%E5%85%B3%E8%8A%82%E5%8F%82%E6%95%B0%E7%95%8C%E9%9D%A2%E7%9C%8B%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB%E5%9E%8B%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,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" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/h5project/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '我在这，点我！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '嘿回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

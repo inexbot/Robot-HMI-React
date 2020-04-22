@@ -1,0 +1,149 @@
+@import '~antd/dist/antd.css';
+
+/* index 样式 */
+a {
+  color: #ffffff;
+  border-radius: 3px;
+} 
+
+.header-index{
+  background-color: #28292D;
+  /* min-width: 1180px; */
+  height: 7vh;
+  display: flex;
+  flex-flow: row;
+  color: white;
+  align-items:center;
+}
+
+.header-right{
+  flex-direction:row-reverse;
+  position: absolute;
+  right: 0px;
+  display: flex;
+  align-items:center;
+}
+
+.header-right .sj a{
+  background: #000;
+  padding: 10px 20px;
+
+}
+
+.header-right .b{
+  margin: 0 8px 0 0;
+}
+
+.header-device-state img{
+  height: 35px;
+  float: left;
+}
+
+/* frame 样式 */
+
+#header-frame .frame{
+  outline: none;
+}
+
+#header-frame .frame .ant-select-selector{
+  background:url("../../images/joint.png") no-repeat;
+  padding-left: 26px;
+  border: none;
+  color: #ffffff;
+  margin-top: 3px;
+  outline: none;
+} 
+
+/* handle 样式 */
+
+#handle-speed .ant-dropdown-link  {
+  background:url("../../images/handle-s.png") no-repeat;
+  padding: 5px 0px 5px 30px;
+  border: none;
+  color: #ffffff;
+  width: 130px;
+  text-align: left;
+  outline: none;
+} 
+
+
+/* mode 样式 */
+#header-mode .Teach .ant-select-selector{
+  background-color: #000000;
+  border: none;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius:0px;
+  padding: 1px 10px;
+  margin-top: 1px;
+  color: #ffffff;
+}
+
+#header-mode .Handle .ant-select-selector{
+  background-color: #28292D;
+  border: 1px #000000 solid;
+  border-top-left-radius:0px;
+  border-bottom-left-radius:0px;
+  padding: 0px 10px;
+  color: #ffffff;
+  margin-top: 3px;
+}
+
+/* program 样式 */
+#header-pro-state .pro .ant-select-selector{
+  background:url("../../images/pro.png") no-repeat;
+  padding-left: 30px;
+  border: none;
+  color: #ffffff;
+  margin-top: 3px;
+} 
+
+/* robot 样式 */
+#header-robot .robot .ant-select-selector{
+  background:url("../../images/robot.png") no-repeat;
+  padding-left: 26px;
+  border: none;
+  color: #ffffff;
+  margin-top: 3px;
+} 
+
+/* runspeed 样式 */
+#run-speed .ant-dropdown-link {
+  background:url("../../images/run-s.png") no-repeat;
+  padding: 5px 0px 5px 30px;
+  border: none;
+  color: #ffffff;
+  width: 130px;
+  text-align: left;
+  outline: none;
+} 
+
+.run .ant-menu{
+  width: 260px;
+}
+
+/* servo 样式 */
+#header-servo-state .servo .ant-select-selector{
+  background:url("../../images/servo.png") no-repeat;
+  padding-left: 30px;
+  border: none;
+  color: #ffffff;
+  margin-top: 3px;
+} 
+
+/* tool 样式 */
+#header-tool .Tool .ant-select-selector{
+  background:url("../../images/tool.png") no-repeat;
+  padding-left: 26px;
+  border: none;
+  color: #ffffff;
+  margin-top: 3px;
+} 
+
+/* user 样式 */
+#header-user .user .ant-select-selector{
+  background:url("../../images/user.png") no-repeat;
+  padding-left: 26px;
+  border: none;
+  color: #ffffff;
+  margin-top: 3px;
+} 

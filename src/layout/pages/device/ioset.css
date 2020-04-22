@@ -1,0 +1,25 @@
+.card img{
+    /* background: url("../../../images/card.png") no-repeat; */
+    background-size: cover;
+    border-radius: 10px;
+    box-shadow: #dddddd 0 5px 5px;
+}
+
+.card span{
+    position: relative;
+    bottom: 40px;
+    left: 20px;
+    color: #ffffff;
+}
+
+.IOSet .line {
+    margin: 20px 0;
+}
+
+.IOSet .line .p1{
+    width: 100px;
+    padding: 6px 10px;
+}
+.IOSet .line input, .IOSet .line .ant-select{
+    margin-left: 40px;
+}

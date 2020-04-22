@@ -1,0 +1,11 @@
+@import '~antd/dist/antd.css';
+/* .footer-index {
+  background-color: brown;
+  min-width: 1280px;
+  height: 60px;
+} */
+
+ a {
+    color: #ffffff;
+    border-radius: 3px;
+} 

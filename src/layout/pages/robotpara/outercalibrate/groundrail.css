@@ -1,0 +1,11 @@
+.groundRail {
+  height: 536px;
+  background-color: white;
+  box-shadow: #dddddd 0px 0px 5px;
+  border-radius: 10px;
+}
+
+.groundRail1 {
+  display: flex;
+  flex-flow: row;
+}

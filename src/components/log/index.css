@@ -1,0 +1,13 @@
+@import '~antd/dist/antd.css';
+.log-index {
+  background-color: #ffffff;
+  height: 40px;
+  box-shadow: #dddddd 0px 0px 5px;
+  display: flex;
+  align-items:center;
+  padding-left: 20px;
+  border-radius: 10px;
+}
+.log-index span{
+  color: black;
+}

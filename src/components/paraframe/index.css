@@ -1,0 +1,45 @@
+.paraFrame{
+    background-color: rgba(51,51,51,0.9);
+    color: #aaaaaa;
+    text-align: left;
+    padding: 30px 10px 20px 40px;
+    position: fixed;
+    bottom: 7vh;
+    right: 0px;
+    z-index: 1000;
+}
+
+.paraFrame a{
+    padding: 20px 30px;
+    line-height: 40px;
+}
+
+.paraFrame h3{
+    color: #aaaaaa;
+    /* padding-left: 20px; */
+}
+
+.paraFrame .paraFrameApplication,.paraFrame .paraFrameOuter,.paraFrame .ParaFrameMachine,.paraFrame .ParaFrameSys{
+    float: left;
+    padding: 10px;
+}
+
+
+.paraFrame ul, .paraFrame ul li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.paraFrame ul>li>ul>li{
+    padding-left: 30px 20px;
+}
+
+.paraFrame ul li{
+    padding: left 0px;
+}
+
+.paraFrame ul img{
+    width: 16px;
+    padding-left: 5px;
+}
