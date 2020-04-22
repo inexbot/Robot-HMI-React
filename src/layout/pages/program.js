@@ -13,6 +13,7 @@ import { renderInstruct } from "./program_instruct_header";
 import ConTitle from "components/title";
 import ChangeInstructValue from "./program_changevalue_header";
 import "./Project.css";
+import { sendMSGtoServer } from "service/network";
 
 // 从全局的状态获取当前机器人状态
 const mapStateToProps = (state) => {
@@ -81,7 +82,8 @@ function Program(props) {
         dataSource = [];
       } else {
         // 遍历获取指令数据
-        instruct.map((value) => {
+        instruct.map((value,index) => {
+          if(index === 0){return;}else{
           if (value === null) {
             dataSource.push({
               key: keyOfInstruct,
@@ -101,7 +103,7 @@ function Program(props) {
           }
           keyOfInstruct = keyOfInstruct + 1;
           return value;
-        });
+        }});
       }
       setDataSourceMain(dataSource);
     }
@@ -121,6 +123,12 @@ function Program(props) {
     setInsertOrChange("insert");
     setChangeVisible(true);
   };
+  const deleteCommand= () =>{
+    let deleteData = {
+      line:selectedRow
+    }
+    sendMSGtoServer("DELETE_COMMAND",deleteData);
+  }
   return (
     <div>
       {/* 主界面 */}
@@ -131,6 +139,7 @@ function Program(props) {
       />
       <Button onClick={changevalue}>修改指令</Button>
       <Button onClick={insertCommand}>插入MOVJ</Button>
+      <Button onClick={deleteCommand}>删除</Button>
       {/* <div id="changeMenu" style={{ visibility: changeVisible }}>
         <ChangeInstructValue name={selectedName} row={selectedRow} />
       </div> */}

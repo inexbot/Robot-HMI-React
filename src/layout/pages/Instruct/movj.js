@@ -26,7 +26,7 @@ function Movj(props) {
   const onFinish = (value) => {
     if (props.insertOrChange === "change") {
       let sendData = {
-        pos: props.row - 1,
+        pos: props.row,
         POS: value.POS,
         VJ: value.VJ,
         PL: value.PL,

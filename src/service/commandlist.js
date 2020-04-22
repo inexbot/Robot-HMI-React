@@ -30,6 +30,11 @@ export const CommandList = {
   CURRENT_ROBOT_COORD_INQUIRE: 0x2202, // 获取当前机器人坐标系
   Project: 0x1111, // 获取工程界面的数据
   openProgram: 0x1113,
+  /* 删除指令
+  data:{
+    line:12
+  } */
+  DELETE_COMMAND:0x1121,
   CheckState: 0x1000, // 查询Server端的启动状态
   JOG_OPERATION_MOVE: 0x2901, // 点动开始
   JOG_OPERATION_STOP: 0x2902, // 点动结束
