@@ -51,12 +51,14 @@ export const CommandList = {
   /* 删除程序
   data:{
     "robot":1
-    "jobname":"abc.JBR"   //作业文件名
+    "isbulk":0, // 0单个，1批量删除
+    "jobname":["abc.JBR"]   //作业文件名
   } */
   DELETE_PROGRAM: 0x1116,
-  /*插入指令
+  /*插入指令Or修改指令
   data:{
     line:1,
+    modifystate:0 //0插入 1修改
     name:"MOVJ",
     POS:P001 || [0,0,12,12,12,12,12,12,0,0,0,0,0,0],
     VJ:10,

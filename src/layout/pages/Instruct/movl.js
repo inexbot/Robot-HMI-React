@@ -19,7 +19,14 @@ const insertDefaultValue = {
 };
 
 function Movl(props) {
-  const posSum = props.program.var.position;
+  const x = () => {
+    if (props.program.var !== undefined && props.program.var.posnum !== undefined ) {
+      return props.program.var.posnum;
+    } else {
+      return 0;
+    }
+  };
+  const posSum = x();
   useEffect(() => {
     let para;
     if (props.insertOrChange === "change") {

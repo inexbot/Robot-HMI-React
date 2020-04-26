@@ -34,14 +34,14 @@ export function renderPosOption(sum) {
 }
 
 export function newPos(sum) {
-  let posSum = sum.length + 1;
+  let pS = sum.length + 1;
   let posName;
-  if (posSum < 10) {
-    posName = `P00${posSum}`;
-  } else if (posSum >= 10 && posSum < 100) {
-    posName = `P0${posSum}`;
-  } else if (posSum > 100) {
-    posName = `P${posSum}`;
+  if (pS < 10) {
+    posName = `P00${pS}`;
+  } else if (pS >= 10 && pS < 100) {
+    posName = `P0${pS}`;
+  } else if (pS > 100) {
+    posName = `P${pS}`;
   }
   return posName;
 }

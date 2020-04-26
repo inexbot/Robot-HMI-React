@@ -56,7 +56,7 @@ function ProjectComponent(props) {
     const openprogram = {
       robot: currentRobot,
       project: selectedProject,
-      jobname: selectedProgram,
+      jobname: selectedProgram[0],
     };
     sendMSGtoServer("openProgram", openprogram);
     let type = "App/change" + Robot + "OpenedProgram";
@@ -91,7 +91,7 @@ function ProjectComponent(props) {
   const handleCancelNewProgram = (e) => {
     destroyAll();
   };
-
+  
   const modalConfigNewProgram = {
     title: "权限选择",
     onOk: handleOkNewProgram,

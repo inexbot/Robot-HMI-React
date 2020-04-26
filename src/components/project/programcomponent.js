@@ -67,7 +67,7 @@ function ProgramComponent(props) {
     destroyOnClose: true,
     content: (
       <div>
-        <p>是否确认删除第{selectedRow}指令</p>
+        <p>是否确认删除第{selectedRow}行指令</p>
         <p>{selectedName}</p>
       </div>
     ),
