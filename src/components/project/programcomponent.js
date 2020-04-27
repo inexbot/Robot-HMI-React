@@ -139,11 +139,20 @@ function ProgramComponent(props) {
       </div>
       <div className='progmore' ref={moreClass} style={{ display: "none" }}>
         <Row>
-          <Col span={6} onClick={showModalDeleteCommand}>
-            删除
+          <Col span={8} offset={3}>
+            <Button className="proMoreBtn" size="large" onClick={showModalDeleteCommand}> 删除 </Button>
           </Col>
-          <Col span={6}>22</Col>
-          <Col span={6}>33</Col>
+          <Col span={8} offset={2}>
+            <Button className="proMoreBtn" size="large">移动</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={8} offset={3}>
+          <Button className="proMoreBtn" size="large">复制</Button>
+          </Col>
+          <Col span={8} offset={2}>
+          <Button className="proMoreBtn" size="large">粘贴</Button>
+          </Col>
         </Row>
       </div>
       <div className='progicon'>

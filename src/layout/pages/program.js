@@ -188,9 +188,10 @@ function Program(props) {
           dataSource={dataSourceMain}
           columns={columns}
           rowSelection={rowSelection}
-          //   scroll={
-          //   {y:"500px"}
-          // }
+          className="Program_table"
+        //   scroll={
+        //   {y:"500px"}
+        // }
           pagination={false}
           onRow={(record) => {
             return {

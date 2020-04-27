@@ -53,6 +53,7 @@
 .hoverButton2 .ant-btn-lg, .hoverButton3 .ant-btn-lg{
     height: 60px;
     width: 60px;
+    box-shadow: 0 1px 8px rgba(200,200,200,0.6);
 }
 
 /* 

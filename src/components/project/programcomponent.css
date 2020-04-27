@@ -32,9 +32,28 @@
 
 .progmore{
     width: 100%;
-    height: 250px;
+    height: 200px;
     display: block;
 }
+
+.progmore .ant-col{
+    text-align: center;
+}
+
+.progmore .ant-col .ant-btn{
+    padding: 0 20px;
+    border-radius: 20px;
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
+}
+
+.progmore .ant-col .ant-btn:hover, .ant-btn:focus{
+    color: #40a9ff;
+    border-color: #40a9ff;
+}
+
+
 
 .progcomponent .icon{
     color: #ffffff;
