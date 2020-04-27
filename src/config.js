@@ -1,5 +1,5 @@
 export const config ={
-    serverIP: "192.168.0.138",
+    serverIP: "192.168.0.0",
     serverPort: "9000",
     modeDisplay:{
         示教按钮: "inline",

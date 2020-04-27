@@ -191,6 +191,7 @@ function Program(props) {
           dataSource={dataSourceMain}
           columns={columns}
           rowSelection={rowSelection}
+          className="Program_table"
         //   scroll={
         //   {y:"500px"}
         // }

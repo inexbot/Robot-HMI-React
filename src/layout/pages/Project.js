@@ -168,8 +168,8 @@ function Project(props) {
           date: value.date,
           more: (
             <div>
-              <EditOutlined onClick={selectMore} />
-              <DeleteOutlined onClick={deleteSingleProgram.bind(this,value.name)} />
+              <EditOutlined onClick={selectMore} style={{fontSize:20,paddingRight:24}}/>
+              <DeleteOutlined onClick={deleteSingleProgram.bind(this,value.name)} style={{fontSize:20}}/>
             </div>
           ),
           tabName: tabName,

@@ -1,4 +1,4 @@
-/* 
+/*
  * 程序界面右下方的“插入指令，修改指令”等功能的组件
  * 引入ChangeInstructValue、instructType两个方法和变量
  */
@@ -82,22 +82,22 @@ function ProgramComponent(props) {
       ),
     });
   };
-  const handleAddButton=()=>{
-    if (addClass.current.style.display==="none") {
-      addClass.current.style.display="block";
-      moreClass.current.style.display="none"
-    }else{
-      addClass.current.style.display="none"
+  const handleAddButton = () => {
+    if (addClass.current.style.display === "none") {
+      addClass.current.style.display = "block";
+      moreClass.current.style.display = "none";
+    } else {
+      addClass.current.style.display = "none";
     }
-  }
-  const handleMoreButton = ()=>{
-    if (moreClass.current.style.display==="none") {
-      moreClass.current.style.display="block";
-      addClass.current.style.display="none"
-    }else{
-      moreClass.current.style.display="none"
+  };
+  const handleMoreButton = () => {
+    if (moreClass.current.style.display === "none") {
+      moreClass.current.style.display = "block";
+      addClass.current.style.display = "none";
+    } else {
+      moreClass.current.style.display = "none";
     }
-  }
+  };
 
   const changeType = (type) => {
     setType(type);
@@ -124,7 +124,7 @@ function ProgramComponent(props) {
   };
   return (
     <div className='progcomponent'>
-      <div className='progadd' ref={addClass} style={{display:"none"}}>
+      <div className='progadd' ref={addClass} style={{ display: "none" }}>
         <Row>
           <Col span={8} className='progaddLeft'>
             {renderType()}
@@ -134,25 +134,34 @@ function ProgramComponent(props) {
           </Col>
         </Row>
       </div>
-      <div className='progmore' ref={moreClass} style={{display:"none"}}>
+      <div className='progmore' ref={moreClass} style={{ display: "none" }}>
         <Row>
-          <Col span={6} onClick={showModalDeleteCommand}>
-            删除
+          <Col span={8} offset={3}>
+            <Button className="proMoreBtn" size="large" onClick={showModalDeleteCommand}> 删除 </Button>
           </Col>
-          <Col span={6}>22</Col>
-          <Col span={6}>33</Col>
+          <Col span={8} offset={2}>
+            <Button className="proMoreBtn" size="large">移动</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={8} offset={3}>
+          <Button className="proMoreBtn" size="large">复制</Button>
+          </Col>
+          <Col span={8} offset={2}>
+          <Button className="proMoreBtn" size="large">粘贴</Button>
+          </Col>
         </Row>
       </div>
       <div className='progicon'>
         <Row>
           <Col span={6} offset={3}>
-            <PlusOutlined className='icon' onClick={handleAddButton}/>
+            <PlusOutlined className='icon' onClick={handleAddButton} />
           </Col>
           <Col span={6}>
             <EditOutlined className='icon' onClick={changevalue} />
           </Col>
           <Col span={6}>
-            <EllipsisOutlined className='icon' onClick={handleMoreButton}/>
+            <EllipsisOutlined className='icon' onClick={handleMoreButton} />
           </Col>
         </Row>
       </div>
