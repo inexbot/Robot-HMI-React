@@ -21,7 +21,6 @@
 .progadd {
     width: 100%;
     height: 500px;
-    /* display: none; */
 }
 
 .progadd .progaddLeft,.progadd .progaddRight{
@@ -34,7 +33,7 @@
 .progmore{
     width: 100%;
     height: 250px;
-    display: none;
+    display: block;
 }
 
 .progcomponent .icon{

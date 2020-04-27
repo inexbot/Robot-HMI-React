@@ -1,3 +1,6 @@
+/* 
+ * 入口文件,没有必要不需要改
+ */
 import React from "react";
 import dva from "dva";
 import "./index.css";

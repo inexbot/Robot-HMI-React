@@ -1,0 +1,4 @@
+.virtual-table-cell{
+    display: flex;
+    flex-flow: column;
+}

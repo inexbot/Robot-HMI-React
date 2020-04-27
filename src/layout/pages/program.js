@@ -1,3 +1,7 @@
+/* 
+ * 程序界面
+ * 引入了ProgramComponent组件，右下方的插入指令等
+ */
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import {
@@ -8,13 +12,12 @@ import {
   notification,
   ConfigProvider,
 } from "antd";
+import VirtualTable from "components/table";
 import { connect } from "dva";
 import { renderInstruct } from "./program_instruct_header";
 import ConTitle from "components/title";
-import ChangeInstructValue from "./program_changevalue_header";
 import ProgramComponent from "../../components/project/programcomponent";
 import "./Project.css";
-import { sendMSGtoServer } from "service/network";
 
 // 从全局的状态获取当前机器人状态
 const mapStateToProps = (state) => {
@@ -39,10 +42,43 @@ const customizeRenderEmpty = () => (
 function Program(props) {
   const [selectedRow, setSelectedRow] = useState(0);
   const [selectedName, setSelectedName] = useState(0);
-  const [changeVisible, setChangeVisible] = useState(false);
+  const [multiSelection, setMultiSelection] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
+  const [rowSelection, setRowSelection] = useState(null);
+  const [isBulk, setIsBulk] = useState(0);
   const [insertOrChange, setInsertOrChange] = useState("insert");
   const [form] = Form.useForm();
+  const rows = {
+    onSelect: (record, selected, selectedRows) => {
+      let order = [];
+      selectedRows.map((value) => {
+        order.push(value.order + 1);
+      });
+      setMultiSelection(order);
+    },
+    onSelectAll: (selected, selectedRows, changeRows) => {
+      let order = [];
+      selectedRows.map((value) => {
+        order.push(value.order + 1);
+      });
+      setMultiSelection(order);
+    },
+  };
+
+  const selectMore = () => {
+    setRowSelection(rows);
+    setIsBulk(1);
+    setMoreButton(<Button onClick={cancelSelectMore}>取消多选</Button>);
+  };
+  const cancelSelectMore = () => {
+    setRowSelection();
+    setIsBulk(0);
+    setMoreButton(<Button onClick={selectMore}>多选</Button>);
+  };
+
+  const [moreButton, setMoreButton] = useState(
+    <Button onClick={selectMore}>多选</Button>
+  );
   // 用来构建标签页
   const columns = [
     {
@@ -51,7 +87,7 @@ function Program(props) {
       className: "pro_id",
     },
     {
-      title: "指令名",
+      title: <div>指令名{moreButton}</div>,
       dataIndex: "name",
       key: "name",
       className: "pro_tit",
@@ -67,6 +103,9 @@ function Program(props) {
       key: "para",
     },
   ];
+  useEffect(() => {
+    console.log(multiSelection);
+  }, [multiSelection]);
   useEffect(() => {
     if (props.program.success === false) {
       notification.error({
@@ -121,14 +160,40 @@ function Program(props) {
         subtitle={intl.get(" ")}
         buttonLink='/Project'
       />
-      <ProgramComponent selectedName={selectedName} selectedRow={selectedRow} />
+      <ProgramComponent
+        selectedName={selectedName}
+        selectedRow={selectedRow}
+        multiSelection={multiSelection}
+        isBulk={isBulk}
+      />
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
+        {/* <VirtualTable
+          columns={columns}
+          dataSource={dataSourceMain}
+          rowSelection={rowSelection}
+          scroll={{
+            y: 500,
+            x: "100px",
+          }}
+          onRow={(record) => {
+            return {
+              // 点击表格每一行后的回调
+              onClick: (event) => {
+                console.log(record.order, record.insName);
+                setSelectedRow(record.order);
+                setMultiSelection([record.order+1]);
+                setSelectedName(record.insName);
+              },
+            };
+          }}
+        /> */}
         <Table
           dataSource={dataSourceMain}
           columns={columns}
-          /* scroll={
-          {y:"500px"}
-        } */
+          rowSelection={rowSelection}
+        //   scroll={
+        //   {y:"500px"}
+        // }
           pagination={false}
           onRow={(record) => {
             return {
@@ -136,6 +201,7 @@ function Program(props) {
               onClick: (event) => {
                 console.log(record.order, record.insName);
                 setSelectedRow(record.order);
+                setMultiSelection([record.order+1]);
                 setSelectedName(record.insName);
               },
             };

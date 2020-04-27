@@ -14,7 +14,7 @@ export const project = [
 ];
 
 export const program = {
-  /* name: "programName",
+  name: "programName",
   Success: true, // or false
   possum:17,
     var:{
@@ -34,8 +34,12 @@ export const program = {
       para: { POS: "P001", VJ: 22, PL: 1, ACC: 10, DEC: 10 },
     },
     {
-      name: "MEIJIAN",
-      para: { POS: "P002", V: 100, PL: 1, ACC: 10, DEC: 10 },
+      name: "MOVJ",
+      para: { POS: "P001", VJ: 22, PL: 1, ACC: 10, DEC: 10 },
     },
-  ], */
+    {
+      name: "MOVJ",
+      para: { POS: "P001", VJ: 22, PL: 1, ACC: 10, DEC: 10 },
+    },
+  ],
 };

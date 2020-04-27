@@ -1,3 +1,6 @@
+/* 
+ * 用来渲染点位选项和新建点位的名字的
+ */
 import React from "react";
 import { Select } from "antd";
 

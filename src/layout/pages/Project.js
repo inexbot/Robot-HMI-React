@@ -1,7 +1,11 @@
+/* 
+ * 工程界面
+ * 引入了ProjectComponent组件，右下方的新建等按钮
+ */
 import React, { useState, useEffect } from "react";
 import { Table, Tabs, ConfigProvider, Modal, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { connect, router } from "dva";
+import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
 import ProjectComponent from "components/project/projectcomponent";
 import intl from "react-intl-universal";

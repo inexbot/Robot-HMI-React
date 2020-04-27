@@ -20,17 +20,17 @@ const insertDefaultValue = {
 
 function Movj(props) {
   const x = () => {
-    if (props.program.var !== undefined && props.program.var.posnum !== undefined ) {
-      return props.program.var.posnum;
+    if (props.program.var !== undefined && props.program.var.position !== undefined ) {
+      return props.program.var.position;
     } else {
-      return 0;
+      return [];
     }
   };
   const posSum = x();
   useEffect(() => {
     let para;
     if (props.insertOrChange === "change") {
-      para = props.program.instruct[props.row - 1].para;
+      para = props.program.instruct[props.row].para;
     } else {
       para = insertDefaultValue;
     }
@@ -57,26 +57,28 @@ function Movj(props) {
     }
     if (props.insertOrChange === "change") {
       let sendData = {
-        pos: props.row,
+        pos: parseInt(props.row+1),
+        modifystate:1,
         POS: value.POS,
-        VJ: value.VJ,
-        PL: value.PL,
-        ACC: value.ACC,
-        DEC: value.DEC,
+        VJ: parseFloat(value.VJ),
+        PL: parseInt(value.PL),
+        ACC: parseFloat(value.ACC),
+        DEC: parseFloat(value.DEC),
       };
       sendMSGtoServer("INSERT_COMMAND", sendData);
       return;
     } else {
       let sendInsert = {
-        line: props.row,
+        line: parseInt(props.row+1),
+        modifystate:0,
         name: "MOVJ",
         postype: posType,
         posname: posName,
         POS: pos,
-        VJ: value.VJ,
-        ACC: value.ACC,
-        DEC: value.DEC,
-        PL: value.PL,
+        VJ: parseFloat(value.VJ),
+        ACC: parseFloat(value.ACC),
+        DEC: parseFloat(value.DEC),
+        PL: parseInt(value.PL),
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
     }

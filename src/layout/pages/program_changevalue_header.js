@@ -1,3 +1,6 @@
+/* 
+ * 修改指令的入口，在这里决定右侧页面显示的是哪个文件
+ */
 import React from "react";
 import Movj from "./Instruct/movj";
 import Movl from "./Instruct/movl";

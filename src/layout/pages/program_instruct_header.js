@@ -13,6 +13,24 @@ export function renderInstruct(name, para) {
       return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
     case "MOVS":
       return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
+    case "IMOV":
+      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
+    case "SPEED":
+      return `Speed=${para.speed}`;
+    case "MOVJEXT":
+      return `${para.POS} VJ=${para.VJ}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC} SYNC=${para.SYNC}`;
+    case "MOVLEXT":
+      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC} SYNC=${para.SYNC}`;
+    case "MOVCEXT":
+      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC} SYNC=${para.SYNC}`;
+    case "MOVJDOUBLE":
+      return `${para.POS} VJ=${para.VJ}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
+    case "MOVLDOUBLE":
+      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
+    case "MOVCDOUBLE":
+      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
+    case "MOVCADOUBLE":
+      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC} SPIN=${para.SPIN}`;
     /* 其它指令 */
     /* 遇到没有的指令名 */
     default:
