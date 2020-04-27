@@ -3,7 +3,7 @@ import { renderPosOption, newPos } from "./renderPos";
 import { Form, Input, Select } from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
-
+const {Option} = Select;
 const mapStateToProps = (state) => {
   return {
     program: state.index.program,
@@ -16,9 +16,10 @@ const insertDefaultValue = {
   PL: 5,
   ACC: 10,
   DEC: 10,
+  SPIN:0
 };
 
-function Movl(props) {
+function MovcA(props) {
   const x = () => {
     if (
       props.program.var !== undefined &&
@@ -43,6 +44,7 @@ function Movl(props) {
       PL: para.PL,
       ACC: para.ACC,
       DEC: para.DEC,
+      SPIN:para.SPIN
     });
   }, [props.row, props.insertOrChange, props.form]);
   const onFinish = (value) => {
@@ -58,11 +60,12 @@ function Movl(props) {
       posType = 1;
       posName = null;
     }
+    console.log(value)
     if (props.insertOrChange === "change") {
       let sendData = {
         line: parseInt(props.row),
         modifystate: 1,
-        name: "MOVL",
+        name: "MOVCA",
         postype: posType,
         posname: posName,
         POS: pos,
@@ -70,6 +73,7 @@ function Movl(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
+        SPIN:parseInt(value.SPIN)
       };
       sendMSGtoServer("INSERT_COMMAND", sendData);
       props.setClose();
@@ -78,7 +82,7 @@ function Movl(props) {
       let sendInsert = {
         line: parseInt(props.row + 1),
         modifystate: 0,
-        name: "MOVL",
+        name: "MOVCA",
         postype: posType,
         posname: posName,
         POS: pos,
@@ -86,6 +90,7 @@ function Movl(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
+        SPIN:parseInt(value.SPIN)
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
@@ -147,7 +152,21 @@ function Movl(props) {
         ]}>
         <Input style={{ width: 200 }} />
       </Form.Item>
+      <Form.Item
+        name='SPIN'
+        label='SPIN'
+        rules={[
+          {
+            required: true,
+          },
+        ]}>
+        <Select style={{ width: 200 }}>
+          <Option value={0}>0</Option>
+          <Option value={1}>1</Option>
+          <Option value={2}>2</Option>
+        </Select>
+      </Form.Item>
     </Form>
   );
 }
-export default connect(mapStateToProps)(Movl);
+export default connect(mapStateToProps)(MovcA);

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "dva";
 import { sendMSGtoController } from "service/network";
-import { Button, Tabs, Input, Col, Popover, Row, Form, Select } from "antd";
+import { Button, Tabs, Input, Popover, Form } from "antd";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./jointpara.css";
 
 const { TabPane } = Tabs;
-const { Option } = Select;
 
 const mapStateToProps = (state) => {
   return {
@@ -31,7 +30,7 @@ function Jointpara(props) {
   const text1 = <span>{intl.get("问题")}</span>;
   const content1 = (
     <div>
-      <img src="/public/images/demo.png" width={400} height={300} alt=""></img>
+      <img src='/public/images/demo.png' width={400} height={300} alt=''></img>
     </div>
   );
 
@@ -78,7 +77,7 @@ function Jointpara(props) {
       sendMSGtoController("JOINTPARAMETER_INQUIRE", sendData);
     }
   };
-  /* 
+  /*
    *  根据机器人类型判断轴个数
    */
   useEffect(() => {
@@ -123,12 +122,12 @@ function Jointpara(props) {
         break;
     }
   }, [props.currentRobotType]);
-  /* 
+  /*
    *  发送获取参数的事儿
    */
   useEffect(() => {
     sendInquire(sum);
-  }, [sum,props.currentRobot]);
+  }, [sum, props.currentRobot]);
   /*
    *  渲染TabPane内容
    */
@@ -218,23 +217,22 @@ function Jointpara(props) {
           <tbody>
             <tr>
               <td>
-              <Form.Item
-            name={`joint${joint}PosSWLimit`}
-            label={intl.get("正限位")}
-            help={intl.get("关节参数/正限位说明")}
-          >
-            <Input disabled={isDisabled} />
-          </Form.Item>
-                </td>
+                <Form.Item
+                  name={`joint${joint}PosSWLimit`}
+                  label={intl.get("正限位")}
+                  help={intl.get("关节参数/正限位说明")}>
+                  <Input disabled={isDisabled} />
+                </Form.Item>
+              </td>
               <td></td>
               <td>
                 <Form.Item
-            name={`joint${joint}NegSWLimit`}
-            label={intl.get("反限位")}
-            help={intl.get("关节参数/反限位说明")}
-          >
-            <Input disabled={isDisabled} />
-          </Form.Item></td>
+                  name={`joint${joint}NegSWLimit`}
+                  label={intl.get("反限位")}
+                  help={intl.get("关节参数/反限位说明")}>
+                  <Input disabled={isDisabled} />
+                </Form.Item>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -359,51 +357,47 @@ function Jointpara(props) {
         subtitle={intl.get("机器人关节参数设置")}
       />
       {/* 悬浮按钮 */}
-      <div className="hoverButton1">
-        <Button type={buttontype1} shape="circle" size="large" onClick={change}>
+      <div className='hoverButton1'>
+        <Button type={buttontype1} shape='circle' size='large' onClick={change}>
           {buttoncharacter1}
         </Button>
       </div>
 
       <Popover
-        placement="left"
+        placement='left'
         title={text1}
         content={content1}
-        trigger="click"
-      >
-        <div className="hoverButton2">
+        trigger='click'>
+        <div className='hoverButton2'>
           <Button
             type={buttontype2}
-            shape="circle"
-            size="large"
-            onClick={demoUp}
-          >
+            shape='circle'
+            size='large'
+            onClick={demoUp}>
             {buttoncharacter2}
           </Button>
         </div>
       </Popover>
       <Popover
-        placement="left"
+        placement='left'
         title={text2}
         content={content2}
-        trigger="click"
-      >
-        <div className="hoverButton3">
+        trigger='click'>
+        <div className='hoverButton3'>
           <Button
             type={buttontype3}
-            shape="circle"
-            size="large"
-            onClick={quesUp}
-          >
+            shape='circle'
+            size='large'
+            onClick={quesUp}>
             {buttoncharacter3}
           </Button>
         </div>
       </Popover>
 
       {/* 主要内容 */}
-      <div className="Jointpara">
+      <div className='Jointpara'>
         <Form form={form} {...formItemLayout} onFinish={onFinish}>
-          <Tabs defaultActiveKey="1" style={{ background: "white" }}>
+          <Tabs defaultActiveKey='1' style={{ background: "white" }}>
             {tabs}
           </Tabs>
         </Form>

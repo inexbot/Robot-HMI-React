@@ -14,6 +14,7 @@ import IO from "../../layout/state/io";
 import Position from "../../layout/state/position";
 import Jog from "layout/state/jog";
 import DragPlayback from "layout/state/dragplayback";
+import LocalPosition from "layout/state/localposition";
 
 const mapStateToProps = (state) => {
   return {
@@ -51,6 +52,8 @@ function LeftState(props) {
         return <Jog />;
       case "DragPlayback":
         return <DragPlayback />;
+      case "LocalPosition":
+        return <LocalPosition />;
       default:
         return null;
     }

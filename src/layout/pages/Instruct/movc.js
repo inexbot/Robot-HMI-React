@@ -18,7 +18,7 @@ const insertDefaultValue = {
   DEC: 10,
 };
 
-function Movl(props) {
+function Movc(props) {
   const x = () => {
     if (
       props.program.var !== undefined &&
@@ -62,7 +62,7 @@ function Movl(props) {
       let sendData = {
         line: parseInt(props.row),
         modifystate: 1,
-        name: "MOVL",
+        name: "MOVC",
         postype: posType,
         posname: posName,
         POS: pos,
@@ -78,7 +78,7 @@ function Movl(props) {
       let sendInsert = {
         line: parseInt(props.row + 1),
         modifystate: 0,
-        name: "MOVL",
+        name: "MOVC",
         postype: posType,
         posname: posName,
         POS: pos,
@@ -150,4 +150,4 @@ function Movl(props) {
     </Form>
   );
 }
-export default connect(mapStateToProps)(Movl);
+export default connect(mapStateToProps)(Movc);

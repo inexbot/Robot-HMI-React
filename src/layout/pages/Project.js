@@ -1,4 +1,4 @@
-/* 
+/*
  * 工程界面
  * 引入了ProjectComponent组件，右下方的新建等按钮
  */
@@ -74,10 +74,10 @@ function Project(props) {
   const handleCancelDeleteSingleProgram = () => {
     Modal.destroyAll();
   };
-  const deleteSingleProgram = (name)=>{
+  const deleteSingleProgram = (name) => {
     confirm({
       title: "确认",
-      onOk: handleOkDeleteSingleProgram.bind(this,name),
+      onOk: handleOkDeleteSingleProgram.bind(this, name),
       onCancel: handleCancelDeleteSingleProgram,
       destroyOnClose: true,
       content: (
@@ -86,8 +86,8 @@ function Project(props) {
           <p>{name}</p>
         </div>
       ),
-    })
-  }
+    });
+  };
   useEffect(() => {
     sendMSGtoServer("Project", { robot: props.currentRobot });
   }, [props.currentRobot]);
@@ -96,6 +96,7 @@ function Project(props) {
       let name = [];
       selectedRows.map((value) => {
         name.push(value.name);
+        return value;
       });
       setSelectedProgram(name);
     },
@@ -103,6 +104,7 @@ function Project(props) {
       let name = [];
       selectedRows.map((value) => {
         name.push(value.name);
+        return value;
       });
       setSelectedProgram(name);
     },
@@ -150,7 +152,7 @@ function Project(props) {
     // 对接收到的数据进行第一次遍历，用来获取标签页标签名
     if (props.project === undefined) {
       setTabPanel(
-        <TabPane tab={"无工程"} key="0">
+        <TabPane tab={"无工程"} key='0'>
           <Table columns={columns} key='0' />
         </TabPane>
       );
@@ -169,7 +171,9 @@ function Project(props) {
           more: (
             <div>
               <EditOutlined onClick={selectMore} />
-              <DeleteOutlined onClick={deleteSingleProgram.bind(this,value.name)} />
+              <DeleteOutlined
+                onClick={deleteSingleProgram.bind(this, value.name)}
+              />
             </div>
           ),
           tabName: tabName,

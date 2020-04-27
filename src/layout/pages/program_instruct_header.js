@@ -10,7 +10,7 @@ export function renderInstruct(name, para) {
     case "MOVC":
       return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
     case "MOVCA":
-      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
+      return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC} SPIN=${para.SPIN}`;
     case "MOVS":
       return `${para.POS} V=${para.V}mm/s PL=${para.PL} ACC=${para.ACC} DEC=${para.DEC}`;
     case "IMOV":

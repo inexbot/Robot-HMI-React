@@ -20,7 +20,10 @@ const insertDefaultValue = {
 
 function Movj(props) {
   const x = () => {
-    if (props.program.var !== undefined && props.program.var.position !== undefined ) {
+    if (
+      props.program.var !== undefined &&
+      props.program.var.position !== undefined
+    ) {
       return props.program.var.position;
     } else {
       return [];
@@ -57,20 +60,24 @@ function Movj(props) {
     }
     if (props.insertOrChange === "change") {
       let sendData = {
-        pos: parseInt(props.row+1),
-        modifystate:1,
-        POS: value.POS,
+        line: parseInt(props.row),
+        modifystate: 1,
+        name: "MOVJ",
+        postype: posType,
+        posname: posName,
+        POS: pos,
         VJ: parseFloat(value.VJ),
-        PL: parseInt(value.PL),
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
+        PL: parseInt(value.PL),
       };
       sendMSGtoServer("INSERT_COMMAND", sendData);
+      props.setClose();
       return;
     } else {
       let sendInsert = {
-        line: parseInt(props.row+1),
-        modifystate:0,
+        line: parseInt(props.row + 1),
+        modifystate: 0,
         name: "MOVJ",
         postype: posType,
         posname: posName,
@@ -81,6 +88,7 @@ function Movj(props) {
         PL: parseInt(value.PL),
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
+      props.setClose();
     }
   };
   return (

@@ -7,7 +7,6 @@ import {
   Input,
   Form,
   Select,
-  Table,
   Card,
   Switch,
   Row,
@@ -18,7 +17,6 @@ import {
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./jointpara.css";
-import autoLoadPro from "../autoLoadPro";
 const { Option } = Select;
 const { TabPane } = Tabs;
 

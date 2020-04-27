@@ -1,4 +1,4 @@
-/* 
+/*
  * 程序界面右下方的“插入指令，修改指令”等功能的组件
  * 引入ChangeInstructValue、instructType两个方法和变量
  */
@@ -31,8 +31,6 @@ function ProgramComponent(props) {
   const [form] = Form.useForm();
   const addClass = useRef();
   const moreClass = useRef();
-  const selectedName = props.selectedName;
-  const selectedRow = props.selectedRow;
   useEffect(() => {
     let rightList = [];
     let ins = instructType[type].list;
@@ -42,6 +40,7 @@ function ProgramComponent(props) {
           {value}
         </p>
       );
+      return value;
     });
     setInstructList(rightList);
   }, [type]);
@@ -67,6 +66,7 @@ function ProgramComponent(props) {
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
+    moreClass.current.style.display = "none";
     let hang = props.multiSelection.map((value) => {
       return value - 1;
     });
@@ -82,22 +82,22 @@ function ProgramComponent(props) {
       ),
     });
   };
-  const handleAddButton=()=>{
-    if (addClass.current.style.display==="none") {
-      addClass.current.style.display="block";
-      moreClass.current.style.display="none"
-    }else{
-      addClass.current.style.display="none"
+  const handleAddButton = () => {
+    if (addClass.current.style.display === "none") {
+      addClass.current.style.display = "block";
+      moreClass.current.style.display = "none";
+    } else {
+      addClass.current.style.display = "none";
     }
-  }
-  const handleMoreButton = ()=>{
-    if (moreClass.current.style.display==="none") {
-      moreClass.current.style.display="block";
-      addClass.current.style.display="none"
-    }else{
-      moreClass.current.style.display="none"
+  };
+  const handleMoreButton = () => {
+    if (moreClass.current.style.display === "none") {
+      moreClass.current.style.display = "block";
+      addClass.current.style.display = "none";
+    } else {
+      moreClass.current.style.display = "none";
     }
-  }
+  };
 
   const changeType = (type) => {
     setType(type);
@@ -111,6 +111,7 @@ function ProgramComponent(props) {
           {value.name}
         </p>
       );
+      return value;
     });
     return leftList;
   };
@@ -118,13 +119,15 @@ function ProgramComponent(props) {
     setInsertOrChange("insert");
     setInsertName(value);
     setChangeVisible(true);
+    moreClass.current.style.display = "none";
+    addClass.current.style.display = "none";
   };
   const renderSaveOrInsert = () => {
     return insertOrChange === "change" ? "保存" : "插入";
   };
   return (
     <div className='progcomponent'>
-      <div className='progadd' ref={addClass} style={{display:"none"}}>
+      <div className='progadd' ref={addClass} style={{ display: "none" }}>
         <Row>
           <Col span={8} className='progaddLeft'>
             {renderType()}
@@ -134,7 +137,7 @@ function ProgramComponent(props) {
           </Col>
         </Row>
       </div>
-      <div className='progmore' ref={moreClass} style={{display:"none"}}>
+      <div className='progmore' ref={moreClass} style={{ display: "none" }}>
         <Row>
           <Col span={6} onClick={showModalDeleteCommand}>
             删除
@@ -146,13 +149,13 @@ function ProgramComponent(props) {
       <div className='progicon'>
         <Row>
           <Col span={6} offset={3}>
-            <PlusOutlined className='icon' onClick={handleAddButton}/>
+            <PlusOutlined className='icon' onClick={handleAddButton} />
           </Col>
           <Col span={6}>
             <EditOutlined className='icon' onClick={changevalue} />
           </Col>
           <Col span={6}>
-            <EllipsisOutlined className='icon' onClick={handleMoreButton}/>
+            <EllipsisOutlined className='icon' onClick={handleMoreButton} />
           </Col>
         </Row>
       </div>
@@ -178,11 +181,12 @@ function ProgramComponent(props) {
           </div>
         }>
         <ChangeInstructValue
-          changeName={selectedName}
-          row={selectedRow}
+          changeName={props.selectedName}
+          row={props.selectedRow}
           form={form}
           insertName={insertName}
           insertOrChange={insertOrChange}
+          setClose={onClose}
         />
       </Drawer>
     </div>

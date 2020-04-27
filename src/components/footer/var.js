@@ -23,7 +23,7 @@ function Var(props) {
     document.getElementById("leftframe").style.display = "block";
     switch (key) {
       case "0":
-        changeLeft("position");
+        changeLeft("LocalPosition");
         break;
       case "1":
         changeLeft("value");

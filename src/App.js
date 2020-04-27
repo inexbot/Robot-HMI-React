@@ -8,7 +8,6 @@ import LeftState from "./components/leftstate";
 import ParaFrame from "./components/paraframe";
 import Log from "./components/log";
 import { connect } from "dva";
-import { Row, Col } from "antd";
 import "./App.css";
 
 // locale data

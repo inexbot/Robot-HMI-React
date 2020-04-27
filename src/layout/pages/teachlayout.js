@@ -131,7 +131,6 @@ function TeachLayout(props) {
     sendMSGtoController("FAULT_RESET", data);
   };
   const mountLeft = (value) => {
-    let key = value.key;
     document.getElementById("leftframe").style.display = "block";
     document.getElementById("controlBtm").style.display = "none";
     props.dispatch({

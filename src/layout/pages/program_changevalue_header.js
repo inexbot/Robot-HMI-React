@@ -1,9 +1,11 @@
-/* 
+/*
  * 修改指令的入口，在这里决定右侧页面显示的是哪个文件
  */
 import React from "react";
 import Movj from "./Instruct/movj";
 import Movl from "./Instruct/movl";
+import Movc from "./Instruct/movc";
+import MovcA from "./Instruct/movca";
 
 function ChangeInstructValue(props) {
   let name;
@@ -19,6 +21,7 @@ function ChangeInstructValue(props) {
           row={props.row}
           form={props.form}
           insertOrChange={props.insertOrChange}
+          setClose={props.setClose}
         />
       );
     case "MOVL":
@@ -27,6 +30,25 @@ function ChangeInstructValue(props) {
           row={props.row}
           form={props.form}
           insertOrChange={props.insertOrChange}
+          setClose={props.setClose}
+        />
+      );
+    case "MOVC":
+      return (
+        <Movc
+          row={props.row}
+          form={props.form}
+          insertOrChange={props.insertOrChange}
+          setClose={props.setClose}
+        />
+      );
+    case "MOVCA":
+      return (
+        <MovcA
+          row={props.row}
+          form={props.form}
+          insertOrChange={props.insertOrChange}
+          setClose={props.setClose}
         />
       );
     default:

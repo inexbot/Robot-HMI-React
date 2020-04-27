@@ -1,5 +1,4 @@
 import React from "react";
-import intl from "react-intl-universal";
 import { Input, Button, Form, InputNumber } from "antd";
 import { connect } from "dva";
 

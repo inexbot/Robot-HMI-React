@@ -1,4 +1,4 @@
-/* 
+/*
  * 程序界面
  * 引入了ProgramComponent组件，右下方的插入指令等
  */
@@ -7,12 +7,10 @@ import intl from "react-intl-universal";
 import {
   Table,
   Button,
-  Drawer,
-  Form,
   notification,
   ConfigProvider,
 } from "antd";
-import VirtualTable from "components/table";
+// import VirtualTable from "components/table";
 import { connect } from "dva";
 import { renderInstruct } from "./program_instruct_header";
 import ConTitle from "components/title";
@@ -46,20 +44,20 @@ function Program(props) {
   const [dataSourceMain, setDataSourceMain] = useState([]);
   const [rowSelection, setRowSelection] = useState(null);
   const [isBulk, setIsBulk] = useState(0);
-  const [insertOrChange, setInsertOrChange] = useState("insert");
-  const [form] = Form.useForm();
   const rows = {
     onSelect: (record, selected, selectedRows) => {
       let order = [];
       selectedRows.map((value) => {
-        order.push(value.order + 1);
+        order.push(value.order);
+        return value;
       });
       setMultiSelection(order);
     },
     onSelectAll: (selected, selectedRows, changeRows) => {
       let order = [];
       selectedRows.map((value) => {
-        order.push(value.order + 1);
+        order.push(value.order);
+        return value;
       });
       setMultiSelection(order);
     },
@@ -104,8 +102,8 @@ function Program(props) {
     },
   ];
   useEffect(() => {
-    console.log(multiSelection);
-  }, [multiSelection]);
+    setSelectedRow(1);
+  }, []);
   useEffect(() => {
     if (props.program.success === false) {
       notification.error({
@@ -124,7 +122,7 @@ function Program(props) {
         // 遍历获取指令数据
         instruct.map((value, index) => {
           if (index === 0) {
-            return;
+            return value;
           } else {
             if (value === null) {
               dataSource.push({
@@ -179,7 +177,6 @@ function Program(props) {
             return {
               // 点击表格每一行后的回调
               onClick: (event) => {
-                console.log(record.order, record.insName);
                 setSelectedRow(record.order);
                 setMultiSelection([record.order+1]);
                 setSelectedName(record.insName);
@@ -191,17 +188,16 @@ function Program(props) {
           dataSource={dataSourceMain}
           columns={columns}
           rowSelection={rowSelection}
-        //   scroll={
-        //   {y:"500px"}
-        // }
+          //   scroll={
+          //   {y:"500px"}
+          // }
           pagination={false}
           onRow={(record) => {
             return {
               // 点击表格每一行后的回调
               onClick: (event) => {
-                console.log(record.order, record.insName);
                 setSelectedRow(record.order);
-                setMultiSelection([record.order+1]);
+                setMultiSelection([record.order]);
                 setSelectedName(record.insName);
               },
             };
