@@ -29,14 +29,19 @@ function Mode(props) {
         defaultValue='Handle'
         onChange={handleChangeOperatemode}
         showArrow={false}
-        className='Handle'>
+        className='Handle'
+        style={{ width: 52 }}>
         <Option value='Handle'>{intl.get("手动")}</Option>
         <Option value='Wheel'>{intl.get("手轮")}</Option>
         <Option value='Drag'>{intl.get("拖拽")}</Option>
       </Select>
     ),
     run: (
-      <Select defaultValue='single' showArrow={false} className='Handle'>
+      <Select
+        defaultValue='single'
+        showArrow={false}
+        className='Handle'
+        style={{ width: 52 }}>
         <Option value='single'>{intl.get("单次")}</Option>
         <Option value='cycle'>{intl.get("循环")}</Option>
       </Select>
@@ -54,7 +59,7 @@ function Mode(props) {
         break;
       case 2:
         setMode("Run");
-        setRightSelect(rightSelection.run)
+        setRightSelect(rightSelection.run);
         break;
       default:
         break;
@@ -91,7 +96,8 @@ function Mode(props) {
         value={mode}
         onChange={handleChangemode}
         showArrow={false}
-        className='Teach'>
+        className='Teach'
+        style={{ width: 80 }}>
         <Option value='Teach'>{intl.get("示教模式")}</Option>
         <Option value='Run'>{intl.get("运行模式")}</Option>
         <Option value='Remote'>{intl.get("远程模式")}</Option>

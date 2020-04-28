@@ -170,7 +170,7 @@ function ProgramComponent(props) {
       </div>
       <Drawer
         title={`指令`}
-        width={720}
+        width={500}
         onClose={onClose}
         visible={changeVisible}
         bodyStyle={{ paddingBottom: 80 }}
@@ -180,11 +180,12 @@ function ProgramComponent(props) {
           <div
             style={{
               textAlign: "left",
+              paddingLeft:50,
             }}>
-            <Button onClick={onClose} style={{ marginRight: 8 }}>
+            <Button onClick={onClose} style={{ marginRight: 50 }}>
               关闭
             </Button>
-            <Button onClick={onFinish} style={{ marginRight: 8 }}>
+            <Button onClick={onFinish} type="primary" style={{ marginRight: 8 }}>
               {renderSaveOrInsert()}
             </Button>
           </div>
