@@ -1,18 +1,18 @@
 # H5Project
 
-#### 介绍
+## 介绍
 
 H5Project，新界面，新体验。
 
 一些说明在[Gitee Pages](http://mintotea.gitee.io/h5project/)
 
-#### 软件架构
+### 软件架构
 
-##### 当前已应用
+#### 当前已应用
 
-NodeJs，React，React-Router，antd, DvaJs,Electron
+NodeJs,React,React-Router,antd, DvaJs,Electron,Echarts,react-intl-universal
 
-#### 使用
+### 使用
 
 设计分辨率：1280*800
 
@@ -41,7 +41,7 @@ NodeJs，React，React-Router，antd, DvaJs,Electron
 2. 执行`npm start`或`npm run start`，在localhost:3000即可预览；
 3. 执行`npm build`或`npm run build`，编译程序。
 
-##### 脚本
+#### 脚本
 
 + `start`启动调试服务器，并打开项目
 + `build`打包H5项目网站到build目录
@@ -56,7 +56,7 @@ NodeJs，React，React-Router，antd, DvaJs,Electron
 
 在VSCode左侧的自带脚本中，直接点击对应的箭头即可直接运行。
 
-#### 目录说明
+### 目录说明
 
 | 文件/目录 | 注释 |
 | ----- | ----- |
@@ -86,9 +86,9 @@ NodeJs，React，React-Router，antd, DvaJs,Electron
 | public/favicon.ico | 图标 |
 | electron-zip | 编译PC版软件的依赖 |
 
-#### 注意事项
+### 注意事项
 
 1. 所有字符串需要用`intl.get()`包起来；
 2. 尽量使用react hooks做组件；
 
-#### 下一步工作
+### 下一步工作
