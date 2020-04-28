@@ -108,8 +108,7 @@ export default {
               <Button
                 onClick={() => {
                   window.location.reload();
-                }}
-              >
+                }}>
                 重试
               </Button>
             </div>
@@ -249,6 +248,12 @@ export default {
           case "3306":
             dispatch({
               type: "receiveServoEncoderUnderVoltageState",
+              data: dataString,
+            });
+            break;
+          case "5013":
+            dispatch({
+              type: "receiveCycleCountRespond",
               data: dataString,
             });
             break;
@@ -515,6 +520,13 @@ export default {
         });
       }
       return state;
+    },
+    /* 接收运行次数 */
+    receiveCycleCountRespond(state, action) {
+      let _state = JSON.parse(JSON.stringify(state));
+      _state.robotStatus.count = action.data.count;
+      _state.robotStatus.index = action.data.index;
+      return _state;
     },
     /* 设置上电返回 */
     receiveDeadmanState(state, action) {

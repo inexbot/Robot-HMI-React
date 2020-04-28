@@ -150,7 +150,7 @@ function Project(props) {
     let tabs = [];
     let keyOfTabs = 1;
     // 对接收到的数据进行第一次遍历，用来获取标签页标签名
-    if (props.project === undefined) {
+    if (props.project === undefined || props.project.length === 0) {
       setTabPanel(
         <TabPane tab={"无工程"} key='0'>
           <Table columns={columns} key='0' />
@@ -201,7 +201,7 @@ function Project(props) {
       return value;
     });
     setTabPanel(tabs);
-  }, [props.project, rowSelection]);
+  }, [props.project,rowSelection]);
   const deleteMoreButton = () => {
     if (isBulk === 0) {
       return (

@@ -67,12 +67,38 @@ export const CommandList = {
     PL:1
   } */
   INSERT_COMMAND: 0x1120,
+  /* 运行程序
+  data:{
+    "robot":1				//1：表示机器人1，2：表示机器人2
+    "jobname":"Q1",
+    suffixname:".JBR"
+    "line":1,
+    "continueRun":0 //1:继续运行,0:不继续运行
+  } */
+  JOBSEND_DONE: 0x2501,
+  /* 停止运行的程序
+  data:{
+    "robot":1
+  }   */
+
+  STOP_JOB_RUN: 0x2503,
   /* 切换机器人
   data:{
     "mode":0,			//0：单机模式，1：多机模式
     "robot":1				//机器人号
   } */
   ROBOT_SWITCH: 0x5001,
+  /* 设置运行次数
+  data:{
+      "robot":1,			//机器人号
+      "index":1				//总循环次数，0：表示无限循环 
+  } */
+  CYCLE_INDEX_SET: 0x5011,
+  /* 查询运行次数
+  data:{
+    "robot":1				//机器人号
+  }  */
+  CYCLE_COUNT_INQUIRE: 0x5012,
   CURRENT_ROBOT_INQUIRE: 0x5002, // 获取当前机器人
   CURRENT_ROBOT_TYPE_INQUIRE: 0x2e02, // 获取当前机器人的类型
   CURRENT_ROBOT_RUNNING_STATE_INQUIRE: 0x3d02, // 获取当前机器人程序的运行状态

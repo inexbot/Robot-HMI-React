@@ -81,8 +81,34 @@ function ProjectComponent(props) {
       robot: currentRobot,
       jobname: `${values.programName}.${values.programType}`,
     };
+    let robot = currentRobot;
+    let Robot = "";
+    switch (robot) {
+      case 1:
+        Robot = "Robot1";
+        break;
+      case 2:
+        Robot = "Robot2";
+        break;
+      case 3:
+        Robot = "Robot3";
+        break;
+      case 4:
+        Robot = "Robot4";
+        break;
+      default:
+        return;
+    }
+    let type = "App/change" + Robot + "OpenedProgram";
+    let dataName = "robot" + robot + "OpenedProgram";
     sendMSGtoServer("NEW_PROGRAM", newProgram);
     destroyAll();
+    props.dispatch({
+      type: type,
+      data: {
+        [dataName]: true,
+      },
+    });
     history.push("/Program");
   };
   const handleOkNewProgram = (e) => {

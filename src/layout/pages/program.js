@@ -4,23 +4,20 @@
  */
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import {
-  Table,
-  Button,
-  notification,
-  ConfigProvider,
-} from "antd";
+import { Table, Button, notification, ConfigProvider } from "antd";
 // import VirtualTable from "components/table";
 import { connect } from "dva";
 import { renderInstruct } from "./program_instruct_header";
 import ConTitle from "components/title";
-import ProgramComponent from "../../components/project/programcomponent";
+import ProgramComponent from "components/project/programcomponent";
+import RunModeComponent from "components/project/runmodecomponent";
 import "./Project.css";
 
 // 从全局的状态获取当前机器人状态
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
+    operaMode: state.index.robotStatus.operaMode,
     robot1OpenedProgram: state.App.robot1OpenedProgram,
     robot2OpenedProgram: state.App.robot2OpenedProgram,
     robot3OpenedProgram: state.App.robot3OpenedProgram,
@@ -43,6 +40,7 @@ function Program(props) {
   const [multiSelection, setMultiSelection] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
   const [rowSelection, setRowSelection] = useState(null);
+  const [headButtonDisplay,setHeadButtonDisplay] = useState("inline")
   const [isBulk, setIsBulk] = useState(0);
   const rows = {
     onSelect: (record, selected, selectedRows) => {
@@ -149,7 +147,24 @@ function Program(props) {
       setDataSourceMain(dataSource);
     }
   }, [props.program]);
-
+  let comp = (
+    <ProgramComponent
+      selectedName={selectedName}
+      selectedRow={selectedRow}
+      multiSelection={multiSelection}
+      isBulk={isBulk}
+    />
+  );
+  const [aComponent, setAComponent] = useState();
+  useEffect(() => {
+    if (props.operaMode === 2) {
+      setAComponent(<RunModeComponent />);
+      setHeadButtonDisplay("none")
+    } else {
+      setAComponent(comp);
+      setHeadButtonDisplay("inline")
+    }
+  }, [props.operaMode]);
   return (
     <div>
       {/* 主界面 */}
@@ -157,13 +172,9 @@ function Program(props) {
         title={`${intl.get("程序")} ${props.program.name}`}
         subtitle={intl.get(" ")}
         buttonLink='/Project'
+        buttonStyle={{display:headButtonDisplay}}
       />
-      <ProgramComponent
-        selectedName={selectedName}
-        selectedRow={selectedRow}
-        multiSelection={multiSelection}
-        isBulk={isBulk}
-      />
+      {aComponent}
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
         {/* <VirtualTable
           columns={columns}
@@ -188,10 +199,10 @@ function Program(props) {
           dataSource={dataSourceMain}
           columns={columns}
           rowSelection={rowSelection}
-          className="Program_table"
-        //   scroll={
-        //   {y:"500px"}
-        // }
+          className='Program_table'
+          //   scroll={
+          //   {y:"500px"}
+          // }
           pagination={false}
           onRow={(record) => {
             return {

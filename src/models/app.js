@@ -11,7 +11,7 @@ export default {
     robot3CurrentProgram: "",
     robot4OpenedProgram: false,
     robot4CurrentProgram: "",
-    paraFrameDisplay:"close"
+    paraFrameDisplay: "close",
   },
 
   subscriptions: {},
@@ -20,7 +20,7 @@ export default {
     *fetch({ payload }, { call, put }) {
       // eslint-disable-line
       yield put({ type: "save" });
-    }
+    },
   },
 
   reducers: {
@@ -73,6 +73,6 @@ export default {
       let _state = JSON.parse(JSON.stringify(state));
       _state.robot4CurrentProgram = action.data.robot4CurrentProgram;
       return _state;
-    }
-  }
+    },
+  },
 };
