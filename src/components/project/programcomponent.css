@@ -1,5 +1,5 @@
 .progcomponent{
-    background: rgba(0,0,0,0.5);
+    background: rgba(10,20,29,0.7);
     border-radius: 25px;
     width: 30vw;
     position: absolute;
@@ -48,11 +48,10 @@
     color: #ffffff;
 }
 
-.progmore .ant-col .ant-btn:hover, .ant-btn:focus{
+.progmore .ant-col .ant-btn:hover, .progmore .ant-col .ant-btn:focus{
     color: #40a9ff;
     border-color: #40a9ff;
 }
-
 
 
 .progcomponent .icon{
@@ -64,4 +63,12 @@
 
 .progcomponent .progicon .ant-col{
     text-align: center;
+}
+
+
+#control-hooks .ant-row{
+    padding: 15px 30px;
+}
+#control-hooks .ant-row .ant-form-item-required{
+    width: 80px;
 }

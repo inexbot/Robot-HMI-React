@@ -19,13 +19,13 @@
     border-top-right-radius: 10px;
 }
 
-.Pro_table .ant-table-thead > tr > th, .Pro_table .ant-table-tbody > tr > td{
+/* .Pro_table .ant-table-thead > tr > th, .Pro_table .ant-table-tbody > tr > td{
     text-align: center;
-}
+} */
 
 .Program_table .ant-table-thead > tr > th, .Program_table .ant-table-tbody > tr > td{
     line-height: 16px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .Program_table .ant-table-tbody > tr > td{

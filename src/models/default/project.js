@@ -1,5 +1,5 @@
 export const project = [
-  /* {
+  {
     name: "222",
     program: [
       { name: "22", date: "22" },
@@ -15,11 +15,11 @@ export const project = [
   {
     name: "444",
     program: [{ name: "33", date: "55" }],
-  }, */
+  },
 ];
 
 export const program = {
-  /* name: "programName",
+ name: "programName",
   Success: true, // or false
   possum: 17,
   var: {
@@ -46,5 +46,5 @@ export const program = {
       name: "MOVJ",
       para: { POS: "P001", VJ: 22, PL: 1, ACC: 10, DEC: 10 },
     },
-  ], */
+  ],
 };

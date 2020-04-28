@@ -68,6 +68,7 @@ function Mode(props) {
         onChange={handleChangemode}
         showArrow={false}
         className="Teach"
+        style={{width:80}}
       >
         <Option value="Teach">{intl.get("示教模式")}</Option>
         <Option value="Run">{intl.get("运行模式")}</Option>
@@ -78,6 +79,7 @@ function Mode(props) {
         onChange={handleChangeOperatemode}
         showArrow={false}
         className="Handle"
+        style={{width:52}}
       >
         <Option value="Handle">{intl.get("手动")}</Option>
         <Option value="Wheel">{intl.get("手轮")}</Option>
