@@ -52,10 +52,10 @@ import Program from "./layout/pages/program";
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
-    robot1OpenedProgram: state.App.robot1OpenedProgram,
-    robot2OpenedProgram: state.App.robot2OpenedProgram,
-    robot3OpenedProgram: state.App.robot3OpenedProgram,
-    robot4OpenedProgram: state.App.robot4OpenedProgram,
+    robot1OpenedProgram: state.index.robotStatus.robot1OpenedProgram,
+    robot2OpenedProgram: state.index.robotStatus.robot2OpenedProgram,
+    robot3OpenedProgram: state.index.robotStatus.robot3OpenedProgram,
+    robot4OpenedProgram: state.index.robotStatus.robot4OpenedProgram,
   };
 };
 function Router(props) {

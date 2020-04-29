@@ -14,10 +14,10 @@ const mapStateToProps = (state) => {
   return {
     operaMode: state.index.robotStatus.operaMode,
     currentRobot: state.index.robotStatus.currentRobot,
-    robot1CurrentProgram: state.App.robot1CurrentProgram,
-    robot2CurrentProgram: state.App.robot2CurrentProgram,
-    robot3CurrentProgram: state.App.robot3CurrentProgram,
-    robot4CurrentProgram: state.App.robot4CurrentProgram,
+    robot1CurrentProgram: state.index.robotStatus.robot1CurrentProgram,
+    robot2CurrentProgram: state.index.robotStatus.robot2CurrentProgram,
+    robot3CurrentProgram: state.index.robotStatus.robot3CurrentProgram,
+    robot4CurrentProgram: state.index.robotStatus.robot4CurrentProgram,
   };
 };
 function Program(props) {
@@ -62,8 +62,10 @@ function Program(props) {
         sendMSGtoController("STOP_JOB_RUN", sData);
         break;
       case "Pause":
-      case "Stop":
-        sendMSGtoController("STOP_JOB_RUN", sData);
+        let psData = {
+          robot: props.currentRobot,
+        };
+        sendMSGtoController("STOP_JOB_RUN", psData);
         break;
       default:
         break;

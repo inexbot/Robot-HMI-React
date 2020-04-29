@@ -19,7 +19,7 @@ export const robotStatus = {
     R_FOUR_CARTESIAN_COORDINATE = 12,
   }; */
   multiRobotMode: 0,
-  currentRobotServoState: 1,
+  currentRobotServoState: 0,
   deadmanState: 0,
   currentRobotRunningState: 0,
   handleSpeed: 1,
@@ -55,4 +55,12 @@ export const robotStatus = {
   outerActivedOuter: "转台1",
   count: 2,
   index: 3,
+  robot1OpenedProgram: false,
+  robot1CurrentProgram: "",
+  robot2OpenedProgram: false,
+  robot2CurrentProgram: "",
+  robot3OpenedProgram: false,
+  robot3CurrentProgram: "",
+  robot4OpenedProgram: false,
+  robot4CurrentProgram: "",
 };

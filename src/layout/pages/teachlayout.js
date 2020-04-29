@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Input, Col, Row, Form, Checkbox, Card } from "antd";
 import { connect } from "dva";
 import { sendMSGtoController } from "service/network";
@@ -92,13 +92,13 @@ function TeachLayout(props) {
   }, [form, props.pos]);
 
   // 工程界面组件
-  let initTime;
+  const initTime = useRef();
   function handleOnMouseDown(axis, direction) {
     let jogData = {
       axis: axis,
       direction: direction,
     };
-    initTime = setInterval(() => {
+    initTime.current = setInterval(() => {
       sendMSGtoController("JOG_OPERATION_MOVE", jogData);
     }, 200);
   }
@@ -106,7 +106,7 @@ function TeachLayout(props) {
     let stopJog = {
       axis: axis,
     };
-    clearInterval(initTime);
+    clearInterval(initTime.current);
     sendMSGtoController("JOG_OPERATION_STOP", stopJog);
   }
   const sendDeadman = () => {

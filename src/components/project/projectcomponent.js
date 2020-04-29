@@ -59,14 +59,6 @@ function ProjectComponent(props) {
       jobname: selectedProgram[0],
     };
     sendMSGtoServer("openProgram", openprogram);
-    let type = "App/change" + Robot + "OpenedProgram";
-    let dataName = "robot" + robot + "OpenedProgram";
-    props.dispatch({
-      type: type,
-      data: {
-        [dataName]: true,
-      },
-    });
     history.push("/Program");
   };
   const showModalNewProgram = () => {

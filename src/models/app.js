@@ -3,14 +3,6 @@ export default {
 
   state: {
     currentAuthority: "操作工",
-    robot1OpenedProgram: false,
-    robot1CurrentProgram: "",
-    robot2OpenedProgram: false,
-    robot2CurrentProgram: "",
-    robot3OpenedProgram: false,
-    robot3CurrentProgram: "",
-    robot4OpenedProgram: false,
-    robot4CurrentProgram: "",
     paraFrameDisplay: "close",
   },
 

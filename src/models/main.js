@@ -89,7 +89,7 @@ export default {
     onOpen({ dispatch }) {
       ws.onopen = () => {
         showMessage.destroy();
-        showMessage.success(`连接${IP}:${PORT}成功`);
+        showMessage.success(`连接${IP}:${PORT}成功`,1);
         sendCheckServerState();
         dispatch({
           type: "onOpen",
@@ -576,7 +576,11 @@ export default {
     /* 接收程序界面的指令信息 */
     receiveProgram(state, action) {
       let _state = JSON.parse(JSON.stringify(state));
+      let currentRobot = _state.robotStatus.currentRobot;
       _state.program = action.data.program;
+      _state.robotStatus[`robot${currentRobot}OpenedProgram`] = true;
+      _state.robotStatus[`robot${currentRobot}CurrentProgram`]= action.data.program.name
+      console.log(_state);
       return _state;
     },
     /* 接收当前位置 */
