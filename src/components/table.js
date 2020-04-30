@@ -3,7 +3,7 @@ import { VariableSizeGrid as Grid } from "react-window";
 import ResizeObserver from "rc-resize-observer";
 import classNames from "classnames";
 import { Table } from "antd";
-import "./table.css"
+import "./table.css";
 
 export default function VirtualTable(props) {
   const { columns, scroll, className } = props;
@@ -31,16 +31,6 @@ export default function VirtualTable(props) {
     });
     return obj;
   });
-
-  //   const resetVirtualGrid = () => {
-  //     gridRef.current.resetAfterIndices({
-  //       columnIndex: 0,
-  //       shouldForceUpdate: false,
-  //     });
-  //   };
-
-  //   useEffect(() => resetVirtualGrid, []);
-  //   useEffect(() => resetVirtualGrid, [tableWidth]);
 
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
     ref.current = connectObject;
@@ -70,8 +60,7 @@ export default function VirtualTable(props) {
               className={classNames("virtual-table-cell", {
                 "virtual-table-cell-last":
                   columnIndex === mergedColumns.length - 1,
-              })}
->
+              })}>
               {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]}
             </div>
           );
@@ -79,7 +68,15 @@ export default function VirtualTable(props) {
       </Grid>
     );
   };
+  const resetVirtualGrid = () => {
+    gridRef.current.resetAfterIndices({
+      columnIndex: 0,
+      shouldForceUpdate: false,
+    });
+  };
 
+  useEffect(() => resetVirtualGrid, []);
+  useEffect(() => resetVirtualGrid, [tableWidth]);
   return (
     <ResizeObserver
       onResize={({ width }) => {
