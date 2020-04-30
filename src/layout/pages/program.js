@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { Table, Button, notification, ConfigProvider } from "antd";
-// import VirtualTable from "components/table";
+import VirtualTable from "components/table";
 import { connect } from "dva";
 import { renderInstruct } from "./program_instruct_header";
 import ConTitle from "components/title";
@@ -40,7 +40,7 @@ function Program(props) {
   const [multiSelection, setMultiSelection] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
   const [rowSelection, setRowSelection] = useState(null);
-  const [headButtonDisplay,setHeadButtonDisplay] = useState("inline")
+  const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
   const rows = {
     onSelect: (record, selected, selectedRows) => {
@@ -159,10 +159,10 @@ function Program(props) {
   useEffect(() => {
     if (props.operaMode === 2) {
       setAComponent(<RunModeComponent />);
-      setHeadButtonDisplay("none")
+      setHeadButtonDisplay("none");
     } else {
       setAComponent(comp);
-      setHeadButtonDisplay("inline")
+      setHeadButtonDisplay("inline");
     }
   }, [props.operaMode]);
   return (
@@ -172,7 +172,7 @@ function Program(props) {
         title={`${intl.get("程序")} ${props.program.name}`}
         subtitle={intl.get(" ")}
         buttonLink='/Project'
-        buttonStyle={{display:headButtonDisplay}}
+        buttonStyle={{ display: headButtonDisplay }}
       />
       {aComponent}
       <ConfigProvider renderEmpty={customizeRenderEmpty}>

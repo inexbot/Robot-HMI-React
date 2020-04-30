@@ -3,7 +3,7 @@ export const robotStatus = {
   operaMode: 0,
   currentRobot: 1,
   currentRobotType: 1,
-  /* ROBOT_TYPE:{
+  /* ROBOT_TYPE:{  
     R_NULL = 0,
     R_GENERAL_6S = 1,
     R_SCARA = 2,
