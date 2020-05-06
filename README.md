@@ -22,7 +22,7 @@ NodeJs,React,React-Router,antd, DvaJs,Electron,Echarts,react-intl-universal
 打开项目方法：
 
 1. 安装NodeJs、VSCode；
-2. git下载`git clone https://github.com/inexbot/Robot-HMI.git`使用ssh方式需在码云加入自己的公钥。
+2. git下载`git clone https://github.com/inexbot/Robot-HMI.git`使用ssh方式需在github加入自己的公钥。
 3. 进入项目主目录；
 4. 右键，选择Visual Studio Code打开。
 
