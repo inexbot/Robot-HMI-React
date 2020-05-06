@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Skeleton, Col, Input, Tabs, Row } from "antd";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import intl from "react-intl-universal";
 import "./zeropara.css";
 const { TabPane } = Tabs;

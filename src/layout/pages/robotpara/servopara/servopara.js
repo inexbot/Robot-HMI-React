@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Table, Tabs, Col, Row } from "antd";
-import { dataSource, columns } from "./servopara_header";
-import ConTitle from "components/title";
+import { dataSource, columns } from "../servopara_header/servopara_header";
+import ConTitle from "../../../../components/title";
 import intl from "react-intl-universal";
 import "./servopara.css";
 const { TabPane } = Tabs;

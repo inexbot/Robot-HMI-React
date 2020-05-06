@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Button, Col, Row, Steps, message } from "antd";
 import { connect } from "dva";
 import intl from "react-intl-universal";
-import Basic from "./visionparaCon";
+import Basic from "../visionparaCon/visionparaCon";
 import ConTitle from "components/title";
-import "./ioset.css";
+import "../ioset/ioset.css";
 
 const mapStateToProps = (state) => {
     return {

@@ -9,7 +9,7 @@ import {
   Select,
 } from "antd";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./remotepro.css";
 
 const { TabPane } = Tabs;

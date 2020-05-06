@@ -16,7 +16,7 @@ import {
 } from "antd";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
-import "./jointpara.css";
+import "../jointpara/jointpara.css";
 const { Option } = Select;
 const { TabPane } = Tabs;
 

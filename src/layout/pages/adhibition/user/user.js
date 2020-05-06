@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Input, Col, Row, Switch, Radio, Form, Select } from "antd";
 import { connect } from "dva";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./user.css";
 
 const mapStateToProps = state => {

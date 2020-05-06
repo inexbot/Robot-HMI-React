@@ -3,7 +3,7 @@ import {Button } from "antd";
 import { router } from "dva";
 import { connect } from "dva";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 
 
 const mapStateToProps = (state) => {

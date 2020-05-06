@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PageHeader, Button, Col, Row, Select } from "antd";
 import { router } from "dva";
 import intl from "react-intl-universal";
-import "./ioremote.css";
+import "../ioremote/ioremote.css";
 import { connect } from "dva";
 
 const mapStateToProps = state => {

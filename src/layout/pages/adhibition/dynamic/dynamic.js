@@ -11,7 +11,7 @@ import {
   Switch,
 } from "antd";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./dynamic.css";
 
 const { TabPane } = Tabs;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Input } from "antd";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./linearvel.css";
 
 function LinearVel(props) {

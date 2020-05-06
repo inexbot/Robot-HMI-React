@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Input, Tabs } from "antd";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./jogspeed.css";
 
 const { TabPane } = Tabs;

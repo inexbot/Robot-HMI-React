@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
 import { Button, Col, Select, Alert, Row } from "antd";
 import { servoAmount, ENIname, ENIstate } from "./slaveset_header";
-import { sendMSGtoController } from "service/network";
+import { sendMSGtoController } from "../../../../service/network";
 import { connect } from "dva";
 import SlaveSetRobot from "./slaveset_robot";
 import SlaveSetPrimary from "./slaveset_primary";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import intl from "react-intl-universal";
 import "./slaveset.css";
 

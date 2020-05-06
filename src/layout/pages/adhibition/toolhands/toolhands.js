@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Col, Input, Select, Row } from "antd";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./toolhands.css";
 
 const { Option } = Select;
 
-function Usercoo(props) {
+function Toolhands(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [buttonCharacter1, setButtonCharacter1] = useState("修改");
   const [buttonType1, setButtonType1] = useState("primary");
@@ -24,10 +24,7 @@ function Usercoo(props) {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle
-        title={intl.get("用户坐标参数")}
-        subtitle={intl.get("用户坐标参数设置")}
-      />
+      <ConTitle title={intl.get("工具手")} subtitle={intl.get("工具手设置")} />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
         <Button type={buttonType1} shape="circle" size="large" onClick={change}>
@@ -41,29 +38,29 @@ function Usercoo(props) {
       </div>
 
       {/* 主要内容 */}
-      <div className="Usercoo">
+      <div className="Toolhands">
         <Row style={{width:"100%"}}>
           <Col span={20} offset={2}>
             <div style={{ paddingBottom: 10 }}>
-              <p>
-                <span>{intl.get("当前用户坐标")}:</span>
+              <div>
+                <span>{intl.get("选择工具手")}:</span>
                 <Select
                   defaultValue="无"
                   style={{ width: 200, margin: 20 }}
                   disabled={isDisabled}
                 >
                   <Option value="tool0">{intl.get("无")}</Option>
-                  <Option value="tool1">{intl.get("用户坐标")}1</Option>
-                  <Option value="tool2">{intl.get("用户坐标")}2</Option>
-                  <Option value="tool3">{intl.get("用户坐标")}3</Option>
-                  <Option value="tool4">{intl.get("用户坐标")}4</Option>
-                  <Option value="tool5">{intl.get("用户坐标")}5</Option>
-                  <Option value="tool6">{intl.get("用户坐标")}6</Option>
-                  <Option value="tool7">{intl.get("用户坐标")}7</Option>
-                  <Option value="tool8">{intl.get("用户坐标")}8</Option>
-                  <Option value="tool9">{intl.get("用户坐标")}9</Option>
+                  <Option value="tool1">{intl.get("工具手")}1</Option>
+                  <Option value="tool2">{intl.get("工具手")}2</Option>
+                  <Option value="tool3">{intl.get("工具手")}3</Option>
+                  <Option value="tool4">{intl.get("工具手")}4</Option>
+                  <Option value="tool5">{intl.get("工具手")}5</Option>
+                  <Option value="tool6">{intl.get("工具手")}6</Option>
+                  <Option value="tool7">{intl.get("工具手")}7</Option>
+                  <Option value="tool8">{intl.get("工具手")}8</Option>
+                  <Option value="tool9">{intl.get("工具手")}9</Option>
                 </Select>
-              </p>
+              </div>
               <p>
                 <Button
                   style={{ width: 160 }}
@@ -74,10 +71,10 @@ function Usercoo(props) {
                 </Button>
               </p>
             </div>
-            <div className="usertab">
+            <div className="tooltab">
               <table>
                 <tr align="center">
-                  <td>X{intl.get("轴")}</td>
+                  <td>X{intl.get("轴方向偏移")}</td>
                   <td>
                     <Input
                       style={{ width: "180px" }}
@@ -88,7 +85,7 @@ function Usercoo(props) {
                   <td>mm</td>
                 </tr>
                 <tr align="center">
-                  <td>Y{intl.get("轴")}</td>
+                  <td>Y{intl.get("轴方向偏移")}</td>
                   <td>
                     <Input
                       style={{ width: "180px" }}
@@ -99,7 +96,7 @@ function Usercoo(props) {
                   <td>mm</td>
                 </tr>
                 <tr align="center">
-                  <td>Z{intl.get("轴")}</td>
+                  <td>Z{intl.get("轴方向偏移")}</td>
                   <td>
                     <Input
                       style={{ width: "180px" }}
@@ -110,7 +107,7 @@ function Usercoo(props) {
                   <td>mm</td>
                 </tr>
                 <tr align="center">
-                  <td>A{intl.get("轴")}</td>
+                  <td>{intl.get("绕A轴旋转")}</td>
                   <td>
                     <Input
                       style={{ width: "180px" }}
@@ -121,7 +118,7 @@ function Usercoo(props) {
                   <td>mm</td>
                 </tr>
                 <tr align="center">
-                  <td>B{intl.get("轴")}</td>
+                  <td>{intl.get("绕B轴旋转")}</td>
                   <td>
                     <Input
                       style={{ width: "180px" }}
@@ -132,7 +129,7 @@ function Usercoo(props) {
                   <td>mm</td>
                 </tr>
                 <tr align="center">
-                  <td>C{intl.get("轴")}</td>
+                  <td>{intl.get("绕C轴旋转")}</td>
                   <td>
                     <Input
                       style={{ width: "180px" }}
@@ -150,4 +147,4 @@ function Usercoo(props) {
     </div>
   );
 }
-export default Usercoo;
+export default Toolhands;

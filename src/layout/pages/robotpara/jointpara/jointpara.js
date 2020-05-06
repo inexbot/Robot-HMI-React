@@ -3,7 +3,7 @@ import { connect } from "dva";
 import { sendMSGtoController } from "service/network";
 import { Button, Tabs, Input, Popover, Form } from "antd";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./jointpara.css";
 
 const { TabPane } = Tabs;

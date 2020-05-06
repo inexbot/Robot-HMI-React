@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Select, Input } from "antd";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./runningpara.css";
 const { Option } = Select;
 

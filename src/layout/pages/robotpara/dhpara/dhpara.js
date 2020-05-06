@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "dva";
 import { Form, Input, Button, Select, Skeleton, Col, Popover, Row } from "antd";
-import { sendMSGtoController } from "../../../service/network";
+import { sendMSGtoController } from "../../../../service/network";
 import intl from "react-intl-universal";
-import ConTitle from "components/title";
+import ConTitle from "../../../../components/title";
 import "./dhpara.css";
 
 const mapStateToProps = (state) => {
