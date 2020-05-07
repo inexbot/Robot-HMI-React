@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { connect } from "dva";
-import "./jog.css";
+import "./index.css";
 import { sendMSGtoController } from "service/network";
 
 // 从全局的状态获取当前机器人状态
