@@ -7,11 +7,11 @@ import intl from "react-intl-universal";
 import { Table, Button, notification, ConfigProvider } from "antd";
 import VirtualTable from "../../components/table";
 import { connect } from "dva";
-import { renderInstruct } from "./program_instruct_header";
+import { renderInstruct } from "./Program_instruct_header/index";
 import ConTitle from "../../components/title";
 import ProgramComponent from "components/project/programcomponent";
 import RunModeComponent from "components/project/runmodecomponent";
-import "./main_interface/project/Project.css";
+import "./main_interface/Project/index.css";
 
 // 从全局的状态获取当前机器人状态
 const mapStateToProps = (state) => {

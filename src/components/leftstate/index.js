@@ -1,20 +1,20 @@
 import React from "react";
 import "./index.css";
 import { connect } from "dva";
-import QuickControl from "../../layout/state/quickcontrol";
-import Servo from "../../layout/state/servo";
-import System from "../../layout/state/system";
-import Produce from "../../layout/state/produce";
-import Welding from "../../layout/state/welding";
-import Torque from "../../layout/state/torque";
-import Overproof from "../../layout/state/overproof";
-import Rotation from "../../layout/state/rotation";
-import IOFunction from "../../layout/state/iofunction";
-import IO from "../../layout/state/io";
-import Position from "../../layout/state/position";
-import Jog from "layout/state/jog";
-import DragPlayback from "layout/state/dragplayback";
-import LocalPosition from "layout/state/localposition";
+import QuickControl from "../../layout/state/Quickontrol/quickcontrol";
+import Servo from "../../layout/state/Servo/servo";
+import System from "../../layout/state/System/system";
+import Produce from "../../layout/state/Produce/produce";
+import Welding from "../../layout/state/Welding/welding";
+import Torque from "../../layout/state/Torque/torque";
+import Overproof from "../../layout/state/Overproof/overproof";
+import Rotation from "../../layout/state/Rotation/rotation";
+import IOFunction from "../../layout/state/Iofunction/iofunction";
+import IO from "../../layout/state/Io/io";
+import Position from "../../layout/state/Position/position";
+import Jog from "layout/state/Jog/jog";
+import DragPlayback from "layout/state/Dragplayback/dragplayback";
+import LocalPosition from "layout/state/Localposition/localposition";
 
 const mapStateToProps = (state) => {
   return {
