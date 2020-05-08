@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import WeldButton from "./weldbutton";
+import WeldButton from "../Weldbutton";
 
 function RightButton() {
   return (

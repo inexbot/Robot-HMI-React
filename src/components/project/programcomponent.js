@@ -12,7 +12,7 @@ import {
 } from "@ant-design/icons";
 import ChangeInstructValue, {
   instructType,
-} from "layout/pages/program_changevalue_header";
+} from "layout/pages/Program_changevalue_header/index";
 import { sendMSGtoServer } from "service/network";
 import "./programcomponent.css";
 const { confirm } = Modal;
