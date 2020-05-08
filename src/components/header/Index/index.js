@@ -17,7 +17,7 @@ import Tool from "../Tool";
 import User from "../User";
 import Robot from "../Robot";
 import Frame from "../Frame";
-import HandleSpeed from "../Handlespeed/handlespeed";
+import HandleSpeed from "../Handlespeed";
 import Runspeed from "../Runspeed";
 // import { Menu, Icon } from 'antd'11;
 

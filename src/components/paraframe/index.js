@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "dva";
 import intl from "react-intl-universal";
 import { router } from "dva";
-import { paraIndex } from "./paraheader";
+import { paraIndex } from "../Paraheader";
 import "./index.css";
 import { useState } from "react";
 import { useEffect } from "react";

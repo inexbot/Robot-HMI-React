@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import './index.css';
+import '../rightbutton/index.css';
 
 const WeldButton = () => (
   <div className="weld-button-right">
