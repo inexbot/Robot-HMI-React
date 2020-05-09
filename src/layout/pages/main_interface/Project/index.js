@@ -3,7 +3,7 @@
  * 引入了ProjectComponent组件，右下方的新建等按钮
  */
 import React, { useState, useEffect } from "react";
-import { Table, Tabs, ConfigProvider, Modal, Button } from "antd";
+import { Table, Tabs, ConfigProvider, Modal, Button, Pagination} from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -11,6 +11,7 @@ import ProjectComponent from "components/project/projectcomponent";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./index.css";
+import { number } from "echarts/lib/export";
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 // 从全局的状态获取当前机器人状态
@@ -27,6 +28,8 @@ const customizeRenderEmpty = () => (
 );
 // 工程界面组件
 function Project(props) {
+  const [onshow, setOnshow] = useState(1)
+  const [bkid, setBkid] = useState(-1)
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [rowSelection, setRowSelectrion] = useState(null);
@@ -182,26 +185,33 @@ function Project(props) {
       tabs.push(
         <TabPane tab={value.name} key={keyOfTabs}>
           <Table
+            rowClassName={(record,index)=>{
+              return(index==bkid?'ant-table-row-selected':'tablewt')
+            }}
             dataSource={dataSource}
             rowSelection={rowSelection}
+            bordered
             columns={columns}
-            onRow={(record) => {
+            onRow={(record,index) => {
               return {
                 // 点击表格每一行后的回调
-                onClick: () => {
+                  onClick: () => {
+                  setOnshow(onshow+1)
+                  setBkid(index)
                   setSelectedProject(record.tabName);
                   setSelectedProgram([record.name]);
                 },
               };
             }}
           />
+          <Pagination showQuickJumper defaultCurrent total={dataSource.length} pageSize={1} showTotal={total => `Total ${total} items`} />
         </TabPane>
       );
       keyOfTabs = keyOfTabs + 1;
       return value;
     });
     setTabPanel(tabs);
-  }, [props.project,rowSelection]);
+  }, [props.project,rowSelection,selectedProgram]);
   const deleteMoreButton = () => {
     if (isBulk === 0) {
       return (

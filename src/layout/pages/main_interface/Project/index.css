@@ -7,6 +7,10 @@
     float: right;
 }
 
+.tablewt{
+    background:white
+}
+
 .Pro_table .ant-table, .Program_table .ant-table{
     border-radius: 10px;
     box-shadow: #dddddd 0px 0px 5px;
