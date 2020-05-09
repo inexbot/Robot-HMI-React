@@ -6,7 +6,7 @@
   "homepage": ".",
   "dependencies": {
     "@ant-design/icons": "^4.0.6",
-    "antd": "^4.1.4",
+    "antd": "^4.2.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
     "dva": "^2.6.0-beta.20",
