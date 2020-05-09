@@ -3,6 +3,7 @@
  * 引入了ProgramComponent组件，右下方的插入指令等
  */
 import React, { useState, useEffect } from "react";
+import { FixedSizeList as List } from 'react-window'
 import intl from "react-intl-universal";
 import { Table, Button, notification, ConfigProvider } from "antd";
 import VirtualTable from "../../components/table";
@@ -146,6 +147,7 @@ function Program(props) {
       }
       setDataSourceMain(dataSource);
     }
+    console.log( props.program )
   }, [props.program]);
   let comp = (
     <ProgramComponent
@@ -165,6 +167,18 @@ function Program(props) {
       setHeadButtonDisplay("inline");
     }
   }, [props.operaMode]);
+
+  const renderGridList = ()=>{
+    return(  
+      <Grid
+        height = { window.screen.height*0.7}
+        // rowCount = 
+      >
+
+      </Grid>
+     )
+  }
+
   return (
     <div>
       {/* 主界面 */}
@@ -195,6 +209,7 @@ function Program(props) {
             };
           }}
         /> */}
+
         <Table
           dataSource={dataSourceMain}
           columns={columns}

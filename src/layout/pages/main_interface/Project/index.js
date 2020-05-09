@@ -4,7 +4,7 @@
  */
 import React, { useState, useEffect } from "react";
 import { Table, Tabs, ConfigProvider, Modal, Button, Pagination} from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, ManOutlined } from "@ant-design/icons";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
 import ProjectComponent from "components/project/projectcomponent";
@@ -28,6 +28,9 @@ const customizeRenderEmpty = () => (
 );
 // 工程界面组件
 function Project(props) {
+  const [pageNum, setPageNum] = useState(null)
+  // const [page, setPage] = useState(null)
+  // const [pageSize, setPagesize] = useState(1)
   const [onshow, setOnshow] = useState(1)
   const [bkid, setBkid] = useState(-1)
   const [selectedProject, setSelectedProject] = useState(null);
@@ -149,9 +152,13 @@ function Project(props) {
       key: "more",
     },
   ];
+
   useEffect(() => {
     let tabs = [];
     let keyOfTabs = 1;
+    let page = '';
+    let pageSize = 1;
+
     // 对接收到的数据进行第一次遍历，用来获取标签页标签名
     if (props.project === undefined || props.project.length === 0) {
       setTabPanel(
@@ -161,10 +168,12 @@ function Project(props) {
       );
       return;
     }
+    // console.log
     props.project.map((value) => {
       let dataSource = [];
       let keyOfTable = 1;
       let tabName = value.name;
+      // console.log(value.name)
       // 对接收到的数据进行第二次遍历，用来获取各个标签页内表格的数据
       value.program.map((value) => {
         dataSource.push({
@@ -191,6 +200,8 @@ function Project(props) {
             dataSource={dataSource}
             rowSelection={rowSelection}
             bordered
+            scroll={{ y: window.screen.height*0.6 }}
+            pagination={{ pageSize: 10 }}
             columns={columns}
             onRow={(record,index) => {
               return {
@@ -204,14 +215,25 @@ function Project(props) {
               };
             }}
           />
-          <Pagination showQuickJumper defaultCurrent total={dataSource.length} pageSize={1} showTotal={total => `Total ${total} items`} />
+          {/* <Pagination showQuickJumper defaultCurrent total={dataSource.length} pageSize={1}
+           onChange={(page,pageSize)=>{
+             setPageNum(pageNum+1)
+
+          }} /> */}
         </TabPane>
       );
       keyOfTabs = keyOfTabs + 1;
       return value;
     });
+
     setTabPanel(tabs);
-  }, [props.project,rowSelection,selectedProgram]);
+  }, [props.project,rowSelection,selectedProgram,pageNum]);
+  useEffect((value)=>{
+    let page = 0;
+    let pageSize = 10
+    let obj = ''
+    obj = props.project[0].program.slice(page*10,page+pageSize-1)
+  })
   const deleteMoreButton = () => {
     if (isBulk === 0) {
       return (
