@@ -147,7 +147,7 @@ function Program(props) {
       }
       setDataSourceMain(dataSource);
     }
-    console.log( props.program )
+    console.log( props.program.instruct )
   }, [props.program]);
   let comp = (
     <ProgramComponent
@@ -170,12 +170,13 @@ function Program(props) {
 
   const renderGridList = ()=>{
     return(  
-      <Grid
+      <List
         height = { window.screen.height*0.7}
-        // rowCount = 
+        itemSize = { 35 }
+        itemCount = { 1000 }
+        rowCount = { 10 }
       >
-
-      </Grid>
+      </List>
      )
   }
 
@@ -190,7 +191,7 @@ function Program(props) {
       />
       {aComponent}
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
-        {/* <VirtualTable
+        <VirtualTable
           columns={columns}
           dataSource={dataSourceMain}
           rowSelection={rowSelection}
@@ -208,9 +209,10 @@ function Program(props) {
               },
             };
           }}
-        /> */}
-
-        <Table
+        />
+        
+        {/* <Table
+          components = {{ body: renderGridList }}
           dataSource={dataSourceMain}
           columns={columns}
           rowSelection={rowSelection}
@@ -218,6 +220,7 @@ function Program(props) {
           //   scroll={
           //   {y:"500px"}
           // }
+          // scroll={ {y: 100} }
           pagination={false}
           onRow={(record) => {
             return {
@@ -229,9 +232,11 @@ function Program(props) {
               },
             };
           }}
-        />
+        /> */}
       </ConfigProvider>
     </div>
   );
+  
 }
+
 export default connect(mapStateToProps)(Program);

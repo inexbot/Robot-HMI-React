@@ -152,7 +152,7 @@ function Project(props) {
       key: "more",
     },
   ];
-
+  console.log(window.screen.height)
   useEffect(() => {
     let tabs = [];
     let keyOfTabs = 1;
@@ -200,7 +200,7 @@ function Project(props) {
             dataSource={dataSource}
             rowSelection={rowSelection}
             bordered
-            scroll={{ y: window.screen.height*0.6 }}
+            scroll={{ y: window.screen.height*0.5 }}
             pagination={{ pageSize: 10 }}
             columns={columns}
             onRow={(record,index) => {
