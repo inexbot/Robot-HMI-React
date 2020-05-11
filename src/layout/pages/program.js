@@ -3,15 +3,16 @@
  * 引入了ProgramComponent组件，右下方的插入指令等
  */
 import React, { useState, useEffect } from "react";
+import { FixedSizeList as List } from 'react-window'
 import intl from "react-intl-universal";
 import { Table, Button, notification, ConfigProvider } from "antd";
-import VirtualTable from "components/table";
+import VirtualTable from "../../components/table";
 import { connect } from "dva";
-import { renderInstruct } from "./program_instruct_header";
-import ConTitle from "components/title";
+import { renderInstruct } from "./Program_instruct_header/index";
+import ConTitle from "../../components/title";
 import ProgramComponent from "components/project/programcomponent";
 import RunModeComponent from "components/project/runmodecomponent";
-import "./Project.css";
+import "./main_interface/Project/index.css";
 
 // 从全局的状态获取当前机器人状态
 const mapStateToProps = (state) => {
@@ -146,6 +147,7 @@ function Program(props) {
       }
       setDataSourceMain(dataSource);
     }
+    console.log( props.program.instruct )
   }, [props.program]);
   let comp = (
     <ProgramComponent
@@ -165,6 +167,19 @@ function Program(props) {
       setHeadButtonDisplay("inline");
     }
   }, [props.operaMode]);
+
+  const renderGridList = ()=>{
+    return(  
+      <List
+        height = { window.screen.height*0.7}
+        itemSize = { 35 }
+        itemCount = { 1000 }
+        rowCount = { 10 }
+      >
+      </List>
+     )
+  }
+
   return (
     <div>
       {/* 主界面 */}
@@ -176,7 +191,7 @@ function Program(props) {
       />
       {aComponent}
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
-        {/* <VirtualTable
+        <VirtualTable
           columns={columns}
           dataSource={dataSourceMain}
           rowSelection={rowSelection}
@@ -194,8 +209,10 @@ function Program(props) {
               },
             };
           }}
-        /> */}
-        <Table
+        />
+        
+        {/* <Table
+          components = {{ body: renderGridList }}
           dataSource={dataSourceMain}
           columns={columns}
           rowSelection={rowSelection}
@@ -203,6 +220,7 @@ function Program(props) {
           //   scroll={
           //   {y:"500px"}
           // }
+          // scroll={ {y: 100} }
           pagination={false}
           onRow={(record) => {
             return {
@@ -214,9 +232,11 @@ function Program(props) {
               },
             };
           }}
-        />
+        /> */}
       </ConfigProvider>
     </div>
   );
+  
 }
+
 export default connect(mapStateToProps)(Program);

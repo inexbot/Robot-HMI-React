@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { router as Router } from "dva";
 import intl from "react-intl-universal";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import Header from "./components/header/Index";
+import Footer from "./components/footer/Index";
 import RightButton from "./components/rightbutton";
 import LeftState from "./components/leftstate";
 import ParaFrame from "./components/paraframe";

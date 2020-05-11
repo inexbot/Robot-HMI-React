@@ -6,44 +6,44 @@ import { router as RouterDom } from "dva";
 
 import App from "./App";
 // 主界面
-import Welcome from "./layout/pages/welcome";
-import Project from "./layout/pages/Project";
+import Welcome from "./layout/pages/main_interface/Welcome";
+import Project from "./layout/pages/main_interface/Project";
 // 角色选择界面
-import Authority from "./layout/pages/authority";
+import Authority from "./layout/pages/role_choices/authority";  
 // 应用参数
-import Toolhands from "./layout/pages/toolhands";
-import Usercoo from "./layout/pages/usercoo";
-import Remotepro from "./layout/pages/remotepro";
-import User from "./layout/pages/user";
-import AutoLoadPro from "./layout/pages/autoLoadPro";
-import RobotRange from "./layout/pages/robotRange";
-import InterferenceRegion from "./layout/pages/interferenceRegion";
-import Dynamic from "./layout/pages/dynamic";
+import Toolhands from "./layout/pages/adhibition/Toolhands";
+import Usercoo from "./layout/pages/adhibition/Usercoo";
+import Remotepro from "./layout/pages/adhibition/Remotepro";
+import User from "./layout/pages/adhibition/User";
+import AutoLoadPro from "./layout/pages/adhibition/AutoLoadPro";
+import RobotRange from "./layout/pages/adhibition/RobotRange";
+import InterferenceRegion from "./layout/pages/adhibition/InterferenceRegion";
+import Dynamic from "./layout/pages/adhibition/Dynamic";
 
 // 外设参数
-import IORemote from "./layout/pages/device/ioremote";
-import IOStatusHint from "./layout/pages/device/iostatushint";
+import IORemote from "./layout/pages/device/Ioremote";
+import IOStatusHint from "./layout/pages/device/Iostatushint";
 import IOReset from "./layout/pages/device/IOReset";
 import IOWarning from "./layout/pages/device/IOWarning";
-import IOSet from "./layout/pages/device/IOSet";
+import IOSet from "./layout/pages/device/Ioset";
 import VisionPara from "./layout/pages/device/visionpara";
-import ConveyorPara from "./layout/pages/device/conveyorPara";
+import ConveyorPara from "./layout/pages/device/ConveyorPara";
 
 
 // 机器人参数
-import Jointpara from "./layout/pages/robotpara/jointpara";
-import Dhpara from "./layout/pages/robotpara/dhpara";
-import Zeropara from "./layout/pages/robotpara/zeropara";
-import LinearVel from "./layout/pages/robotpara/linearvel";
-import JogSpeed from "./layout/pages/robotpara/jogspeed";
-import RunningPara from "./layout/pages/robotpara/runningpara";
-import SafeConfig from "./layout/pages/robotpara/safeconfig";
-import OuterCalibrate from "./layout/pages/robotpara/outercalibrate/outercalibrate";
-import GroundRail from "./layout/pages/robotpara/outercalibrate/groundrail";
-import Turning from "./layout/pages/robotpara/outercalibrate/turning";
-import SlaveSet from "./layout/pages/robotpara/slaveset/slaveset";
-import ServoPara from "./layout/pages/robotpara/servopara";
-import TeachLayout from "./layout/pages/teachlayout";
+import Jointpara from "./layout/pages/robotpara/Jointpara";
+import Dhpara from "./layout/pages/robotpara/Dhpara";
+import Zeropara from "./layout/pages/robotpara/Zeropara";
+import LinearVel from "./layout/pages/robotpara/Linearvel";
+import JogSpeed from "./layout/pages/robotpara/Jopspeed";
+import RunningPara from "./layout/pages/robotpara/Runningpara";
+import SafeConfig from "./layout/pages/robotpara/Safeconfig";
+import OuterCalibrate from "./layout/pages/robotpara/Outercalibrate";
+import GroundRail from "./layout/pages/robotpara/Groundrail";
+import Turning from "./layout/pages/robotpara/Turning";
+import SlaveSet from "./layout/pages/robotpara/Slaveset/slaveset";
+import ServoPara from "./layout/pages/robotpara/Servopara";
+import TeachLayout from "./layout/pages/Teachlayout";
 // 系统参数
 import Language from "./layout/pages/system/language";
 import { connect } from "dva";
