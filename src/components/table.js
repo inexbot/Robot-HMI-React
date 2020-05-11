@@ -60,7 +60,9 @@ export default function VirtualTable(props) {
               className={classNames("virtual-table-cell", {
                 "virtual-table-cell-last":
                   columnIndex === mergedColumns.length - 1,
-              })}>
+              })}
+              style = { style }
+              >
               {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]}
             </div>
           );

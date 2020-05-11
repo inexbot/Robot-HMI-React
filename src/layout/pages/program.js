@@ -197,7 +197,6 @@ function Program(props) {
           rowSelection={rowSelection}
           scroll={{
             y: 500,
-            x: "100px",
           }}
           onRow={(record) => {
             return {

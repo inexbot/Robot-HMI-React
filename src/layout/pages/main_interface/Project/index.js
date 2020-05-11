@@ -3,15 +3,14 @@
  * 引入了ProjectComponent组件，右下方的新建等按钮
  */
 import React, { useState, useEffect } from "react";
-import { Table, Tabs, ConfigProvider, Modal, Button, Pagination} from "antd";
-import { EditOutlined, DeleteOutlined, ManOutlined } from "@ant-design/icons";
+import { Table, Tabs, ConfigProvider, Modal, Button } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
 import ProjectComponent from "components/project/projectcomponent";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./index.css";
-import { number } from "echarts/lib/export";
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 // 从全局的状态获取当前机器人状态
@@ -28,9 +27,6 @@ const customizeRenderEmpty = () => (
 );
 // 工程界面组件
 function Project(props) {
-  const [pageNum, setPageNum] = useState(null)
-  // const [page, setPage] = useState(null)
-  // const [pageSize, setPagesize] = useState(1)
   const [onshow, setOnshow] = useState(1)
   const [bkid, setBkid] = useState(-1)
   const [selectedProject, setSelectedProject] = useState(null);
@@ -152,13 +148,11 @@ function Project(props) {
       key: "more",
     },
   ];
-  console.log(window.screen.height)
   useEffect(() => {
     let tabs = [];
     let keyOfTabs = 1;
     let page = '';
     let pageSize = 1;
-
     // 对接收到的数据进行第一次遍历，用来获取标签页标签名
     if (props.project === undefined || props.project.length === 0) {
       setTabPanel(
@@ -168,12 +162,10 @@ function Project(props) {
       );
       return;
     }
-    // console.log
     props.project.map((value) => {
       let dataSource = [];
       let keyOfTable = 1;
       let tabName = value.name;
-      // console.log(value.name)
       // 对接收到的数据进行第二次遍历，用来获取各个标签页内表格的数据
       value.program.map((value) => {
         dataSource.push({
@@ -194,9 +186,9 @@ function Project(props) {
       tabs.push(
         <TabPane tab={value.name} key={keyOfTabs}>
           <Table
-            rowClassName={(record,index)=>{
-              return(index==bkid?'ant-table-row-selected':'tablewt')
-            }}
+          rowClassName={(record,index)=>{
+            return(index==bkid?'ant-table-row-selected':'tablewt')
+          }}
             dataSource={dataSource}
             rowSelection={rowSelection}
             bordered
@@ -206,7 +198,7 @@ function Project(props) {
             onRow={(record,index) => {
               return {
                 // 点击表格每一行后的回调
-                  onClick: () => {
+                onClick: () => {
                   setOnshow(onshow+1)
                   setBkid(index)
                   setSelectedProject(record.tabName);
@@ -215,19 +207,13 @@ function Project(props) {
               };
             }}
           />
-          {/* <Pagination showQuickJumper defaultCurrent total={dataSource.length} pageSize={1}
-           onChange={(page,pageSize)=>{
-             setPageNum(pageNum+1)
-
-          }} /> */}
         </TabPane>
       );
       keyOfTabs = keyOfTabs + 1;
       return value;
     });
-
     setTabPanel(tabs);
-  }, [props.project,rowSelection,selectedProgram,pageNum]);
+  }, [props.project,rowSelection,selectedProgram]);
   useEffect((value)=>{
     let page = 0;
     let pageSize = 10
