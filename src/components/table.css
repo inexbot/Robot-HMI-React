@@ -1,4 +1,11 @@
-.virtual-table-cell{
+ .virtual-table-cell{
     display: flex;
     flex-flow: column;
 }
+
+/* .virtual-table-cell {
+    box-sizing: border-box;
+    padding: 16px;
+    border-bottom: 1px solid #e8e8e8;
+    background: #FFF;
+  }  */
