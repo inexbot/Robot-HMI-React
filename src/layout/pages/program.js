@@ -3,7 +3,6 @@
  * 引入了ProgramComponent组件，右下方的插入指令等
  */
 import React, { useState, useEffect } from "react";
-import { FixedSizeList as List } from 'react-window'
 import intl from "react-intl-universal";
 import { Table, Button, notification, ConfigProvider } from "antd";
 import VirtualTable from "../../components/table";
@@ -68,6 +67,7 @@ function Program(props) {
     setMoreButton(<Button onClick={cancelSelectMore}>取消多选</Button>);
   };
   const cancelSelectMore = () => {
+
     setRowSelection();
     setIsBulk(0);
     setMoreButton(<Button onClick={selectMore}>多选</Button>);
@@ -168,17 +168,6 @@ function Program(props) {
     }
   }, [props.operaMode]);
 
-  const renderGridList = ()=>{
-    return(  
-      <List
-        height = { window.screen.height*0.7}
-        itemSize = { 35 }
-        itemCount = { 1000 }
-        rowCount = { 10 }
-      >
-      </List>
-     )
-  }
 
   return (
     <div>
@@ -195,23 +184,23 @@ function Program(props) {
           columns={columns}
           dataSource={dataSourceMain}
           rowSelection={rowSelection}
+          className='Program_table'
           scroll={{
-            y: 500,
+            y: window.screen.height*0.5,
           }}
-          onRow={(record) => {
-            return {
-              // 点击表格每一行后的回调
-              onClick: (event) => {
-                setSelectedRow(record.order);
-                setMultiSelection([record.order+1]);
-                setSelectedName(record.insName);
-              },
-            };
-          }}
+          // onRow={(record,index) => {
+          //   return {
+          //     // 点击表格每一行后的回调
+          //     onClick: (event) => {
+          //       setSelectedRow(record.order);
+          //       setMultiSelection([record.order]);
+          //       setSelectedName(record.insName);
+          //       console.log(index)
+          //     },
+          //   };
+          // }}
         />
-        
         {/* <Table
-          components = {{ body: renderGridList }}
           dataSource={dataSourceMain}
           columns={columns}
           rowSelection={rowSelection}

@@ -186,23 +186,23 @@ function Project(props) {
       tabs.push(
         <TabPane tab={value.name} key={keyOfTabs}>
           <Table
-          rowClassName={(record,index)=>{
-            return(index==bkid?'ant-table-row-selected':'tablewt')
-          }}
+            rowClassName={(record,index)=>{
+              return(index==bkid?'ant-table-row-selected':'')
+            }}
             dataSource={dataSource}
             rowSelection={rowSelection}
-            bordered
-            scroll={{ y: window.screen.height*0.5 }}
-            pagination={{ pageSize: 10 }}
+            pagination={{ defaultPageSize:window.screen.height*0.9/100 }}
+            height = {100}
             columns={columns}
             onRow={(record,index) => {
               return {
                 // 点击表格每一行后的回调
                 onClick: () => {
-                  setOnshow(onshow+1)
-                  setBkid(index)
                   setSelectedProject(record.tabName);
                   setSelectedProgram([record.name]);
+                  setOnshow(onshow+1)
+                  setBkid(index)
+                  console.log(window.screen.height)
                 },
               };
             }}
@@ -213,7 +213,7 @@ function Project(props) {
       return value;
     });
     setTabPanel(tabs);
-  }, [props.project,rowSelection,selectedProgram]);
+  }, [props.project,rowSelection,,selectedProgram]);
   useEffect((value)=>{
     let page = 0;
     let pageSize = 10
