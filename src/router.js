@@ -41,7 +41,7 @@ import SafeConfig from "./layout/pages/robotpara/Safeconfig";
 import OuterCalibrate from "./layout/pages/robotpara/Outercalibrate";
 import GroundRail from "./layout/pages/robotpara/Groundrail";
 import Turning from "./layout/pages/robotpara/Turning";
-import SlaveSet from "./layout/pages/robotpara/Slaveset/slaveset";
+import SlaveSet from "./layout/pages/robotpara/slaveset/slaveset";
 import ServoPara from "./layout/pages/robotpara/Servopara";
 import TeachLayout from "./layout/pages/Teachlayout";
 // 系统参数

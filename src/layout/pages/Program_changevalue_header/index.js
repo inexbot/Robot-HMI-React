@@ -6,6 +6,7 @@ import Movj from "../Instruct/movj";
 import Movl from "../Instruct/movl";
 import Movc from "../Instruct/movc";
 import MovcA from "../Instruct/movca";
+import Movs from "../Instruct/movs";
 
 function ChangeInstructValue(props) {
   let name;
@@ -45,6 +46,15 @@ function ChangeInstructValue(props) {
     case "MOVCA":
       return (
         <MovcA
+          row={props.row}
+          form={props.form}
+          insertOrChange={props.insertOrChange}
+          setClose={props.setClose}
+        />
+      );
+    case "MOVS":
+      return (
+        <Movs
           row={props.row}
           form={props.form}
           insertOrChange={props.insertOrChange}
