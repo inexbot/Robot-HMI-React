@@ -7,6 +7,7 @@ import "./table.css";
 
 export default function VirtualTable(props) {
   const { columns, scroll, className } = props;
+  const [ addls, setAddls] = useState(-1)
   const [tableWidth, setTableWidth] = useState(0);
   const widthColumnCount = columns.filter(({ width }) => !width).length;
   const mergedColumns = columns.map((column) => {
@@ -31,9 +32,13 @@ export default function VirtualTable(props) {
     });
     return obj;
   });
-
+  console.log(props)
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
     ref.current = connectObject;
+    // let apt = rawData.map((index,item)=>{
+    //   console.log(index,item)
+    // })
+    console.log(rawData)
     return (
       <Grid
         ref={gridRef}
@@ -55,15 +60,35 @@ export default function VirtualTable(props) {
           });
         }}>
         {({ columnIndex, rowIndex, style }) => {
+          let styleod = { background:"#e6f7ff" }
+          let stylesh = { lineHeight:"100px",...style }
+          let stylebd = {
+            ...style,
+            ...styleod,
+            ...stylesh
+          }
+
+
           return (
             <div
-              className={classNames("virtual-table-cell", {
-                "virtual-table-cell-last":
-                  columnIndex === mergedColumns.length - 1,
-              })}
-              style = { style }
+              className={classNames(`virtual-table-cell${rawData[rowIndex].order}`)}
+              style = {  rawData[rowIndex].order==addls? stylebd : stylesh }
+              onClick={(e)=>{
+                // console.log(rawData[rowIndex][mergedColumns[columnIndex].dataIndex])
+                console.log(rawData[rowIndex],style)
+                setAddls(rawData[rowIndex].order)
+                console.log(addls,rawData[rowIndex].order)
+                // console.log(e.target)
+                // console.log(apt)
+              }}
               >
               {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]}
+              {/* <td> */}
+              {/* {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]} */}
+              {/* {rawData[rowIndex].order}
+              </td>
+              <td> { rawData[rowIndex].name } </td>
+              <td> { rawData[rowIndex].para } </td> */}
             </div>
           );
         }}
