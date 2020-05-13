@@ -8,6 +8,7 @@ import "./table.css";
 export default function VirtualTable(props) {
   const { columns, scroll, className } = props;
   const [ addls, setAddls] = useState(-1)
+  const [ addnum, setAddnum ] = useState(0)
   const [tableWidth, setTableWidth] = useState(0);
   const widthColumnCount = columns.filter(({ width }) => !width).length;
   const mergedColumns = columns.map((column) => {
@@ -17,6 +18,7 @@ export default function VirtualTable(props) {
 
     return { ...column, width: Math.floor(tableWidth / widthColumnCount) };
   });
+  console.log(mergedColumns)
   const gridRef = useRef();
   const [connectObject] = useState(() => {
     const obj = {};
@@ -32,13 +34,12 @@ export default function VirtualTable(props) {
     });
     return obj;
   });
-  console.log(props)
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
+
     ref.current = connectObject;
     // let apt = rawData.map((index,item)=>{
     //   console.log(index,item)
     // })
-    console.log(rawData)
     return (
       <Grid
         ref={gridRef}
@@ -67,19 +68,25 @@ export default function VirtualTable(props) {
             ...styleod,
             ...stylesh
           }
-
-
           return (
-            <div
+            <div 
               className={classNames(`virtual-table-cell${rawData[rowIndex].order}`)}
-              style = {  rawData[rowIndex].order==addls? stylebd : stylesh }
+              style =  {  rawData[rowIndex].select?  stylebd : stylesh}
               onClick={(e)=>{
                 // console.log(rawData[rowIndex][mergedColumns[columnIndex].dataIndex])
-                console.log(rawData[rowIndex],style)
-                setAddls(rawData[rowIndex].order)
-                console.log(addls,rawData[rowIndex].order)
+                // console.log(rawData[rowIndex],style)
+                // setAddls(rawData[rowIndex].order)
+                // console.log(rawData[rowIndex].select)
+                // console.log(rawData[rowIndex].allList)
+                rawData[rowIndex].select = !rawData[rowIndex].select
+                setAddnum(addnum+1)
+                // console.log(e.target.style,'111')
+                // setRawDatas(!rawDatas)
+                // console.log( rawData[rowIndex])
+                // console.log(addls,rawData[rowIndex].order)
                 // console.log(e.target)
                 // console.log(apt)
+                
               }}
               >
               {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]}

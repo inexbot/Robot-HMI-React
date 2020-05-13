@@ -4,7 +4,7 @@
  */
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import { Table, Button, notification, ConfigProvider } from "antd";
+import { Table, Button, notification, ConfigProvider,Select } from "antd";
 import VirtualTable from "../../components/table";
 import { connect } from "dva";
 import { renderInstruct } from "./Program_instruct_header/index";
@@ -39,43 +39,58 @@ function Program(props) {
   const [selectedName, setSelectedName] = useState(0);
   const [multiSelection, setMultiSelection] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
+  const [allList, setAllList] = useState(0)
   const [rowSelection, setRowSelection] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
-  const rows = {
-    onSelect: (record, selected, selectedRows) => {
-      let order = [];
-      selectedRows.map((value) => {
-        order.push(value.order);
-        return value;
-      });
-      setMultiSelection(order);
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      let order = [];
-      selectedRows.map((value) => {
-        order.push(value.order);
-        return value;
-      });
-      setMultiSelection(order);
-    },
+  const { Option } = Select;
+  console.log(props.program.instruct)
+  const children = []
+  for (let i =1; i < props.program.instruct.length; i++) {
+    children.push(<div style = {{ margin:'0',padding:'0' }} key={i.toString(36) + i}>{i}</div>);
+  }
+  // const selectMore = () => {
+  //   // console.log(dataSourceMain,props)
+  //   setMoreButton(<Button onClick={cancelSelectMore}>取消多选</Button>);
+  // };
+  // const cancelSelectMore = () => {
+  //   setMoreButton(<Button onClick={selectMore}>多选</Button>);
+  // };
+  const selectAll = () => {
+    setAllList(1)
+    setAllButton(<Button onClick={callSelectAll}>全不选</Button>)
+  }
+
+  const callSelectAll = () => {
+    setAllList(0)
+    setAllButton(<Button onClick={selectAll}>全选</Button>);
   };
 
-  const selectMore = () => {
-    setRowSelection(rows);
-    setIsBulk(1);
-    setMoreButton(<Button onClick={cancelSelectMore}>取消多选</Button>);
-  };
-  const cancelSelectMore = () => {
+const handleChange =(value)  =>{
+    console.log(`selected ${value}`);
+  }
 
-    setRowSelection();
-    setIsBulk(0);
-    setMoreButton(<Button onClick={selectMore}>多选</Button>);
-  };
 
-  const [moreButton, setMoreButton] = useState(
-    <Button onClick={selectMore}>多选</Button>
-  );
+
+  // const [moreButton, setMoreButton] = useState(
+  //   <Button onClick={selectMore}>多选</Button>
+  // );
+  const [allButton, setAllButton] = useState(
+    <Button onClick = {selectAll} >全选</Button>
+  )
+
+  const [placebtn, setPlacebtn] = useState(
+    <Select
+    mode="multiple"
+    style={{ width: '70%',overflow:'scroll',height:'70px',position:'absolute',overflow:'hidden',margin:'0',padding:'0'}}
+    placeholder="请选择"
+    defaultValue={[ ]}
+    onChange={handleChange}
+  >
+    {children}
+  </Select>,
+  )
+
   // 用来构建标签页
   const columns = [
     {
@@ -84,7 +99,7 @@ function Program(props) {
       className: "pro_id",
     },
     {
-      title: <div>指令名{moreButton}</div>,
+    title: <div>指令名{allButton}{placebtn}</div>,
       dataIndex: "name",
       key: "name",
       className: "pro_tit",
@@ -112,7 +127,7 @@ function Program(props) {
       return;
     } else {
       let instruct = props.program.instruct;
-      let keyOfInstruct = 1;
+      let keyOfInstruct = 0;
       // 标签页内表格的表头
       let dataSource = [];
       if (instruct === undefined) {
@@ -120,35 +135,66 @@ function Program(props) {
       } else {
         // 遍历获取指令数据
         instruct.map((value, index) => {
-          if (index === 0) {
+          if (instruct.length === 0) {
             return value;
           } else {
-            if (value === null) {
-              dataSource.push({
-                key: keyOfInstruct,
-                order: keyOfInstruct,
-                name: "未解析指令",
-                para: "未解析指令",
-                insName: "未解析指令",
-              });
+            if (value === null) { 
+              if(allList === 0){
+                dataSource.push({
+                  key: keyOfInstruct,
+                  order: keyOfInstruct,
+                  name: "未解析指令",
+                  para: "未解析指令",
+                  insName: "未解析指令",
+                  select: false,
+                  allList:allList
+                });
+              }else{
+                dataSource.push({
+                  key: keyOfInstruct,
+                  order: keyOfInstruct,
+                  name: "未解析指令",
+                  para: "未解析指令",
+                  insName: "未解析指令",
+                  select: false,
+                  allList:allList
+                });
+              }
+
             } else {
-              dataSource.push({
-                key: keyOfInstruct,
-                order: keyOfInstruct,
-                name: intl.get(value.name),
-                para: renderInstruct(value.name, value.para),
-                insName: value.name,
-              });
+              if(allList === 0 ){
+                dataSource.push({
+                  key: keyOfInstruct,
+                  order: keyOfInstruct,
+                  name: intl.get(value.name),
+                  para: renderInstruct(value.name, value.para),
+                  insName: value.name,
+                  select:false,
+                  allList:allList
+                });
+              }else{
+                dataSource.push({
+                  key: keyOfInstruct,
+                  order: keyOfInstruct,
+                  name: intl.get(value.name),
+                  para: renderInstruct(value.name, value.para),
+                  insName: value.name,
+                  select: true,
+                  allList:allList
+                });
+              }
+
             }
             keyOfInstruct = keyOfInstruct + 1;
             return value;
           }
+
         });
+        setDataSourceMain(dataSource)
       }
-      setDataSourceMain(dataSource);
+
     }
-    console.log( props.program.instruct )
-  }, [props.program]);
+  }, [props.program,allList]);
   let comp = (
     <ProgramComponent
       selectedName={selectedName}
