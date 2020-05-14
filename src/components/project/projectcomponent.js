@@ -143,7 +143,8 @@ function ProjectComponent(props) {
 
   return (
     <div>
-      <div className='hoverButton1'>
+      <div
+       className='hoverButton1'>
         <Button
           type={buttonType1}
           shape='circle'

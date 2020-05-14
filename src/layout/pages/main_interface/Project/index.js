@@ -27,8 +27,8 @@ const customizeRenderEmpty = () => (
 );
 // 工程界面组件
 function Project(props) {
-  const [onshow, setOnshow] = useState(1)
-  const [bkid, setBkid] = useState(-1)
+  const [onshow, setOnshow] = useState(1);
+  const [bkid, setBkid] = useState(-1);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [rowSelection, setRowSelectrion] = useState(null);
@@ -151,13 +151,13 @@ function Project(props) {
   useEffect(() => {
     let tabs = [];
     let keyOfTabs = 1;
-    let page = '';
+    let page = "";
     let pageSize = 1;
     // 对接收到的数据进行第一次遍历，用来获取标签页标签名
     if (props.project === undefined || props.project.length === 0) {
       setTabPanel(
-        <TabPane tab={"无工程"} key='0'>
-          <Table columns={columns} key='0' />
+        <TabPane tab={"无工程"} key="0">
+          <Table columns={columns} key="0" />
         </TabPane>
       );
       return;
@@ -174,8 +174,14 @@ function Project(props) {
           date: value.date,
           more: (
             <div>
-              <EditOutlined onClick={selectMore} style={{fontSize:20,paddingRight:24}}/>
-              <DeleteOutlined onClick={deleteSingleProgram.bind(this,value.name)} style={{fontSize:20}}/>
+              <EditOutlined
+                onClick={selectMore}
+                style={{ fontSize: 20, paddingRight: 24 }}
+              />
+              <DeleteOutlined
+                onClick={deleteSingleProgram.bind(this, value.name)}
+                style={{ fontSize: 20 }}
+              />
             </div>
           ),
           tabName: tabName,
@@ -186,23 +192,23 @@ function Project(props) {
       tabs.push(
         <TabPane tab={value.name} key={keyOfTabs}>
           <Table
-            rowClassName={(record,index)=>{
-              return(index==bkid?'ant-table-row-selected':'')
+            rowClassName={(record, index) => {
+              return index == bkid ? "ant-table-row-selected" : "";
             }}
             dataSource={dataSource}
             rowSelection={rowSelection}
-            pagination={{ defaultPageSize:window.screen.height*0.9/100 }}
-            height = {100}
+            pagination={{ defaultPageSize: (window.screen.height * 0.9) / 100 }}
+            height={100}
             columns={columns}
-            onRow={(record,index) => {
+            onRow={(record, index) => {
               return {
                 // 点击表格每一行后的回调
                 onClick: () => {
                   setSelectedProject(record.tabName);
                   setSelectedProgram([record.name]);
-                  setOnshow(onshow+1)
-                  setBkid(index)
-                  console.log(window.screen.height)
+                  setOnshow(onshow + 1);
+                  setBkid(index);
+                  // console.log(window.screen.height);
                 },
               };
             }}
@@ -213,17 +219,18 @@ function Project(props) {
       return value;
     });
     setTabPanel(tabs);
-  }, [props.project,rowSelection,,selectedProgram]);
-  useEffect((value)=>{
+  }, [props.project, rowSelection, , selectedProgram]);
+  useEffect((value) => {
     let page = 0;
-    let pageSize = 10
-    let obj = ''
-    obj = props.project[0].program.slice(page*10,page+pageSize-1)
-  })
+    let pageSize = 10;
+    let obj = "";
+    obj = props.project[0].program.slice(page * 10, page + pageSize - 1);
+  });
   const deleteMoreButton = () => {
     if (isBulk === 0) {
       return (
         <ProjectComponent
+          style={{ background: "red" }}
           currentRobot={props.currentRobot}
           selectedProject={selectedProject}
           selectedProgram={selectedProgram}
@@ -232,8 +239,8 @@ function Project(props) {
       );
     } else {
       return (
-        <div className='hoverButton2'>
-          <Button shape='circle' size='large' onClick={deleteMultiProgram}>
+        <div style = {{  position: 'absolute', top:'65%',left:'86%', zIndex: '10',display:'flex',flexDirection:'column-reverse',height:'130px',justifyContent:'space-around'  }}  className="hoverButton2">
+          <Button shape="circle" size="large" onClick={deleteMultiProgram}>
             删除
           </Button>
         </div>
@@ -250,7 +257,7 @@ function Project(props) {
       />
       {deleteMoreButton()}
       <ConfigProvider renderEmpty={customizeRenderEmpty}>
-        <Tabs tabPosition='left' className='Pro_table'>
+        <Tabs tabPosition="left" className="Pro_table">
           {tabPanel}
         </Tabs>
       </ConfigProvider>

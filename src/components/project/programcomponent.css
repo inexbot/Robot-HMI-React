@@ -30,6 +30,19 @@
     margin-top: 16px;
 }
 
+.hoverButton1{
+    position: absolute;
+    bottom: 160px;
+    right: 120px;
+    z-index: 999;
+}
+
+.hoverButton2{
+    position: absolute;
+    bottom: 240px;
+    right: 120px;
+    z-index: 999;
+}
 .progmore{
     width: 100%;
     height: 200px;

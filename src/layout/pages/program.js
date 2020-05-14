@@ -39,57 +39,61 @@ function Program(props) {
   const [selectedName, setSelectedName] = useState(0);
   const [multiSelection, setMultiSelection] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
+  const [moreBtn, setMoreBtn] = useState(false)
+  const [forbid, setForbid] = useState(false)
+  const [agai, setAgai] = useState(0)
   const [allList, setAllList] = useState(0)
   const [rowSelection, setRowSelection] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
   const { Option } = Select;
-  console.log(props.program.instruct)
+  // console.log(props)
   const children = []
+  let moreBtns = false
   for (let i =1; i < props.program.instruct.length; i++) {
     children.push(<div style = {{ margin:'0',padding:'0' }} key={i.toString(36) + i}>{i}</div>);
   }
-  // const selectMore = () => {
-  //   // console.log(dataSourceMain,props)
-  //   setMoreButton(<Button onClick={cancelSelectMore}>取消多选</Button>);
-  // };
-  // const cancelSelectMore = () => {
-  //   setMoreButton(<Button onClick={selectMore}>多选</Button>);
-  // };
+  const selectMore = () => {
+    setMoreBtn(true)
+    moreBtns = true
+    setForbid(!forbid)
+    setMoreButton(<Button onClick={cancelSelectMore}>单选</Button>);
+  };
+  const cancelSelectMore = () => {
+    setMoreBtn(false)
+    moreBtns = false
+    setForbid(!forbid)
+    setMoreButton(<Button  onClick={selectMore}>多选</Button>);
+  };
   const selectAll = () => {
     setAllList(1)
-    setAllButton(<Button onClick={callSelectAll}>全不选</Button>)
+    setAllButton(<Button disabled={ moreBtns }  onClick={callSelectAll}>全不选</Button>)
   }
 
   const callSelectAll = () => {
     setAllList(0)
-    setAllButton(<Button onClick={selectAll}>全选</Button>);
+    setAllButton(<Button disabled={ moreBtns } onClick={selectAll}>全选</Button>);
   };
-
-const handleChange =(value)  =>{
-    console.log(`selected ${value}`);
+  const agaiMore = () => {
+    setAgai(true)
+    setAgaiButton(<Button disabled={ moreBtns }  onClick = {cancelagaiMore}>反选</Button>)
+  }
+  const cancelagaiMore = () => {
+    setAgai(false)
+    setAgaiButton(<Button disabled={ moreBtns }  onClick = {agaiMore}>反选</Button>)
   }
 
 
-
-  // const [moreButton, setMoreButton] = useState(
-  //   <Button onClick={selectMore}>多选</Button>
-  // );
+  const [agaiButton, setAgaiButton] = useState(
+    <Button disabled={ moreBtns }  onClick = {agaiMore}>反选</Button>
+  );
   const [allButton, setAllButton] = useState(
-    <Button onClick = {selectAll} >全选</Button>
+    <Button disabled={ moreBtns }   onClick = {selectAll} >全选</Button>
   )
+  const [moreButton, setMoreButton] = useState(
+    <Button onClick ={selectMore} >多选</Button>
+  );
 
-  const [placebtn, setPlacebtn] = useState(
-    <Select
-    mode="multiple"
-    style={{ width: '70%',overflow:'scroll',height:'70px',position:'absolute',overflow:'hidden',margin:'0',padding:'0'}}
-    placeholder="请选择"
-    defaultValue={[ ]}
-    onChange={handleChange}
-  >
-    {children}
-  </Select>,
-  )
 
   // 用来构建标签页
   const columns = [
@@ -99,7 +103,7 @@ const handleChange =(value)  =>{
       className: "pro_id",
     },
     {
-    title: <div>指令名{allButton}{placebtn}</div>,
+    title: <div>指令名{moreButton}{allButton}{agaiButton}</div>,
       dataIndex: "name",
       key: "name",
       className: "pro_tit",
@@ -147,7 +151,9 @@ const handleChange =(value)  =>{
                   para: "未解析指令",
                   insName: "未解析指令",
                   select: false,
-                  allList:allList
+                  allList:allList,
+                  moreBtn:moreBtn,
+                  agaiBtn:agai
                 });
               }else{
                 dataSource.push({
@@ -157,7 +163,9 @@ const handleChange =(value)  =>{
                   para: "未解析指令",
                   insName: "未解析指令",
                   select: false,
-                  allList:allList
+                  allList:allList,
+                  moreBtn:moreBtn,
+                  agaiBtn:agai
                 });
               }
 
@@ -170,7 +178,9 @@ const handleChange =(value)  =>{
                   para: renderInstruct(value.name, value.para),
                   insName: value.name,
                   select:false,
-                  allList:allList
+                  allList:allList,
+                  moreBtn:moreBtn,
+                  agaiBtn:agai
                 });
               }else{
                 dataSource.push({
@@ -180,7 +190,9 @@ const handleChange =(value)  =>{
                   para: renderInstruct(value.name, value.para),
                   insName: value.name,
                   select: true,
-                  allList:allList
+                  allList:allList,
+                  moreBtn:moreBtn,
+                  agaiBtn:agai
                 });
               }
 
@@ -194,7 +206,7 @@ const handleChange =(value)  =>{
       }
 
     }
-  }, [props.program,allList]);
+  }, [props.program,allList,moreBtn]);
   let comp = (
     <ProgramComponent
       selectedName={selectedName}
@@ -234,6 +246,7 @@ const handleChange =(value)  =>{
           scroll={{
             y: window.screen.height*0.5,
           }}
+
           // onRow={(record,index) => {
           //   return {
           //     // 点击表格每一行后的回调

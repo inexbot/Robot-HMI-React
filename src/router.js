@@ -3,51 +3,56 @@
  */
 import React from "react";
 import { router as RouterDom } from "dva";
+import asyncComponents from './AsyncComponents'
+import { connect } from "dva";
 
-import App from "./App";
+import Dhpara from "./layout/pages/robotpara/Dhpara"
+// const Dhpara =  asyncComponents( () => import ( "./layout/pages/robotpara/Dhpara" ));
+
+const App = asyncComponents( () => import ( "./App" ));
 // 主界面
-import Welcome from "./layout/pages/main_interface/Welcome";
-import Project from "./layout/pages/main_interface/Project";
+const Welcome = asyncComponents( () => import ( "./layout/pages/main_interface/Welcome" ));
+const Project =  asyncComponents( () => import ( "./layout/pages/main_interface/Project" ));
 // 角色选择界面
-import Authority from "./layout/pages/role_choices/authority";  
+const Authority =  asyncComponents( () => import ( "./layout/pages/role_choices/authority" ));
 // 应用参数
-import Toolhands from "./layout/pages/adhibition/Toolhands";
-import Usercoo from "./layout/pages/adhibition/Usercoo";
-import Remotepro from "./layout/pages/adhibition/Remotepro";
-import User from "./layout/pages/adhibition/User";
-import AutoLoadPro from "./layout/pages/adhibition/AutoLoadPro";
-import RobotRange from "./layout/pages/adhibition/RobotRange";
-import InterferenceRegion from "./layout/pages/adhibition/InterferenceRegion";
-import Dynamic from "./layout/pages/adhibition/Dynamic";
+const Toolhands =  asyncComponents( () => import ( "./layout/pages/adhibition/Toolhands" ));
+const Usercoo =  asyncComponents( () => import ( "./layout/pages/adhibition/Usercoo" ));
+const Remotepro =  asyncComponents( () => import ( "./layout/pages/adhibition/Remotepro" ));
+const User =  asyncComponents( () => import ( "./layout/pages/adhibition/User" ));
+const AutoLoadPro =  asyncComponents( () => import ( "./layout/pages/adhibition/AutoLoadPro" ));
+const RobotRange =  asyncComponents( () => import ( "./layout/pages/adhibition/RobotRange" ));
+const InterferenceRegion =  asyncComponents( () => import ( "./layout/pages/adhibition/InterferenceRegion" ));
+const Dynamic =  asyncComponents( () => import ( "./layout/pages/adhibition/Dynamic" ));
 
 // 外设参数
-import IORemote from "./layout/pages/device/Ioremote";
-import IOStatusHint from "./layout/pages/device/Iostatushint";
-import IOReset from "./layout/pages/device/IOReset";
-import IOWarning from "./layout/pages/device/IOWarning";
-import IOSet from "./layout/pages/device/Ioset";
-import VisionPara from "./layout/pages/device/visionpara";
-import ConveyorPara from "./layout/pages/device/ConveyorPara";
+const IORemote =  asyncComponents( () => import ( "./layout/pages/device/Ioremote" ));
+const IOStatusHint =  asyncComponents( () => import ( "./layout/pages/device/Iostatushint" ));
+const IOReset =  asyncComponents( () => import ( "./layout/pages/device/IOReset" ));
+const IOWarning =  asyncComponents( () => import ( "./layout/pages/device/IOWarning" ));
+const IOSet =  asyncComponents( () => import ( "./layout/pages/device/Ioset" ));
+const VisionPara =  asyncComponents( () => import ( "./layout/pages/device/visionpara" ));
+const ConveyorPara =  asyncComponents( () => import ( "./layout/pages/device/ConveyorPara" ));
 
 
 // 机器人参数
-import Jointpara from "./layout/pages/robotpara/Jointpara";
-import Dhpara from "./layout/pages/robotpara/Dhpara";
-import Zeropara from "./layout/pages/robotpara/Zeropara";
-import LinearVel from "./layout/pages/robotpara/Linearvel";
-import JogSpeed from "./layout/pages/robotpara/Jopspeed";
-import RunningPara from "./layout/pages/robotpara/Runningpara";
-import SafeConfig from "./layout/pages/robotpara/Safeconfig";
-import OuterCalibrate from "./layout/pages/robotpara/Outercalibrate";
-import GroundRail from "./layout/pages/robotpara/Groundrail";
-import Turning from "./layout/pages/robotpara/Turning";
-import SlaveSet from "./layout/pages/robotpara/slaveset/slaveset";
-import ServoPara from "./layout/pages/robotpara/Servopara";
-import TeachLayout from "./layout/pages/Teachlayout";
+const Jointpara =  asyncComponents( () => import ( "./layout/pages/robotpara/Jointpara" ));
+
+const Zeropara =  asyncComponents( () => import ( "./layout/pages/robotpara/Zeropara" ));
+const LinearVel =  asyncComponents( () => import ( "./layout/pages/robotpara/Linearvel" ));
+const JogSpeed =  asyncComponents( () => import ( "./layout/pages/robotpara/Jopspeed" ));
+const RunningPara =  asyncComponents( () => import ( "./layout/pages/robotpara/Runningpara" ));
+const SafeConfig =  asyncComponents( () => import ( "./layout/pages/robotpara/Safeconfig" ));
+const OuterCalibrate =  asyncComponents( () => import ( "./layout/pages/robotpara/Outercalibrate" ));
+const GroundRail =  asyncComponents( () => import ( "./layout/pages/robotpara/Groundrail" ));
+const Turning =  asyncComponents( () => import ( "./layout/pages/robotpara/Turning" ));
+const SlaveSet =  asyncComponents( () => import ( "./layout/pages/robotpara/Slaveset/slaveset" ));
+const ServoPara =  asyncComponents( () => import ( "./layout/pages/robotpara/Servopara" ));
+const TeachLayout =  asyncComponents( () => import ( "./layout/pages/Teachlayout" ));
 // 系统参数
-import Language from "./layout/pages/system/language";
-import { connect } from "dva";
-import Program from "./layout/pages/program";
+const Language =  asyncComponents( () => import ( "./layout/pages/system/language" ));
+const Program =  asyncComponents( () => import ( "./layout/pages/program" ));
+
 
 const mapStateToProps = (state) => {
   return {

@@ -6,6 +6,7 @@ import { Table } from "antd";
 import "./table.css";
 
 export default function VirtualTable(props) {
+  const [ dataList, setDataList ] = useState([])
   const { columns, scroll, className } = props;
   const [ addls, setAddls] = useState(-1)
   const [ addnum, setAddnum ] = useState(0)
@@ -18,7 +19,8 @@ export default function VirtualTable(props) {
 
     return { ...column, width: Math.floor(tableWidth / widthColumnCount) };
   });
-  console.log(mergedColumns)
+
+  // console.log(mergedColumns)
   const gridRef = useRef();
   const [connectObject] = useState(() => {
     const obj = {};
@@ -35,7 +37,7 @@ export default function VirtualTable(props) {
     return obj;
   });
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
-
+    setDataList(rawData)
     ref.current = connectObject;
     // let apt = rawData.map((index,item)=>{
     //   console.log(index,item)
@@ -73,20 +75,35 @@ export default function VirtualTable(props) {
               className={classNames(`virtual-table-cell${rawData[rowIndex].order}`)}
               style =  {  rawData[rowIndex].select?  stylebd : stylesh}
               onClick={(e)=>{
+                // console.log(props)
+                // console.log(rawData)
+                if(rawData[0].moreBtn == false){
+                  // console.log('ssssssss')
+                  // rawData[rowIndex].select = 
+                  rawData.map((item,index)=>{
+                    item.select = false
+                  })
+                  rawData[rowIndex].select = !rawData[rowIndex].select
+                  setAddnum(addnum+1)
+                } else{
+                  // if(rawData[0].agaiBtn == )
+                 rawData[rowIndex].select = !rawData[rowIndex].select
+                 setAddnum(addnum+1)
+                }
                 // console.log(rawData[rowIndex][mergedColumns[columnIndex].dataIndex])
                 // console.log(rawData[rowIndex],style)
                 // setAddls(rawData[rowIndex].order)
                 // console.log(rawData[rowIndex].select)
                 // console.log(rawData[rowIndex].allList)
-                rawData[rowIndex].select = !rawData[rowIndex].select
-                setAddnum(addnum+1)
+                // rawData[rowIndex].select = !rawData[rowIndex].select
+                // setAddnum(addnum+1)
                 // console.log(e.target.style,'111')
                 // setRawDatas(!rawDatas)
                 // console.log( rawData[rowIndex])
                 // console.log(addls,rawData[rowIndex].order)
                 // console.log(e.target)
                 // console.log(apt)
-                
+                // console.log(rawData)
               }}
               >
               {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]}
@@ -126,6 +143,46 @@ export default function VirtualTable(props) {
           body: renderVirtualList,
         }}
         onRow={props.onRow}
+        onHeaderRow={ (column) => {
+          // console.log(column)
+          // console.log(column[1].title.props.children[3].props.children)
+          return {
+            onClick: () => {
+              // console.log( column[1].title.props.children[2].props)
+              // console.log(props)
+              // column[1].title.props.children[2].props.onClick=()=>{
+              //   console.log('sss')
+              // }
+              // console.log(column[1].title.props.children[2])
+              if(column[1].title.props.children[3].props.children === '反选'){
+                // console.log('haha')
+                // console.log(rawData)
+                console.log(dataList)
+                dataList.map((item,index)=>{
+                  // console.log(item)
+                  item.select = !item.select
+                  // console.log(item.select)
+                  setAddnum(addnum+1)
+                })
+                // console.log(dataList)
+              }
+              // if(column[1].title.props.children[1].props.children == '全选'){
+              //   dataList.map((item,index)=>{
+              //     // console.log(item)
+              //     item.select = true
+              //     setAddnum(addnum+1)
+              //   })
+              // }else{
+              //   dataList.map((item,index)=>{
+              //     // console.log(item)
+              //     item.select = false
+              //     setAddnum(addnum+1)
+              //   })
+              // }
+            }, // 点击表头行
+            
+          };
+        }}
       />
     </ResizeObserver>
   );
