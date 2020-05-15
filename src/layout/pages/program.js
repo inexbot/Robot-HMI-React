@@ -23,8 +23,11 @@ const mapStateToProps = (state) => {
     robot3OpenedProgram: state.index.robotStatus.robot3OpenedProgram,
     robot4OpenedProgram: state.index.robotStatus.robot4OpenedProgram,
     program: state.index.program,
+    programBoth:state.App.programBoth,
+    List: state.App.programSeletedRow,
   };
 };
+
 // 空状态
 const customizeRenderEmpty = () => (
   <div style={{ textAlign: "center" }}>
@@ -46,55 +49,51 @@ function Program(props) {
   const [rowSelection, setRowSelection] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
-  const { Option } = Select;
-  // console.log(props)
   const children = []
-  let moreBtns = false
-  for (let i =1; i < props.program.instruct.length; i++) {
-    children.push(<div style = {{ margin:'0',padding:'0' }} key={i.toString(36) + i}>{i}</div>);
+
+ console.log(props.programBoth)
+  const selectAll = () => {
+    setAllList(1)
+    setAllButton(<Button  disabled={ moreBtn }  onClick={callSelectAll}>全不选</Button>)
   }
   const selectMore = () => {
     setMoreBtn(true)
-    moreBtns = true
+    setAllList(0)
     setForbid(!forbid)
     setMoreButton(<Button onClick={cancelSelectMore}>单选</Button>);
   };
   const cancelSelectMore = () => {
     setMoreBtn(false)
-    moreBtns = false
+    setAllList(0)
     setForbid(!forbid)
-    setMoreButton(<Button  onClick={selectMore}>多选</Button>);
+    setMoreButton(<Button onClick={selectMore}>多选</Button>);
   };
-  const selectAll = () => {
-    setAllList(1)
-    setAllButton(<Button disabled={ moreBtns }  onClick={callSelectAll}>全不选</Button>)
-  }
 
   const callSelectAll = () => {
     setAllList(0)
-    setAllButton(<Button disabled={ moreBtns } onClick={selectAll}>全选</Button>);
+    setAllButton(<Button disabled={ moreBtn } onClick={selectAll}>全选</Button>);
   };
   const agaiMore = () => {
     setAgai(true)
-    setAgaiButton(<Button disabled={ moreBtns }  onClick = {cancelagaiMore}>反选</Button>)
+    setAgaiButton(<Button  disabled={ moreBtn }  onClick = {cancelagaiMore}>反选</Button>)
   }
   const cancelagaiMore = () => {
     setAgai(false)
-    setAgaiButton(<Button disabled={ moreBtns }  onClick = {agaiMore}>反选</Button>)
+    setAgaiButton(<Button  disabled={ moreBtn }  onClick = {agaiMore}>反选</Button>)
   }
 
-
   const [agaiButton, setAgaiButton] = useState(
-    <Button disabled={ moreBtns }  onClick = {agaiMore}>反选</Button>
+    <Button disabled={ moreBtn }  onClick = {agaiMore}>反选</Button>
   );
   const [allButton, setAllButton] = useState(
-    <Button disabled={ moreBtns }   onClick = {selectAll} >全选</Button>
+    <Button disabled={ moreBtn }   onClick = {selectAll} >全选</Button>
   )
   const [moreButton, setMoreButton] = useState(
     <Button onClick ={selectMore} >多选</Button>
   );
-
-
+    useEffect(()=>{
+      props.List.splice(0)
+    },[moreBtn])
   // 用来构建标签页
   const columns = [
     {
@@ -103,7 +102,7 @@ function Program(props) {
       className: "pro_id",
     },
     {
-    title: <div>指令名{moreButton}{allButton}{agaiButton}</div>,
+    title: <div style={{ display:'flex',alignItems:'center' }}>指令名{moreButton} {moreBtn? <div style={{ display:'flex' }}> {allButton} {agaiButton}  </div> : ''} </div>,
       dataIndex: "name",
       key: "name",
       className: "pro_tit",
@@ -131,7 +130,7 @@ function Program(props) {
       return;
     } else {
       let instruct = props.program.instruct;
-      let keyOfInstruct = 0;
+      let keyOfInstruct = 1;
       // 标签页内表格的表头
       let dataSource = [];
       if (instruct === undefined) {
@@ -162,7 +161,7 @@ function Program(props) {
                   name: "未解析指令",
                   para: "未解析指令",
                   insName: "未解析指令",
-                  select: false,
+                  select: true,
                   allList:allList,
                   moreBtn:moreBtn,
                   agaiBtn:agai
@@ -180,7 +179,8 @@ function Program(props) {
                   select:false,
                   allList:allList,
                   moreBtn:moreBtn,
-                  agaiBtn:agai
+                  agaiBtn:agai,
+                  paras: value.para
                 });
               }else{
                 dataSource.push({
@@ -192,7 +192,8 @@ function Program(props) {
                   select: true,
                   allList:allList,
                   moreBtn:moreBtn,
-                  agaiBtn:agai
+                  agaiBtn:agai,
+                  paras: value.para
                 });
               }
 
@@ -206,7 +207,7 @@ function Program(props) {
       }
 
     }
-  }, [props.program,allList,moreBtn]);
+  }, [props.program,allList,moreBtn,moreButton]);
   let comp = (
     <ProgramComponent
       selectedName={selectedName}
@@ -246,18 +247,6 @@ function Program(props) {
           scroll={{
             y: window.screen.height*0.5,
           }}
-
-          // onRow={(record,index) => {
-          //   return {
-          //     // 点击表格每一行后的回调
-          //     onClick: (event) => {
-          //       setSelectedRow(record.order);
-          //       setMultiSelection([record.order]);
-          //       setSelectedName(record.insName);
-          //       console.log(index)
-          //     },
-          //   };
-          // }}
         />
         {/* <Table
           dataSource={dataSourceMain}

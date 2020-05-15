@@ -4,7 +4,7 @@
  */
 import React, { useState, useEffect, useRef } from "react";
 import { Row, Col, Button, Input, Form, Modal } from "antd";
-import { connect } from "dva";
+import { connect } from "dva"; 
 import "./programcomponent.css";
 import { sendMSGtoController } from "service/network";
 const mapStateToProps = (state) => {

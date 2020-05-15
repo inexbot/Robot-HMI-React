@@ -3,12 +3,23 @@ import { VariableSizeGrid as Grid } from "react-window";
 import ResizeObserver from "rc-resize-observer";
 import classNames from "classnames";
 import { Table } from "antd";
+import { connect } from "dva";
 import "./table.css";
 
-export default function VirtualTable(props) {
+const mapStateToProps = (state) => {
+  return {
+    List: state.App.programSeletedRow,
+    pargram: state.index.program,
+    programBoth:state.App.programBoth,
+    programList:state.App.programList
+  };
+};
+
+function VirtualTable(props) {
   const [ dataList, setDataList ] = useState([])
   const { columns, scroll, className } = props;
   const [ addls, setAddls] = useState(-1)
+  
   const [ addnum, setAddnum ] = useState(0)
   const [tableWidth, setTableWidth] = useState(0);
   const widthColumnCount = columns.filter(({ width }) => !width).length;
@@ -19,8 +30,13 @@ export default function VirtualTable(props) {
 
     return { ...column, width: Math.floor(tableWidth / widthColumnCount) };
   });
-
-  // console.log(mergedColumns)
+  useEffect(() => {
+    props.programList.splice(0)
+    props.programList.push(...props.dataSource)
+  })
+  // console.log(props)
+  // console.log(VirtualTable)
+  // console.log(props.programBoth)
   const gridRef = useRef();
   const [connectObject] = useState(() => {
     const obj = {};
@@ -36,12 +52,10 @@ export default function VirtualTable(props) {
     });
     return obj;
   });
+  // console.log(props)
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
     setDataList(rawData)
     ref.current = connectObject;
-    // let apt = rawData.map((index,item)=>{
-    //   console.log(index,item)
-    // })
     return (
       <Grid
         ref={gridRef}
@@ -75,44 +89,68 @@ export default function VirtualTable(props) {
               className={classNames(`virtual-table-cell${rawData[rowIndex].order}`)}
               style =  {  rawData[rowIndex].select?  stylebd : stylesh}
               onClick={(e)=>{
+                //点击每一行
+                // console.log(rawData);
+                // console.log(rawData[rowIndex])
                 // console.log(props)
-                // console.log(rawData)
                 if(rawData[0].moreBtn == false){
-                  // console.log('ssssssss')
-                  // rawData[rowIndex].select = 
                   rawData.map((item,index)=>{
                     item.select = false
                   })
                   rawData[rowIndex].select = !rawData[rowIndex].select
                   setAddnum(addnum+1)
-                } else{
-                  // if(rawData[0].agaiBtn == )
-                 rawData[rowIndex].select = !rawData[rowIndex].select
-                 setAddnum(addnum+1)
+                  // console.log(props)
+                  // console.log(rawData)
+                  props.List.splice(0)
+                  props.dataSource.map((item,index)=>{
+                    if(item.select){
+
+                      props.List.push(item)
+                    }
+                  })
+                }else if(rawData[0].moreBtn == true){
+                  rawData[rowIndex].select = !rawData[rowIndex].select
+                  setAddnum(addnum+1)
+                  props.List.splice(0)
+                  props.dataSource.map((item,index)=>{
+                    if(item.select == true){
+                      // console.log(item)
+                      // item = {name:item.insName,para:item.paras}
+                      props.List.push(item)
+                    }
+                  })
+                  // console.log(props.List)
+                  // console.log(props.List)
+                  // props.List.push(props..data)
+                  // props.List.push(props.pargram.instruct[ rawData[rowIndex].order-1 ])
+                  // console.log(props.List)
+                  // props.dataSource.map((item,index)=>{
+                  //   if(item.select == false){
+                  //     // props.List.slice()
+                  //     // console.log(item,index)
+                  //     // props.List.map((v,i)=>{
+                  //     //   if(i == item.order -1){
+                  //     //     // return props.List.slice(i,1)
+                  //     //     // console.log(props.List.slice(i,1)) 
+                  //     //     props.filter(())
+                  //     //   }
+                  //     // })
+
+                  //     // props.List.filter((v,i)=>{
+                  //     //   setAddnum(addnum+1)
+                  //     //   return item != v
+                        
+                  //     // })
+                  //     console.log(item,index)
+                     
+                  //     // console.log(props.List)
+                  //   }
+                  // })
+                  // console.log('sss',rawData[0])
                 }
-                // console.log(rawData[rowIndex][mergedColumns[columnIndex].dataIndex])
-                // console.log(rawData[rowIndex],style)
-                // setAddls(rawData[rowIndex].order)
-                // console.log(rawData[rowIndex].select)
-                // console.log(rawData[rowIndex].allList)
-                // rawData[rowIndex].select = !rawData[rowIndex].select
-                // setAddnum(addnum+1)
-                // console.log(e.target.style,'111')
-                // setRawDatas(!rawDatas)
-                // console.log( rawData[rowIndex])
-                // console.log(addls,rawData[rowIndex].order)
-                // console.log(e.target)
-                // console.log(apt)
-                // console.log(rawData)
               }}
               >
               {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]}
-              {/* <td> */}
-              {/* {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]} */}
-              {/* {rawData[rowIndex].order}
-              </td>
-              <td> { rawData[rowIndex].name } </td>
-              <td> { rawData[rowIndex].para } </td> */}
             </div>
           );
         }}
@@ -144,46 +182,36 @@ export default function VirtualTable(props) {
         }}
         onRow={props.onRow}
         onHeaderRow={ (column) => {
-          // console.log(column)
-          // console.log(column[1].title.props.children[3].props.children)
           return {
             onClick: () => {
-              // console.log( column[1].title.props.children[2].props)
-              // console.log(props)
-              // column[1].title.props.children[2].props.onClick=()=>{
-              //   console.log('sss')
-              // }
-              // console.log(column[1].title.props.children[2])
-              if(column[1].title.props.children[3].props.children === '反选'){
-                // console.log('haha')
-                // console.log(rawData)
-                console.log(dataList)
+              // console.log(props.List)
+              // 点击表头行
+              
+              if(column[1].title.props.children[3] == ''){
+                setAddnum(addnum+1)
+              }else if( column[1].title.props.children[3].props){
                 dataList.map((item,index)=>{
-                  // console.log(item)
                   item.select = !item.select
-                  // console.log(item.select)
                   setAddnum(addnum+1)
                 })
-                // console.log(dataList)
+                // console.log(props.dataSource)
+                props.List.splice(0)
+                props.dataSource.map((item,index)=>{
+                  if(item.select == true){
+                    // item = {name:item.insName,para:item.paras}
+                    props.List.push(item)
+                  }
+                })
               }
-              // if(column[1].title.props.children[1].props.children == '全选'){
-              //   dataList.map((item,index)=>{
-              //     // console.log(item)
-              //     item.select = true
-              //     setAddnum(addnum+1)
-              //   })
-              // }else{
-              //   dataList.map((item,index)=>{
-              //     // console.log(item)
-              //     item.select = false
-              //     setAddnum(addnum+1)
-              //   })
-              // }
-            }, // 点击表头行
-            
+              // console.log(props.List)
+              console.log(props.List)
+            }, 
+
           };
         }}
       />
     </ResizeObserver>
   );
 } // Usage
+
+export default connect(mapStateToProps)(VirtualTable);

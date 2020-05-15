@@ -4,6 +4,9 @@ export default {
   state: {
     currentAuthority: "操作工",
     paraFrameDisplay: "close",
+    programSeletedRow:[],
+    programBoth:false,
+    programList:[]
   },
 
   subscriptions: {},
@@ -26,45 +29,10 @@ export default {
       _state.paraFrameDisplay = action.data;
       return _state;
     },
-    changeRobot1OpenedProgram(state, action) {
+    changeSeletedRow(state, action) {
       let _state = JSON.parse(JSON.stringify(state));
-      _state.robot1OpenedProgram = action.data.robot1OpenedProgram;
+      _state.currentAuthority = action.data;
       return _state;
-    },
-    changeRobot1CurrentProgram(state, action) {
-      let _state = JSON.parse(JSON.stringify(state));
-      _state.robot1CurrentProgram = action.data.robot1CurrentProgram;
-      return _state;
-    },
-    changeRobot2OpenedProgram(state, action) {
-      let _state = JSON.parse(JSON.stringify(state));
-      _state.robot2OpenedProgram = action.data.robot2OpenedProgram;
-      return _state;
-    },
-    changeRobot2CurrentProgram(state, action) {
-      let _state = JSON.parse(JSON.stringify(state));
-      _state.robot2CurrentProgram = action.data.robot2CurrentProgram;
-      return _state;
-    },
-    changeRobot3OpenedProgram(state, action) {
-      let _state = JSON.parse(JSON.stringify(state));
-      _state.robot3OpenedProgram = action.data.robot3OpenedProgram;
-      return _state;
-    },
-    changeRobot3CurrentProgram(state, action) {
-      let _state = JSON.parse(JSON.stringify(state));
-      _state.robot3CurrentProgram = action.data.robot3CurrentProgram;
-      return _state;
-    },
-    changeRobot4OpenedProgram(state, action) {
-      let _state = JSON.parse(JSON.stringify(state));
-      _state.robot4OpenedProgram = action.data.robot4OpenedProgram;
-      return _state;
-    },
-    changeRobot4CurrentProgram(state, action) {
-      let _state = JSON.parse(JSON.stringify(state));
-      _state.robot4CurrentProgram = action.data.robot4CurrentProgram;
-      return _state;
-    },
+    }
   },
 };

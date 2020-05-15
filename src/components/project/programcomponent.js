@@ -19,6 +19,9 @@ const { confirm } = Modal;
 const mapStateToProps = (state) => {
   return {
     program: state.index.program,
+    // VirtualTable: state.App.programSeletedRow,
+    dataList: state.App.programSeletedRow,
+    pargamList: state.App.programList
   };
 };
 
@@ -30,7 +33,8 @@ function ProgramComponent(props) {
   const [insertName, setInsertName] = useState();
   const [form] = Form.useForm();
   const addClass = useRef();
-  const moreClass = useRef();
+  const moreClass = useRef()
+  console.log(props.pargamList)
   useEffect(() => {
     let rightList = [];
     let ins = instructType[type].list;
@@ -62,13 +66,16 @@ function ProgramComponent(props) {
       isbulk: props.isBulk,
       selectlines: props.multiSelection,
     };
+    console.log(props)
     sendMSGtoServer("DELETE_COMMAND", deleteData);
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
     moreClass.current.style.display = "none";
-    let hang = props.multiSelection.map((value) => {
-      return value - 1;
+    console.log(props.dataList)
+    let hang = props.dataList.map((value) => {
+      // console.log(value)
+      return value.order;
     });
     confirm({
       title: "确认",
