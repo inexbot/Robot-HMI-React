@@ -35,6 +35,9 @@ function ProjectComponent(props) {
   }, [selectedProgram]);
 
   const openProgram = () => {
+    console.log("今天也是美好的一天:"+currentRobot)
+    // console.log(props.selectedProgram[0])
+    localStorage.setItem("procedure",JSON.stringify(props.selectedProgram[0]))
     let robot = currentRobot;
     let Robot = "";
     switch (robot) {
@@ -68,6 +71,7 @@ function ProjectComponent(props) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  console.log(currentRobot)
   const onFinish = (values) => {
     let newProgram = {
       robot: currentRobot,

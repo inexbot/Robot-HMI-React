@@ -33,7 +33,7 @@ function Project(props) {
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [rowSelection, setRowSelectrion] = useState(null);
   const [isBulk, setIsBulk] = useState(0);
-
+  // console.log(props)
   // 初始化组件后做的
   const [tabPanel, setTabPanel] = useState("");
   const handleOkDeleteMultiProgram = () => {
@@ -221,11 +221,17 @@ function Project(props) {
     setTabPanel(tabs);
   }, [props.project, rowSelection, , selectedProgram]);
   useEffect((value) => {
-    let page = 0;
-    let pageSize = 10;
-    let obj = "";
-    obj = props.project[0].program.slice(page * 10, page + pageSize - 1);
-  });
+    if(props.project == undefined){
+
+    }else{
+      let page = 0;
+      let pageSize = 10;
+      let obj = "";
+      obj = props.project[0].program.slice(page * 10, page + pageSize - 1);
+    }
+
+
+  }); 
   const deleteMoreButton = () => {
     if (isBulk === 0) {
       return (

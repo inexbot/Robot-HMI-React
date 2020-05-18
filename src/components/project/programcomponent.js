@@ -21,7 +21,8 @@ const mapStateToProps = (state) => {
     program: state.index.program,
     // VirtualTable: state.App.programSeletedRow,
     dataList: state.App.programSeletedRow,
-    pargamList: state.App.programList
+    pargamList: state.App.programList,
+    deleteList: state.App.deleteList
   };
 };
 
@@ -34,7 +35,7 @@ function ProgramComponent(props) {
   const [form] = Form.useForm();
   const addClass = useRef();
   const moreClass = useRef()
-  console.log(props.pargamList)
+  // console.log(props.pargamList,props.program,props.dataList)
   useEffect(() => {
     let rightList = [];
     let ins = instructType[type].list;
@@ -62,17 +63,29 @@ function ProgramComponent(props) {
     Modal.destroyAll();
   };
   const handleOkDeleteCommand = () => {
+    let selectlines = props.dataList.map((value)=>{
+      return value.order
+    })
+    let isbulk = 0
+    if( props.dataList.length > 1){
+      isbulk = 1
+    }else{
+      isbulk = 0
+    }
     let deleteData = {
-      isbulk: props.isBulk,
-      selectlines: props.multiSelection,
+      isbulk,
+      selectlines
     };
-    console.log(props)
+    console.log(props.isBulk,props.multiSelection)
     sendMSGtoServer("DELETE_COMMAND", deleteData);
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
+    // console.log(props.deleteList)
+    
     moreClass.current.style.display = "none";
-    console.log(props.dataList)
+    // console.log(props.dataList)
+
     let hang = props.dataList.map((value) => {
       // console.log(value)
       return value.order;

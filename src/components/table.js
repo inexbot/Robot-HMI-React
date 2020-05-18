@@ -10,17 +10,17 @@ const mapStateToProps = (state) => {
   return {
     List: state.App.programSeletedRow,
     pargram: state.index.program,
-    programBoth:state.App.programBoth,
-    programList:state.App.programList
+    programBoth: state.App.programBoth,
+    programList: state.App.programList,
   };
 };
 
 function VirtualTable(props) {
-  const [ dataList, setDataList ] = useState([])
+  const [dataList, setDataList] = useState([]);
   const { columns, scroll, className } = props;
-  const [ addls, setAddls] = useState(-1)
-  
-  const [ addnum, setAddnum ] = useState(0)
+  const [addls, setAddls] = useState(-1);
+
+  const [addnum, setAddnum] = useState(0);
   const [tableWidth, setTableWidth] = useState(0);
   const widthColumnCount = columns.filter(({ width }) => !width).length;
   const mergedColumns = columns.map((column) => {
@@ -31,9 +31,9 @@ function VirtualTable(props) {
     return { ...column, width: Math.floor(tableWidth / widthColumnCount) };
   });
   useEffect(() => {
-    props.programList.splice(0)
-    props.programList.push(...props.dataSource)
-  })
+    props.programList.splice(0);
+    props.programList.push(...props.dataSource);
+  });
   // console.log(props)
   // console.log(VirtualTable)
   // console.log(props.programBoth)
@@ -52,14 +52,25 @@ function VirtualTable(props) {
     });
     return obj;
   });
-  // console.log(props)
+  console.log(gridRef);
+
+  const customizeRenderEmpty = () => (
+    <div style={{ textAlign: "center" }}>
+      <p>空程序，请插入指令</p>
+    </div>
+  );
+
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
-    setDataList(rawData)
+    console.log(rawData);
+    if (props.pargram.instruct == undefined) {
+      rawData.splice(0);
+    }
+    setDataList(rawData);
     ref.current = connectObject;
     return (
       <Grid
         ref={gridRef}
-        className='virtual-grid'
+        className="virtual-grid"
         columnCount={mergedColumns.length}
         columnWidth={(index) => {
           const { width } = mergedColumns[index];
@@ -75,81 +86,53 @@ function VirtualTable(props) {
           onScroll({
             scrollLeft,
           });
-        }}>
+        }}
+      >
         {({ columnIndex, rowIndex, style }) => {
-          let styleod = { background:"#e6f7ff" }
-          let stylesh = { lineHeight:"100px",...style }
+          let styleod = { background: "#e6f7ff" };
+          let stylesh = { lineHeight: "100px", ...style };
           let stylebd = {
             ...style,
             ...styleod,
-            ...stylesh
-          }
+            ...stylesh,
+          };
           return (
-            <div 
-              className={classNames(`virtual-table-cell${rawData[rowIndex].order}`)}
-              style =  {  rawData[rowIndex].select?  stylebd : stylesh}
-              onClick={(e)=>{
+            <div
+              className={classNames(
+                `virtual-table-cell${rawData[rowIndex].order}`
+              )}
+              //根据select来显示选中时候的样式
+              style={rawData[rowIndex].select ? stylebd : stylesh}
+              onClick={(e) => {
                 //点击每一行
-                // console.log(rawData);
-                // console.log(rawData[rowIndex])
-                // console.log(props)
-                if(rawData[0].moreBtn == false){
-                  rawData.map((item,index)=>{
-                    item.select = false
-                  })
-                  rawData[rowIndex].select = !rawData[rowIndex].select
-                  setAddnum(addnum+1)
+                if (rawData[0].moreBtn == false) {
+                  rawData.map((item, index) => {
+                    item.select = false;
+                  });
+                  rawData[rowIndex].select = !rawData[rowIndex].select;
+                  setAddnum(addnum + 1);
                   // console.log(props)
                   // console.log(rawData)
-                  props.List.splice(0)
-                  props.dataSource.map((item,index)=>{
-                    if(item.select){
-
-                      props.List.push(item)
+                  props.List.splice(0);
+                  props.dataSource.map((item, index) => {
+                    if (item.select) {
+                      props.List.push(item);
                     }
-                  })
-                }else if(rawData[0].moreBtn == true){
-                  rawData[rowIndex].select = !rawData[rowIndex].select
-                  setAddnum(addnum+1)
-                  props.List.splice(0)
-                  props.dataSource.map((item,index)=>{
-                    if(item.select == true){
+                  });
+                } else if (rawData[0].moreBtn == true) {
+                  rawData[rowIndex].select = !rawData[rowIndex].select;
+                  setAddnum(addnum + 1);
+                  props.List.splice(0);
+                  props.dataSource.map((item, index) => {
+                    if (item.select == true) {
                       // console.log(item)
                       // item = {name:item.insName,para:item.paras}
-                      props.List.push(item)
+                      props.List.push(item);
                     }
-                  })
-                  // console.log(props.List)
-                  // console.log(props.List)
-                  // props.List.push(props..data)
-                  // props.List.push(props.pargram.instruct[ rawData[rowIndex].order-1 ])
-                  // console.log(props.List)
-                  // props.dataSource.map((item,index)=>{
-                  //   if(item.select == false){
-                  //     // props.List.slice()
-                  //     // console.log(item,index)
-                  //     // props.List.map((v,i)=>{
-                  //     //   if(i == item.order -1){
-                  //     //     // return props.List.slice(i,1)
-                  //     //     // console.log(props.List.slice(i,1)) 
-                  //     //     props.filter(())
-                  //     //   }
-                  //     // })
-
-                  //     // props.List.filter((v,i)=>{
-                  //     //   setAddnum(addnum+1)
-                  //     //   return item != v
-                        
-                  //     // })
-                  //     console.log(item,index)
-                     
-                  //     // console.log(props.List)
-                  //   }
-                  // })
-                  // console.log('sss',rawData[0])
+                  });
                 }
               }}
-              >
+            >
               {rawData[rowIndex][mergedColumns[columnIndex].dataIndex]}
             </div>
           );
@@ -158,10 +141,14 @@ function VirtualTable(props) {
     );
   };
   const resetVirtualGrid = () => {
-    gridRef.current.resetAfterIndices({
-      columnIndex: 0,
-      shouldForceUpdate: false,
-    });
+    //对服务器返回的列表数据进行显示
+    if (gridRef.current === undefined || null) {
+    } else {
+      gridRef.current.resetAfterIndices({
+        columnIndex: 0,
+        shouldForceUpdate: false,
+      });
+    }
   };
 
   useEffect(() => resetVirtualGrid, []);
@@ -170,7 +157,8 @@ function VirtualTable(props) {
     <ResizeObserver
       onResize={({ width }) => {
         setTableWidth(width);
-      }}>
+      }}
+    >
       <Table
         dataSource={props.dataSource}
         scroll={props.scroll}
@@ -181,32 +169,31 @@ function VirtualTable(props) {
           body: renderVirtualList,
         }}
         onRow={props.onRow}
-        onHeaderRow={ (column) => {
+        onHeaderRow={(column) => {
           return {
             onClick: () => {
               // console.log(props.List)
               // 点击表头行
-              
-              if(column[1].title.props.children[3] == ''){
-                setAddnum(addnum+1)
-              }else if( column[1].title.props.children[3].props){
-                dataList.map((item,index)=>{
-                  item.select = !item.select
-                  setAddnum(addnum+1)
-                })
+
+              if (column[1].title.props.children[3] == "") {
+                setAddnum(addnum + 1);
+              } else if (column[1].title.props.children[3].props) {
+                dataList.map((item, index) => {
+                  item.select = !item.select;
+                  setAddnum(addnum + 1);
+                });
                 // console.log(props.dataSource)
-                props.List.splice(0)
-                props.dataSource.map((item,index)=>{
-                  if(item.select == true){
+                props.List.splice(0);
+                props.dataSource.map((item, index) => {
+                  if (item.select == true) {
                     // item = {name:item.insName,para:item.paras}
-                    props.List.push(item)
+                    props.List.push(item);
                   }
-                })
+                });
               }
               // console.log(props.List)
-              console.log(props.List)
-            }, 
-
+              // console.log(props.List)
+            },
           };
         }}
       />

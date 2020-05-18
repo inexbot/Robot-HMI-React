@@ -1,5 +1,5 @@
 export const config ={
-    serverIP: "192.168.0.56",
+    serverIP: "192.168.0.15",
     serverPort: "9000",
     modeDisplay:{
         伺服参数: "none",

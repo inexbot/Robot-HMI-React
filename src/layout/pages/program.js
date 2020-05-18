@@ -4,7 +4,7 @@
  */
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import { Table, Button, notification, ConfigProvider,Select } from "antd";
+import { Table, Button, notification, ConfigProvider, Select } from "antd";
 import VirtualTable from "../../components/table";
 import { connect } from "dva";
 import { renderInstruct } from "./Program_instruct_header/index";
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
     robot3OpenedProgram: state.index.robotStatus.robot3OpenedProgram,
     robot4OpenedProgram: state.index.robotStatus.robot4OpenedProgram,
     program: state.index.program,
-    programBoth:state.App.programBoth,
+    programBoth: state.App.programBoth,
     List: state.App.programSeletedRow,
   };
 };
@@ -42,58 +42,77 @@ function Program(props) {
   const [selectedName, setSelectedName] = useState(0);
   const [multiSelection, setMultiSelection] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
-  const [moreBtn, setMoreBtn] = useState(false)
-  const [forbid, setForbid] = useState(false)
-  const [agai, setAgai] = useState(0)
-  const [allList, setAllList] = useState(0)
+  const [moreBtn, setMoreBtn] = useState(false);
+  const [forbid, setForbid] = useState(false);
+  const [agai, setAgai] = useState(0);
+  const [allList, setAllList] = useState(0);
   const [rowSelection, setRowSelection] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
-  const children = []
+  const children = [];
 
- console.log(props.programBoth)
+  console.log(props.programBoth);
   const selectAll = () => {
-    setAllList(1)
-    setAllButton(<Button  disabled={ moreBtn }  onClick={callSelectAll}>全不选</Button>)
-  }
+    setAllList(1);
+    setAllButton(
+      <Button disabled={moreBtn} onClick={callSelectAll}>
+        全不选
+      </Button>
+    );
+  };
   const selectMore = () => {
-    setMoreBtn(true)
-    setAllList(0)
-    setForbid(!forbid)
+    setMoreBtn(true);
+    setAllList(0);
+    setForbid(!forbid);
     setMoreButton(<Button onClick={cancelSelectMore}>单选</Button>);
   };
   const cancelSelectMore = () => {
-    setMoreBtn(false)
-    setAllList(0)
-    setForbid(!forbid)
+    setMoreBtn(false);
+    setAllList(0);
+    setForbid(!forbid);
     setMoreButton(<Button onClick={selectMore}>多选</Button>);
   };
-
   const callSelectAll = () => {
-    setAllList(0)
-    setAllButton(<Button disabled={ moreBtn } onClick={selectAll}>全选</Button>);
+    setAllList(0);
+    setAllButton(
+      <Button disabled={moreBtn} onClick={selectAll}>
+        全选
+      </Button>
+    );
   };
   const agaiMore = () => {
-    setAgai(true)
-    setAgaiButton(<Button  disabled={ moreBtn }  onClick = {cancelagaiMore}>反选</Button>)
-  }
+    setAgai(true);
+    setAgaiButton(
+      <Button disabled={moreBtn} onClick={cancelagaiMore}>
+        反选
+      </Button>
+    );
+  };
   const cancelagaiMore = () => {
-    setAgai(false)
-    setAgaiButton(<Button  disabled={ moreBtn }  onClick = {agaiMore}>反选</Button>)
-  }
+    setAgai(false);
+    setAgaiButton(
+      <Button disabled={moreBtn} onClick={agaiMore}>
+        反选
+      </Button>
+    );
+  };
 
   const [agaiButton, setAgaiButton] = useState(
-    <Button disabled={ moreBtn }  onClick = {agaiMore}>反选</Button>
+    <Button disabled={moreBtn} onClick={agaiMore}>
+      反选
+    </Button>
   );
   const [allButton, setAllButton] = useState(
-    <Button disabled={ moreBtn }   onClick = {selectAll} >全选</Button>
-  )
-  const [moreButton, setMoreButton] = useState(
-    <Button onClick ={selectMore} >多选</Button>
+    <Button disabled={moreBtn} onClick={selectAll}>
+      全选
+    </Button>
   );
-    useEffect(()=>{
-      props.List.splice(0)
-    },[moreBtn])
+  const [moreButton, setMoreButton] = useState(
+    <Button onClick={selectMore}>多选</Button>
+  );
+  useEffect(() => {
+    props.List.splice(0);
+  }, [moreBtn]);
   // 用来构建标签页
   const columns = [
     {
@@ -102,12 +121,24 @@ function Program(props) {
       className: "pro_id",
     },
     {
-    title: <div style={{ display:'flex',alignItems:'center' }}>指令名{moreButton} {moreBtn? <div style={{ display:'flex' }}> {allButton} {agaiButton}  </div> : ''} </div>,
+      title: (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          指令名{moreButton}{" "}
+          {moreBtn ? (
+            <div style={{ display: "flex" }}>
+              {" "}
+              {allButton} {agaiButton}{" "}
+            </div>
+          ) : (
+            ""
+          )}{" "}
+        </div>
+      ),
       dataIndex: "name",
       key: "name",
       className: "pro_tit",
       render: (text) => (
-        <div className='instructName' type={{ color: "FF00FF" }}>
+        <div className="instructName" type={{ color: "FF00FF" }}>
           {text}
         </div>
       ),
@@ -129,85 +160,96 @@ function Program(props) {
       });
       return;
     } else {
+      console.log(props);
+      console.log(props.program.instruct);
+      // if(props.program.instruct){
       let instruct = props.program.instruct;
       let keyOfInstruct = 1;
       // 标签页内表格的表头
       let dataSource = [];
-      if (instruct === undefined) {
+
+      if (instruct === undefined ) {
         dataSource = [];
       } else {
+        // if( localStorage.getItem(JSON.parse("procedure"))){
+        // }else{
         // 遍历获取指令数据
         instruct.map((value, index) => {
-          if (instruct.length === 0) {
-            return value;
+          if (index == 0) {
           } else {
-            if (value === null) { 
-              if(allList === 0){
-                dataSource.push({
-                  key: keyOfInstruct,
-                  order: keyOfInstruct,
-                  name: "未解析指令",
-                  para: "未解析指令",
-                  insName: "未解析指令",
-                  select: false,
-                  allList:allList,
-                  moreBtn:moreBtn,
-                  agaiBtn:agai
-                });
-              }else{
-                dataSource.push({
-                  key: keyOfInstruct,
-                  order: keyOfInstruct,
-                  name: "未解析指令",
-                  para: "未解析指令",
-                  insName: "未解析指令",
-                  select: true,
-                  allList:allList,
-                  moreBtn:moreBtn,
-                  agaiBtn:agai
-                });
-              }
-
+            if (instruct.length === 0) {
+              return value;
             } else {
-              if(allList === 0 ){
-                dataSource.push({
-                  key: keyOfInstruct,
-                  order: keyOfInstruct,
-                  name: intl.get(value.name),
-                  para: renderInstruct(value.name, value.para),
-                  insName: value.name,
-                  select:false,
-                  allList:allList,
-                  moreBtn:moreBtn,
-                  agaiBtn:agai,
-                  paras: value.para
-                });
-              }else{
-                dataSource.push({
-                  key: keyOfInstruct,
-                  order: keyOfInstruct,
-                  name: intl.get(value.name),
-                  para: renderInstruct(value.name, value.para),
-                  insName: value.name,
-                  select: true,
-                  allList:allList,
-                  moreBtn:moreBtn,
-                  agaiBtn:agai,
-                  paras: value.para
-                });
+              if (value === null) {
+                if (allList === 0) {
+                  dataSource.push({
+                    key: keyOfInstruct,
+                    order: keyOfInstruct,
+                    name: "未解析指令",
+                    para: "未解析指令",
+                    insName: "未解析指令",
+                    select: false,
+                    allList: allList,
+                    moreBtn: moreBtn,
+                    agaiBtn: agai,
+                  });
+                } else {
+                  dataSource.push({
+                    key: keyOfInstruct,
+                    order: keyOfInstruct,
+                    name: "未解析指令",
+                    para: "未解析指令",
+                    insName: "未解析指令",
+                    select: true,
+                    allList: allList,
+                    moreBtn: moreBtn,
+                    agaiBtn: agai,
+                  });
+                }
+              } else {
+                if (allList === 0) {
+                  dataSource.push({
+                    key: keyOfInstruct,
+                    order: keyOfInstruct,
+                    name: intl.get(value.name),
+                    para: renderInstruct(value.name, value.para),
+                    insName: value.name,
+                    select: false,
+                    allList: allList,
+                    moreBtn: moreBtn,
+                    agaiBtn: agai,
+                    paras: value.para,
+                  });
+                } else {
+                  dataSource.push({
+                    key: keyOfInstruct,
+                    order: keyOfInstruct,
+                    name: intl.get(value.name),
+                    para: renderInstruct(value.name, value.para),
+                    insName: value.name,
+                    select: true,
+                    allList: allList,
+                    moreBtn: moreBtn,
+                    agaiBtn: agai,
+                    paras: value.para,
+                  });
+                }
+                keyOfInstruct = keyOfInstruct + 1;
+                return value;
               }
-
             }
-            keyOfInstruct = keyOfInstruct + 1;
-            return value;
           }
-
         });
-        setDataSourceMain(dataSource)
-      }
 
+        // }
+
+        // 把过滤出来的数据存入dataSourceMain
+        setDataSourceMain(dataSource);
+      }
+      console.log(dataSource);
+      // }
     }
-  }, [props.program,allList,moreBtn,moreButton]);
+  }, [props.program, allList, moreBtn, moreButton]);
   let comp = (
     <ProgramComponent
       selectedName={selectedName}
@@ -217,16 +259,19 @@ function Program(props) {
     />
   );
   const [aComponent, setAComponent] = useState();
-  useEffect(() => {
-    if (props.operaMode === 2) {
-      setAComponent(<RunModeComponent />);
-      setHeadButtonDisplay("none");
-    } else {
-      setAComponent(comp);
-      setHeadButtonDisplay("inline");
-    }
-  }, [props.operaMode]);
-
+  useEffect(
+    () => {
+      if (props.operaMode === 2) {
+        setAComponent(<RunModeComponent />);
+        setHeadButtonDisplay("none");
+      } else {
+        setAComponent(comp);
+        setHeadButtonDisplay("inline");
+      }
+    },
+    [props.operaMode],
+    [dataSourceMain]
+  );
 
   return (
     <div>
@@ -234,7 +279,7 @@ function Program(props) {
       <ConTitle
         title={`${intl.get("程序")} ${props.program.name}`}
         subtitle={intl.get(" ")}
-        buttonLink='/Project'
+        buttonLink="/Project"
         buttonStyle={{ display: headButtonDisplay }}
       />
       {aComponent}
@@ -243,36 +288,14 @@ function Program(props) {
           columns={columns}
           dataSource={dataSourceMain}
           rowSelection={rowSelection}
-          className='Program_table'
+          className="Program_table"
           scroll={{
-            y: window.screen.height*0.5,
+            y: window.screen.height * 0.5,
           }}
         />
-        {/* <Table
-          dataSource={dataSourceMain}
-          columns={columns}
-          rowSelection={rowSelection}
-          className='Program_table'
-          //   scroll={
-          //   {y:"500px"}
-          // }
-          // scroll={ {y: 100} }
-          pagination={false}
-          onRow={(record) => {
-            return {
-              // 点击表格每一行后的回调
-              onClick: (event) => {
-                setSelectedRow(record.order);
-                setMultiSelection([record.order]);
-                setSelectedName(record.insName);
-              },
-            };
-          }}
-        /> */}
       </ConfigProvider>
     </div>
   );
-  
 }
 
 export default connect(mapStateToProps)(Program);

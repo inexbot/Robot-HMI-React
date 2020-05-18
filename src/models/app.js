@@ -6,7 +6,8 @@ export default {
     paraFrameDisplay: "close",
     programSeletedRow:[],
     programBoth:false,
-    programList:[]
+    programList:[],
+    deleteList:false
   },
 
   subscriptions: {},
