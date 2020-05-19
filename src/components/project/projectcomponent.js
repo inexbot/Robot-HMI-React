@@ -7,6 +7,8 @@ const { Option } = Select;
 const mapStateToProps = (state) => {
   return {
     project: state.index.project,
+    program: state.index.program,
+    newprogram: state.App.newprogram
   };
 };
 function destroyAll() {
@@ -35,9 +37,8 @@ function ProjectComponent(props) {
   }, [selectedProgram]);
 
   const openProgram = () => {
-    console.log("今天也是美好的一天:"+currentRobot)
     // console.log(props.selectedProgram[0])
-    localStorage.setItem("procedure",JSON.stringify(props.selectedProgram[0]))
+    // localStorage.setItem("procedure",JSON.stringify(props.selectedProgram[0]))
     let robot = currentRobot;
     let Robot = "";
     switch (robot) {
@@ -63,6 +64,7 @@ function ProjectComponent(props) {
     };
     sendMSGtoServer("openProgram", openprogram);
     history.push("/Program");
+    // console.log(props.program)
   };
   const showModalNewProgram = () => {
     confirm(modalConfigNewProgram);
@@ -71,7 +73,7 @@ function ProjectComponent(props) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  console.log(currentRobot)
+  // console.log(currentRobot)
   const onFinish = (values) => {
     let newProgram = {
       robot: currentRobot,
@@ -106,6 +108,7 @@ function ProjectComponent(props) {
       },
     });
     history.push("/Program");
+
   };
   const handleOkNewProgram = (e) => {
     form.submit();

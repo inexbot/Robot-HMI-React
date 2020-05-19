@@ -7,7 +7,11 @@ export default {
     programSeletedRow:[],
     programBoth:false,
     programList:[],
-    deleteList:false
+    deleteList:false,
+    newprogram:[],
+    selectmodalnum:[
+      {a:1}
+    ]
   },
 
   subscriptions: {},
@@ -18,7 +22,6 @@ export default {
       yield put({ type: "save" });
     },
   },
-
   reducers: {
     changeAuthority(state, action) {
       let _state = JSON.parse(JSON.stringify(state));

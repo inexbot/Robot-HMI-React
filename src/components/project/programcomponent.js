@@ -3,7 +3,7 @@
  * 引入ChangeInstructValue、instructType两个方法和变量
  */
 import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Button, Drawer, Form, Modal } from "antd";
+import { Row, Col, Button, Drawer, Form, Modal, Space } from "antd";
 import { connect } from "dva";
 import {
   PlusOutlined,
@@ -22,7 +22,9 @@ const mapStateToProps = (state) => {
     // VirtualTable: state.App.programSeletedRow,
     dataList: state.App.programSeletedRow,
     pargamList: state.App.programList,
-    deleteList: state.App.deleteList
+    deleteList: state.App.deleteList,
+    programSeletedRow: state.App.programSeletedRow,
+    selectmodalnum: state.App.selectmodalnum,
   };
 };
 
@@ -34,7 +36,7 @@ function ProgramComponent(props) {
   const [insertName, setInsertName] = useState();
   const [form] = Form.useForm();
   const addClass = useRef();
-  const moreClass = useRef()
+  const moreClass = useRef();
   // console.log(props.pargamList,props.program,props.dataList)
   useEffect(() => {
     let rightList = [];
@@ -54,6 +56,7 @@ function ProgramComponent(props) {
   };
   const onFinish = () => {
     form.submit();
+    // console.log('sss')
   };
   const changevalue = () => {
     setInsertOrChange("change");
@@ -63,26 +66,27 @@ function ProgramComponent(props) {
     Modal.destroyAll();
   };
   const handleOkDeleteCommand = () => {
-    let selectlines = props.dataList.map((value)=>{
-      return value.order
-    })
-    let isbulk = 0
-    if( props.dataList.length > 1){
-      isbulk = 1
-    }else{
-      isbulk = 0
+    let selectlines = props.dataList.map((value) => {
+      return value.order;
+    });
+    let isbulk = 0;
+    if (props.dataList.length > 1) {
+      isbulk = 1;
+    } else {
+      isbulk = 0;
     }
     let deleteData = {
       isbulk,
-      selectlines
+      selectlines,
     };
-    console.log(props.isBulk,props.multiSelection)
+    // console.log(props.isBulk,props.multiSelection)
+
     sendMSGtoServer("DELETE_COMMAND", deleteData);
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
     // console.log(props.deleteList)
-    
+
     moreClass.current.style.display = "none";
     // console.log(props.dataList)
 
@@ -135,6 +139,20 @@ function ProgramComponent(props) {
     });
     return leftList;
   };
+  //点击确定插入
+  const config = {
+    title: " 请选择插入 ",
+    content: (
+      <div>
+       <input type="radio" value="哈哈"/>
+      </div>
+    ),
+  };
+  const selectmodal = () => {
+    console.log(props.programSeletedRow);
+        Modal.confirm(config);
+  };
+
   const insertCommand = (value) => {
     setInsertOrChange("insert");
     setInsertName(value);
@@ -145,46 +163,60 @@ function ProgramComponent(props) {
   const renderSaveOrInsert = () => {
     return insertOrChange === "change" ? "保存" : "插入";
   };
+  console.log(props.programSeletedRow);
   return (
-    <div className='progcomponent'>
-      <div className='progadd' ref={addClass} style={{ display: "none" }}>
+    <div className="progcomponent">
+      <div className="progadd" ref={addClass} style={{ display: "none" }}>
         <Row>
-          <Col span={8} className='progaddLeft'>
+          <Col span={8} className="progaddLeft">
             {renderType()}
           </Col>
-          <Col span={16} className='progaddRight'>
+          <Col span={16} className="progaddRight">
             {instructList}
           </Col>
         </Row>
       </div>
-      <div className='progmore' ref={moreClass} style={{ display: "none" }}>
+      <div className="progmore" ref={moreClass} style={{ display: "none" }}>
         <Row>
           <Col span={8} offset={3}>
-            <Button className="proMoreBtn" size="large" onClick={showModalDeleteCommand}> 删除 </Button>
+            <Button
+              className="proMoreBtn"
+              size="large"
+              onClick={showModalDeleteCommand}
+            >
+              {" "}
+              删除{" "}
+            </Button>
           </Col>
           <Col span={8} offset={2}>
-            <Button className="proMoreBtn" size="large">移动</Button>
+            <Button className="proMoreBtn" size="large">
+              移动
+            </Button>
           </Col>
         </Row>
         <Row>
           <Col span={8} offset={3}>
-          <Button className="proMoreBtn" size="large">复制</Button>
+            <Button className="proMoreBtn" size="large">
+              复制
+            </Button>
           </Col>
           <Col span={8} offset={2}>
-          <Button className="proMoreBtn" size="large">粘贴</Button>
+            <Button className="proMoreBtn" size="large">
+              粘贴
+            </Button>
           </Col>
         </Row>
       </div>
-      <div className='progicon'>
+      <div className="progicon">
         <Row>
           <Col span={6} offset={3}>
-            <PlusOutlined className='icon' onClick={handleAddButton} />
+            <PlusOutlined className="icon" onClick={handleAddButton} />
           </Col>
           <Col span={6}>
-            <EditOutlined className='icon' onClick={changevalue} />
+            <EditOutlined className="icon" onClick={changevalue} />
           </Col>
           <Col span={6}>
-            <EllipsisOutlined className='icon' onClick={handleMoreButton} />
+            <EllipsisOutlined className="icon" onClick={handleMoreButton} />
           </Col>
         </Row>
       </div>
@@ -200,16 +232,35 @@ function ProgramComponent(props) {
           <div
             style={{
               textAlign: "left",
-              paddingLeft:50,
-            }}>
+              paddingLeft: 50,
+            }}
+          >
             <Button onClick={onClose} style={{ marginRight: 50 }}>
               关闭
             </Button>
-            <Button onClick={onFinish} type="primary" style={{ marginRight: 8 }}>
+            {/* 点击插入按钮 */}
+            <Button
+              onClick={() => {
+                console.log(props.programSeletedRow.length)
+                if (props.programSeletedRow.length == 1) {
+                  if (props.programSeletedRow[0].key == 1) {
+                    selectmodal();
+                  } else {
+                    onFinish();
+                  }
+                } else if(props.programSeletedRow.length == 0 ) {
+                  console.log('哈哈')
+                  onFinish()
+                }
+              }}
+              type="primary"
+              style={{ marginRight: 8 }}
+            >
               {renderSaveOrInsert()}
             </Button>
           </div>
-        }>
+        }
+      >
         <ChangeInstructValue
           changeName={props.selectedName}
           row={props.selectedRow}

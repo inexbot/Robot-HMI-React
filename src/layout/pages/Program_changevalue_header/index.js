@@ -17,6 +17,10 @@ function ChangeInstructValue(props) {
   }
   switch (name) {
     case "MOVJ":
+      console.log(props.row)
+      console.log(props.form)
+      console.log(props.insertOrChange,)
+      console.log(props.setClose)
       return (
         <Movj
           row={props.row}

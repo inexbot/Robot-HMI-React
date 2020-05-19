@@ -45,6 +45,7 @@ function VirtualTable(props) {
       set: (scrollLeft) => {
         if (gridRef.current) {
           gridRef.current.scrollTo({
+
             scrollLeft,
           });
         }
@@ -52,7 +53,7 @@ function VirtualTable(props) {
     });
     return obj;
   });
-  console.log(gridRef);
+  // console.log(gridRef);
 
   const customizeRenderEmpty = () => (
     <div style={{ textAlign: "center" }}>
@@ -61,7 +62,7 @@ function VirtualTable(props) {
   );
 
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
-    console.log(rawData);
+    // console.log(rawData);
     if (props.pargram.instruct == undefined) {
       rawData.splice(0);
     }

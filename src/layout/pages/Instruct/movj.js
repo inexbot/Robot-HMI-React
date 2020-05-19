@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
   return {
     program: state.index.program,
     currentPos: state.index.robotStatus.pos,
+    programSeletedRow: state.App.programSeletedRow,
+    selectmodalnum: state.App.selectmodalnum
   };
 };
 const insertDefaultValue = {
@@ -75,8 +77,24 @@ function Movj(props) {
       props.setClose();
       return;
     } else {
+      console.log(props)
+       let num = 1
+       console.log(props.programSeletedRow.length)
+      if( props.programSeletedRow.length == 0 ){
+        num = props.program.instruct.length + 1
+        // console.log(num)
+      }else{
+        console.log(props.selectmodalnum)
+        if(props.selectmodalnum.length == 2){
+          num = 1
+        }else{
+          num =  props.programSeletedRow[0].key + 1
+        }
+
+      }
+      console.log(num)
       let sendInsert = {
-        line: parseInt(props.row + 1),
+        line: parseInt(props.row + num),
         modifystate: 0,
         name: "MOVJ",
         postype: posType,
@@ -91,6 +109,7 @@ function Movj(props) {
       props.setClose();
     }
   };
+  console.log(props.form)
   return (
     <Form
       form={props.form}
