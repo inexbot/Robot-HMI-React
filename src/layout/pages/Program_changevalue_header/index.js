@@ -1,12 +1,13 @@
 /*
  * 修改指令的入口，在这里决定右侧页面显示的是哪个文件
  */
-import React from "react";
+import React, { useEffect } from "react";
 import Movj from "../Instruct/movj";
 import Movl from "../Instruct/movl";
 import Movc from "../Instruct/movc";
 import MovcA from "../Instruct/movca";
 import Movs from "../Instruct/movs";
+import { sendMSGtoServer } from "service/network";
 
 function ChangeInstructValue(props) {
   let name;
@@ -15,6 +16,18 @@ function ChangeInstructValue(props) {
   } else if (props.insertOrChange === "insert") {
     name = props.insertName;
   }
+  useEffect(() => {
+    let getCurrentPosition = setInterval(() => {
+      let data = {
+        robot: props.currentRobot,
+        coord: props.currentCoordinate,
+      };
+      sendMSGtoController("CURRENTPOS_INQUIRE", data);
+    }, 1000);
+    return () => {
+      clearInterval(getCurrentPosition);
+    };
+  }, []);
   switch (name) {
     case "MOVJ":
       return (
