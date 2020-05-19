@@ -46,7 +46,7 @@ const SafeConfig =  asyncComponents( () => import ( "./layout/pages/robotpara/Sa
 const OuterCalibrate =  asyncComponents( () => import ( "./layout/pages/robotpara/Outercalibrate" ));
 const GroundRail =  asyncComponents( () => import ( "./layout/pages/robotpara/Groundrail" ));
 const Turning =  asyncComponents( () => import ( "./layout/pages/robotpara/Turning" ));
-const SlaveSet =  asyncComponents( () => import ( "./layout/pages/robotpara/Slaveset/slaveset" ));
+const SlaveSet =  asyncComponents( () => import ( "./layout/pages/robotpara/slaveset/slaveset" ));
 const ServoPara =  asyncComponents( () => import ( "./layout/pages/robotpara/Servopara" ));
 const TeachLayout =  asyncComponents( () => import ( "./layout/pages/Teachlayout" ));
 // 系统参数
