@@ -25,6 +25,7 @@ const mapStateToProps = (state) => {
     program: state.index.program,
     programBoth: state.App.programBoth,
     List: state.App.programSeletedRow,
+    newprogram: state.App.newprogram
   };
 };
 
@@ -50,8 +51,8 @@ function Program(props) {
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
   const children = [];
+  
 
-  console.log(props.programBoth);
   const selectAll = () => {
     setAllList(1);
     setAllButton(
@@ -152,7 +153,11 @@ function Program(props) {
   useEffect(() => {
     setSelectedRow(1);
   }, []);
+
   useEffect(() => {
+    // console.log(props.newprogram)
+    // props.program.splice(0)
+    // props.program.push(props.program)
     if (props.program.success === false) {
       notification.error({
         message: `打开文件失败！`,
@@ -160,8 +165,9 @@ function Program(props) {
       });
       return;
     } else {
-      console.log(props);
-      console.log(props.program.instruct);
+      
+      // console.log(props);
+      // console.log(props.program.instruct);
       // if(props.program.instruct){
       let instruct = props.program.instruct;
       let keyOfInstruct = 1;
@@ -173,7 +179,7 @@ function Program(props) {
       } else {
         // if( localStorage.getItem(JSON.parse("procedure"))){
         // }else{
-        // 遍历获取指令数据
+          // console.log(instruct[0])
         instruct.map((value, index) => {
           if (index == 0) {
           } else {
@@ -240,14 +246,12 @@ function Program(props) {
             }
           }
         });
-
         // }
-
         // 把过滤出来的数据存入dataSourceMain
-        setDataSourceMain(dataSource);
+        setDataSourceMain(dataSource)
       }
-      console.log(dataSource);
-      // }
+      // console.log(dataSource);
+
     }
   }, [props.program, allList, moreBtn, moreButton]);
   let comp = (

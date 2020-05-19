@@ -26,6 +26,8 @@ function sendCheckServerState() {
   sendMSGtoServer("CheckState", "");
 }
 /* 接收到服务端初始化信息后做处理 */
+
+ 
 function receiveCheckServerState(state) {
   /* 如果已经初始化完成，则往下执行 */
   if (state === true) {
@@ -136,7 +138,6 @@ export default {
     Websocket({ dispatch }) {
       var data = "";
       ws.onmessage = async (message) => {
-        console.log(message);
         data = await comeMessage(message);
         let command;
         command = data[0];
@@ -154,6 +155,7 @@ export default {
         console.group("接收到控制器数据");
         console.log("命令字", command);
         console.log("数据", dataString);
+        
         console.groupEnd();
         switch (command) {
           case "4303":
@@ -341,6 +343,7 @@ export default {
               });
               break;
             }
+
             console.error(dataString.data);
             notification.error({
               message: "报错！",
