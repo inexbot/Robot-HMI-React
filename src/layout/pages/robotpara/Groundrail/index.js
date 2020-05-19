@@ -6,8 +6,6 @@ import intl from "react-intl-universal";
 import ConTitle from "../../../../components/title";
 import "./index.css";
 
-
-
 const { Option } = Select;
 
 const mapStateToProps = (state) => {
@@ -50,7 +48,10 @@ function GroundRail(props) {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle title={intl.get("地轨标定")} subtitle={intl.get("在这里对地轨等进行标定")}/>
+      <ConTitle
+        title={intl.get("地轨标定")}
+        subtitle={intl.get("在这里对地轨等进行标定")}
+      />
       {/* 悬浮按钮 */}
       <div className="hoverButton">
         <Button type="dashed" shape="circle" size="large" onClick={change}>

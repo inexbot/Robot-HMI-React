@@ -94,57 +94,63 @@ function Movl(props) {
   return (
     <Form
       form={props.form}
-      name='control-hooks'
-      layout='inline'
-      onFinish={onFinish}>
+      name="control-hooks"
+      layout="inline"
+      onFinish={onFinish}
+    >
       <Form.Item
-        name='POS'
-        label='POS'
+        name="POS"
+        label="POS"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
       </Form.Item>
       <Form.Item
-        name='V'
-        label='V'
+        name="V"
+        label="V"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
       <Form.Item
-        name='PL'
-        label='PL'
+        name="PL"
+        label="PL"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
       <Form.Item
-        name='ACC'
-        label='ACC'
+        name="ACC"
+        label="ACC"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
       <Form.Item
-        name='DEC'
-        label='DEC'
+        name="DEC"
+        label="DEC"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
     </Form>

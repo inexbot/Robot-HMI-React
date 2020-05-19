@@ -18,5 +18,5 @@ export const IOName = {
     {
         name:["",""]
     } */
-  aoutName: []
+  aoutName: [],
 };

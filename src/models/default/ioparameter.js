@@ -15,7 +15,7 @@ export const IOParameter = {
     robot1AoutAmount: "16",
     robot2AoutAmount: "16",
     robot3AoutAmount: "16",
-    robot4AoutAmount: "16"
+    robot4AoutAmount: "16",
   },
   IOStatusHint: {
     startUp: 2,
@@ -39,7 +39,7 @@ export const IOParameter = {
         program7: 3, //io程序5预约输出
         program8: 3, //io程序5预约输出
         program9: 3, //io程序5预约输出
-        program10: 3 //io程序5预约输出
+        program10: 3, //io程序5预约输出
       },
       {
         faultIsFickler: 0, //报错指示灯是否闪烁 0:不闪 1：闪
@@ -57,7 +57,7 @@ export const IOParameter = {
         program7: 3, //io程序5预约输出
         program8: 3, //io程序5预约输出
         program9: 3, //io程序5预约输出
-        program10: 3 //io程序5预约输出
+        program10: 3, //io程序5预约输出
       },
       {
         faultIsFickler: 0, //报错指示灯是否闪烁 0:不闪 1：闪
@@ -75,7 +75,7 @@ export const IOParameter = {
         program7: 3, //io程序5预约输出
         program8: 3, //io程序5预约输出
         program9: 3, //io程序5预约输出
-        program10: 3 //io程序5预约输出
+        program10: 3, //io程序5预约输出
       },
       {
         faultIsFickler: 0, //报错指示灯是否闪烁 0:不闪 1：闪
@@ -93,9 +93,9 @@ export const IOParameter = {
         program7: 3, //io程序5预约输出
         program8: 3, //io程序5预约输出
         program9: 3, //io程序5预约输出
-        program10: 3 //io程序5预约输出
-      }
-    ]
+        program10: 3, //io程序5预约输出
+      },
+    ],
   },
   IORemotePara: {
     robot1: {
@@ -104,77 +104,77 @@ export const IOParameter = {
         stop: 2,
         pause: 1,
         faultPause: 5,
-        reserveRun: 6
+        reserveRun: 6,
       },
       inValue: {
         start: 1,
         stop: 0,
         pause: 1,
         faultPause: 0,
-        reserveRun: "1"
+        reserveRun: "1",
       },
       program: [
         {
           job: 1,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 2,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 3,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 4,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 5,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 6,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 7,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 8,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 9,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 10,
           name: "",
           port: 10,
-          value: 1
-        }
-      ]
+          value: 1,
+        },
+      ],
     },
     robot2: {
       inPort: {
@@ -182,77 +182,77 @@ export const IOParameter = {
         stop: 2,
         pause: 1,
         faultPause: 5,
-        reserveRun: 6
+        reserveRun: 6,
       },
       inValue: {
         start: 1,
         stop: 0,
         pause: 1,
         faultPause: 0,
-        reserveRun: 1
+        reserveRun: 1,
       },
       program: [
         {
           job: 1,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 2,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 3,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 4,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 5,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 6,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 7,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 8,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 9,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 10,
           name: "",
           port: 10,
-          value: 1
-        }
-      ]
+          value: 1,
+        },
+      ],
     },
     robot3: {
       inPort: {
@@ -260,77 +260,77 @@ export const IOParameter = {
         stop: 2,
         pause: 1,
         faultPause: 5,
-        reserveRun: 6
+        reserveRun: 6,
       },
       inValue: {
         start: 1,
         stop: 0,
         pause: 1,
         faultPause: 0,
-        reserveRun: 1
+        reserveRun: 1,
       },
       program: [
         {
           job: 1,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 2,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 3,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 4,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 5,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 6,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 7,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 8,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 9,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 10,
           name: "",
           port: 10,
-          value: 1
-        }
-      ]
+          value: 1,
+        },
+      ],
     },
     robot4: {
       inPort: {
@@ -338,77 +338,77 @@ export const IOParameter = {
         stop: 2,
         pause: 1,
         faultPause: 5,
-        reserveRun: 6
+        reserveRun: 6,
       },
       inValue: {
         start: 1,
         stop: 0,
         pause: 1,
         faultPause: 0,
-        reserveRun: 1
+        reserveRun: 1,
       },
       program: [
         {
           job: 1,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 2,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 3,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 4,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 5,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 6,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 7,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 8,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 9,
           name: "",
           port: 10,
-          value: 1
+          value: 1,
         },
         {
           job: 10,
           name: "",
           port: 10,
-          value: 1
-        }
-      ]
-    }
-  }
+          value: 1,
+        },
+      ],
+    },
+  },
 };

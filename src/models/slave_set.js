@@ -10,14 +10,14 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       // eslint-disable-line
-    }
+    },
   },
 
   effects: {
     *fetch({ payload }, { call, put }) {
       // eslint-disable-line
       yield put({ type: "save" });
-    }
+    },
   },
 
   reducers: {
@@ -28,5 +28,5 @@ export default {
       _state.buttontype = action.data.buttontype;
       return _state;
     },
-  }
+  },
 };

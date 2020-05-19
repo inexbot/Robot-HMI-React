@@ -1,31 +1,31 @@
-.Zeropara .ant-tabs{
-    border-radius: 10px;
+.Zeropara .ant-tabs {
+  border-radius: 10px;
 }
 
-.Zeropara table thead th{
-    text-align: center;
-    background-color: #e6f7ff;
-    padding: 10px;
-    border-top: 1px #9FDDF5 solid;
+.Zeropara table thead th {
+  text-align: center;
+  background-color: #e6f7ff;
+  padding: 10px;
+  border-top: 1px #9fddf5 solid;
 }
 
-.Zeropara table tr td{
-    width: 120px;
-    text-align: center;
-    padding: 6px 10px 4px 10px;
-    border-top: 1px #9FDDF5 solid;
+.Zeropara table tr td {
+  width: 120px;
+  text-align: center;
+  padding: 6px 10px 4px 10px;
+  border-top: 1px #9fddf5 solid;
 }
 
-.Zeropara table tr td button{
-    width: 100%;
-    height: 30px;
+.Zeropara table tr td button {
+  width: 100%;
+  height: 30px;
 }
 
-.zero_btn{
-    margin: 20px;
+.zero_btn {
+  margin: 20px;
 }
 
-.zero_input{
-    min-width: 90px;
-    height: 30px;
+.zero_input {
+  min-width: 90px;
+  height: 30px;
 }

@@ -4,10 +4,10 @@ export default {
   state: {
     currentAuthority: "操作工",
     paraFrameDisplay: "close",
-    programSeletedRow:[],
-    programBoth:false,
-    programList:[],
-    deleteList:false
+    programSeletedRow: [],
+    programBoth: false,
+    programList: [],
+    deleteList: false,
   },
 
   subscriptions: {},
@@ -34,6 +34,6 @@ export default {
       let _state = JSON.parse(JSON.stringify(state));
       _state.currentAuthority = action.data;
       return _state;
-    }
+    },
   },
 };

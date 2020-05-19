@@ -1,58 +1,110 @@
-/* 
+/*
  * 主路由文件，增加页面跳转在这里
  */
 import React from "react";
 import { router as RouterDom } from "dva";
-import asyncComponents from './AsyncComponents'
+import asyncComponents from "./AsyncComponents";
 import { connect } from "dva";
 
-import Dhpara from "./layout/pages/robotpara/Dhpara"
+import Dhpara from "./layout/pages/robotpara/Dhpara";
 // const Dhpara =  asyncComponents( () => import ( "./layout/pages/robotpara/Dhpara" ));
 
-const App = asyncComponents( () => import ( "./App" ));
+const App = asyncComponents(() => import("./App"));
 // 主界面
-const Welcome = asyncComponents( () => import ( "./layout/pages/main_interface/Welcome" ));
-const Project =  asyncComponents( () => import ( "./layout/pages/main_interface/Project" ));
+const Welcome = asyncComponents(() =>
+  import("./layout/pages/main_interface/Welcome")
+);
+const Project = asyncComponents(() =>
+  import("./layout/pages/main_interface/Project")
+);
 // 角色选择界面
-const Authority =  asyncComponents( () => import ( "./layout/pages/role_choices/authority" ));
+const Authority = asyncComponents(() =>
+  import("./layout/pages/role_choices/authority")
+);
 // 应用参数
-const Toolhands =  asyncComponents( () => import ( "./layout/pages/adhibition/Toolhands" ));
-const Usercoo =  asyncComponents( () => import ( "./layout/pages/adhibition/Usercoo" ));
-const Remotepro =  asyncComponents( () => import ( "./layout/pages/adhibition/Remotepro" ));
-const User =  asyncComponents( () => import ( "./layout/pages/adhibition/User" ));
-const AutoLoadPro =  asyncComponents( () => import ( "./layout/pages/adhibition/AutoLoadPro" ));
-const RobotRange =  asyncComponents( () => import ( "./layout/pages/adhibition/RobotRange" ));
-const InterferenceRegion =  asyncComponents( () => import ( "./layout/pages/adhibition/InterferenceRegion" ));
-const Dynamic =  asyncComponents( () => import ( "./layout/pages/adhibition/Dynamic" ));
+const Toolhands = asyncComponents(() =>
+  import("./layout/pages/adhibition/Toolhands")
+);
+const Usercoo = asyncComponents(() =>
+  import("./layout/pages/adhibition/Usercoo")
+);
+const Remotepro = asyncComponents(() =>
+  import("./layout/pages/adhibition/Remotepro")
+);
+const User = asyncComponents(() => import("./layout/pages/adhibition/User"));
+const AutoLoadPro = asyncComponents(() =>
+  import("./layout/pages/adhibition/AutoLoadPro")
+);
+const RobotRange = asyncComponents(() =>
+  import("./layout/pages/adhibition/RobotRange")
+);
+const InterferenceRegion = asyncComponents(() =>
+  import("./layout/pages/adhibition/InterferenceRegion")
+);
+const Dynamic = asyncComponents(() =>
+  import("./layout/pages/adhibition/Dynamic")
+);
 
 // 外设参数
-const IORemote =  asyncComponents( () => import ( "./layout/pages/device/Ioremote" ));
-const IOStatusHint =  asyncComponents( () => import ( "./layout/pages/device/Iostatushint" ));
-const IOReset =  asyncComponents( () => import ( "./layout/pages/device/IOReset" ));
-const IOWarning =  asyncComponents( () => import ( "./layout/pages/device/IOWarning" ));
-const IOSet =  asyncComponents( () => import ( "./layout/pages/device/Ioset" ));
-const VisionPara =  asyncComponents( () => import ( "./layout/pages/device/visionpara" ));
-const ConveyorPara =  asyncComponents( () => import ( "./layout/pages/device/ConveyorPara" ));
-
+const IORemote = asyncComponents(() =>
+  import("./layout/pages/device/Ioremote")
+);
+const IOStatusHint = asyncComponents(() =>
+  import("./layout/pages/device/Iostatushint")
+);
+const IOReset = asyncComponents(() => import("./layout/pages/device/IOReset"));
+const IOWarning = asyncComponents(() =>
+  import("./layout/pages/device/IOWarning")
+);
+const IOSet = asyncComponents(() => import("./layout/pages/device/Ioset"));
+const VisionPara = asyncComponents(() =>
+  import("./layout/pages/device/visionpara")
+);
+const ConveyorPara = asyncComponents(() =>
+  import("./layout/pages/device/ConveyorPara")
+);
 
 // 机器人参数
-const Jointpara =  asyncComponents( () => import ( "./layout/pages/robotpara/Jointpara" ));
+const Jointpara = asyncComponents(() =>
+  import("./layout/pages/robotpara/Jointpara")
+);
 
-const Zeropara =  asyncComponents( () => import ( "./layout/pages/robotpara/Zeropara" ));
-const LinearVel =  asyncComponents( () => import ( "./layout/pages/robotpara/Linearvel" ));
-const JogSpeed =  asyncComponents( () => import ( "./layout/pages/robotpara/Jopspeed" ));
-const RunningPara =  asyncComponents( () => import ( "./layout/pages/robotpara/Runningpara" ));
-const SafeConfig =  asyncComponents( () => import ( "./layout/pages/robotpara/Safeconfig" ));
-const OuterCalibrate =  asyncComponents( () => import ( "./layout/pages/robotpara/Outercalibrate" ));
-const GroundRail =  asyncComponents( () => import ( "./layout/pages/robotpara/Groundrail" ));
-const Turning =  asyncComponents( () => import ( "./layout/pages/robotpara/Turning" ));
-const SlaveSet =  asyncComponents( () => import ( "./layout/pages/robotpara/slaveset/slaveset" ));
-const ServoPara =  asyncComponents( () => import ( "./layout/pages/robotpara/Servopara" ));
-const TeachLayout =  asyncComponents( () => import ( "./layout/pages/Teachlayout" ));
+const Zeropara = asyncComponents(() =>
+  import("./layout/pages/robotpara/Zeropara")
+);
+const LinearVel = asyncComponents(() =>
+  import("./layout/pages/robotpara/Linearvel")
+);
+const JogSpeed = asyncComponents(() =>
+  import("./layout/pages/robotpara/Jopspeed")
+);
+const RunningPara = asyncComponents(() =>
+  import("./layout/pages/robotpara/Runningpara")
+);
+const SafeConfig = asyncComponents(() =>
+  import("./layout/pages/robotpara/Safeconfig")
+);
+const OuterCalibrate = asyncComponents(() =>
+  import("./layout/pages/robotpara/Outercalibrate")
+);
+const GroundRail = asyncComponents(() =>
+  import("./layout/pages/robotpara/Groundrail")
+);
+const Turning = asyncComponents(() =>
+  import("./layout/pages/robotpara/Turning")
+);
+const SlaveSet = asyncComponents(() =>
+  import("./layout/pages/robotpara/slaveset/slaveset")
+);
+const ServoPara = asyncComponents(() =>
+  import("./layout/pages/robotpara/Servopara")
+);
+const TeachLayout = asyncComponents(() => import("./layout/pages/Teachlayout"));
 // 系统参数
-const Language =  asyncComponents( () => import ( "./layout/pages/system/language" ));
-const Program =  asyncComponents( () => import ( "./layout/pages/program" ));
-
+const Language = asyncComponents(() =>
+  import("./layout/pages/system/language")
+);
+const Program = asyncComponents(() => import("./layout/pages/program"));
 
 const mapStateToProps = (state) => {
   return {

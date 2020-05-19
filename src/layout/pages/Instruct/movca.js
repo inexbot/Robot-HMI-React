@@ -3,7 +3,7 @@ import { renderPosOption, newPos } from "./renderPos";
 import { Form, Input, Select } from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
-const {Option} = Select;
+const { Option } = Select;
 const mapStateToProps = (state) => {
   return {
     program: state.index.program,
@@ -16,7 +16,7 @@ const insertDefaultValue = {
   PL: 5,
   ACC: 10,
   DEC: 10,
-  SPIN:0
+  SPIN: 0,
 };
 
 function MovcA(props) {
@@ -44,7 +44,7 @@ function MovcA(props) {
       PL: para.PL,
       ACC: para.ACC,
       DEC: para.DEC,
-      SPIN:para.SPIN
+      SPIN: para.SPIN,
     });
   }, [props.row, props.insertOrChange, props.form]);
   const onFinish = (value) => {
@@ -60,7 +60,7 @@ function MovcA(props) {
       posType = 1;
       posName = null;
     }
-    console.log(value)
+    console.log(value);
     if (props.insertOrChange === "change") {
       let sendData = {
         line: parseInt(props.row),
@@ -73,7 +73,7 @@ function MovcA(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
-        SPIN:parseInt(value.SPIN)
+        SPIN: parseInt(value.SPIN),
       };
       sendMSGtoServer("INSERT_COMMAND", sendData);
       props.setClose();
@@ -90,7 +90,7 @@ function MovcA(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
-        SPIN:parseInt(value.SPIN)
+        SPIN: parseInt(value.SPIN),
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
@@ -99,67 +99,74 @@ function MovcA(props) {
   return (
     <Form
       form={props.form}
-      name='control-hooks'
-      layout='inline'
-      onFinish={onFinish}>
+      name="control-hooks"
+      layout="inline"
+      onFinish={onFinish}
+    >
       <Form.Item
-        name='POS'
-        label='POS'
+        name="POS"
+        label="POS"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
       </Form.Item>
       <Form.Item
-        name='V'
-        label='V'
+        name="V"
+        label="V"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
       <Form.Item
-        name='PL'
-        label='PL'
+        name="PL"
+        label="PL"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
       <Form.Item
-        name='ACC'
-        label='ACC'
+        name="ACC"
+        label="ACC"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
       <Form.Item
-        name='DEC'
-        label='DEC'
+        name="DEC"
+        label="DEC"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Input style={{ width: 200 }} />
       </Form.Item>
       <Form.Item
-        name='SPIN'
-        label='SPIN'
+        name="SPIN"
+        label="SPIN"
         rules={[
           {
             required: true,
           },
-        ]}>
+        ]}
+      >
         <Select style={{ width: 200 }}>
           <Option value={0}>0</Option>
           <Option value={1}>1</Option>

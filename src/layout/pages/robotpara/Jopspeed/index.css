@@ -1,31 +1,31 @@
-.jogspeed{
-    height: 536px;
-    background-color: white;
-    box-shadow: #dddddd 0px 0px 5px;
-    border-radius:  10px;
+.jogspeed {
+  height: 536px;
+  background-color: white;
+  box-shadow: #dddddd 0px 0px 5px;
+  border-radius: 10px;
 }
 
 /* .jogspeed .jog_tab{
     padding: 0px 20px;
 } */
 
-.jogspeed1{
-    display: flex;
-    flex-flow: row;
-    /* width: 420px; */
-    margin: 0 auto;
-    padding-top: 30px;
+.jogspeed1 {
+  display: flex;
+  flex-flow: row;
+  /* width: 420px; */
+  margin: 0 auto;
+  padding-top: 30px;
 }
 
 /* .jogspeed1 .p1, .jogspeed2 .p1{
     width: 140px;
 } */
 
-.jogspeed2{
-    display: flex;
-    flex-flow: row;
-    margin-top: 100px;
-    /* width: 420px; */
-    margin: 0 auto;
-    /* padding-top: 30px; */
+.jogspeed2 {
+  display: flex;
+  flex-flow: row;
+  margin-top: 100px;
+  /* width: 420px; */
+  margin: 0 auto;
+  /* padding-top: 30px; */
 }

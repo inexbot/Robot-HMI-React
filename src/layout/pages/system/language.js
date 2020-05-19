@@ -28,7 +28,7 @@ function Language() {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle title={intl.get("语言切换")} subtitle={intl.get("切换语言")}/>
+      <ConTitle title={intl.get("语言切换")} subtitle={intl.get("切换语言")} />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
         <Button type={buttonType1} shape="circle" size="large" onClick={change}>

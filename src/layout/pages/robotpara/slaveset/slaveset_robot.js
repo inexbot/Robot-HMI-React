@@ -231,7 +231,7 @@ function SlaveSetRobot(props) {
       <TabPane tab={robotName} key={robot}>
         <Row>
           <Col span={12}>
-            <div className="slaveset1" style={{paddingBottom:15}}>
+            <div className="slaveset1" style={{ paddingBottom: 15 }}>
               <span className="p1">机器人类型</span>
               <Select
                 defaultValue="2"
@@ -337,7 +337,7 @@ function SlaveSetRobot(props) {
             </div>
           </Col>
           <Col span={12}>
-            <div className="slaveset1" style={{paddingBottom:15}}>
+            <div className="slaveset1" style={{ paddingBottom: 15 }}>
               <span className="p1">外部轴组数</span>
               <Select
                 defaultValue={props[robot + "OuterAmount"]}
@@ -532,7 +532,11 @@ function SlaveSetRobot(props) {
   return (
     <div>
       <div className="slaveset1">
-        <div style={{ fontSize: 20, width: 120, fontWeight: 500 ,float:"left"}}>从动轴</div>
+        <div
+          style={{ fontSize: 20, width: 120, fontWeight: 500, float: "left" }}
+        >
+          从动轴
+        </div>
         <div>
           <span className="p1">机器人数目</span>
           <span>

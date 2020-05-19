@@ -25,7 +25,10 @@ function JogSpeed(props) {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle title={intl.get("点动速度")} subtitle={intl.get("机器人点动速度设置")}/>
+      <ConTitle
+        title={intl.get("点动速度")}
+        subtitle={intl.get("机器人点动速度设置")}
+      />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
         <Button type={buttonType1} shape="circle" size="large" onClick={change}>

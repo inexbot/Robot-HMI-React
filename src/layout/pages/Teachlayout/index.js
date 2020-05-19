@@ -166,7 +166,10 @@ function TeachLayout(props) {
                     />
                   </Col>
                   <Col span={12}>
-                    <img src={require("../../../images/location-z-.png")} alt="" />
+                    <img
+                      src={require("../../../images/location-z-.png")}
+                      alt=""
+                    />
                   </Col>
                 </Row>
                 <Row style={{ width: "100%" }}>
@@ -210,7 +213,10 @@ function TeachLayout(props) {
                     />
                   </Col>
                   <Col span={12}>
-                    <img src={require("../../../images/posture-z+.png")} alt="" />
+                    <img
+                      src={require("../../../images/posture-z+.png")}
+                      alt=""
+                    />
                   </Col>
                 </Row>
                 <Row style={{ width: "100%" }}>

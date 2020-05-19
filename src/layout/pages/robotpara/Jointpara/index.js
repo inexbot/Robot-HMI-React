@@ -30,7 +30,7 @@ function Jointpara(props) {
   const text1 = <span>{intl.get("问题")}</span>;
   const content1 = (
     <div>
-      <img src='/public/images/demo.png' width={400} height={300} alt=''></img>
+      <img src="/public/images/demo.png" width={400} height={300} alt=""></img>
     </div>
   );
 
@@ -220,7 +220,8 @@ function Jointpara(props) {
                 <Form.Item
                   name={`joint${joint}PosSWLimit`}
                   label={intl.get("正限位")}
-                  help={intl.get("关节参数/正限位说明")}>
+                  help={intl.get("关节参数/正限位说明")}
+                >
                   <Input disabled={isDisabled} />
                 </Form.Item>
               </td>
@@ -229,7 +230,8 @@ function Jointpara(props) {
                 <Form.Item
                   name={`joint${joint}NegSWLimit`}
                   label={intl.get("反限位")}
-                  help={intl.get("关节参数/反限位说明")}>
+                  help={intl.get("关节参数/反限位说明")}
+                >
                   <Input disabled={isDisabled} />
                 </Form.Item>
               </td>
@@ -357,47 +359,51 @@ function Jointpara(props) {
         subtitle={intl.get("机器人关节参数设置")}
       />
       {/* 悬浮按钮 */}
-      <div className='hoverButton1'>
-        <Button type={buttontype1} shape='circle' size='large' onClick={change}>
+      <div className="hoverButton1">
+        <Button type={buttontype1} shape="circle" size="large" onClick={change}>
           {buttoncharacter1}
         </Button>
       </div>
 
       <Popover
-        placement='left'
+        placement="left"
         title={text1}
         content={content1}
-        trigger='click'>
-        <div className='hoverButton2'>
+        trigger="click"
+      >
+        <div className="hoverButton2">
           <Button
             type={buttontype2}
-            shape='circle'
-            size='large'
-            onClick={demoUp}>
+            shape="circle"
+            size="large"
+            onClick={demoUp}
+          >
             {buttoncharacter2}
           </Button>
         </div>
       </Popover>
       <Popover
-        placement='left'
+        placement="left"
         title={text2}
         content={content2}
-        trigger='click'>
-        <div className='hoverButton3'>
+        trigger="click"
+      >
+        <div className="hoverButton3">
           <Button
             type={buttontype3}
-            shape='circle'
-            size='large'
-            onClick={quesUp}>
+            shape="circle"
+            size="large"
+            onClick={quesUp}
+          >
             {buttoncharacter3}
           </Button>
         </div>
       </Popover>
 
       {/* 主要内容 */}
-      <div className='Jointpara'>
+      <div className="Jointpara">
         <Form form={form} {...formItemLayout} onFinish={onFinish}>
-          <Tabs defaultActiveKey='1' style={{ background: "white" }}>
+          <Tabs defaultActiveKey="1" style={{ background: "white" }}>
             {tabs}
           </Tabs>
         </Form>

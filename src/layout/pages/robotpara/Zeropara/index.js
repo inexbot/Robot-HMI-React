@@ -36,7 +36,10 @@ function Zeropara(props) {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle title={intl.get("零点设置")} subtitle={intl.get("机器人零点设置")}/>
+      <ConTitle
+        title={intl.get("零点设置")}
+        subtitle={intl.get("机器人零点设置")}
+      />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
         <Button type={buttonType1} shape="circle" size="large" onClick={change}>
@@ -338,7 +341,7 @@ function Zeropara(props) {
             <Row>
               <Col span={10} offset={2}>
                 <div>
-                  <table style={{margin: "0 auto"}}>
+                  <table style={{ margin: "0 auto" }}>
                     <thead>
                       <tr>
                         <th>{intl.get("轴")}</th>

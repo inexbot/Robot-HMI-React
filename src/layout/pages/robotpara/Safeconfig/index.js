@@ -12,7 +12,7 @@ import {
   Row,
   Col,
   Slider,
-  InputNumber
+  InputNumber,
 } from "antd";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
@@ -169,14 +169,14 @@ function SafeConfig(props) {
               </div>
             </TabPane>
             <TabPane tab="碰撞检测" key="2">
-              <div style={{height:"450px",overflow:"scroll"}}>
+              <div style={{ height: "450px", overflow: "scroll" }}>
                 <Card title="运动碰撞检测">
                   <Form.Item name="touch1switch" label="开关">
                     <Switch />
                   </Form.Item>
-                  
-                    <Row>
-                      <Col span={12}>
+
+                  <Row>
+                    <Col span={12}>
                       <Form.Item name="sensiticity1" label="灵敏度">
                         <Slider
                           min={1}
@@ -186,9 +186,9 @@ function SafeConfig(props) {
                             typeof inputValue1 === "number" ? inputValue1 : 0
                           }
                         />
-                        </Form.Item>
-                      </Col>
-                      <Col span={4}>
+                      </Form.Item>
+                    </Col>
+                    <Col span={4}>
                       <Form.Item name="sensiticity1">
                         <InputNumber
                           style={{ marginLeft: 16 }}
@@ -197,17 +197,16 @@ function SafeConfig(props) {
                           max={100}
                           min={1}
                         />
-                        </Form.Item>
-                      </Col>
-                    </Row>
-                  
+                      </Form.Item>
+                    </Col>
+                  </Row>
                 </Card>
                 <Card title="点动碰撞检测">
                   <Form.Item name="touch2switch" label="开关">
                     <Switch />
                   </Form.Item>
-                    <Row>
-                      <Col span={12}>
+                  <Row>
+                    <Col span={12}>
                       <Form.Item name="sensiticity2" label="灵敏度">
                         <Slider
                           min={1}
@@ -217,9 +216,9 @@ function SafeConfig(props) {
                             typeof inputValue2 === "number" ? inputValue2 : 0
                           }
                         />
-                        </Form.Item>
-                      </Col>
-                      <Col span={4}>
+                      </Form.Item>
+                    </Col>
+                    <Col span={4}>
                       <Form.Item name="sensiticity2">
                         <InputNumber
                           style={{ marginLeft: 16 }}
@@ -228,42 +227,51 @@ function SafeConfig(props) {
                           max={100}
                           min={1}
                         />
-                        </Form.Item>
-                      </Col>
-                    </Row>
+                      </Form.Item>
+                    </Col>
+                  </Row>
                 </Card>
                 <Card title="碰撞回退与自恢复">
                   <Row>
                     <Col span={12}>
-                  <Form.Item name="backSwitch" label="碰撞回退开关">
-                    <Switch />
-                  </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                  <Form.Item name="backTime" label="碰撞回退缓存时间" help="25ms~500ms">
-                    <InputNumber />
-                  </Form.Item>
-                  <Form.Item name="backStatus" label="碰撞后电机状态">
-                          <Select style={{width:"200px"}}>
-                            <Option value="on">使能</Option>
-                            <Option value="off">下电</Option>
-                          </Select>
-                  </Form.Item>
-                  </Col>
+                      <Form.Item name="backSwitch" label="碰撞回退开关">
+                        <Switch />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item
+                        name="backTime"
+                        label="碰撞回退缓存时间"
+                        help="25ms~500ms"
+                      >
+                        <InputNumber />
+                      </Form.Item>
+                      <Form.Item name="backStatus" label="碰撞后电机状态">
+                        <Select style={{ width: "200px" }}>
+                          <Option value="on">使能</Option>
+                          <Option value="off">下电</Option>
+                        </Select>
+                      </Form.Item>
+                    </Col>
                   </Row>
                   <Row>
                     <Col span={12}>
-                    <Form.Item name="recoverSwitch" label="碰撞自恢复开关">
-                      <Switch />
-                    </Form.Item>
-                    </Col><Col span={12}>
-                      <Form.Item name="recoverTime" label="碰撞后自恢复时间" help="1~5s">
+                      <Form.Item name="recoverSwitch" label="碰撞自恢复开关">
+                        <Switch />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item
+                        name="recoverTime"
+                        label="碰撞后自恢复时间"
+                        help="1~5s"
+                      >
                         <InputNumber />
                       </Form.Item>
                     </Col>
                   </Row>
                 </Card>
-                </div>
+              </div>
             </TabPane>
           </Tabs>
         </Form>

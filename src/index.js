@@ -1,11 +1,11 @@
-/* 
+/*
  * 入口文件,没有必要不需要改
  */
 import React from "react";
 import dva from "dva";
 import "./index.css";
 import Router from "./router";
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from "./serviceWorker";
 
 // 1. Initialize
 const app = dva();
@@ -16,7 +16,7 @@ app.model(require("./models/main").default);
 app.model(require("./models/leftstatus").default);
 
 // 4. Router
-app.router(()=><Router />);
+app.router(() => <Router />);
 
 // 5. Start
 app.start("#root");

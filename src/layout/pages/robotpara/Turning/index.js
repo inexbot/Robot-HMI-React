@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import {Button } from "antd";
+import { Button } from "antd";
 import { router } from "dva";
 import { connect } from "dva";
 import intl from "react-intl-universal";
 import ConTitle from "../../../../components/title";
-
 
 const mapStateToProps = (state) => {
   return {
@@ -33,7 +32,10 @@ function Turning(props) {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle title={intl.get("变位机标定")} subtitle={intl.get("变位机标定")}/>
+      <ConTitle
+        title={intl.get("变位机标定")}
+        subtitle={intl.get("变位机标定")}
+      />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
         <Button type={buttonType} shape="circle" size="large" onClick={change}>

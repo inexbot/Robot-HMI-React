@@ -19,8 +19,8 @@ export const IOConfig = {
   serialAnalog: {
     baudRate: 1,
     port: 0,
-    type: ""
+    type: "",
   },
   simuNum: 1,
-  type: []
+  type: [],
 };

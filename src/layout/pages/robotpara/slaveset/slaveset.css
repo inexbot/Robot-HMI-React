@@ -6,13 +6,13 @@
   padding: 10px;
 }
 
-.slaveset .slave_l{
+.slaveset .slave_l {
   padding: 0 20px 0 10px;
   border-right: 1px solid #cccccc;
   margin: 10px 0 20px 0;
 }
 
-.slaveset .p1{
+.slaveset .p1 {
   margin: 10px 5px 10px 5px;
 }
 
@@ -27,36 +27,40 @@
   overflow-y: auto;
 }
 
-.slaveset-table table{
+.slaveset-table table {
   width: 100%;
   border: 1px solid #cccccc;
 }
 
-.slaveset-table table tr th, .slaveset-table table tr td{
+.slaveset-table table tr th,
+.slaveset-table table tr td {
   padding: 6px 0;
   text-align: center;
 }
 
-.slaveset1 table{width: 80%;}
+.slaveset1 table {
+  width: 80%;
+}
 
 .slaveset1 table .table_head {
   background-color: #e6f7ff;
 }
 
-.slaveset1 table tr th, .slaveset1 table tr td{
+.slaveset1 table tr th,
+.slaveset1 table tr td {
   text-align: center;
   height: 45px;
   border-top: 1px solid #91d5ff;
 }
 
-.slaveset .table_btn{
+.slaveset .table_btn {
   width: 80px;
 }
 
-.slaveset .table_btn2{
+.slaveset .table_btn2 {
   width: 120px;
 }
 
-.slaveset .ant-alert.ant-alert-no-icon{
+.slaveset .ant-alert.ant-alert-no-icon {
   padding: 8px 6px;
 }

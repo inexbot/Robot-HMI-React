@@ -1,9 +1,9 @@
-.Jointpara .ant-tabs{
-    border-radius: 10px;
+.Jointpara .ant-tabs {
+  border-radius: 10px;
 }
 
 .Jointpara1 {
-    display: flex;
-    flex-flow: row;
-    margin: 20px 0px;
+  display: flex;
+  flex-flow: row;
+  margin: 20px 0px;
 }

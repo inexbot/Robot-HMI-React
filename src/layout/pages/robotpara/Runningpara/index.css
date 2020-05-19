@@ -1,16 +1,15 @@
 .runningpara1 {
-    display: flex;
-    flex-flow: row;
-    width: 460px;
-    margin: 0 auto;
-    padding-top: 30px;
-  }
+  display: flex;
+  flex-flow: row;
+  width: 460px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
 
-  
-.runningpara1 .p1{
+.runningpara1 .p1 {
   width: 130px;
 }
 
-.runningpara1 .p2{
+.runningpara1 .p2 {
   padding-left: 10px;
 }

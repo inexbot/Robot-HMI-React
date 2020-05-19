@@ -8,7 +8,7 @@ const { Option } = Select;
 export function renderPosOption(sum) {
   let posSum = sum.length;
   let Options = [
-    <Option value='new' key='new'>
+    <Option value="new" key="new">
       新建
     </Option>,
   ];

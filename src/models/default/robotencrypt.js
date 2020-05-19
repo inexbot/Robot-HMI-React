@@ -3,7 +3,7 @@ export const robotEncrypt = {
   craft: {
     pallet: true,
     vision: true,
-    weld: true
+    weld: true,
   },
   robotsum: 1,
   robottype: {
@@ -18,6 +18,6 @@ export const robotEncrypt = {
     R_SCARA_THREEAXIS: true,
     R_SCARA_TWOAXIS: true,
     R_THREE_CARTESIAN_COORDINATE: true,
-    R_THREE_CARTESIAN_COORDINATE_1: true
-  }
+    R_THREE_CARTESIAN_COORDINATE_1: true,
+  },
 };

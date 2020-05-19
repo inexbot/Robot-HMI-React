@@ -1,6 +1,6 @@
 import { CommandList } from "./commandlist";
 import { message, notification } from "antd";
-import {config} from "config"
+import { config } from "config";
 export var IP = config.serverIP;
 export var PORT = config.serverPort;
 

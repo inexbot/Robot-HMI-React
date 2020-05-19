@@ -10,5 +10,5 @@ export const controllerConfig = {
   num: 0,
   //   控制器ID 5303
   /* controllerID: "" */
-  controllerID: ""
+  controllerID: "",
 };

@@ -40,7 +40,7 @@ function Authority(props) {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle title={intl.get("角色选择")} subtitle={intl.get("切换权限")}/>
+      <ConTitle title={intl.get("角色选择")} subtitle={intl.get("切换权限")} />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
         <Button type={buttontype1} shape="circle" size="large" onClick={change}>

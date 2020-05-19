@@ -89,7 +89,7 @@ export default {
     onOpen({ dispatch }) {
       ws.onopen = () => {
         showMessage.destroy();
-        showMessage.success(`连接${IP}:${PORT}成功`,1);
+        showMessage.success(`连接${IP}:${PORT}成功`, 1);
         sendCheckServerState();
         dispatch({
           type: "onOpen",
@@ -108,7 +108,8 @@ export default {
               <Button
                 onClick={() => {
                   window.location.reload();
-                }}>
+                }}
+              >
                 重试
               </Button>
             </div>
@@ -579,7 +580,8 @@ export default {
       let currentRobot = _state.robotStatus.currentRobot;
       _state.program = action.data.program;
       _state.robotStatus[`robot${currentRobot}OpenedProgram`] = true;
-      _state.robotStatus[`robot${currentRobot}CurrentProgram`]= action.data.program.name
+      _state.robotStatus[`robot${currentRobot}CurrentProgram`] =
+        action.data.program.name;
       console.log(_state);
       return _state;
     },

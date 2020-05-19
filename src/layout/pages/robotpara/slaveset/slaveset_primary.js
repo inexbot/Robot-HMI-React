@@ -7,21 +7,21 @@ import { useState } from "react";
 const { TabPane } = Tabs;
 const { Option } = Select;
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     robotAmount: state.index.robotStatus.robotAmount,
     isDisabled: state.Slave_Set.isDisabled,
     buttoncharacter: state.Slave_Set.buttoncharacter,
-    buttontype: state.Slave_Set.buttontype
+    buttontype: state.Slave_Set.buttontype,
   };
 };
 
 function SlaveSetPrimary(props) {
   const [state, setState] = useState({
     primaryRobotActiveKey: "robot1",
-    primaryJointActiveKey: "J1"
+    primaryJointActiveKey: "J1",
   });
-  const servoSelectOption = servoAmount => {
+  const servoSelectOption = (servoAmount) => {
     const options = [];
     for (let i = 0; i < servoAmount.length; i++) {
       options.push(<Option key={i + 1}>{"伺服-" + (i + 1)}</Option>);
@@ -29,7 +29,7 @@ function SlaveSetPrimary(props) {
     return options;
   };
 
-  const changePrimary = value => {
+  const changePrimary = (value) => {
     var activeRobot = state.primaryRobotActiveKey;
     var activeJoint = state.primaryJointActiveKey;
     var primary1 = activeRobot + activeJoint + "Primary1";
@@ -175,7 +175,7 @@ function SlaveSetPrimary(props) {
           </div>
           <Tabs
             activeKey={state.primaryRobotActiveKey}
-            onChange={key => {
+            onChange={(key) => {
               setState({ primaryRobotActiveKey: key });
             }}
           >
@@ -183,7 +183,7 @@ function SlaveSetPrimary(props) {
               <Tabs
                 activeKey={state.primaryJointActiveKey}
                 size="small"
-                onChange={key => {
+                onChange={(key) => {
                   setState({ primaryJointActiveKey: key });
                 }}
               >
@@ -208,7 +208,7 @@ function SlaveSetPrimary(props) {
       return (
         <Tabs
           activeKey={state.primaryRobotActiveKey}
-          onChange={key => {
+          onChange={(key) => {
             setState({ primaryRobotActiveKey: key });
           }}
         >
@@ -216,7 +216,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -238,7 +238,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -262,7 +262,7 @@ function SlaveSetPrimary(props) {
       return (
         <Tabs
           activeKey={state.primaryRobotActiveKey}
-          onChange={key => {
+          onChange={(key) => {
             setState({ primaryRobotActiveKey: key });
           }}
         >
@@ -270,7 +270,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -292,7 +292,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -314,7 +314,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -338,7 +338,7 @@ function SlaveSetPrimary(props) {
       return (
         <Tabs
           activeKey={state.primaryRobotActiveKey}
-          onChange={key => {
+          onChange={(key) => {
             setState({ primaryRobotActiveKey: key });
           }}
         >
@@ -346,7 +346,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -368,7 +368,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -390,7 +390,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >
@@ -412,7 +412,7 @@ function SlaveSetPrimary(props) {
             <Tabs
               activeKey={state.primaryJointActiveKey}
               size="small"
-              onChange={key => {
+              onChange={(key) => {
                 setState({ primaryJointActiveKey: key });
               }}
             >

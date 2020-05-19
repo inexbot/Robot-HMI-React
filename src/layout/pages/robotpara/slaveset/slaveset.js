@@ -13,11 +13,11 @@ import "./slaveset.css";
 const { Option } = Select;
 
 // dva所用到的，将所有model/robotpara.js中的state作为该类的props
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isDisabled: state.Slave_Set.isDisabled,
     buttoncharacter: state.Slave_Set.buttoncharacter,
-    buttontype: state.Slave_Set.buttontype
+    buttontype: state.Slave_Set.buttontype,
   };
 };
 
@@ -26,7 +26,7 @@ function SlaveSet(props) {
     page: "robot",
     RPbuttontype: "dashed",
     RPbuttoncharacter: "机器人",
-    icon: <SwapRightOutlined />
+    icon: <SwapRightOutlined />,
   });
   useEffect(() => {
     sendMSGtoController("SLAVETYPE_LIST_INQUIRE", "");
@@ -39,8 +39,8 @@ function SlaveSet(props) {
         data: {
           isDisabled: false,
           buttoncharacter: "保存",
-          buttontype: "dashed"
-        }
+          buttontype: "dashed",
+        },
       });
     } else {
       props.dispatch({
@@ -48,8 +48,8 @@ function SlaveSet(props) {
         data: {
           isDisabled: true,
           buttoncharacter: "修改",
-          buttontype: "primary"
-        }
+          buttontype: "primary",
+        },
       });
     }
   };
@@ -67,19 +67,19 @@ function SlaveSet(props) {
       setState({
         page: "primary",
         RPbuttoncharacter: "从动轴",
-        icon: <SwapLeftOutlined />
+        icon: <SwapLeftOutlined />,
       });
     }
     if (state.RPbuttoncharacter === "从动轴") {
       setState({
         page: "robot",
         RPbuttoncharacter: "机器人",
-        icon: <SwapRightOutlined />
+        icon: <SwapRightOutlined />,
       });
     }
   };
   // 生成左边伺服表格
-  const servoTable = servoAmount => {
+  const servoTable = (servoAmount) => {
     const tables = [];
     for (let i = 0; i < servoAmount.length; i++) {
       tables.push(
@@ -95,7 +95,10 @@ function SlaveSet(props) {
   return (
     <div>
       {/* 头部 */}
-      <ConTitle title={intl.get("从站配置")} subtitle={intl.get("配置伺服、IO等EtherCAT从站设备")}/>
+      <ConTitle
+        title={intl.get("从站配置")}
+        subtitle={intl.get("配置伺服、IO等EtherCAT从站设备")}
+      />
       {/* 悬浮按钮 */}
       <div className="linkButton">
         <Button
@@ -126,20 +129,18 @@ function SlaveSet(props) {
         <Row>
           <Col span={6} className="slave_l">
             <div className="slaveset1" style={{ paddingBottom: 15 }}>
-              <span className="p1" >
-                {intl.get("通讯周期")}
-              </span>
+              <span className="p1">{intl.get("通讯周期")}</span>
               <span>
-<Select
-                defaultValue="1"
-                style={{ width: 80 }}
-                disabled={props.isDisabled}
-              >
-                <Option value="1">1</Option>
-                <Option value="2">2</Option>
-                <Option value="4">4</Option>
-                <Option value="8">8</Option>
-              </Select>
+                <Select
+                  defaultValue="1"
+                  style={{ width: 80 }}
+                  disabled={props.isDisabled}
+                >
+                  <Option value="1">1</Option>
+                  <Option value="2">2</Option>
+                  <Option value="4">4</Option>
+                  <Option value="8">8</Option>
+                </Select>
               </span>
               <span className="p1">ms</span>
             </div>

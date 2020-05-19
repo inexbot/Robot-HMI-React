@@ -221,17 +221,14 @@ function Project(props) {
     setTabPanel(tabs);
   }, [props.project, rowSelection, , selectedProgram]);
   useEffect((value) => {
-    if(props.project == undefined){
-
-    }else{
+    if (props.project == undefined) {
+    } else {
       let page = 0;
       let pageSize = 10;
       let obj = "";
       obj = props.project[0].program.slice(page * 10, page + pageSize - 1);
     }
-
-
-  }); 
+  });
   const deleteMoreButton = () => {
     if (isBulk === 0) {
       return (
@@ -245,7 +242,19 @@ function Project(props) {
       );
     } else {
       return (
-        <div style = {{  position: 'absolute', top:'65%',left:'86%', zIndex: '10',display:'flex',flexDirection:'column-reverse',height:'130px',justifyContent:'space-around'  }}  className="hoverButton2">
+        <div
+          style={{
+            position: "absolute",
+            top: "65%",
+            left: "86%",
+            zIndex: "10",
+            display: "flex",
+            flexDirection: "column-reverse",
+            height: "130px",
+            justifyContent: "space-around",
+          }}
+          className="hoverButton2"
+        >
           <Button shape="circle" size="large" onClick={deleteMultiProgram}>
             删除
           </Button>
