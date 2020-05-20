@@ -7,7 +7,7 @@ import Movl from "../Instruct/movl";
 import Movc from "../Instruct/movc";
 import MovcA from "../Instruct/movca";
 import Movs from "../Instruct/movs";
-import { sendMSGtoServer } from "service/network";
+import { sendMSGtoController } from "service/network";
 
 function ChangeInstructValue(props) {
   let name;
