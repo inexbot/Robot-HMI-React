@@ -52,7 +52,6 @@ function Program(props) {
   const [isBulk, setIsBulk] = useState(0);
   const children = [];
   
-
   const selectAll = () => {
     setAllList(1);
     setAllButton(
@@ -165,21 +164,14 @@ function Program(props) {
       });
       return;
     } else {
-      
-      // console.log(props);
-      // console.log(props.program.instruct);
-      // if(props.program.instruct){
       let instruct = props.program.instruct;
       let keyOfInstruct = 1;
       // 标签页内表格的表头
       let dataSource = [];
-
+      console.log(instruct)
       if (instruct === undefined ) {
         dataSource = [];
       } else {
-        // if( localStorage.getItem(JSON.parse("procedure"))){
-        // }else{
-          // console.log(instruct[0])
         instruct.map((value, index) => {
           if (index == 0) {
           } else {
@@ -246,12 +238,9 @@ function Program(props) {
             }
           }
         });
-        // }
         // 把过滤出来的数据存入dataSourceMain
         setDataSourceMain(dataSource)
       }
-      // console.log(dataSource);
-
     }
   }, [props.program, allList, moreBtn, moreButton]);
   let comp = (

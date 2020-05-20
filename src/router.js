@@ -94,7 +94,7 @@ const Turning = asyncComponents(() =>
   import("./layout/pages/robotpara/Turning")
 );
 const SlaveSet = asyncComponents(() =>
-  import("./layout/pages/robotpara/slaveset/slaveset")
+  import("./layout/pages/robotpara/Slaveset/slaveset")
 );
 const ServoPara = asyncComponents(() =>
   import("./layout/pages/robotpara/Servopara")

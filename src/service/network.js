@@ -59,7 +59,7 @@ export async function sendMSGtoServer(command, data) {
   try {
     if (ws.readyState === 1) {
       ws.send(message);
-      console.log("发送到服务端", message);
+      // console.log("发送到服务端", message);
     }
   } catch (e) {
     // 遇到错误了
