@@ -102,8 +102,12 @@ const ServoPara = asyncComponents(() =>
 const TeachLayout = asyncComponents(() => import("./layout/pages/Teachlayout"));
 // 系统参数
 const Language = asyncComponents(() =>
-  import("./layout/pages/system/language")
+  import("./layout/pages/system/Language")
 );
+const RecoverAndBackup = asyncComponents(() =>
+  import("./layout/pages/system/RecoverAndBackup")
+);
+
 const Program = asyncComponents(() => import("./layout/pages/program"));
 
 const mapStateToProps = (state) => {
@@ -170,6 +174,7 @@ function Router(props) {
         <RouterDom.Route path="/ServoPara" component={ServoPara} />
         {/* 系统参数 */}
         <RouterDom.Route path="/Language" component={Language} />
+        <RouterDom.Route path="/Backup" component={RecoverAndBackup} />
       </RouterDom.Switch>
     </App>
   );
