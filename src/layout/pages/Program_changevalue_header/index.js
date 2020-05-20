@@ -8,6 +8,14 @@ import Movc from "../Instruct/movc";
 import MovcA from "../Instruct/movca";
 import Movs from "../Instruct/movs";
 import { sendMSGtoController } from "service/network";
+import { connect } from "dva";
+
+const mapStateToProps = (state) => {
+  return {
+    currentRobot: state.index.robotStatus.currentRobot,
+    currentCoordinate: state.index.robotStatus.currentCoordinate,
+  };
+};
 
 function ChangeInstructValue(props) {
   let name;
@@ -86,7 +94,7 @@ function ChangeInstructValue(props) {
       );
   }
 }
-export default ChangeInstructValue;
+export default connect(mapStateToProps)(ChangeInstructValue);
 
 export const instructType = [
   {
