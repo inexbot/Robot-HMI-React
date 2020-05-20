@@ -168,7 +168,7 @@ function Program(props) {
       let keyOfInstruct = 1;
       // 标签页内表格的表头
       let dataSource = [];
-      console.log(instruct)
+      // console.log(instruct)
       if (instruct === undefined ) {
         dataSource = [];
       } else {

@@ -87,11 +87,11 @@ function Movc(props) {
                 num = 1
               }else{
                 num = props.program.instruct.length 
-                console.log(num)
+                // console.log(num)
               }
       
             }else{
-              console.log(props.selectmodalnum)
+              // console.log(props.selectmodalnum)
               if(props.selectmodalnum.length == 2){
                 num = 1
                 props.selectmodalnum.splice(1)
@@ -113,6 +113,7 @@ function Movc(props) {
         PL: parseInt(value.PL),
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
+      props.programSeletedRow.splice(0)
       props.setClose();
     }
   };

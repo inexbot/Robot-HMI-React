@@ -3,7 +3,16 @@
  * 引入ChangeInstructValue、instructType两个方法和变量
  */
 import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Button, Drawer, Form, Modal, Space } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Drawer,
+  Form,
+  Modal,
+  message,
+  InputNumber,
+} from "antd";
 import { connect } from "dva";
 import {
   PlusOutlined,
@@ -31,9 +40,11 @@ const mapStateToProps = (state) => {
 function ProgramComponent(props) {
   const [insertOrChange, setInsertOrChange] = useState("insert");
   const [changeVisible, setChangeVisible] = useState(false);
+  const [showmodalCopy, setShowmodalCopy] = useState(false);
+  const [Copynum, setCopynum] = useState(0)
   const [instructList, setInstructList] = useState();
   const [type, setType] = useState(0);
-  const [ShowModal, setShowModal] = useState(false)
+  const [ShowModal, setShowModal] = useState(false);
   const [insertName, setInsertName] = useState();
   const [form] = Form.useForm();
   const addClass = useRef();
@@ -83,6 +94,7 @@ function ProgramComponent(props) {
     // console.log(props.isBulk,props.multiSelection)
 
     sendMSGtoServer("DELETE_COMMAND", deleteData);
+    props.programSeletedRow.splice(0)
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
@@ -102,7 +114,10 @@ function ProgramComponent(props) {
       destroyOnClose: true,
       content: (
         <div>
-          <p>是否确认删除第{hang.join("、")}行指令</p>
+          <p>
+            是否确认删除第
+            {props.programSeletedRow.length == 0 ? "1" : hang.join("、")}行指令
+          </p>
         </div>
       ),
     });
@@ -151,6 +166,26 @@ function ProgramComponent(props) {
     return insertOrChange === "change" ? "保存" : "插入";
   };
 
+  const copysuccess = () => {
+    let hang = props.dataList.map((value) => {
+      // console.log(value)
+      return value.order;
+    });
+    message.success(`成功复制第${hang.join("、")}行指令`);
+  };
+  
+  const copyerror = () => {
+    message.error('请选择想要复制的指令')
+  }
+
+  const changePasteList = (value) => {
+    setCopynum(value)
+  };
+
+  const pasteList = () => {
+    setShowmodalCopy(true);
+  };
+
   return (
     <div className="progcomponent">
       <div className="progadd" ref={addClass} style={{ display: "none" }}>
@@ -183,17 +218,53 @@ function ProgramComponent(props) {
         </Row>
         <Row>
           <Col span={8} offset={3}>
-            <Button className="proMoreBtn" size="large">
+            <Button className="proMoreBtn" size="large" onClick={() =>{
+              if(props.programSeletedRow.length == 0 ){
+                copyerror()
+              }else{
+                copysuccess()
+              }
+            }}>
               复制
             </Button>
           </Col>
           <Col span={8} offset={2}>
-            <Button className="proMoreBtn" size="large">
+            <Button className="proMoreBtn" size="large" onClick={pasteList}>
               粘贴
             </Button>
           </Col>
         </Row>
       </div>
+      <Modal
+       visible={showmodalCopy}
+       //点击粘贴模态框的确定按钮
+       onOk={ ()=>{
+        let hang = props.dataList.map((value) => {
+          return value.order;
+        });
+        console.log(hang)
+        let copyData = {
+          lineto:Copynum -1,
+          selectlines:hang
+        };
+        sendMSGtoServer("COPY_COMMAND", copyData)
+        props.programSeletedRow.splice(0)
+        Modal.destroyAll();
+        setShowmodalCopy(false)
+       } }
+       //点击粘贴模态框的取消按钮
+       onCancel={ ()=>{
+        setShowmodalCopy(false)
+       }}
+      > 请选择插入第几行:
+        <InputNumber
+          min={1}
+          max={props.program.instruct.length}
+          defaultValue={0}
+          onChange={changePasteList}
+        />
+      </Modal>
+
       <div className="progicon">
         <Row>
           <Col span={6} offset={3}>
@@ -223,37 +294,38 @@ function ProgramComponent(props) {
             }}
           >
             <Modal
-             onCancel = {()=>{
-              setShowModal(false)
-             }}
-             visible = {ShowModal}
-             footer = {null}
-             centered = {true}
-             maskClosable = {true}
-             >
+              onCancel={() => {
+                setShowModal(false);
+              }}
+              visible={ShowModal}
+              footer={null}
+              centered={true}
+              maskClosable={true}
+            >
               <Button
-                style = {{ width:"400px",margin:"10px" }}
+                style={{ width: "400px", margin: "10px" }}
                 onClick={() => {
-                  props.selectmodalnum.splice(1)
-                  props.selectmodalnum.push( {b:2} )
-                  onFinish()
-                  setShowModal(false)
+                  props.selectmodalnum.splice(1);
+                  props.selectmodalnum.push({ b: 2 });
+                  onFinish();
+                  setShowModal(false);
                   // props.selectmodalnum.splice(1)
                 }}
               >
                 插入到上一行
               </Button>
               <Button
-                style = {{ width:"400px",margin:"10px"  }}
+                style={{ width: "400px", margin: "10px" }}
                 onClick={() => {
-                  props.selectmodalnum.splice(1)
-                  onFinish()
-                  setShowModal(false)
+                  props.selectmodalnum.splice(1);
+                  onFinish();
+                  setShowModal(false);
                 }}
               >
                 插入到下一行
               </Button>
             </Modal>
+
             <Button onClick={onClose} style={{ marginRight: 50 }}>
               关闭
             </Button>
@@ -265,7 +337,7 @@ function ProgramComponent(props) {
                   if (props.programSeletedRow[0].key == 1) {
                     // selectmodal();
                     // console.log("sss")
-                    setShowModal(true)
+                    setShowModal(true);
                   } else {
                     onFinish();
                   }

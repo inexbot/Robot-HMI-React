@@ -35,6 +35,7 @@ export const CommandList = {
     line:12
   } */
   DELETE_COMMAND: 0x1121,
+  COPY_COMMAND: 0x1123,// 批量复制
   CheckState: 0x1000, // 查询Server端的启动状态
   JOG_OPERATION_MOVE: 0x2901, // 点动开始
   JOG_OPERATION_STOP: 0x2902, // 点动结束
