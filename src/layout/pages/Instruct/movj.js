@@ -77,22 +77,28 @@ function Movj(props) {
       props.setClose();
       return;
     } else {
-      console.log(props)
+      //根据num来判断插入的是哪一行
        let num = 1
-       console.log(props.programSeletedRow.length)
       if( props.programSeletedRow.length == 0 ){
-        num = props.program.instruct.length + 1
-        // console.log(num)
+        props.selectmodalnum.splice(1)
+        if(props.program.instruct == undefined){
+          num = 1
+        }else{
+          num = props.program.instruct.length 
+          console.log(num)
+        }
+
       }else{
         console.log(props.selectmodalnum)
         if(props.selectmodalnum.length == 2){
           num = 1
+          props.selectmodalnum.splice(1)
         }else{
           num =  props.programSeletedRow[0].key + 1
         }
 
       }
-      console.log(num)
+      // console.log(num)
       let sendInsert = {
         line: parseInt(props.row + num),
         modifystate: 0,
@@ -109,7 +115,7 @@ function Movj(props) {
       props.setClose();
     }
   };
-  console.log(props.form)
+  // console.log(props.form)
   return (
     <Form
       form={props.form}

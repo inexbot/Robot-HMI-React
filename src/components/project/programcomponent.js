@@ -33,6 +33,7 @@ function ProgramComponent(props) {
   const [changeVisible, setChangeVisible] = useState(false);
   const [instructList, setInstructList] = useState();
   const [type, setType] = useState(0);
+  const [ShowModal, setShowModal] = useState(false)
   const [insertName, setInsertName] = useState();
   const [form] = Form.useForm();
   const addClass = useRef();
@@ -139,20 +140,6 @@ function ProgramComponent(props) {
     });
     return leftList;
   };
-  //点击确定插入
-  const config = {
-    title: " 请选择插入 ",
-    content: (
-      <div>
-       <input type="radio" value="哈哈"/>
-      </div>
-    ),
-  };
-  const selectmodal = () => {
-    console.log(props.programSeletedRow);
-        Modal.confirm(config);
-  };
-
   const insertCommand = (value) => {
     setInsertOrChange("insert");
     setInsertName(value);
@@ -163,7 +150,7 @@ function ProgramComponent(props) {
   const renderSaveOrInsert = () => {
     return insertOrChange === "change" ? "保存" : "插入";
   };
-  console.log(props.programSeletedRow);
+
   return (
     <div className="progcomponent">
       <div className="progadd" ref={addClass} style={{ display: "none" }}>
@@ -235,22 +222,56 @@ function ProgramComponent(props) {
               paddingLeft: 50,
             }}
           >
+            <Modal
+             onCancel = {()=>{
+              setShowModal(false)
+             }}
+             visible = {ShowModal}
+             footer = {null}
+             centered = {true}
+             maskClosable = {true}
+             >
+              <Button
+                style = {{ width:"400px",margin:"10px" }}
+                onClick={() => {
+                  props.selectmodalnum.splice(1)
+                  props.selectmodalnum.push( {b:2} )
+                  onFinish()
+                  setShowModal(false)
+                  // props.selectmodalnum.splice(1)
+                }}
+              >
+                插入到上一行
+              </Button>
+              <Button
+                style = {{ width:"400px",margin:"10px"  }}
+                onClick={() => {
+                  props.selectmodalnum.splice(1)
+                  onFinish()
+                  setShowModal(false)
+                }}
+              >
+                插入到下一行
+              </Button>
+            </Modal>
             <Button onClick={onClose} style={{ marginRight: 50 }}>
               关闭
             </Button>
             {/* 点击插入按钮 */}
             <Button
               onClick={() => {
-                console.log(props.programSeletedRow.length)
+                // console.log(props.programSeletedRow.length);
                 if (props.programSeletedRow.length == 1) {
                   if (props.programSeletedRow[0].key == 1) {
-                    selectmodal();
+                    // selectmodal();
+                    // console.log("sss")
+                    setShowModal(true)
                   } else {
                     onFinish();
                   }
-                } else if(props.programSeletedRow.length == 0 ) {
-                  console.log('哈哈')
-                  onFinish()
+                } else if (props.programSeletedRow.length == 0) {
+                  // console.log('哈哈')
+                  onFinish();
                 }
               }}
               type="primary"

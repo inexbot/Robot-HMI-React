@@ -22,7 +22,7 @@ function ChangeInstructValue(props) {
         robot: props.currentRobot,
         coord: props.currentCoordinate,
       };
-      sendMSGtoController("CURRENTPOS_INQUIRE", data);
+      // sendMSGtoServer("CURRENTPOS_INQUIRE", data);
     }, 1000);
     return () => {
       clearInterval(getCurrentPosition);
