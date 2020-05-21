@@ -12,6 +12,7 @@ import {
   Modal,
   message,
   InputNumber,
+  Tooltip,
 } from "antd";
 import { connect } from "dva";
 import {
@@ -38,10 +39,12 @@ const mapStateToProps = (state) => {
 };
 
 function ProgramComponent(props) {
+  const [banButtonbtm, setBanButtonbtm] = useState(false)
+  const [banButtontop, setBanButtontop] = useState(false)
   const [insertOrChange, setInsertOrChange] = useState("insert");
   const [changeVisible, setChangeVisible] = useState(false);
   const [showmodalCopy, setShowmodalCopy] = useState(false);
-  const [Copynum, setCopynum] = useState(0)
+  const [Copynum, setCopynum] = useState(0);
   const [instructList, setInstructList] = useState();
   const [type, setType] = useState(0);
   const [ShowModal, setShowModal] = useState(false);
@@ -94,7 +97,7 @@ function ProgramComponent(props) {
     // console.log(props.isBulk,props.multiSelection)
 
     sendMSGtoServer("DELETE_COMMAND", deleteData);
-    props.programSeletedRow.splice(0)
+    props.programSeletedRow.splice(0);
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
@@ -173,19 +176,89 @@ function ProgramComponent(props) {
     });
     message.success(`成功复制第${hang.join("、")}行指令`);
   };
-  
+
   const copyerror = () => {
-    message.error('请选择想要复制的指令')
-  }
+    message.error("请选择想要复制的指令");
+  };
 
   const changePasteList = (value) => {
-    setCopynum(value)
+    console.log(value);
+    setCopynum(value);
   };
 
   const pasteList = () => {
     setShowmodalCopy(true);
   };
 
+  // let banButton = false
+
+  const moveBtn = ( res ) => {
+    console.log(props)
+    let hang = props.dataList.map((value) => {
+      // console.log(value)
+      return value.order;
+    });
+    // console.log(hang)
+    if(hang.length == 1){
+        let moveData = {
+          line: hang[0],
+          direction:res
+        }
+        console.log(moveData)
+        sendMSGtoServer("MOVE_COMMAND", moveData)
+        Modal.destroyAll();
+    }else if(hang.length == 0){
+      message.error('请选择想要移动的指令')
+    }else if(hang.length >1){
+      message.error('一次只能移动一个指令')
+    }
+  }
+
+  //点击上下移动指令
+  const movecontent = (
+    <div>
+      <Button type = "primary"  disabled = {banButtontop} ghost onClick = {()=>{
+        moveBtn("up")
+        let num = props.dataList[0].order
+        if(props.dataList.length > 1){
+
+        }else{
+          props.dataList.splice(0)
+          props.dataList.push(props.pargamList[num-2])
+        }
+        if(props.dataList[0].order == 1){
+          setBanButtontop(true)
+          setBanButtonbtm(false)
+        }else{
+          setBanButtontop(false)
+          setBanButtonbtm(false)
+        }
+      }
+
+      } >向上移动</Button>
+      <Button type = "primary"  disabled = {banButtonbtm}  ghost onClick = {()=>{
+        moveBtn("down")
+        let num = props.dataList[0].order
+        if(props.dataList.length > 1){
+
+        }else{
+          props.dataList.splice(0)
+          props.dataList.push(props.pargamList[num])
+        }
+
+        console.log(props.dataList[0].order,props.program.instruct.length)
+        if(props.dataList[0].order == props.program.instruct.length -1){
+          setBanButtonbtm(true)
+          setBanButtontop(false)
+        }else{
+          setBanButtonbtm(false)
+          setBanButtontop(false)
+        }
+      }
+      } >向下移动</Button>
+    </div>
+  );
+  // console.log(props.program.instruct)
   return (
     <div className="progcomponent">
       <div className="progadd" ref={addClass} style={{ display: "none" }}>
@@ -211,20 +284,47 @@ function ProgramComponent(props) {
             </Button>
           </Col>
           <Col span={8} offset={2}>
-            <Button className="proMoreBtn" size="large">
+          <Tooltip   placement="top"  title={movecontent} trigger="click">
+            <Button
+              className="proMoreBtn"
+              size="large"
+              onClick = {()=>{
+                console.log(props)
+                let hang = props.dataList.map((value) => {
+                  // console.log(value)
+                  return value.order;
+                });
+                if(hang[0] == props.program.instruct.length -1){
+                  setBanButtonbtm(true)
+                }else{
+                  setBanButtonbtm(false)
+                }
+
+                if(hang[0] == 1){
+                  setBanButtontop(true)
+                }else{
+                  setBanButtontop(false)
+                }
+              }}
+            >
               移动
             </Button>
+            </Tooltip>
           </Col>
         </Row>
         <Row>
           <Col span={8} offset={3}>
-            <Button className="proMoreBtn" size="large" onClick={() =>{
-              if(props.programSeletedRow.length == 0 ){
-                copyerror()
-              }else{
-                copysuccess()
-              }
-            }}>
+            <Button
+              className="proMoreBtn"
+              size="large"
+              onClick={() => {
+                if (props.programSeletedRow.length == 0) {
+                  copyerror();
+                } else {
+                  copysuccess();
+                }
+              }}
+            >
               复制
             </Button>
           </Col>
@@ -236,30 +336,36 @@ function ProgramComponent(props) {
         </Row>
       </div>
       <Modal
-       visible={showmodalCopy}
-       //点击粘贴模态框的确定按钮
-       onOk={ ()=>{
-        let hang = props.dataList.map((value) => {
-          return value.order;
-        });
-        console.log(hang)
-        let copyData = {
-          lineto:Copynum -1,
-          selectlines:hang
-        };
-        sendMSGtoServer("COPY_COMMAND", copyData)
-        props.programSeletedRow.splice(0)
-        Modal.destroyAll();
-        setShowmodalCopy(false)
-       } }
-       //点击粘贴模态框的取消按钮
-       onCancel={ ()=>{
-        setShowmodalCopy(false)
-       }}
-      > 请选择插入第几行:
+        visible={showmodalCopy}
+        //点击粘贴模态框的确定按钮
+        onOk={() => {
+          let hang = props.dataList.map((value) => {
+            return value.order;
+          });
+          console.log(hang);
+          let copyData = {
+            lineto: Copynum - 1,
+            selectlines: hang,
+          };
+          sendMSGtoServer("COPY_COMMAND", copyData);
+          props.programSeletedRow.splice(0);
+          Modal.destroyAll();
+          setShowmodalCopy(false);
+        }}
+        //点击粘贴模态框的取消按钮
+        onCancel={() => {
+          setShowmodalCopy(false);
+        }}
+      >
+        {" "}
+        请选择插入第几行:
         <InputNumber
-          min={1}
-          max={props.program.instruct.length}
+          min={0}
+          max={
+            props.program.instruct == undefined
+              ? 3
+              : props.program.instruct.length
+          }
           defaultValue={0}
           onChange={changePasteList}
         />

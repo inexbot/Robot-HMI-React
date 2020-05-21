@@ -50,7 +50,6 @@ function Program(props) {
   const [rowSelection, setRowSelection] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
-  const children = [];
   
   const selectAll = () => {
     setAllList(1);
@@ -66,6 +65,7 @@ function Program(props) {
     setForbid(!forbid);
     setMoreButton(<Button onClick={cancelSelectMore}>单选</Button>);
   };
+
   const cancelSelectMore = () => {
     setMoreBtn(false);
     setAllList(0);

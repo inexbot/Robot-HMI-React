@@ -18,8 +18,6 @@ const mapStateToProps = (state) => {
 function VirtualTable(props) {
   const [dataList, setDataList] = useState([]);
   const { columns, scroll, className } = props;
-  const [addls, setAddls] = useState(-1);
-
   const [addnum, setAddnum] = useState(0);
   const [tableWidth, setTableWidth] = useState(0);
   const widthColumnCount = columns.filter(({ width }) => !width).length;
@@ -27,16 +25,12 @@ function VirtualTable(props) {
     if (column.width) {
       return column;
     }
-
     return { ...column, width: Math.floor(tableWidth / widthColumnCount) };
   });
   useEffect(() => {
     props.programList.splice(0);
     props.programList.push(...props.dataSource);
   });
-  // console.log(props)
-  // console.log(VirtualTable)
-  // console.log(props.programBoth)
   const gridRef = useRef();
   const [connectObject] = useState(() => {
     const obj = {};
@@ -53,7 +47,6 @@ function VirtualTable(props) {
     });
     return obj;
   });
-  // console.log(gridRef);
 
   const customizeRenderEmpty = () => (
     <div style={{ textAlign: "center" }}>
@@ -68,6 +61,7 @@ function VirtualTable(props) {
     }
     setDataList(rawData);
     ref.current = connectObject;
+    console.log(scroll.y)
     return (
       <Grid
         ref={gridRef}
@@ -81,7 +75,7 @@ function VirtualTable(props) {
         }}
         height={scroll.y}
         rowCount={rawData.length}
-        rowHeight={() => 100}
+        rowHeight={() => 65}
         width={tableWidth}
         onScroll={({ scrollLeft }) => {
           onScroll({
@@ -91,12 +85,16 @@ function VirtualTable(props) {
       >
         {({ columnIndex, rowIndex, style }) => {
           let styleod = { background: "#e6f7ff" };
-          let stylesh = { lineHeight: "100px", ...style };
+          let stylesh = { lineHeight: "65px", ...style };
           let stylebd = {
             ...style,
             ...styleod,
             ...stylesh,
           };
+          console.log(style)
+          // console.log(props)
+          // console.log(style,columnIndex,rowIndex)
+          // props.dataSource[0].select = true
           return (
             <div
               className={classNames(
@@ -112,8 +110,6 @@ function VirtualTable(props) {
                   });
                   rawData[rowIndex].select = !rawData[rowIndex].select;
                   setAddnum(addnum + 1);
-                  // console.log(props)
-                  // console.log(rawData)
                   props.List.splice(0);
                   props.dataSource.map((item, index) => {
                     if (item.select) {
@@ -126,8 +122,6 @@ function VirtualTable(props) {
                   props.List.splice(0);
                   props.dataSource.map((item, index) => {
                     if (item.select == true) {
-                      // console.log(item)
-                      // item = {name:item.insName,para:item.paras}
                       props.List.push(item);
                     }
                   });
@@ -143,7 +137,9 @@ function VirtualTable(props) {
   };
   const resetVirtualGrid = () => {
     //对服务器返回的列表数据进行显示
+    console.log(gridRef)
     if (gridRef.current === undefined || null) {
+
     } else {
       gridRef.current.resetAfterIndices({
         columnIndex: 0,
@@ -152,6 +148,7 @@ function VirtualTable(props) {
     }
   };
 
+  // useEffect(() => )
   useEffect(() => resetVirtualGrid, []);
   useEffect(() => resetVirtualGrid, [tableWidth]);
   return (
@@ -173,7 +170,6 @@ function VirtualTable(props) {
         onHeaderRow={(column) => {
           return {
             onClick: () => {
-              // console.log(props.List)
               // 点击表头行
 
               if (column[1].title.props.children[3] == "") {
@@ -187,13 +183,10 @@ function VirtualTable(props) {
                 props.List.splice(0);
                 props.dataSource.map((item, index) => {
                   if (item.select == true) {
-                    // item = {name:item.insName,para:item.paras}
                     props.List.push(item);
                   }
                 });
               }
-              // console.log(props.List)
-              // console.log(props.List)
             },
           };
         }}

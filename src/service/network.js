@@ -42,6 +42,7 @@ export async function sendMSGtoController(command, data) {
     alert(e);
   }
 }
+
 // 发送数据到server,command是命令字，data是要发送的数据，data为JSON格式，command为CommandList里面的元素名
 export async function sendMSGtoServer(command, data) {
   console.log(data)
@@ -59,11 +60,11 @@ export async function sendMSGtoServer(command, data) {
   data === ""
     ? console.error("发送数据为空")
     : message.push(JSON.stringify(data));
-  console.log(message)
-  console.log(dataLength,)
-  console.log(commandString,)
-  console.log(dataLength,)
-  console.log(data)
+  // console.log(message)
+  // console.log(dataLength,)
+  // console.log(commandString,)
+  // console.log(dataLength,)
+  // console.log(data)
   try {
     if (ws.readyState === 1) {
       ws.send(message);
