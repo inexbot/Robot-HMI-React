@@ -48,12 +48,6 @@ function VirtualTable(props) {
     return obj;
   });
 
-  const customizeRenderEmpty = () => (
-    <div style={{ textAlign: "center" }}>
-      <p>空程序，请插入指令</p>
-    </div>
-  );
-
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
     // console.log(rawData);
     if (props.pargram.instruct == undefined) {
@@ -61,7 +55,7 @@ function VirtualTable(props) {
     }
     setDataList(rawData);
     ref.current = connectObject;
-    console.log(scroll.y)
+    // console.log(scroll.y)
     return (
       <Grid
         ref={gridRef}
@@ -84,22 +78,26 @@ function VirtualTable(props) {
         }}
       >
         {({ columnIndex, rowIndex, style }) => {
+
           let styleod = { background: "#e6f7ff" };
-          let stylesh = { lineHeight: "65px", ...style };
+          let stylesh = { lineHeight: "50px", ...style };
           let stylebd = {
             ...style,
             ...styleod,
             ...stylesh,
           };
-          console.log(style)
+
           // console.log(props)
           // console.log(style,columnIndex,rowIndex)
           // props.dataSource[0].select = true
           return (
             <div
-              className={classNames(
-                `virtual-table-cell${rawData[rowIndex].order}`
-              )}
+              // className={classNames(
+              //   `virtual-table-cell${rawData[rowIndex].order}`
+              // )}
+              className={classNames('virtual-table-cell', {
+                'virtual-table-cell-last': columnIndex === mergedColumns.length - 1,
+              })}
               //根据select来显示选中时候的样式
               style={rawData[rowIndex].select ? stylebd : stylesh}
               onClick={(e) => {
@@ -160,10 +158,11 @@ function VirtualTable(props) {
       <Table
         dataSource={props.dataSource}
         scroll={props.scroll}
+        {...props}
         className={classNames(className, "virtual-table")}
         columns={mergedColumns}
         pagination={false}
-        components={{
+        components={{ 
           body: renderVirtualList,
         }}
         onRow={props.onRow}
@@ -171,7 +170,6 @@ function VirtualTable(props) {
           return {
             onClick: () => {
               // 点击表头行
-
               if (column[1].title.props.children[3] == "") {
                 setAddnum(addnum + 1);
               } else if (column[1].title.props.children[3].props) {

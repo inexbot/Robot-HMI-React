@@ -39,8 +39,8 @@ const mapStateToProps = (state) => {
 };
 
 function ProgramComponent(props) {
-  const [banButtonbtm, setBanButtonbtm] = useState(false)
-  const [banButtontop, setBanButtontop] = useState(false)
+  const [banButtonbtm, setBanButtonbtm] = useState(false);
+  const [banButtontop, setBanButtontop] = useState(false);
   const [insertOrChange, setInsertOrChange] = useState("insert");
   const [changeVisible, setChangeVisible] = useState(false);
   const [showmodalCopy, setShowmodalCopy] = useState(false);
@@ -53,6 +53,7 @@ function ProgramComponent(props) {
   const addClass = useRef();
   const moreClass = useRef();
   // console.log(props.pargamList,props.program,props.dataList)
+  console.log(props)
   useEffect(() => {
     let rightList = [];
     let ins = instructType[type].list;
@@ -64,6 +65,7 @@ function ProgramComponent(props) {
       );
       return value;
     });
+    console.log(rightList)
     setInstructList(rightList);
   }, [type]);
   const onClose = () => {
@@ -158,7 +160,9 @@ function ProgramComponent(props) {
     });
     return leftList;
   };
+  
   const insertCommand = (value) => {
+    console.log(insertOrChange)
     setInsertOrChange("insert");
     setInsertName(value);
     setChangeVisible(true);
@@ -169,6 +173,7 @@ function ProgramComponent(props) {
     return insertOrChange === "change" ? "保存" : "插入";
   };
 
+  //复制成功
   const copysuccess = () => {
     let hang = props.dataList.map((value) => {
       // console.log(value)
@@ -176,13 +181,19 @@ function ProgramComponent(props) {
     });
     message.success(`成功复制第${hang.join("、")}行指令`);
   };
-
+  //如果没有选择复制的指令
   const copyerror = () => {
     message.error("请选择想要复制的指令");
   };
 
   const changePasteList = (value) => {
     console.log(value);
+    console.log(typeof value);
+    if (typeof(value) != 'number') {
+      message.error("请输入数字类型");
+    } else {
+      
+    }
     setCopynum(value);
   };
 
@@ -192,73 +203,92 @@ function ProgramComponent(props) {
 
   // let banButton = false
 
-  const moveBtn = ( res ) => {
-    console.log(props)
+  //点击移动
+  const moveBtn = (res) => {
+    console.log(props);
     let hang = props.dataList.map((value) => {
-      // console.log(value)
       return value.order;
     });
-    // console.log(hang)
-    if(hang.length == 1){
-        let moveData = {
-          line: hang[0],
-          direction:res
-        }
-        console.log(moveData)
-        sendMSGtoServer("MOVE_COMMAND", moveData)
-        Modal.destroyAll();
-    }else if(hang.length == 0){
-      message.error('请选择想要移动的指令')
-    }else if(hang.length >1){
-      message.error('一次只能移动一个指令')
+    if (hang.length == 1) {
+      let moveData = {
+        line: hang[0],
+        direction: res,
+      };
+      console.log(moveData);
+      sendMSGtoServer("MOVE_COMMAND", moveData);
+      Modal.destroyAll();
+    } else if (hang.length == 0) {
+      message.error("请选择想要移动的指令");
+    } else if (hang.length > 1) {
+      message.error("一次只能移动一个指令");
     }
-  }
+  };
 
   //点击上下移动指令
   const movecontent = (
     <div>
-      <Button type = "primary"  disabled = {banButtontop} ghost onClick = {()=>{
-        moveBtn("up")
-        let num = props.dataList[0].order
-        if(props.dataList.length > 1){
+      <Button
+        type="primary"
+        disabled={banButtontop}
+        ghost
+        //点击向上移动
+        onClick={() => {
+          moveBtn("up");
+          console.log(props.dataList);
+          if (props.dataList.length > 0) {
+            let num = props.dataList[0].order;
 
-        }else{
-          props.dataList.splice(0)
-          props.dataList.push(props.pargamList[num-2])
-        }
-        if(props.dataList[0].order == 1){
-          setBanButtontop(true)
-          setBanButtonbtm(false)
-        }else{
-          setBanButtontop(false)
-          setBanButtonbtm(false)
-        }
-      }
+            if (props.dataList.length > 1) {
+            } else {
+              props.dataList.splice(0);
+              props.dataList.push(props.pargamList[num - 2]);
+            }
+            if (props.dataList[0].order == 1) {
+              setBanButtontop(true);
+              setBanButtonbtm(false);
+            } else {
+              setBanButtontop(false);
+              setBanButtonbtm(false);
+            }
+          } else {
+          }
+        }}
+      >
+        向上移动
+      </Button>
+      <Button
+        type="primary"
+        disabled={banButtonbtm}
+        ghost
+        //点击向下移动
+        onClick={() => {
+          moveBtn("down");
+          if (props.dataList.length > 0) {
+            let num = props.dataList[0].order;
+            if (props.dataList.length > 1) {
+            } else {
+              props.dataList.splice(0);
+              props.dataList.push(props.pargamList[num]);
+            }
 
-      } >向上移动</Button>
-      <Button type = "primary"  disabled = {banButtonbtm}  ghost onClick = {()=>{
-        moveBtn("down")
-        let num = props.dataList[0].order
-        if(props.dataList.length > 1){
-
-        }else{
-          props.dataList.splice(0)
-          props.dataList.push(props.pargamList[num])
-        }
-
-        console.log(props.dataList[0].order,props.program.instruct.length)
-        if(props.dataList[0].order == props.program.instruct.length -1){
-          setBanButtonbtm(true)
-          setBanButtontop(false)
-        }else{
-          setBanButtonbtm(false)
-          setBanButtontop(false)
-        }
-      }
-      } >向下移动</Button>
+            console.log(props.dataList[0].order, props.program.instruct.length);
+            if (props.dataList[0].order == props.program.instruct.length - 1) {
+              setBanButtonbtm(true);
+              setBanButtontop(false);
+            } else {
+              setBanButtonbtm(false);
+              setBanButtontop(false);
+            }
+          } else {
+          }
+        }}
+      >
+        向下移动
+      </Button>
     </div>
   );
   // console.log(props.program.instruct)
+  console.log(props)
   return (
     <div className="progcomponent">
       <div className="progadd" ref={addClass} style={{ display: "none" }}>
@@ -284,31 +314,31 @@ function ProgramComponent(props) {
             </Button>
           </Col>
           <Col span={8} offset={2}>
-          <Tooltip   placement="top"  title={movecontent} trigger="click">
-            <Button
-              className="proMoreBtn"
-              size="large"
-              onClick = {()=>{
-                console.log(props)
-                let hang = props.dataList.map((value) => {
-                  // console.log(value)
-                  return value.order;
-                });
-                if(hang[0] == props.program.instruct.length -1){
-                  setBanButtonbtm(true)
-                }else{
-                  setBanButtonbtm(false)
-                }
+            <Tooltip placement="top" title={movecontent} trigger="click">
+              <Button
+                className="proMoreBtn"
+                size="large"
+                onClick={() => {
+                  console.log(props);
+                  let hang = props.dataList.map((value) => {
+                    // console.log(value)
+                    return value.order;
+                  });
+                  if (hang[0] == props.program.instruct.length - 1) {
+                    setBanButtonbtm(true);
+                  } else {
+                    setBanButtonbtm(false);
+                  }
 
-                if(hang[0] == 1){
-                  setBanButtontop(true)
-                }else{
-                  setBanButtontop(false)
-                }
-              }}
-            >
-              移动
-            </Button>
+                  if (hang[0] == 1) {
+                    setBanButtontop(true);
+                  } else {
+                    setBanButtontop(false);
+                  }
+                }}
+              >
+                移动
+              </Button>
             </Tooltip>
           </Col>
         </Row>
@@ -448,7 +478,8 @@ function ProgramComponent(props) {
                     onFinish();
                   }
                 } else if (props.programSeletedRow.length == 0) {
-                  // console.log('哈哈')
+                  onFinish();
+                }else if(props.programSeletedRow.length >1){
                   onFinish();
                 }
               }}
@@ -461,8 +492,9 @@ function ProgramComponent(props) {
         }
       >
         <ChangeInstructValue
-          changeName={props.selectedName}
+          changeName={ props.dataList.length == 1?props.dataList[0].insName : props.selectedName }
           row={props.selectedRow}
+          // row={ props.dataList.length == 1? props.dataList[0].order  : props.selectedRow}
           form={form}
           insertName={insertName}
           insertOrChange={insertOrChange}

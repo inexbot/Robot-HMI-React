@@ -34,6 +34,14 @@ export const CommandList = {
   data:{
     line:12
   } */
+  AMEND_COMMAND:0x1124,//批量修改
+  // {
+  //   "selectlines":[2,5,11,12,20]   //选中那些行
+  //   "VJ":10,
+  //   "ACC":10,
+  //   "DEC":10,
+  //   "PL":1,
+  //   }
   DELETE_COMMAND: 0x1121,
   MOVE_COMMAND:0x1122,//移动
   COPY_COMMAND: 0x1123,// 批量复制

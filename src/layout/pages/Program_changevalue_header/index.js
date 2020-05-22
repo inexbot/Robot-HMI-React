@@ -9,86 +9,107 @@ import MovcA from "../Instruct/movca";
 import Movs from "../Instruct/movs";
 import { sendMSGtoController } from "service/network";
 import { connect } from "dva";
+import { message } from "antd";
 
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
     currentCoordinate: state.index.robotStatus.currentCoordinate,
+    programSeletedRow: state.App.programSeletedRow
   };
 };
 
 function ChangeInstructValue(props) {
+  console.log(props)
   let name;
   if (props.insertOrChange === "change") {
-    name = props.changeName;
+      name = props.changeName;
   } else if (props.insertOrChange === "insert") {
     name = props.insertName;
   }
+  // console.log(props.changeName)
   useEffect(() => {
     let getCurrentPosition = setInterval(() => {
       let data = {
         robot: props.currentRobot,
         coord: props.currentCoordinate,
       };
-      // sendMSGtoServer("CURRENTPOS_INQUIRE", data);
+      // console.log(data)
+      // sendMSGtoController("CURRENTPOS_INQUIRE", data);
     }, 1000);
     return () => {
       clearInterval(getCurrentPosition);
     };
   }, []);
-  switch (name) {
-    case "MOVJ":
-      return (
-        <Movj
-          row={props.row}
-          form={props.form}
-          insertOrChange={props.insertOrChange}
-          setClose={props.setClose}
-        />
-      );
-    case "MOVL":
-      return (
-        <Movl
-          row={props.row}
-          form={props.form}
-          insertOrChange={props.insertOrChange}
-          setClose={props.setClose}
-        />
-      );
-    case "MOVC":
-      return (
-        <Movc
-          row={props.row}
-          form={props.form}
-          insertOrChange={props.insertOrChange}
-          setClose={props.setClose}
-        />
-      );
-    case "MOVCA":
-      return (
-        <MovcA
-          row={props.row}
-          form={props.form}
-          insertOrChange={props.insertOrChange}
-          setClose={props.setClose}
-        />
-      );
-    case "MOVS":
-      return (
-        <Movs
-          row={props.row}
-          form={props.form}
-          insertOrChange={props.insertOrChange}
-          setClose={props.setClose}
-        />
-      );
-    default:
-      return (
-        <div>
-          指令行{props.row}，指令名{props.name}没有修改界面
-        </div>
-      );
+  if(props.programSeletedRow.length == 1 ){
+    switch (name) {
+      case "MOVJ":
+        return (
+          <Movj
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVL":
+        return (
+          <Movl
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVC":
+        return (
+          <Movc
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVCA":
+        return (
+          <MovcA
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVS":
+        return (
+          <Movs
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      default:
+        return (
+          <div>
+            指令行{props.row}，指令名{props.name}没有修改界面
+          </div>
+        );
+    }
+  }else{
+    console.log(props)
+    let nums = props.programSeletedRow.map((index)=>{
+      return index
+    })
+    return (
+      <Movj
+        row={nums}
+        form={props.form}
+        insertOrChange={props.insertOrChange}
+        setClose={props.setClose}
+      />
+    );
   }
+
 }
 export default connect(mapStateToProps)(ChangeInstructValue);
 

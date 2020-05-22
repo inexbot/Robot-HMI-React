@@ -12,8 +12,7 @@ export default {
     newprogram:[],
     selectmodalnum:[
       {a:1}
-    ]
-
+    ],
   },
 
   subscriptions: {},
