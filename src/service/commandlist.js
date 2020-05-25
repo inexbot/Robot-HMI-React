@@ -20,6 +20,7 @@ export const CommandList = {
     robot:1, //机器人号
     coord:0  //0关节，1直角，2工具，3用户
   } */
+
   COORD_MODE_SET: 0x2201,
   /* 上电
   data:{
@@ -34,6 +35,8 @@ export const CommandList = {
   data:{
     line:12
   } */
+  COPYPROGRAM_COMMAND:0x1117,//复制程序
+  AMENDWORK_COMMAND:0X1118,//修改作业文件名
   AMEND_COMMAND:0x1124,//批量修改
   // {
   //   "selectlines":[2,5,11,12,20]   //选中那些行

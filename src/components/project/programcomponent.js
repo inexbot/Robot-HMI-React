@@ -52,8 +52,6 @@ function ProgramComponent(props) {
   const [form] = Form.useForm();
   const addClass = useRef();
   const moreClass = useRef();
-  // console.log(props.pargamList,props.program,props.dataList)
-  console.log(props)
   useEffect(() => {
     let rightList = [];
     let ins = instructType[type].list;
@@ -65,7 +63,6 @@ function ProgramComponent(props) {
       );
       return value;
     });
-    console.log(rightList)
     setInstructList(rightList);
   }, [type]);
   const onClose = () => {
@@ -73,7 +70,6 @@ function ProgramComponent(props) {
   };
   const onFinish = () => {
     form.submit();
-    // console.log('sss')
   };
   const changevalue = () => {
     setInsertOrChange("change");
@@ -96,20 +92,16 @@ function ProgramComponent(props) {
       isbulk,
       selectlines,
     };
-    // console.log(props.isBulk,props.multiSelection)
 
     sendMSGtoServer("DELETE_COMMAND", deleteData);
     props.programSeletedRow.splice(0);
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
-    // console.log(props.deleteList)
 
     moreClass.current.style.display = "none";
-    // console.log(props.dataList)
 
     let hang = props.dataList.map((value) => {
-      // console.log(value)
       return value.order;
     });
     confirm({
@@ -162,13 +154,13 @@ function ProgramComponent(props) {
   };
   
   const insertCommand = (value) => {
-    console.log(insertOrChange)
     setInsertOrChange("insert");
     setInsertName(value);
     setChangeVisible(true);
     moreClass.current.style.display = "none";
     addClass.current.style.display = "none";
   };
+
   const renderSaveOrInsert = () => {
     return insertOrChange === "change" ? "保存" : "插入";
   };
@@ -176,7 +168,6 @@ function ProgramComponent(props) {
   //复制成功
   const copysuccess = () => {
     let hang = props.dataList.map((value) => {
-      // console.log(value)
       return value.order;
     });
     message.success(`成功复制第${hang.join("、")}行指令`);
@@ -187,8 +178,6 @@ function ProgramComponent(props) {
   };
 
   const changePasteList = (value) => {
-    console.log(value);
-    console.log(typeof value);
     if (typeof(value) != 'number') {
       message.error("请输入数字类型");
     } else {
@@ -205,7 +194,6 @@ function ProgramComponent(props) {
 
   //点击移动
   const moveBtn = (res) => {
-    console.log(props);
     let hang = props.dataList.map((value) => {
       return value.order;
     });
@@ -214,7 +202,6 @@ function ProgramComponent(props) {
         line: hang[0],
         direction: res,
       };
-      console.log(moveData);
       sendMSGtoServer("MOVE_COMMAND", moveData);
       Modal.destroyAll();
     } else if (hang.length == 0) {
@@ -234,7 +221,6 @@ function ProgramComponent(props) {
         //点击向上移动
         onClick={() => {
           moveBtn("up");
-          console.log(props.dataList);
           if (props.dataList.length > 0) {
             let num = props.dataList[0].order;
 
@@ -271,7 +257,6 @@ function ProgramComponent(props) {
               props.dataList.push(props.pargamList[num]);
             }
 
-            console.log(props.dataList[0].order, props.program.instruct.length);
             if (props.dataList[0].order == props.program.instruct.length - 1) {
               setBanButtonbtm(true);
               setBanButtontop(false);
@@ -287,8 +272,6 @@ function ProgramComponent(props) {
       </Button>
     </div>
   );
-  // console.log(props.program.instruct)
-  console.log(props)
   return (
     <div className="progcomponent">
       <div className="progadd" ref={addClass} style={{ display: "none" }}>
@@ -319,9 +302,7 @@ function ProgramComponent(props) {
                 className="proMoreBtn"
                 size="large"
                 onClick={() => {
-                  console.log(props);
                   let hang = props.dataList.map((value) => {
-                    // console.log(value)
                     return value.order;
                   });
                   if (hang[0] == props.program.instruct.length - 1) {
@@ -372,7 +353,6 @@ function ProgramComponent(props) {
           let hang = props.dataList.map((value) => {
             return value.order;
           });
-          console.log(hang);
           let copyData = {
             lineto: Copynum - 1,
             selectlines: hang,
@@ -390,17 +370,17 @@ function ProgramComponent(props) {
         {" "}
         请选择插入第几行:
         <InputNumber
-          min={0}
+          min={1}
           max={
             props.program.instruct == undefined
               ? 3
               : props.program.instruct.length
           }
-          defaultValue={0}
+          defaultValue={''}
           onChange={changePasteList}
         />
       </Modal>
-
+          
       <div className="progicon">
         <Row>
           <Col span={6} offset={3}>
@@ -468,17 +448,22 @@ function ProgramComponent(props) {
             {/* 点击插入按钮 */}
             <Button
               onClick={() => {
-                // console.log(props.programSeletedRow.length);
                 if (props.programSeletedRow.length == 1) {
                   if (props.programSeletedRow[0].key == 1) {
-                    // selectmodal();
-                    // console.log("sss")
-                    setShowModal(true);
+                    if(insertOrChange == "insert"){
+                      setShowModal(true);
+                    }else{
+                      onFinish();
+                    }
                   } else {
                     onFinish();
                   }
                 } else if (props.programSeletedRow.length == 0) {
+                  if(insertOrChange == "insert"){
                   onFinish();
+                  }else{
+                    message.error('请选择想要修改的指令')
+                  }
                 }else if(props.programSeletedRow.length >1){
                   onFinish();
                 }

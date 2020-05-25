@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { renderPosOption, newPos } from "./renderPos";
-import { Form, Input, Select } from "antd";
+import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
 
@@ -31,41 +31,49 @@ function Movj(props) {
       return [];
     }
   };
-  console.log(props)
   const posSum = x();
+  //把指令的数据传送到抽屉里输入框
   useEffect(() => {
-    console.log(props)
     let para;
     if (props.insertOrChange === "change") {
       if(props.programSeletedRow.length  > 1){
         para = {
-          POS: 0,
           VJ: 0,
           PL: 0,
           ACC: 0,
           DEC: 0,
         }
-      }else{
-        para = props.programSeletedRow[0].paras;
+
+        props.form.setFieldsValue({
+          POS: para.POS,
+          VJ: para.VJ,
+          PL: para.PL,
+          ACC: para.ACC,
+          DEC: para.DEC,
+        });
+
+      }else if(props.programSeletedRow.length ==1){
+          para = props.programSeletedRow[0].paras;
+      }else if(props.programSeletedRow.length ==0){
+        message.error("请选择指令进行修改")
       }
     } else {
       para = insertDefaultValue;
+      props.form.setFieldsValue({
+        POS: para.POS,
+        VJ: para.VJ,
+        PL: para.PL,
+        ACC: para.ACC,
+        DEC: para.DEC,
+      });
     }
- 
-    props.form.setFieldsValue({
-      POS: para.POS,
-      VJ: para.VJ,
-      PL: para.PL,
-      ACC: para.ACC,
-      DEC: para.DEC,
-    });
 
   }, [props.row, props.insertOrChange, props.form]);
+  
   const onFinish = (value) => {
     let pos;
     let posType;
     let posName;
-    console.log(value)
     if (value.POS === "new") {
       pos = props.currentPos;
       posType = 0;
@@ -76,7 +84,6 @@ function Movj(props) {
       posName = null;
     }
     if (props.insertOrChange === "change") {
-      console.log('change')
       if( props.programSeletedRow.length >= 2){
         let nums = props.programSeletedRow.map((index)=>{
           return index.order
@@ -117,10 +124,8 @@ function Movj(props) {
           num = 1
         }else{
           num = props.program.instruct.length 
-          console.log(num)
         }
       }else{
-        console.log(props.selectmodalnum)
         if(props.selectmodalnum.length == 2){
           num = 1
           props.selectmodalnum.splice(1)
@@ -128,7 +133,6 @@ function Movj(props) {
           num =  props.programSeletedRow[0].key + 1
         }
       }
-      // console.log(num)
       let sendInsert = {
         line: parseInt(props.row + num),
         modifystate: 0,
@@ -141,12 +145,10 @@ function Movj(props) {
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
       };
-      console.log(sendInsert)
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
     }
   };
-  // console.log(props.form)
   return (
     <Form
       form={props.form}
@@ -154,7 +156,7 @@ function Movj(props) {
       layout="inline"
       onFinish={onFinish}
     >
-      <Form.Item
+       {props.programSeletedRow.length > 1 ? " " : <Form.Item
         name="POS"
         label="POS"
         rules={[
@@ -163,8 +165,8 @@ function Movj(props) {
           },
         ]}
       >
-        <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
-      </Form.Item>
+       <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
+      </Form.Item>} 
       <Form.Item
         name="VJ"
         label="VJ"

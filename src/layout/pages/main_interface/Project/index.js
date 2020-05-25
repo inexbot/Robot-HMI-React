@@ -3,14 +3,23 @@
  * 引入了ProjectComponent组件，右下方的新建等按钮
  */
 import React, { useState, useEffect } from "react";
-import { Table, Tabs, ConfigProvider, Modal, Button } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  Table,
+  Tabs,
+  ConfigProvider,
+  Modal,
+  Button,
+  Input,
+  InputNumber,
+} from "antd";
+import { EditOutlined, DeleteOutlined, CopyOutlined } from "@ant-design/icons";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
 import ProjectComponent from "components/project/projectcomponent";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./index.css";
+
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 // 从全局的状态获取当前机器人状态
@@ -33,7 +42,6 @@ function Project(props) {
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [rowSelection, setRowSelectrion] = useState(null);
   const [isBulk, setIsBulk] = useState(0);
-  // console.log(props)
   // 初始化组件后做的
   const [tabPanel, setTabPanel] = useState("");
   const handleOkDeleteMultiProgram = () => {
@@ -112,6 +120,8 @@ function Project(props) {
     },
   };
 
+  //确认修改
+
   const selectMore = () => {
     setRowSelectrion(rows);
     setIsBulk(1);
@@ -148,6 +158,7 @@ function Project(props) {
       key: "more",
     },
   ];
+
   useEffect(() => {
     let tabs = [];
     let keyOfTabs = 1;
@@ -162,6 +173,31 @@ function Project(props) {
       );
       return;
     }
+
+    let programName = "";
+    const changeName = (e) => {
+      programName = e.target.value;
+    };
+
+    //点击修改弹出模态框
+    const showamendName = (name) => {
+      confirm({
+        title: "请修改所选的程序名:",
+        content: <Input allowClear placeholder={name} onChange={changeName} />,
+        onOk() {
+          let dataList = {
+            robot: 1,
+            oldjobName: name,
+            newjobName: programName + ".JBR",
+          };
+          sendMSGtoServer("AMENDWORK_COMMAND", dataList);
+        },
+        onCancel() {
+          console.log("Cancel");
+        },
+      });
+    };
+
     props.project.map((value) => {
       let dataSource = [];
       let keyOfTable = 1;
@@ -174,9 +210,32 @@ function Project(props) {
           date: value.date,
           more: (
             <div>
+              <CopyOutlined
+                onClick={() => {
+                  let newProgramName = ''
+                  confirm({
+                    title: "对新程序进行命名:",
+                    content: <Input allowClear onChange={(e)=>{
+                      newProgramName = e.target.value
+                    }} />,
+                    onOk() {
+                      let dataList = {
+                        robot: 1,
+                        oldjobName: value.name,
+                        newjobName: newProgramName+".JBR",
+                      };
+                      sendMSGtoServer("COPYPROGRAM_COMMAND", dataList);
+                    },
+                    onCancel() {
+                      console.log("Cancel");
+                    },
+                  });
+                }}
+                style={{ fontSize: 20, paddingRight: 17 }}
+              />
               <EditOutlined
-                onClick={selectMore}
-                style={{ fontSize: 20, paddingRight: 24 }}
+                onClick={showamendName.bind(this, value.name)}
+                style={{ fontSize: 20, paddingRight: 17 }}
               />
               <DeleteOutlined
                 onClick={deleteSingleProgram.bind(this, value.name)}
@@ -219,7 +278,7 @@ function Project(props) {
       return value;
     });
     setTabPanel(tabs);
-  }, [props.project, rowSelection, , selectedProgram]);
+  }, [props.project, rowSelection, selectedProgram]);
   useEffect((value) => {
     if (props.project == undefined) {
     } else {

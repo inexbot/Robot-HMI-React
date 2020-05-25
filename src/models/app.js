@@ -4,7 +4,7 @@ export default {
   state: {
     currentAuthority: "操作工",
     paraFrameDisplay: "close",
-
+    allButton:[{a:1}],
     programSeletedRow:[],
     programBoth:false,
     programList:[],

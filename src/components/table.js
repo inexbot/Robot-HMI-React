@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
     pargram: state.index.program,
     programBoth: state.App.programBoth,
     programList: state.App.programList,
+    programallButton: state.App.allButton,
   };
 };
 
@@ -39,7 +40,6 @@ function VirtualTable(props) {
       set: (scrollLeft) => {
         if (gridRef.current) {
           gridRef.current.scrollTo({
-
             scrollLeft,
           });
         }
@@ -78,7 +78,6 @@ function VirtualTable(props) {
         }}
       >
         {({ columnIndex, rowIndex, style }) => {
-
           let styleod = { background: "#e6f7ff" };
           let stylesh = { lineHeight: "50px", ...style };
           let stylebd = {
@@ -87,16 +86,11 @@ function VirtualTable(props) {
             ...stylesh,
           };
 
-          // console.log(props)
-          // console.log(style,columnIndex,rowIndex)
-          // props.dataSource[0].select = true
           return (
             <div
-              // className={classNames(
-              //   `virtual-table-cell${rawData[rowIndex].order}`
-              // )}
-              className={classNames('virtual-table-cell', {
-                'virtual-table-cell-last': columnIndex === mergedColumns.length - 1,
+              className={classNames("virtual-table-cell", {
+                "virtual-table-cell-last":
+                  columnIndex === mergedColumns.length - 1,
               })}
               //根据select来显示选中时候的样式
               style={rawData[rowIndex].select ? stylebd : stylesh}
@@ -135,9 +129,8 @@ function VirtualTable(props) {
   };
   const resetVirtualGrid = () => {
     //对服务器返回的列表数据进行显示
-    console.log(gridRef)
+    console.log(gridRef);
     if (gridRef.current === undefined || null) {
-
     } else {
       gridRef.current.resetAfterIndices({
         columnIndex: 0,
@@ -162,7 +155,7 @@ function VirtualTable(props) {
         className={classNames(className, "virtual-table")}
         columns={mergedColumns}
         pagination={false}
-        components={{ 
+        components={{
           body: renderVirtualList,
         }}
         onRow={props.onRow}

@@ -25,7 +25,8 @@ const mapStateToProps = (state) => {
     program: state.index.program,
     programBoth: state.App.programBoth,
     List: state.App.programSeletedRow,
-    newprogram: state.App.newprogram
+    newprogram: state.App.newprogram,
+    programallButton: state.App.allButton
   };
 };
 
@@ -50,7 +51,7 @@ function Program(props) {
   const [rowSelection, setRowSelection] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
-  
+
   const selectAll = () => {
     setAllList(1);
     setAllButton(
@@ -81,6 +82,7 @@ function Program(props) {
     );
   };
   const agaiMore = () => {
+    props.programallButton.push({b:2})
     setAgai(true);
     setAgaiButton(
       <Button disabled={moreBtn} onClick={cancelagaiMore}>
@@ -89,6 +91,7 @@ function Program(props) {
     );
   };
   const cancelagaiMore = () => {
+    props.programallButton.splice(1)
     setAgai(false);
     setAgaiButton(
       <Button disabled={moreBtn} onClick={agaiMore}>
@@ -96,7 +99,8 @@ function Program(props) {
       </Button>
     );
   };
-
+  
+  console.log(props)
   const [agaiButton, setAgaiButton] = useState(
     <Button disabled={moreBtn} onClick={agaiMore}>
       反选
@@ -154,9 +158,6 @@ function Program(props) {
   }, []);
 
   useEffect(() => {
-    // console.log(props.newprogram)
-    // props.program.splice(0)
-    // props.program.push(props.program)
     if (props.program.success === false) {
       notification.error({
         message: `打开文件失败！`,
@@ -168,7 +169,6 @@ function Program(props) {
       let keyOfInstruct = 1;
       // 标签页内表格的表头
       let dataSource = [];
-      // console.log(instruct)
       if (instruct === undefined ) {
         dataSource = [];
       } else {

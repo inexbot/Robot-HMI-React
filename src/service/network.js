@@ -14,8 +14,8 @@ export function initNetwork() {
     content: `正在连接${IP}:${PORT}，请稍后`,
     duration: 0,
   });
-  console.log(CommandList.myLove);
-  console.log(CommandList.webSite);
+  // console.log(CommandList.myLove);
+  // console.log(CommandList.webSite);
 }
 // 发送数据到控制器,command是命令字，data是要发送的数据，data为JSON格式，command为CommandList里面的元素名
 export async function sendMSGtoController(command, data) {
@@ -45,7 +45,6 @@ export async function sendMSGtoController(command, data) {
 
 // 发送数据到server,command是命令字，data是要发送的数据，data为JSON格式，command为CommandList里面的元素名
 export async function sendMSGtoServer(command, data) {
-  console.log(data)
   let message;
   message = [];
   let dataLength;
@@ -68,7 +67,7 @@ export async function sendMSGtoServer(command, data) {
   try {
     if (ws.readyState === 1) {
       ws.send(message);
-      // console.log("发送到服务端", message);
+      console.log("发送到服务端", message);
     }
   } catch (e) {
     // 遇到错误了
