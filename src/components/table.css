@@ -1,8 +1,8 @@
- .virtual-table-cell{
+ /* .virtual-table-cell{
     display: flex;
     flex-flow: column;
     background:red
-}
+} */
 
 .virtual-table-cell {
     box-sizing: border-box;

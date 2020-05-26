@@ -52,6 +52,7 @@ function ProgramComponent(props) {
   const [form] = Form.useForm();
   const addClass = useRef();
   const moreClass = useRef();
+
   useEffect(() => {
     let rightList = [];
     let ins = instructType[type].list;
@@ -98,7 +99,6 @@ function ProgramComponent(props) {
     Modal.destroyAll();
   };
   const showModalDeleteCommand = () => {
-
     moreClass.current.style.display = "none";
 
     let hang = props.dataList.map((value) => {
@@ -152,7 +152,7 @@ function ProgramComponent(props) {
     });
     return leftList;
   };
-  
+
   const insertCommand = (value) => {
     setInsertOrChange("insert");
     setInsertName(value);
@@ -178,10 +178,9 @@ function ProgramComponent(props) {
   };
 
   const changePasteList = (value) => {
-    if (typeof(value) != 'number') {
+    if (typeof value != "number") {
       message.error("请输入数字类型");
     } else {
-      
     }
     setCopynum(value);
   };
@@ -376,21 +375,27 @@ function ProgramComponent(props) {
               ? 3
               : props.program.instruct.length
           }
-          defaultValue={''}
+          defaultValue={""}
           onChange={changePasteList}
         />
       </Modal>
-          
+
       <div className="progicon">
         <Row>
           <Col span={6} offset={3}>
-            <PlusOutlined className="icon" onClick={handleAddButton} />
+            <Tooltip placement="topLeft" title={"选择指令插入"}>
+              <PlusOutlined className="icon" onClick={handleAddButton} />
+            </Tooltip>
           </Col>
           <Col span={6}>
-            <EditOutlined className="icon" onClick={changevalue} />
+            <Tooltip placement="topLeft" title={"修改指令"}>
+              <EditOutlined className="icon" onClick={changevalue} />
+            </Tooltip>
           </Col>
           <Col span={6}>
-            <EllipsisOutlined className="icon" onClick={handleMoreButton} />
+            <Tooltip placement="topLeft" title={"更多"}>
+              <EllipsisOutlined className="icon" onClick={handleMoreButton} />
+            </Tooltip>
           </Col>
         </Row>
       </div>
@@ -450,21 +455,21 @@ function ProgramComponent(props) {
               onClick={() => {
                 if (props.programSeletedRow.length == 1) {
                   if (props.programSeletedRow[0].key == 1) {
-                    if(insertOrChange == "insert"){
+                    if (insertOrChange == "insert") {
                       setShowModal(true);
-                    }else{
+                    } else {
                       onFinish();
                     }
                   } else {
                     onFinish();
                   }
                 } else if (props.programSeletedRow.length == 0) {
-                  if(insertOrChange == "insert"){
-                  onFinish();
-                  }else{
-                    message.error('请选择想要修改的指令')
+                  if (insertOrChange == "insert") {
+                    onFinish();
+                  } else {
+                    message.error("请选择想要修改的指令");
                   }
-                }else if(props.programSeletedRow.length >1){
+                } else if (props.programSeletedRow.length > 1) {
                   onFinish();
                 }
               }}
@@ -477,7 +482,11 @@ function ProgramComponent(props) {
         }
       >
         <ChangeInstructValue
-          changeName={ props.dataList.length == 1?props.dataList[0].insName : props.selectedName }
+          changeName={
+            props.dataList.length == 1
+              ? props.dataList[0].insName
+              : props.selectedName
+          }
           row={props.selectedRow}
           // row={ props.dataList.length == 1? props.dataList[0].order  : props.selectedRow}
           form={form}

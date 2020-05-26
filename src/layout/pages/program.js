@@ -51,15 +51,17 @@ function Program(props) {
   const [rowSelection, setRowSelection] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
   const [isBulk, setIsBulk] = useState(0);
-
+  
   const selectAll = () => {
     setAllList(1);
+    props.programallButton.push({b:2})
     setAllButton(
       <Button disabled={moreBtn} onClick={callSelectAll}>
-        全不选
+        关闭全选
       </Button>
     );
   };
+  
   const selectMore = () => {
     setMoreBtn(true);
     setAllList(0);
@@ -75,6 +77,7 @@ function Program(props) {
   };
   const callSelectAll = () => {
     setAllList(0);
+    props.programallButton.splice(1)
     setAllButton(
       <Button disabled={moreBtn} onClick={selectAll}>
         全选
@@ -82,7 +85,7 @@ function Program(props) {
     );
   };
   const agaiMore = () => {
-    props.programallButton.push({b:2})
+
     setAgai(true);
     setAgaiButton(
       <Button disabled={moreBtn} onClick={cancelagaiMore}>
@@ -91,7 +94,7 @@ function Program(props) {
     );
   };
   const cancelagaiMore = () => {
-    props.programallButton.splice(1)
+
     setAgai(false);
     setAgaiButton(
       <Button disabled={moreBtn} onClick={agaiMore}>
@@ -100,7 +103,6 @@ function Program(props) {
     );
   };
   
-  console.log(props)
   const [agaiButton, setAgaiButton] = useState(
     <Button disabled={moreBtn} onClick={agaiMore}>
       反选
@@ -123,6 +125,7 @@ function Program(props) {
       dataIndex: "order",
       key: "order",
       className: "pro_id",
+      
     },
     {
       title: (
@@ -146,12 +149,14 @@ function Program(props) {
           {text}
         </div>
       ),
+    
     },
     {
       title: intl.get("参数"),
       dataIndex: "para",
       key: "para",
     },
+    
   ];
   useEffect(() => {
     setSelectedRow(1);
@@ -242,15 +247,16 @@ function Program(props) {
         setDataSourceMain(dataSource)
       }
     }
-  }, [props.program, allList, moreBtn, moreButton]);
+  }, [props.program, allList, moreBtn, moreButton,VirtualTable]);
   let comp = (
     <ProgramComponent
       selectedName={selectedName}
       selectedRow={selectedRow}
-      multiSelection={multiSelection}
+      multiSelection={[multiSelection]}
       isBulk={isBulk}
     />
   );
+  
   const [aComponent, setAComponent] = useState();
   useEffect(
     () => {

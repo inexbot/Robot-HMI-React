@@ -54,6 +54,14 @@ function Movj(props) {
 
       }else if(props.programSeletedRow.length ==1){
           para = props.programSeletedRow[0].paras;
+          props.form.setFieldsValue({
+            POS: para.POS,
+            VJ: para.VJ,
+            PL: para.PL,
+            ACC: para.ACC,
+            DEC: para.DEC,
+          });
+  
       }else if(props.programSeletedRow.length ==0){
         message.error("请选择指令进行修改")
       }

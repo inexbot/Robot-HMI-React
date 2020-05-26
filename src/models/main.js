@@ -27,7 +27,7 @@ function sendCheckServerState() {
 }
 /* 接收到服务端初始化信息后做处理 */
 
- 
+
 function receiveCheckServerState(state) {
   /* 如果已经初始化完成，则往下执行 */
   if (state === true) {
@@ -343,7 +343,9 @@ export default {
               });
               break;
             }
-
+          // case "2b05":
+            
+          //   break;
             console.error(dataString.data);
             notification.error({
               message: "报错！",

@@ -11,6 +11,8 @@ import {
   Button,
   Input,
   InputNumber,
+  Tooltip,
+  message
 } from "antd";
 import { EditOutlined, DeleteOutlined, CopyOutlined } from "@ant-design/icons";
 import { connect } from "dva";
@@ -177,6 +179,15 @@ function Project(props) {
     let programName = "";
     const changeName = (e) => {
       programName = e.target.value;
+      props.project.map(( item , index) => {
+        item.program.map(( item , index) => {
+          if(programName+".JBR" == item.name){
+            message.error("此程序名已存在")
+          }else{
+
+          }
+        })
+      })
     };
 
     //点击修改弹出模态框
@@ -210,6 +221,7 @@ function Project(props) {
           date: value.date,
           more: (
             <div>
+              <Tooltip placement="topLeft" title={"复制此条程序"}>
               <CopyOutlined
                 onClick={() => {
                   let newProgramName = ''
@@ -217,6 +229,15 @@ function Project(props) {
                     title: "对新程序进行命名:",
                     content: <Input allowClear onChange={(e)=>{
                       newProgramName = e.target.value
+                      props.project.map(( item , index) => {
+                        item.program.map(( item , index) => {
+                          if(newProgramName+".JBR" == item.name){
+                            message.error("此程序名已存在")
+                          }else{
+                
+                          }
+                        })
+                      })
                     }} />,
                     onOk() {
                       let dataList = {
@@ -233,14 +254,19 @@ function Project(props) {
                 }}
                 style={{ fontSize: 20, paddingRight: 17 }}
               />
+              </Tooltip>
+              <Tooltip placement="topLeft" title={"重命名"}>
               <EditOutlined
                 onClick={showamendName.bind(this, value.name)}
                 style={{ fontSize: 20, paddingRight: 17 }}
               />
+              </Tooltip>
+              <Tooltip placement="topLeft" title={"删除此程序"}>
               <DeleteOutlined
                 onClick={deleteSingleProgram.bind(this, value.name)}
                 style={{ fontSize: 20 }}
               />
+              </Tooltip>
             </div>
           ),
           tabName: tabName,
