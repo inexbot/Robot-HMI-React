@@ -181,6 +181,11 @@ function ProgramComponent(props) {
     if (typeof value != "number") {
       message.error("请输入数字类型");
     } else {
+      if( value < 1){
+        value = 1
+      }else if( value > props.program.instruct.length){
+        value = props.program.instruct.length
+      }
     }
     setCopynum(value);
   };
@@ -488,7 +493,6 @@ function ProgramComponent(props) {
               : props.selectedName
           }
           row={props.selectedRow}
-          // row={ props.dataList.length == 1? props.dataList[0].order  : props.selectedRow}
           form={form}
           insertName={insertName}
           insertOrChange={insertOrChange}
