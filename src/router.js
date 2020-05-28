@@ -110,6 +110,8 @@ const RecoverAndBackup = asyncComponents(() =>
 
 const Program = asyncComponents(() => import("./layout/pages/program"));
 
+const Setparameter = asyncComponents(() => import("./layout/pages/craft/conveyor/Sensorsign"))
+
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
@@ -175,6 +177,8 @@ function Router(props) {
         {/* 系统参数 */}
         <RouterDom.Route path="/Language" component={Language} />
         <RouterDom.Route path="/Backup" component={RecoverAndBackup} />
+
+        <RouterDom.Route path="/setparameter" component={Setparameter} />
       </RouterDom.Switch>
     </App>
   );
