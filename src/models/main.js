@@ -16,6 +16,7 @@ import { project, program } from "./default/project";
 import { robotEncrypt } from "./default/robotencrypt";
 import { IOConfig } from "./default/ioconfig";
 import { IOName } from "./default/ioname";
+import { conveyor } from "./default/conveyor"
 
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -84,6 +85,7 @@ export default {
     robotEncrypt,
     IOConfig,
     IOName,
+    conveyor
   },
 
   subscriptions: {
@@ -665,5 +667,11 @@ export default {
         action.data.outerAmount;
       return _state;
     },
+    // 改变工艺中的参数
+    receiveconveyor(state, action) {
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.conveyor.data = action.data.data
+      return _state
+    }
   },
 };

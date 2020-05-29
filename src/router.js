@@ -110,7 +110,7 @@ const RecoverAndBackup = asyncComponents(() =>
 
 const Program = asyncComponents(() => import("./layout/pages/program"));
 
-const Setparameter = asyncComponents(() => import("./layout/pages/craft/conveyor/Sensorsign"))
+const Setparameter = asyncComponents(() => import("./layout/pages/craft/ConveyorBeltTracking/conveyor/Setparameter"))
 
 const mapStateToProps = (state) => {
   return {
