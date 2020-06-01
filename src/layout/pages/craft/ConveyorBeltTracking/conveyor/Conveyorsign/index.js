@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, notification, ConfigProvider, Select, Divider, Input } from "antd";
+import { Table, Button, notification, ConfigProvider, Select, Divider, Input, Modal} from "antd";
 import { connect } from "dva";
-
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +10,22 @@ const mapStateToProps = (state) => {
 
   function Conveyorsign(props){
     const [showSave, setShowSave ] = useState(false)
-
+    const [showemptyModal, setShowemptyModal] = useState(false);
+    const [showcopyModal, setshowcopyModal] = useState(false);
+  
+    const { Option } = Select;
+    const conveyorNumchildren = [];
+    for (let i = 1; i <10; i++) {
+      conveyorNumchildren.push(
+        <Option key={i}>{  i}</Option>
+      );
+    } 
+    
+  
+    const handleChange =(value) => {
+      console.log(`Selected: ${value}`);
+    }
+  
     const columns = [
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
@@ -22,25 +36,78 @@ const mapStateToProps = (state) => {
       { key: "3", name: "z", money: <Input  />,},
       { key: "4", name: "A", money: <Input  />, },
       { key: "5", name: "B", money: <Input  />,},
-      { key: "6", name: "C", money: <Input  />,},
+      { key: "6", name: "C", money: <Input  />,}
     ];
+
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
         <div className="connect">
           <Table
             pagination={false}
-            size = {"small"}
             columns={columns}
             dataSource={data }
             title={() => `传送带坐标系  用户坐标系4` }
           />
         </div>
-        {showSave ? <div> <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} >保存</Button>
+        <Modal
+        title="提示"
+        style={{ top: 100 }}
+        visible={showemptyModal}
+        onOk={() => setShowemptyModal(false)}
+        onCancel={() => setShowemptyModal(false)}
+      >
+        <p style={{ fontSize: "30px" }}>确定要清空 工艺号1的参数吗？</p>
+        <p style={{ color: "red", fontSize: "30px" }}>
+          谨慎操作，一旦清空，无法恢复!
+        </p>
+      </Modal>
+      <Modal
+        title="提示"
+        style={{ top: 100 }}
+        visible={showcopyModal}
+        onOk={() => setshowcopyModal(false)}
+        onCancel={() => setshowcopyModal(false)}
+      >
+        <p style={{ fontSize: "30px" }}>确定要将当前工艺参数复制到</p>
+        <p style={{ fontSize: "30px" }}>
+          {" "}
+          <div>
+            工艺号:
+            <Select
+              defaultValue="1"
+              onChange={handleChange}
+              style={{ width: 200 }}
+            >
+              {conveyorNumchildren}
+            </Select>
+          </div>
+        </p>
+      </Modal>
+        {showSave ? <span style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} >保存</Button>
         <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
           setShowSave(false)
-        }}>取消</Button></div> : <Button  style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {()=>{
+        }}>取消</Button>
+        <Button style = {{ width:"100px",height:"50px" }} onClick = {() => {
+          console.log(window.location.href)
+          window.location.href = "#/setparameter/conveyorone"
+        }}> 开始标定 </Button>
+        </span>
+         : <Button  style = {{ width:"100px",height:"50px",marginLeft:`25%` }} onClick = {()=>{
           setShowSave(true)
         }} >修改</Button> }
+        <Button
+        style={{ width: "100px", height: "50px", marginLeft: `${showSave?"23" :"34"}%` }}
+        onClick={() => {
+          setShowemptyModal(true);
+        }}
+      >
+        清空参数
+      </Button>
+      <Button style={{ width: "100px", height: "50px" }} onClick={() => {
+        setshowcopyModal(true)
+      }}>
+        复制参数
+      </Button>
       </div>
     )
   }

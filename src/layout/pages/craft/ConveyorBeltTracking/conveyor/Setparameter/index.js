@@ -8,9 +8,10 @@ import {
   Steps,
   message,
 } from "antd";
+import {ArrowRightOutlined} from "@ant-design/icons"
 import { connect } from "dva";
 import asyncComponents from "../../../../../../AsyncComponents";
-import { HashRouter, NavLink, Route, Switch } from "react-router-dom";
+import { HashRouter, NavLink, Route, Switch, useHistory, useLocation} from "react-router-dom";
 import "./index.css";
 
 
@@ -18,7 +19,15 @@ const Basic = asyncComponents(() => import("../Basic"))
 const Discern = asyncComponents(() => import("../Discern"))
 const Conveyorsign = asyncComponents(() => import("../Conveyorsign"))
 const Sensorsign = asyncComponents(() => import("../Sensorsign"))
+const SensorOne = asyncComponents(() => import("../SensorOne"))
+const SensorTwo = asyncComponents(() => import("../SensorTwo"))
+const SensorThree = asyncComponents(() => import("../SensorThree"))
+
 const Setsite = asyncComponents(() => import("../Setsite"))
+const ConveyorOne = asyncComponents(() => import("../ConveyorOne"))
+const ConveyorTwo = asyncComponents(() => import("../ConveyorTwo"))
+const ConveyorThree = asyncComponents(() => import("../ConveyorThree"))
+const ConveyorFour = asyncComponents(() => import("../ConveyorFour"))
 
 const mapStateToProps = (state) => {
   return {
@@ -33,28 +42,13 @@ function Setparameter() {
   const [current, setCurrent] = useState(0);
 
   const steps = [
-    {
-      title: "基本信息",
-      path: "/setparameter/basic",
-    },
-    {
-      title: "识别参数",
-      path: "/setparameter/discern",
-    },
-    {
-      title: "传送带标定",
-      path: "/setparameter/conveyorsign",
-    },
-    {
-      title: "传感器标定",
-      path: "/setparameter/sensorsign",
-    },
-    {
-      title: "位置设置",
-      path: "/setparameter/setsite",
-    },
+    { title: "基本信息", path: "/setparameter/basic", },
+    { title: "识别参数", path: "/setparameter/discern", },
+    { title: "传送带标定", path: "/setparameter/conveyorsign", },
+    { title: "传感器标定", path: "/setparameter/sensorsign", },
+    { title: "位置设置", path: "/setparameter/setsite", },
   ];
-  const [pathrouter, setPathrouter] = useState();
+  const [RouterBtn, setRouterBtn] = useState('');
   const [conveyorNum, setConveyorNum] = useState();
   const next = () => {
     setCurrent(current + 1);
@@ -62,7 +56,6 @@ function Setparameter() {
   const prev = () => {
     setCurrent(current - 1);
   };
-
   const conveyorNumchildren = [];
   for (let i = 1; i <10; i++) {
     conveyorNumchildren.push(
@@ -77,6 +70,30 @@ function Setparameter() {
   const handleChange =(value) => {
     console.log(`Selected: ${value}`);
   }
+
+  useEffect(()=>{
+    console.log(window.location.hash)
+    switch(window.location.hash){
+      case "#/setparameter/basic":
+        setRouterBtn("basic")
+        break;
+      case "#/setparameter":
+        setRouterBtn("basic")
+        break;
+      case "#/setparameter/discern":
+        setRouterBtn("discern")
+        break;
+      case "#/setparameter/conveyorsign":
+        setRouterBtn("conveyorsign")
+        break;
+      case "#/setparameter/sensorsign":
+        setRouterBtn("sensorsign")
+        break;
+      case "#/setparameter/setsite":
+        setRouterBtn("setsite")
+        break;
+    }
+  })
   return (
     <div>
       {/* 选择工艺号 */}
@@ -102,38 +119,47 @@ function Setparameter() {
       <HashRouter >
         <Route path="/setparameter/basic" component={Basic}></Route>
         <Route path="/setparameter/discern" component={Discern}></Route>
-        <Route
-          path="/setparameter/conveyorsign"
-          component={Conveyorsign}
-        ></Route>
+        <Route  path="/setparameter/conveyorsign" component={Conveyorsign}></Route>
+        <Route  path="/setparameter/conveyorone" component={ConveyorOne}></Route>
+        <Route  path="/setparameter/conveyorTwo" component={ConveyorTwo}></Route>
+        <Route  path="/setparameter/conveyorThree" component={ConveyorThree}></Route>
+        <Route  path="/setparameter/conveyorFour" component={ConveyorFour}></Route>
         <Route path="/setparameter/sensorsign" component={Sensorsign}></Route>
+        <Route path="/setparameter/sensorOne" component={SensorOne}></Route>
+        <Route path="/setparameter/sensorTwo" component={SensorTwo}></Route>
+        <Route path="/setparameter/sensorThree" component={SensorThree}></Route>
         <Route path="/setparameter/setsite" component={Setsite}></Route>
+        
         <Switch>
           <Route exact path='/setparameter' component={Basic}></Route>
         </Switch>
           
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/basic">
-          <Button type="primary" style={{ width:"20%",height:"40px" }}  onClick={() => {setCurrent(0);}}>
+          <Button type={ RouterBtn=="basic"? "primary":"" }  style={{ width:"15%",height:"40px" }}  onClick={() => {setCurrent(0);}}>
             基本信息
           </Button>
         </NavLink>
+        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/discern">
-          <Button type="primary" style={{ width:"20%",height:"40px" }} onClick={() => { setCurrent(1);}}>
+          <Button type={ RouterBtn=="discern"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => { setCurrent(1);}}>
             识别参数
           </Button>
         </NavLink>
+        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav"  to="/setparameter/conveyorsign">
-          <Button type="primary" style={{ width:"20%",height:"40px" }} onClick={() => {setCurrent(2);}}>
+          <Button type={ RouterBtn=="conveyorsign"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => {setCurrent(2);}}>
             传送带标定
           </Button>
         </NavLink>
+        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/sensorsign">
-          <Button type="primary" style={{ width:"20%",height:"40px" }} onClick={() => {setCurrent(3);}}>
+          <Button type={ RouterBtn=="sensorsign"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => {setCurrent(3);}}>
             传感器标定
           </Button>
         </NavLink>
+        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/setsite">
-          <Button type="primary" style={{ width:"20%",height:"40px" }} onClick={() => {setCurrent(4);}}>
+          <Button type={ RouterBtn=="setsite"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => {setCurrent(4);}}>
             位置设置
           </Button>
         </NavLink>
