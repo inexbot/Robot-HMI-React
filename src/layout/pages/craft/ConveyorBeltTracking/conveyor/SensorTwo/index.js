@@ -44,10 +44,10 @@ const mapStateToProps = (state) => {
              
           }}>清除标定线</Button>
           <Button style = {{ width:"100px",height:"50px",marginLeft:"11%" }} onClick = { ()=>{
-              window.location.href = "#/setparameter/sensorOne"
+              window.location.href = "#/setparameter/sensorone"
           }}>上一步 </Button>
           <Button style = {{ width:"100px",height:"50px" }} onClick = { ()=>{
-              window.location.href = "#/setparameter/sensorThree"
+              window.location.href = "#/setparameter/sensorthree"
           }}>下一步 </Button>
          
       </div>

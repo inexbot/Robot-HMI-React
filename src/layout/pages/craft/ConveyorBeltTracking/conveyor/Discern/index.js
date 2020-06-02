@@ -5,6 +5,8 @@ import { connect } from "dva";
 
 const mapStateToProps = (state) => {
     return {
+      dataSoure: state.index.conveyor.data,
+      conveyorNum: state.index.conveyor.conveyorNum
     };
   };
 
@@ -22,7 +24,7 @@ const mapStateToProps = (state) => {
       );
     } 
     
-  
+    console.log(props.conveyorNum)
     const handleChange =(value) => {
       console.log(`Selected: ${value}`);
     }
@@ -33,7 +35,7 @@ const mapStateToProps = (state) => {
       {title: "单位", dataIndex: "address",}
     ];
     const data = [
-      { key: "1", name:"工件检测信号",  money: <Input  />, address: "视觉/IO/全局变量", },
+      { key: "1", name:"工件检测信号",  money: <Select  ></Select>, address: "视觉/IO/全局变量", },
       { key: "2", name: "信号源参数", money:<Input  />, address: "视觉工艺号/IO端口号/变量", },
       { key: "3", name: "工件识别方式", money: <Input  />, address: "视觉/传感器", },
       { key: "4", name: "视觉通讯方式", money: <Input  />, address: "以太网/Modbus", },

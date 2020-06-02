@@ -51,10 +51,10 @@ function ConveyorsignThree(props) {
            
         }}>清除标定线</Button>
         <Button style = {{ width:"100px",height:"50px",marginLeft:"11%" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyorTwo"
+            window.location.href = "#/setparameter/conveyortwo"
         }}>上一步 </Button>
         <Button style = {{ width:"100px",height:"50px" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyorFour"
+            window.location.href = "#/setparameter/conveyorfour"
         }}>下一步 </Button>
        
     </div>

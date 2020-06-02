@@ -13,6 +13,7 @@ import { connect } from "dva";
 import asyncComponents from "../../../../../../AsyncComponents";
 import { HashRouter, NavLink, Route, Switch, useHistory, useLocation} from "react-router-dom";
 import "./index.css";
+import { sendMSGtoController } from "service/network";
 
 
 const Basic = asyncComponents(() => import("../Basic"))
@@ -56,10 +57,11 @@ function Setparameter() {
   const prev = () => {
     setCurrent(current - 1);
   };
+
   const conveyorNumchildren = [];
   for (let i = 1; i <10; i++) {
     conveyorNumchildren.push(
-      <Option key={i}>{  i}</Option>
+      <Option key={i}>{i}</Option>
     );
   }
 
@@ -69,6 +71,11 @@ function Setparameter() {
 
   const handleChange =(value) => {
     console.log(`Selected: ${value}`);
+    let dataList = {
+      robot:"1",
+      conveyorID:value,
+    }
+    // sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE",dataList)
   }
 
   useEffect(()=>{
@@ -101,7 +108,7 @@ function Setparameter() {
         工艺号: 
         <Select
           size={conveyorNum}
-          defaultValue="1"
+          defaultValue="请选择工艺号"
           onChange={handleChange}
           style={{ width: 200 }}
         >
@@ -121,13 +128,13 @@ function Setparameter() {
         <Route path="/setparameter/discern" component={Discern}></Route>
         <Route  path="/setparameter/conveyorsign" component={Conveyorsign}></Route>
         <Route  path="/setparameter/conveyorone" component={ConveyorOne}></Route>
-        <Route  path="/setparameter/conveyorTwo" component={ConveyorTwo}></Route>
-        <Route  path="/setparameter/conveyorThree" component={ConveyorThree}></Route>
-        <Route  path="/setparameter/conveyorFour" component={ConveyorFour}></Route>
+        <Route  path="/setparameter/conveyortwo" component={ConveyorTwo}></Route>
+        <Route  path="/setparameter/conveyorthree" component={ConveyorThree}></Route>
+        <Route  path="/setparameter/conveyorfour" component={ConveyorFour}></Route>
         <Route path="/setparameter/sensorsign" component={Sensorsign}></Route>
-        <Route path="/setparameter/sensorOne" component={SensorOne}></Route>
-        <Route path="/setparameter/sensorTwo" component={SensorTwo}></Route>
-        <Route path="/setparameter/sensorThree" component={SensorThree}></Route>
+        <Route path="/setparameter/sensorone" component={SensorOne}></Route>
+        <Route path="/setparameter/sensortwo" component={SensorTwo}></Route>
+        <Route path="/setparameter/sensorthree" component={SensorThree}></Route>
         <Route path="/setparameter/setsite" component={Setsite}></Route>
         
         <Switch>

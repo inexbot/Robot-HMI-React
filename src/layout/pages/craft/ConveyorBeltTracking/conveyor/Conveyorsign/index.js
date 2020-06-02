@@ -43,6 +43,7 @@ const mapStateToProps = (state) => {
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
         <div className="connect">
           <Table
+            size={"middle"}
             pagination={false}
             columns={columns}
             dataSource={data }

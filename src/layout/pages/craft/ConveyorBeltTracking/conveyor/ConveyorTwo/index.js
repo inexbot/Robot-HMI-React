@@ -45,10 +45,10 @@ import "./index.css"
            
         }}>清除标定线</Button>
         <Button style = {{ width:"100px",height:"50px",marginLeft:"11%" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyorOne"
+            window.location.href = "#/setparameter/conveyorone"
         }}>上一步 </Button>
         <Button style = {{ width:"100px",height:"50px" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyorThree"
+            window.location.href = "#/setparameter/conveyorthree"
         }}>下一步 </Button>
        
     </div>

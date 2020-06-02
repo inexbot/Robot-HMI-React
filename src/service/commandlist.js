@@ -190,4 +190,347 @@ export const CommandList = {
   SLAVETYPE_LIST_INQUIRE: 0x2e0e,
 
   UPGRADE_COMMAND: 0x2111,// 升级系统
+
+
+  //传送带跟踪
+    //设置传送带参数
+    SET_THE_CONVEYOR_PARAMETERS:0x4801,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "conveyor":
+    //   {
+    //   "maxEncoderVal":60000,    //double
+    //   "minEncoderVal": -60000,
+    //   "encoderDirection": 1,      //1：正向；-1：反向
+    //   "encoderResolution":44.33,  //double
+    //   "userCoord":1             	//1~9
+    //   "checkSpeed":1      //传送带停止，机器人：0-立即结束；1-继续运行
+    //   },
+    //   "compensation":
+    //   {
+    //   "time":10,
+    //   "encoderVal":0
+    //   }
+    //   }
+
+    //查询传送带参数
+    TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE:0x4802,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1  工艺号
+    // }
+
+    //返回传送带参数
+    TRACK_CONVEYOR_CONVEYORPARAM_RESPOND:0x4803,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "conveyor":
+    //   {
+    //   "maxEncoderVal":60000,    
+    //   "minEncoderVal": -60000,
+    //   "encoderDirection": 1,      //1：正向；-1：反向
+    //   "encoderResolution":44.33,   //double
+    //   "encoderValue":333221123,  //double
+    //   "speed":100,        //double
+    //   "userCoord":1，       	//1~9
+    //   "checkSpeed":1      //传送带停止，机器人：0-立即结束；1-继续运行
+    //   },
+    //   "compensation":
+    //   {
+    //   "time":10,
+    //   "encoderVal":0
+    //   }
+    // }
+
+    // 设置工件识别参数
+    TRACK_CONVEYOR_POSCHECKPARAM_SET:0x4804,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "detectSrc":
+    //   {
+    //   "type":0,    //0-视觉；1-IO；2-全局变量
+    //   "visionID":1,
+    //   "DI_capturePos":0,
+    //   "globalVar":"GA001"
+    //   },
+    //   "identification":
+    //   {
+    //   "type":0,    //0-视觉；1-传感器
+    //   "communication":0    //0-以太网；1-Modbus
+    //   "sensorTrg":1     //0-低电平触发， 1-高电平触发
+    //   }
+    // }
+
+    //查询工件识别参数
+    TRACK_CONVEYOR_POSCHECKPARAM_INQUIRE:0x4805,
+    // {
+    //   "robot":1,	
+    //   "conveyorID":1 // 工艺号
+    // }
+
+    // 返回工件识别参数
+    TRACK_CONVEYOR_POSCHECKPARAM_RESPOND:0x4806,
+    //数据与4804是一致的
+    // {
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "detectSrc":
+    //   {
+    //   "type":0,    //0-视觉；1-IO；2-全局变量
+    //   "visionID":1,
+    //   "DI_capturePos":0,
+    //   "globalVar":"GA001"
+    //   },
+    //   "identification":
+    //   {
+    //   "type":0,    //0-视觉；1-传感器
+    //   "communication":0    //0-以太网；1-Modbus
+    //   "sensorTrg":1     //0-低电平触发， 1-高电平触发
+    //   }
+    // }
+  
+    // 实时查询编码器值和传送带速度
+    TRACK_CONVEYOR_REALTIME_INQUIRE:0x4807,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1
+    // }
+
+    // 响应实时查询
+    TRACK_CONVEYOR_REALTIME_RESPOND:0x4808,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "conveyor":
+    //   {
+    //   "encoderValue":333221123,  //uint
+    //   "speed":100.0,  //double
+    //   }
+    // }  
+
+
+  // 传送带坐标系标定
+    // 计算用户坐标系
+    TRACK_CONVEYOR_USERCOORD_CALCULATE:0x4810,
+    // {
+    //   "robot":1,	
+    //   "conveyorID":1
+    // }
+
+    // 标定取坐标
+    TRACK_CONVEYOR_USERCOORD_CALIBRATION:0x4811,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "posNum":1  //1,2,3
+    // }
+
+    // 查询已标定的点坐标
+    RACK_CONVEYOR_CALIBRATION_INQUIRE:0x4812,
+    // {
+    //   "robot":1,	
+    //   "conveyorID":1,
+    //   "posNum":1
+    // }
+
+    // 返回标定的点坐标
+    TRACK_CONVEYOR_CALIBRATION_RESPOND:0x4813,
+    // {
+    //   "posNum":1
+    //   "posX":1.0,	
+    //   "posY":1.0,
+    //   "encodorValue":1
+    // }
+
+    // 清空标定值
+    TRACK_CONVEYOR_CALIBRATION_CLEAR:0x4814,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "posNum":1
+    // } 返回0x4813
+
+    // 取消标定
+    TRACK_CONVEYOR_CALIBRATION_CANCEL:0x4815,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1
+    // }
+
+  // 传感器位置标定
+    // 传感器位置查询
+    TRACK_CONVEYOR_SENSORPOS_INQUIRE:0x4816,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1
+    //   }
+
+    // 响应传感器位置查询
+    TRACK_CONVEYOR_SENSORPOS_RESPOND:0x4817,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "sensorPos":
+    //   {
+    //   "X":1.0,	 
+    //   "Y":1.0
+    //   }
+    // }
+
+    // 传感器位置开始标定及参数查询
+    TRACK_CONVEYOR_SENSORPOS_CALIBRATION_INQUIRE:0x4818,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1,
+    // }
+
+    // 响应传感器位置标定参数查询
+    TRACK_CONVEYOR_SENSORPOS_CALIBRATION_RESPOND:0x4819,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "sensorCalibration":
+    //   {
+    //   "IO_encodorValue":1,
+    //   "calib_encodorValue":1,
+    //   "calib_X":1.0,	 
+    //   "calib_Y":1.0
+    //   }
+    // }
+
+    // 传感器位置参数标定
+    TRACK_CONVEYOR_SENSORPOS_CALIBRATE:0x481A,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1
+    // }
+
+    // 响应传感器位置参数标定
+    // 返回 0x4819
+
+    // 传感器跟踪抓取姿态参数查询
+    TRACK_CONVEYOR_SENSOR_GRABGESTURE_INQUIRE:0x481C,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1
+    // }
+
+    // 响应传感器跟踪抓取姿态查询
+    TRACK_CONVEYOR_SENSOR_GRABGESTURE_RESPOND:0x481D,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "grabGesture":
+    //   {
+    //   "Z":1,
+    //   "A":1,
+    //   "B":1,
+    //   "C":1
+    //   }
+    // }
+
+    // 传感器跟踪抓取姿态标定
+    TRACK_CONVEYOR_SENSOR_GRABGESTURE_CALIBRATE:0x481E,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1
+    // }
+
+    // 响应传感器跟踪抓取姿态标定
+    // 返回 0x481D
+
+    // 清空标定值
+    TRACK_CONVEYOR_SENSORPOS_CALIBRATION_CLEAR:0x4820,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1,
+    //   "type":0        //0-清空传感器位置标定参数；1-清空抓取姿态参数
+    //   }   // 若type为0：返回0x4819；若type为1：返回0x481D
+
+    // 取消标定
+    TRACK_CONVEYOR_SENSORPOS_CALIBRATION_CANCEL:0x4821,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1
+    // }
+
+    // 计算传感器位置
+    TRACK_CONVEYOR_SENSORPOS_CALCULATE:0x4822  ,
+    // { 
+    //   "robot":1,
+    //   "conveyorID":1
+    //   }  不返回，回哪个界面，查询哪个界面。
+
+    // 设置传送带跟踪位置参数
+    TRACK_CONVEYOR_POSITION_SET:0x4830,
+    // { 
+    //   "robot":1, 
+    //   "conveyorID":1,
+    //   "position":
+    //   {
+    //   "trackStartXPoint":123.123
+    //   "trackRangeXMax":213.213
+    //   "trackRangeYMin":132.132
+    //   "trackRangeYMax":321.321
+    //   "trackRangeZMin":231.231
+    //   "trackRangeZMax":312.312
+    //   "receLatestPos":123.321
+    //   "grabheight":111.111
+    //   }
+    // }
+
+    // 查询传送带跟踪位置参数
+    TRACK_CONVEYOR_POSITION_INQUIRE:0x4831,
+    // {
+    //   "robot":1,	
+    //   "conveyorID":1
+    // }
+
+    // 返回传送带跟踪位置参数
+    TRACK_CONVEYOR_POSITION_RESPOND:0x4832,
+    // data：同0x4150
+
+    // 标定位置
+    TRACK_CONVEYOR_POSITION_CALIBRATION:0x4833,
+    // {
+    //   "robot":1, 
+    //   "conveyorID":1,
+    //   "type":1   //1,2,3,4..7
+    // }
+
+    // 返回标定位置
+    TRACK_CONVEYOR_POSITION_CALIBRATION_RESPOND:0x4834,
+    // {
+    //   "robot":1, 
+    //   "conveyorID":1,
+    //   "type":1,
+    //   "value":2.33，
+    //   "pos":2.33
+    // }
+
+    // 运动到指定的位置
+    TRACK_CONVEYOR_POSITION_TO_MOVE:0x4837,
+    // {
+    //   "robot":1, 
+    //   "conveyorID":1,
+    //   "type":1   //1,2,3,4..7
+    // }
+
+    // 复制传送带参数
+    TRACK_CONVEYOR_PARAM_COPY:0x4835,
+    // {
+    //   "robot":1,
+    //   "srcConveyorID":1,
+    //   "dstConveyorID":2
+    // }
+
+    //清空传送带参数
+    TRACK_CONVEYOR_PARAM_CLEAR:0x4836,
+    // {
+    //   "robot":1,
+    //   "conveyorID":1
+    // }
 };

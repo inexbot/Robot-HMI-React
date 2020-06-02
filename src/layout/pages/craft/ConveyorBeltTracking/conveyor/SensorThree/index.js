@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
               window.location.href = "#/setparameter/sensorsign"
           }}>取消标定</Button>
           <Button style = {{ width:"100px",height:"50px",marginLeft:"16%" }} onClick = { ()=>{
-              window.location.href = "#/setparameter/sensorTwo"
+              window.location.href = "#/setparameter/sensortwo"
           }}>上一步 </Button>
           <Button style = {{ width:"100px",height:"50px" }} onClick = { ()=>{
               window.location.href = "#/setparameter/sensorsign"
