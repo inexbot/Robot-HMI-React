@@ -12,15 +12,17 @@ import {
 import { connect } from "dva";
 import "./index.css";
 import { sendMSGtoController } from "service/network";
+import useSelection from "antd/lib/table/hooks/useSelection";
 
 const mapStateToProps = (state) => {
   return{
-    dataSoure: state.index.conveyor.data,
-    conveyorNum: state.index.conveyor.conveyorNum
+    dataSoure: state.index.conveyor.Basicdata,
+    // conveyorNum: state.index.conveyor.conveyorNum
   }
 };
 
 function Basic(props) {
+
   const [showSave, setShowSave ] = useState(false)
   const [showemptyModal, setShowemptyModal] = useState(false);
   const [showcopyModal, setshowcopyModal] = useState(false);
@@ -36,6 +38,18 @@ function Basic(props) {
   const [time, setTime] = useState(props.dataSoure.compensation.time)
   const [encoderVal, setEncoderVal] = useState(props.dataSoure.compensation.encoderVal)
 
+  useEffect(()=>{
+    setMinEncoderVal(props.dataSoure.conveyor.minEncoderVal)
+    setEncoderValue(props.dataSoure.conveyor.encoderValue)
+    setMaxEncoderVal(props.dataSoure.conveyor.maxEncoderVal)
+    setEncoderResolution(props.dataSoure.conveyor.encoderResolution)
+    setEncoderDirection(props.dataSoure.conveyor.encoderDirection)
+    setSpeed(props.dataSoure.conveyor.speed)
+    setUserCoord(props.dataSoure.conveyor.userCoord)
+    setCheckSpeed(props.dataSoure.conveyor.checkSpeed)
+    setTime(props.dataSoure.compensation.time)
+    setEncoderVal(props.dataSoure.compensation.encoderVal)
+  },[props.dataSoure.conveyor])
   const { Option } = Select;
   const conveyorNumchildren = [];
   for (let i = 1; i <10; i++) {
@@ -49,51 +63,54 @@ function Basic(props) {
 
   }
 
-  const encoderDirectionNumchildren = [];
-  for (let i = -1; i <2; i++) {
-    if(i!=0){
-      encoderDirectionNumchildren.push(
-        <Option key={i}>{i==1?"正向":"反向"}</Option>
+    console.log(props)
+    const encoderDirectionNumchildren = [];
+    for (let i = -1; i <2; i++) {
+      if(i!=0){
+        encoderDirectionNumchildren.push(
+          <Option key={i}>{i==1?"正向":"反向"}</Option>
+        );
+      }
+    }
+    const checkSpeedNumchildren = [];
+    for (let i = 0; i <2; i++) {
+      checkSpeedNumchildren.push(
+        <Option key={i}>{i==0?"机器人立即结束":"机器人继续运行"}</Option>
       );
     }
-  }
-  const checkSpeedNumchildren = [];
-  for (let i = 0; i <2; i++) {
-    checkSpeedNumchildren.push(
-      <Option key={i}>{i==0?"机器人立即结束":"机器人继续运行"}</Option>
-    );
-  }
-  const userCoordNumchildren = [];
-  for (let i = 1; i <10; i++) {
-    userCoordNumchildren.push(
-      <Option key={i}>{i}</Option>
-    );
-  }
+    const userCoordNumchildren = [];
+    for (let i = 1; i <10; i++) {
+      userCoordNumchildren.push(
+        <Option key={i}>{i}</Option>
+      );
+    }
 
-  const columns = [
-    {title: "参数",dataIndex: "name", },
-    {title: "值", dataIndex: "money", },
-    {title: "单位", dataIndex: "address",}
-  ];
-  const data = [
-    { key: "1", name:"编码器值",  money: <Input disabled = { Iptdsb } value={encoderValue} onChange={(e)=>{setEncoderValue(e.target.value)}} />, address: "线", },
-    { key: "2", name: "编码器计数最小值", money:<Input disabled = { Iptdsb } value={minEncoderVal} onChange={(e)=>{ setMinEncoderVal(e.target.value) }} />, address: "线", },
-    { key: "3", name: "编码器计数最大值", money: <Input disabled = { Iptdsb } value={maxEncoderVal} onChange={(e)=>{setMaxEncoderVal(e.target.value)}}  />, address: "线", },
-    { key: "4", name: "编码器分辨率", money: <Input disabled = { Iptdsb } value={encoderResolution} onChange={(e)=>{setEncoderResolution(e.target.value)}}  />, address: "线/毫米", },
-    { key: "5", name: "编码器方向", money: <Select  disabled = { Iptdsb } defaultValue={encoderDirection==1?"正向":"反向"}onChange={(e)=>{ setEncoderDirection(e) }} >{encoderDirectionNumchildren}</Select>, address: "", },
-    { key: "6", name: "当前传送带速度", money: <Input disabled = { Iptdsb } value={speed}  onChange={(e)=>{setSpeed(e.target.value)}} />, address: "毫米/秒",},
-    { key: "7", name: "用户坐标系", money: <Select  disabled  = { Iptdsb } defaultValue={userCoord} onChange={(e)=>{ setUserCoord(e) }} >{userCoordNumchildren}</Select>, address: "用户坐标编号", },
-    { key: "8", name: "传送带停止处理",  money: <Select  disabled = { Iptdsb } defaultValue={checkSpeed==0?"机器人立即结束":"机器人继续运行"} onChange = {(e)=>{ setCheckSpeed(e) }}>{checkSpeedNumchildren}</Select>, address: "", },
-  ];
-  const twoColumns = [
-    {title: "参数",dataIndex: "name", },
-    {title: "值", dataIndex: "money", },
-    {title: "单位", dataIndex: "address",}
-  ];
-  const twoData = [
-    { key: "1", name:"时间",  money: <Input disabled = { Iptdsb } value={time} onChange={(e)=>{setTime(e.target.value)}} />, address: "ms", },
-    { key: "2", name: "编码器值", money:<Input disabled = { Iptdsb } value={encoderVal} onChange={(e)=>{setEncoderVal(e.target.value)}} />, address: "线", },
-  ]
+  
+    const columns = [
+      {title: "参数",dataIndex: "name", },
+      {title: "值", dataIndex: "money", },
+      {title: "单位", dataIndex: "address",}
+    ];
+    const data = [
+      { key: "1", name:"编码器值",  money: <Input disabled = { Iptdsb } value={encoderValue} onChange={(e)=>{setEncoderValue(e.target.value)}} />, address: "线", },
+      { key: "2", name: "编码器计数最小值", money:<Input disabled = { Iptdsb } value={minEncoderVal} onChange={(e)=>{ setMinEncoderVal(e.target.value) }} />, address: "线", },
+      { key: "3", name: "编码器计数最大值", money: <Input disabled = { Iptdsb } value={maxEncoderVal} onChange={(e)=>{setMaxEncoderVal(e.target.value)}}  />, address: "线", },
+      { key: "4", name: "编码器分辨率", money: <Input disabled = { Iptdsb } value={encoderResolution} onChange={(e)=>{setEncoderResolution(e.target.value)}}  />, address: "线/毫米", },
+      { key: "5", name: "编码器方向", money: <Select  disabled = { Iptdsb } defaultValue={encoderDirection==1?"正向":"反向"}onChange={(e)=>{ setEncoderDirection(e) }} >{encoderDirectionNumchildren}</Select>, address: "", },
+      { key: "6", name: "当前传送带速度", money: <Input disabled = { Iptdsb } value={speed}  onChange={(e)=>{setSpeed(e.target.value)}} />, address: "毫米/秒",},
+      { key: "7", name: "用户坐标系", money: <Select  disabled  = { Iptdsb } defaultValue={userCoord} onChange={(e)=>{ setUserCoord(e) }} >{userCoordNumchildren}</Select>, address: "用户坐标编号", },
+      { key: "8", name: "传送带停止处理",  money: <Select  disabled = { Iptdsb } defaultValue={checkSpeed==0?"机器人立即结束":"机器人继续运行"} onChange = {(e)=>{ setCheckSpeed(e) }}>{checkSpeedNumchildren}</Select>, address: "", },
+    ];
+    const twoColumns = [
+      {title: "参数",dataIndex: "name", },
+      {title: "值", dataIndex: "money", },
+      {title: "单位", dataIndex: "address",}
+    ];
+    const twoData = [
+      { key: "1", name:"时间",  money: <Input disabled = { Iptdsb } value={time} onChange={(e)=>{setTime(e.target.value)}} />, address: "ms", },
+      { key: "2", name: "编码器值", money:<Input disabled = { Iptdsb } value={encoderVal} onChange={(e)=>{setEncoderVal(e.target.value)}} />, address: "线", },
+    ]
+  
   return (           
     <div className = "backconnect" style={{ height:document.body.clientHeight  * 0.68  }} >
       <div className="connect" >
@@ -153,11 +170,11 @@ function Basic(props) {
       </Modal>
       {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick={()=>{
         let dataList = {
-          robot:"1",
-          conveyorID:props.dataSoure.conveyorID,
+          robot:1,
+          conveyorID:Number(props.dataSoure.conveyorID),
           conveyor:{
-            maxEncoderVal:maxEncoderVal,
-            minEncoderVal:minEncoderVal,
+            maxEncoderVal:Number(maxEncoderVal),
+            minEncoderVal:Number(minEncoderVal),
             encoderDirection:encoderDirection,
             encoderResolution:encoderResolution,
             userCoord:userCoord,

@@ -327,7 +327,31 @@ export default {
               type: "receiveSlaveTypeList",
               data: dataString,
             });
+            break;  
+
+          case "4801":
+            dispatch({
+              type:"changeBasic",
+              data:dataString,
+            })
+          case "4803":
+            dispatch({
+              type:"inquireBasicdata",
+              data:dataString,
+            });
             break;
+          case "4806":
+            dispatch({
+              type:"inquireDiscernData",
+              data:dataString,
+            });
+            break;
+          case "4804":
+              dispatch({
+                type:"changeDiscernData",
+                data:dataString,
+              });
+              break;
           // 接收到报错信息
           case "2b03":
             if (dataString.data === "unInitFinish") {
@@ -668,10 +692,23 @@ export default {
       return _state;
     },
     // 改变工艺中的参数
-    receiveconveyor(state, action) {
+    inquireBasicdata(state, action) {
+      // console.log(state,action)
       let _state = JSON.parse(JSON.stringify(state))
-      _state.conveyor.data = action.data.data
+      _state.conveyor.Basicdata = action.data
       return _state
+    },
+    changeBasic(state, action) {
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.conveyor.Basicdata = action.data
+    },
+    inquireDiscernData(state, action) {
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.conveyor.DiscernData = action.data
+    },
+    changeDiscernData(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.conveyor.DiscernData = action.data
     }
   },
 };

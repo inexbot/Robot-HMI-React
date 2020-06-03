@@ -12,7 +12,7 @@ import {
   Input,
   InputNumber,
   Tooltip,
-  message
+  message,
 } from "antd";
 import { EditOutlined, DeleteOutlined, CopyOutlined } from "@ant-design/icons";
 import { connect } from "dva";
@@ -179,15 +179,14 @@ function Project(props) {
     let programName = "";
     const changeName = (e) => {
       programName = e.target.value;
-      props.project.map(( item , index) => {
-        item.program.map(( item , index) => {
-          if(programName+".JBR" == item.name){
-            message.error("此程序名已存在")
-          }else{
-
+      props.project.map((item, index) => {
+        item.program.map((item, index) => {
+          if (programName + ".JBR" == item.name) {
+            message.error("此程序名已存在");
+          } else {
           }
-        })
-      })
+        });
+      });
     };
 
     //点击修改弹出模态框
@@ -222,50 +221,54 @@ function Project(props) {
           more: (
             <div>
               <Tooltip placement="topLeft" title={"复制此条程序"}>
-              <CopyOutlined
-                onClick={() => {
-                  let newProgramName = ''
-                  confirm({
-                    title: "对新程序进行命名:",
-                    content: <Input allowClear onChange={(e)=>{
-                      newProgramName = e.target.value
-                      props.project.map(( item , index) => {
-                        item.program.map(( item , index) => {
-                          if(newProgramName+".JBR" == item.name){
-                            message.error("此程序名已存在")
-                          }else{
-                
-                          }
-                        })
-                      })
-                    }} />,
-                    onOk() {
-                      let dataList = {
-                        robot: 1,
-                        oldjobName: value.name,
-                        newjobName: newProgramName+".JBR",
-                      };
-                      sendMSGtoServer("COPYPROGRAM_COMMAND", dataList);
-                    },
-                    onCancel() {
-                      console.log("Cancel");
-                    },
-                  });
-                }}
-                style={{ fontSize: 20, paddingRight: 17 }}
-              />
+                <CopyOutlined
+                  onClick={() => {
+                    let newProgramName = "";
+                    confirm({
+                      title: "对新程序进行命名:",
+                      content: (
+                        <Input
+                          allowClear
+                          onChange={(e) => {
+                            newProgramName = e.target.value;
+                            props.project.map((item, index) => {
+                              item.program.map((item, index) => {
+                                if (newProgramName + ".JBR" == item.name) {
+                                  message.error("此程序名已存在");
+                                } else {
+                                }
+                              });
+                            });
+                          }}
+                        />
+                      ),
+                      onOk() {
+                        let dataList = {
+                          robot: 1,
+                          oldjobName: value.name,
+                          newjobName: newProgramName + ".JBR",
+                        };
+                        sendMSGtoServer("COPYPROGRAM_COMMAND", dataList);
+                      },
+                      onCancel() {
+                        console.log("Cancel");
+                      },
+                    });
+                  }}
+                  style={{ fontSize: 20, paddingRight: 17 }}
+                />
               </Tooltip>
               <Tooltip placement="topLeft" title={"重命名"}>
-              <EditOutlined
-                onClick={showamendName.bind(this, value.name)}
-                style={{ fontSize: 20, paddingRight: 17 }}
-              />
+                <EditOutlined
+                  onClick={showamendName.bind(this, value.name)}
+                  style={{ fontSize: 20, paddingRight: 17 }}
+                />
               </Tooltip>
               <Tooltip placement="topLeft" title={"删除此程序"}>
-              <DeleteOutlined
-                onClick={deleteSingleProgram.bind(this, value.name)}
-                style={{ fontSize: 20 }}
-              />
+                <DeleteOutlined
+                  onClick={deleteSingleProgram.bind(this, value.name)}
+                  style={{ fontSize: 20 }}
+                />
               </Tooltip>
             </div>
           ),

@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
       );
     } 
     
-  
+    console.log(props)
     const handleChange =(value) => {
       console.log(`Selected: ${value}`);
     }

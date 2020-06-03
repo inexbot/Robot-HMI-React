@@ -52,27 +52,30 @@ export async function sendMSGtoServer(command, data) {
   dataLength = data !== "" ? JSON.stringify(data).length : 0;
   commandString = commandString === undefined ? command : CommandList[command];
   message.push(0x4e);
-  console.log(message)
   message.push(0x67);
   message.push(dataLength);
   message.push(commandString);
+  console.log(message)
   data === ""
     ? console.error("发送数据为空")
     : message.push(JSON.stringify(data));
   // console.log(message)
   // console.log(dataLength,)
   // console.log(commandString,)
-  // console.log(dataLength,)
+  // console.log(dataLength,data.length)
   // console.log(data)
-  try {
-    if (ws.readyState === 1) {
-      ws.send(message);
-      console.log("发送到服务端", message);
+
+    try {
+      if (ws.readyState === 1) {
+        ws.send(message);
+        console.log("发送到服务端", message);
+      }
+    } catch (e) {
+      // 遇到错误了
+      alert(e);
     }
-  } catch (e) {
-    // 遇到错误了
-    alert(e);
-  }
+
+
 }
 // 解析收到的数据，返回的值为数组，[command,data]，command为字符串，data为json
 export async function comeMessage(message) {
