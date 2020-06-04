@@ -36,7 +36,7 @@ export async function sendMSGtoController(command, data) {
     if (ws.readyState === 1) {
       ws.send(message);
       console.log("发送数据到控制器", message);
-    }
+    } 
   } catch (e) {
     // 遇到错误了
     alert(e);

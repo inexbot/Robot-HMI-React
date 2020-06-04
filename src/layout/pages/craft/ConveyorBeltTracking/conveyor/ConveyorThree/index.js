@@ -9,9 +9,13 @@ import {
   Input,
 } from "antd";
 import { connect } from "dva";
+import {sendMSGtoController} from "service/network";
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    dataSoures:state.index.conveyor.Basicdata,
+    dataSoure:state.index.conveyor.Conveyorsign.ConveyorThree
+  };
 };
 
 function ConveyorsignThree(props) {
@@ -21,9 +25,9 @@ function ConveyorsignThree(props) {
     {title: "单位", dataIndex: "address", },
   ];
   const data = [
-    { key: "1", name:"x",  money: <Input  />, address:"mm"},
-    { key: "2", name: "y", money:<Input  />, address:"mm"},
-    { key: "3", name: "z", money: <Input  />, address:"mm"}
+    { key: "1", name:"x",  money: <Input  disabled  value={props.dataSoure.posX} />, address:"mm"},
+    { key: "2", name: "y", money:<Input  disabled value={props.dataSoure.posY} />, address:"mm"},
+    { key: "3", name: "编码器数值", money: <Input disabled value={props.dataSoure.encodorValue} />, address:"线"}
   ];
 
   return(
@@ -42,13 +46,30 @@ function ConveyorsignThree(props) {
           <img src="../images/conveyorsign.png" style={{ width:"400px" }} />
         </div>
         <Button style = {{ width:"100px",height:"50px", }} onClick = {() =>{
+            let dataList = {
+              robot:1,
+              conveyorID:props.dataSoures.conveyorID,
+            }
+            sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CANCEL",dataList)
+          
             window.location.href = "#/setparameter/conveyorsign"
         }}>取消标定</Button>
         <Button type="primary" shape="round"  style = {{ width:"100px",height:"50px",marginLeft:"12%" }} onClick = {() =>{
-            
+          let dataList = {
+            robot:1,
+            conveyorID:props.dataSoures.conveyorID,
+            posNum:3,
+          }
+          sendMSGtoController("TRACK_CONVEYOR_USERCOORD_CALIBRATION",dataList)
+          sendMSGtoController("RACK_CONVEYOR_CALIBRATION_INQUIRE",dataList)
         }}>标定</Button>
-        <Button type="primary" shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
-           
+        <Button type="primary" danger shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
+          let dataList = {
+            robot:1,
+            conveyorID:props.dataSoures.conveyorID,
+            posNum:3,
+          }
+          sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CLEAR",dataList)
         }}>清除标定线</Button>
         <Button style = {{ width:"100px",height:"50px",marginLeft:"11%" }} onClick = { ()=>{
             window.location.href = "#/setparameter/conveyortwo"

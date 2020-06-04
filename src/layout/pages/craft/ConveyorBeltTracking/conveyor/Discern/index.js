@@ -12,10 +12,9 @@ const mapStateToProps = (state) => {
     };
   };
 
-
   function Disern(props){
 
-
+    const [copycraftNum, setCopycraftNum] = useState(1)
     const [showSave, setShowSave ] = useState(false)
     const [showemptyModal, setShowemptyModal] = useState(false);
     const [showcopyModal, setshowcopyModal] = useState(false);
@@ -30,13 +29,23 @@ const mapStateToProps = (state) => {
     const [DisernidensensorTrg, setDisernidensensorTrg] = useState(props.dataSoure.identification.sensorTrg)
     const [signalSource, setSignalSource] = useState('')
     const { Option } = Select;
+
+
+    useEffect(()=>{
+      let dataList = {
+        robot:1,
+        conveyorID:props.dataSoures.conveyorID
+      }
+      sendMSGtoController("TRACK_CONVEYOR_POSCHECKPARAM_RESPOND",dataList)
+    },[props.dataSoures.conveyorID])
+  
+
     const conveyorNumchildren = [];
     for (let i = 1; i <10; i++) {
       conveyorNumchildren.push(
         <Option key={i}>{  i}</Option>
       );
     } 
-    console.log(props.dataSoure)
     const detectionNumchildren = [];
     for (let i = 0; i <=2; i++) {
       detectionNumchildren.push(
@@ -80,7 +89,7 @@ const mapStateToProps = (state) => {
     
     // console.log(props.conveyorNum)
     const handleChange =(value) => {
-      console.log(`Selected: ${value}`);
+      setCopycraftNum(Number(value))
     }
   
     const columns = [
@@ -112,7 +121,16 @@ const mapStateToProps = (state) => {
         title="提示"
         style={{ top: 100 }}
         visible={showemptyModal}
-        onOk={() => setShowemptyModal(false)}
+        onOk={() => {
+          setShowemptyModal(false)
+          let dataList = {
+            robot:1,
+            conveyorID:props.dataSoure.conveyorID
+          }
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
+        }
+          
+        }
         onCancel={() => setShowemptyModal(false)}
       >
         <p style={{ fontSize: "30px" }}>确定要清空 工艺号1的参数吗？</p>
@@ -124,7 +142,14 @@ const mapStateToProps = (state) => {
         title="提示"
         style={{ top: 100 }}
         visible={showcopyModal}
-        onOk={() => setshowcopyModal(false)}
+        onOk={() => {setshowcopyModal(false) 
+          let dataList = {
+            robot:1,
+            srcConveyorID:props.dataSoure.conveyorID,
+            dstConveyorID:copycraftNum
+          }
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY",dataList)
+        }}
         onCancel={() => setshowcopyModal(false)}
       >
         <p style={{ fontSize: "30px" }}>确定要将当前工艺参数复制到</p>
@@ -143,7 +168,6 @@ const mapStateToProps = (state) => {
         </p>
       </Modal>
         {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {()=>{
-          console.log()
           let dataList = {}
           if(Diserntype == 0){
             dataList = {
@@ -154,9 +178,9 @@ const mapStateToProps = (state) => {
                 visinoID:Number(signalSource),
               },
               identification:{
-                type:Disernidentype,
-                communication:Disernidencommunication,
-                sensorTrg:DisernidensensorTrg
+                type:Number(Disernidentype),
+                communication:Number(Disernidencommunication),
+                sensorTrg:Number(DisernidensensorTrg)
               }
             }
           }else if(Diserntype == 1){
@@ -168,9 +192,9 @@ const mapStateToProps = (state) => {
                 DI_capturePos:0,
               },
               identification:{
-                type:Disernidentype,
-                communication:Disernidencommunication,
-                sensorTrg:DisernidensensorTrg
+                type:Number(Disernidentype),
+                communication:Number(Disernidencommunication),
+                sensorTrg:Number(DisernidensensorTrg)
               }
             }
           }else if(Diserntype == 2){
@@ -178,13 +202,13 @@ const mapStateToProps = (state) => {
               robot:1,
               conveyorID:DisernconveyorID,
               detectSrc:{
-                type:Diserntype,
+                type:Number(Diserntype),
                 globalVar:Number(signalSource)<=9? "GB00"+signalSource : Number(signalSource)<=99?"GB0"+signalSource : "GB"+signalSource ,
               },
               identification:{
-                type:Disernidentype,
-                communication:Disernidencommunication,
-                sensorTrg:DisernidensensorTrg
+                type:Number(Disernidentype),
+                communication:Number(Disernidencommunication),
+                sensorTrg:Number(DisernidensensorTrg)
               }
             }
           }
@@ -198,6 +222,8 @@ const mapStateToProps = (state) => {
           setIptdsb(false)
         }} >修改</Button> }
         <Button
+        type="primary"
+        danger 
         style={{ width: "100px", height: "50px", marginLeft: `${showSave?"28" :"34"}%` }}
         onClick={() => {
           setShowemptyModal(true);

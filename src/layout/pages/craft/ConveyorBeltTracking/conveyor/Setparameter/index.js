@@ -70,19 +70,16 @@ function Setparameter() {
   };
 
   const handleChange =(value) => {
-    console.log(`Selected: ${value}`);
     let dataList = {
       robot:1,
       conveyorID:Number(value),
     }
-    console.log(dataList)
     sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE",dataList)
-
-    sendMSGtoController("TRACK_CONVEYOR_POSCHECKPARAM_RESPOND",dataList)
   }
 
+
+
   useEffect(()=>{
-    console.log(window.location.hash)
     switch(window.location.hash){
       case "#/setparameter/basic":
         setRouterBtn("basic")

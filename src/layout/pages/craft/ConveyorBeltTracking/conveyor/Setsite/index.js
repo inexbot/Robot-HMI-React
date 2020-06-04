@@ -1,18 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, notification, ConfigProvider, Select, Divider,Input, Modal} from "antd";
 import { connect } from "dva";
+import { sendMSGtoController } from "service/network";
 
 
 const mapStateToProps = (state) => {
     return {
-      
+      dataSoure: state.index.conveyor.Basicdata,
+      Setsite: state.index.conveyor.Setsite
     };
   };
 
   function Setsite(props){
+
+    const [copycraftNum, setCopycraftNum] = useState(1)
     const [showSave, setShowSave ] = useState(false)
     const [showemptyModal, setShowemptyModal] = useState(false);
     const [showcopyModal, setshowcopyModal] = useState(false);
+    const [Iptdsb, setIptdsb ] = useState(true)
+    const [trackStartXPoint,setTrackStartXPoint] = useState(props.Setsite.position.trackStartXPoint)
+    const [trackRangeXMax,setTrackRangeXMax] = useState(props.Setsite.position.trackRangeXMax)
+    const [trackRangeYMin,setTrackRangeYMin] = useState(props.Setsite.position.trackRangeYMin)
+    const [trackRangeYMax,setTrackRangeYMax] = useState(props.Setsite.position.trackRangeYMax)
+    const [trackRangeZMin,setTrackRangeZMin] = useState(props.Setsite.position.trackRangeZMin)
+    const [trackRangeZMax,setTrackRangeZMax] = useState(props.Setsite.position.trackRangeZMax)
+    const [grabheight,setGrabheight] = useState(props.Setsite.position.grabheight)
+
+
+    useEffect(()=>{
+      setTrackStartXPoint(props.Setsite.position.trackStartXPoint)
+      setTrackRangeXMax(props.Setsite.position.trackRangeXMax)
+      setTrackRangeYMin(props.Setsite.position.trackRangeYMin)
+      setTrackRangeYMax(props.Setsite.position.trackRangeYMax)
+      setTrackRangeZMin(props.Setsite.position.trackRangeZMin)
+      setTrackRangeZMax(props.Setsite.position.trackRangeZMax)
+      setGrabheight(props.Setsite.position.grabheight)
+    },[props.Setsite])
   
     const { Option } = Select;
     const conveyorNumchildren = [];
@@ -21,12 +44,37 @@ const mapStateToProps = (state) => {
         <Option key={i}>{  i}</Option>
       );
     } 
+    useEffect(()=>{
+      let dataList = {
+        robot:1,
+        conveyorID:props.dataSoure.conveyorID
+      }
+      sendMSGtoController("TRACK_CONVEYOR_POSITION_RESPOND",dataList)
+    },[props.dataSoure.conveyorID])
     
-  
+    
     const handleChange =(value) => {
-      console.log(`Selected: ${value}`);
+      setCopycraftNum(Number(value))
     }
-  
+
+    const sendinquiredemarcate = ( value ) =>{
+      let dataList = {
+        robot:1,
+        conveyorID:props.dataSoure.conveyorID,
+        type:value
+      }
+      sendMSGtoController("TRACK_CONVEYOR_POSITION_CALIBRATION",dataList)
+    }
+    
+    const sendmoveSetsite = (value) =>{
+      let dataList = {
+        robot:1,
+        conveyorID:props.dataSoure.conveyorID,
+        type:value
+      }
+      sendMSGtoController("TRACK_CONVEYOR_POSITION_TO_MOVE",dataList)
+    }
+
     const columns = [
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
@@ -34,13 +82,20 @@ const mapStateToProps = (state) => {
       {title: "移动", dataIndex:"move"}
     ];
     const data = [
-      { key: "1", name: "跟踪开始X点",  money: <Input  />, address:<Button>标记</Button>,move:<Button>至此</Button> },
-      { key: "1", name: "跟踪范围X最大",  money: <Input  />, address:<Button>标记</Button>,move:<Button>至此</Button> },
-      { key: "1", name: "跟踪范围Y最小",  money: <Input  />, address:<Button>标记</Button>,move:<Button>至此</Button> },
-      { key: "1", name: "跟踪范围Y最大",  money: <Input  />, address:<Button>标记</Button>,move:<Button>至此</Button> },
-      { key: "1", name: "跟踪范围Z最小",  money: <Input  />, address:<Button>标记</Button>,move:<Button>至此</Button> },
-      { key: "1", name: "跟踪范围Z最大",  money: <Input  />, address:<Button>标记</Button>,move:<Button>至此</Button> },
-      { key: "1", name: "最迟接收位置",  money: <Input  />, address:<Button>标记</Button>,move:<Button>至此</Button> },
+      { key: "1", name: "跟踪开始X点",  money: <Input  disabled = { Iptdsb } value={trackStartXPoint}  onChange={(e)=>{ setTrackStartXPoint(e.target.value) }}/>,
+       address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,1)}>标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,1)}>至此</Button> },
+      { key: "1", name: "跟踪范围X最大",  money: <Input  disabled = { Iptdsb } value={trackRangeXMax}  onChange={(e)=>{ setTrackRangeXMax(e.target.value) }}/>,
+       address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,2)}>标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,2)}>至此</Button> },
+      { key: "1", name: "跟踪范围Y最小",  money: <Input  disabled = { Iptdsb } value={trackRangeYMin}  onChange={(e)=>{ setTrackRangeYMin(e.target.value) }}/>,
+       address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,3)}>标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,3)}>至此</Button> },
+      { key: "1", name: "跟踪范围Y最大",  money: <Input  disabled = { Iptdsb } value={trackRangeYMax}  onChange={(e)=>{ setTrackRangeYMax(e.target.value) }}/>,
+       address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,4)}>  标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,4)}>至此</Button> },
+      { key: "1", name: "跟踪范围Z最小",  money: <Input  disabled = { Iptdsb } value={trackRangeZMin}  onChange={(e)=>{ setTrackRangeZMin(e.target.value) }}/>,
+       address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,5)}>标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,5)}>至此</Button> },
+      { key: "1", name: "跟踪范围Z最大",  money: <Input  disabled = { Iptdsb } value={trackRangeZMax}  onChange={(e)=>{  setTrackRangeZMax(e.target.value)}}/>,
+       address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,6)}>标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,6)}>至此</Button> },
+      { key: "1", name: "最迟接收位置",  money: <Input disabled = { Iptdsb } value={grabheight} onChange={(e)=>{ setGrabheight(e.target.value) }}/>,
+       address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,7)} >标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,7)}>至此</Button> },
     ];
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68,marginLeft:"0" }}>
@@ -59,7 +114,14 @@ const mapStateToProps = (state) => {
           title="提示"
           style={{ top: 100 }}
           visible={showemptyModal}
-          onOk={() => setShowemptyModal(false)}
+          onOk={() => {
+            setShowemptyModal(false)
+            let dataList = {
+              robot:1,
+              conveyorID:props.dataSoure.conveyorID
+            }
+            sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
+          }}
           onCancel={() => setShowemptyModal(false)}
         >
           <p style={{ fontSize: "30px" }}>确定要清空 工艺号1的参数吗？</p>
@@ -71,7 +133,14 @@ const mapStateToProps = (state) => {
           title="提示"
           style={{ top: 100 }}
           visible={showcopyModal}
-          onOk={() => setshowcopyModal(false)}
+          onOk={() => {setshowcopyModal(false)
+            let dataList = {
+              robot:1,
+              srcConveyorID:props.dataSoure.conveyorID,
+              dstConveyorID:copycraftNum
+            }
+            sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY",dataList)
+          }}
           onCancel={() => setshowcopyModal(false)}
         >
           <p style={{ fontSize: "30px" }}>确定要将当前工艺参数复制到</p>
@@ -89,13 +158,32 @@ const mapStateToProps = (state) => {
             </div>
           </p>
         </Modal>
-        {showSave ? <div style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px", }} >保存</Button>
+        {showSave ? <div style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px", }} onClick={()=>{
+          let dataList = {
+            robot:1,
+            conveyorID:props.dataSoure.conveyorID,
+            position:{
+              trackStartXPoint:trackStartXPoint,
+              trackRangeXMax:trackRangeXMax,
+              trackRangeYMin:trackRangeYMin,
+              trackRangeYMax:trackRangeYMax,
+              trackRangeZMin:trackRangeZMin,
+              trackRangeZMax:trackRangeZMax,
+              grabheight:grabheight
+            }
+          }
+          sendMSGtoController("TRACK_CONVEYOR_POSITION_SET",dataList)
+        }} >保存</Button>
         <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
           setShowSave(false)
+          setIptdsb(true)
         }}>取消</Button></div> : <Button  style = {{ width:"100px",height:"50px", }} onClick = {()=>{
           setShowSave(true)
+          setIptdsb(false)
         }} >修改</Button> }
         <Button
+        type="primary"
+        danger
         style={{ width: "100px", height: "50px", marginLeft: `${showSave?"28" :"34"}%`  }}
         onClick={() => {
           setShowemptyModal(true);
@@ -103,7 +191,7 @@ const mapStateToProps = (state) => {
         >
           清空参数
         </Button>
-        <Button style={{ width: "100px", height: "50px" }} onClick={() => {
+        <Button type="primary" style={{ width: "100px", height: "50px" }} onClick={() => {
           setshowcopyModal(true)
         }}>
           复制参数

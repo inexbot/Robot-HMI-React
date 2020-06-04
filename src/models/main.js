@@ -352,6 +352,28 @@ export default {
                 data:dataString,
               });
               break;
+          case "4813":
+              dispatch({
+                type:"inquireDiscernOne",
+                data:dataString,
+              })
+          case "4832":
+              dispatch({
+                type:"inquireSetsite",
+                data:dataString,
+              });
+              break;
+          case "4834":
+              dispatch({
+                type:"inquiredemarcate",
+                data:dataString
+              });
+              break;
+          case "4837":
+              dispatch({
+                type:"moveSetsite",
+                data:dataString
+              })
           // 接收到报错信息
           case "2b03":
             if (dataString.data === "unInitFinish") {
@@ -693,7 +715,6 @@ export default {
     },
     // 改变工艺中的参数
     inquireBasicdata(state, action) {
-      // console.log(state,action)
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.Basicdata = action.data
       return _state
@@ -701,14 +722,48 @@ export default {
     changeBasic(state, action) {
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.Basicdata = action.data
+      return _state
     },
     inquireDiscernData(state, action) {
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.DiscernData = action.data
+      return _state
     },
     changeDiscernData(state, action){
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.DiscernData = action.data
+      return _state
+    },
+    inquireSetsite(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.conveyor.DiscernDate = action.data
+      return _state
+    },
+    inquiredemarcate(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      let Num = 0
+      for( let key in _state.conveyor.Setsite.position){
+        Num++
+        if(Num == action.data.type){
+          _state.conveyor.Setsite.position[key] = action.data.value
+          return _state
+        }
+      }
+    },
+    moveSetsite(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      return _state
+    },
+    inquireDiscernOne(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      if(action.data.posNum == 1){
+        _state.conveyor.Conveyorsign.ConveyorOne = action.data
+      }else if(action.data.posNum == 2){
+        _state.conveyor.Conveyorsign.ConveyorTwo = action.data
+      }else if(action.data.posNum == 3){
+        _state.conveyor.Conveyorsign.ConveyorThree = action.data
+      }
+      return _state
     }
   },
 };

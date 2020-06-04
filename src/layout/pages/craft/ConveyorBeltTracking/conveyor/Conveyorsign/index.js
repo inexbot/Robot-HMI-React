@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, notification, ConfigProvider, Select, Divider, Input, Modal} from "antd";
 import { connect } from "dva";
+import { sendMSGtoController } from "service/network";
+
 
 const mapStateToProps = (state) => {
     return {
+      dataSoure: state.index.conveyor.Basicdata,
     };
   };
 
 
   function Conveyorsign(props){
+    const [copycraftNum, setCopycraftNum] = useState(1)
     const [showSave, setShowSave ] = useState(false)
     const [showemptyModal, setShowemptyModal] = useState(false);
     const [showcopyModal, setshowcopyModal] = useState(false);
@@ -21,9 +25,8 @@ const mapStateToProps = (state) => {
       );
     } 
     
-    console.log(props)
     const handleChange =(value) => {
-      console.log(`Selected: ${value}`);
+      setCopycraftNum(Number(value))
     }
   
     const columns = [
@@ -54,7 +57,14 @@ const mapStateToProps = (state) => {
         title="提示"
         style={{ top: 100 }}
         visible={showemptyModal}
-        onOk={() => setShowemptyModal(false)}
+        onOk={() => {
+          setShowemptyModal(false)
+          let dataList = {
+            robot:1,
+            conveyorID:props.dataSoure.conveyorID
+          }
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
+        }}
         onCancel={() => setShowemptyModal(false)}
       >
         <p style={{ fontSize: "30px" }}>确定要清空 工艺号1的参数吗？</p>
@@ -66,7 +76,14 @@ const mapStateToProps = (state) => {
         title="提示"
         style={{ top: 100 }}
         visible={showcopyModal}
-        onOk={() => setshowcopyModal(false)}
+        onOk={() => {setshowcopyModal(false) 
+          let dataList = {
+            robot:1,
+            srcConveyorID:props.dataSoure.conveyorID,
+            dstConveyorID:copycraftNum
+          }
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY",dataList)
+        }}
         onCancel={() => setshowcopyModal(false)}
       >
         <p style={{ fontSize: "30px" }}>确定要将当前工艺参数复制到</p>
@@ -89,7 +106,6 @@ const mapStateToProps = (state) => {
           setShowSave(false)
         }}>取消</Button>
         <Button style = {{ width:"100px",height:"50px" }} onClick = {() => {
-          console.log(window.location.href)
           window.location.href = "#/setparameter/conveyorone"
         }}> 开始标定 </Button>
         </span>
@@ -97,6 +113,8 @@ const mapStateToProps = (state) => {
           setShowSave(true)
         }} >修改</Button> }
         <Button
+        type="primary"
+        danger
         style={{ width: "100px", height: "50px", marginLeft: `${showSave?"23" :"34"}%` }}
         onClick={() => {
           setShowemptyModal(true);
@@ -104,7 +122,7 @@ const mapStateToProps = (state) => {
       >
         清空参数
       </Button>
-      <Button style={{ width: "100px", height: "50px" }} onClick={() => {
+      <Button type="primary" style={{ width: "100px", height: "50px" }} onClick={() => {
         setshowcopyModal(true)
       }}>
         复制参数

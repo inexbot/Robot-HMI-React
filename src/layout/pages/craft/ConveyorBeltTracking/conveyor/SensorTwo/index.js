@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
           <Button type="primary" shape="round"  style = {{ width:"100px",height:"50px",marginLeft:"12%" }} onClick = {() =>{
               
           }}>标定</Button>
-          <Button type="primary" shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
+          <Button danger type="primary" shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
              
           }}>清除标定线</Button>
           <Button style = {{ width:"100px",height:"50px",marginLeft:"11%" }} onClick = { ()=>{

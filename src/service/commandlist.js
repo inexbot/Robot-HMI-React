@@ -311,7 +311,7 @@ export const CommandList = {
     //   }
     // }  
 
-
+ 
   // 传送带坐标系标定
     // 计算用户坐标系
     TRACK_CONVEYOR_USERCOORD_CALCULATE:0x4810,

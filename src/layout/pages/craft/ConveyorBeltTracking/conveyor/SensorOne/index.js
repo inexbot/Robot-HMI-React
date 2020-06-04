@@ -38,13 +38,13 @@ const mapStateToProps = (state) => {
         <div style={{ position:"absolute",left:"50%",top:"23%" }}>
           <img src="../images/sensorsign.png" style={{ width:"400px" }} />
         </div>
-          <Button style = {{ width:"100px",height:"50px", }} onClick = {() =>{
+          <Button  style = {{ width:"100px",height:"50px", }} onClick = {() =>{
               window.location.href = "#/setparameter/sensorsign"
           }}>取消标定</Button>
           <Button type="primary" shape="round"  style = {{ width:"100px",height:"50px",marginLeft:"12%" }} onClick = {() =>{
               
           }}>标定</Button>
-          <Button type="primary" shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
+          <Button danger type="primary" shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
              
           }}>清除标定线</Button>
           <Button style = {{ width:"100px",height:"50px",marginLeft:"16%" }} onClick = { ()=>{
