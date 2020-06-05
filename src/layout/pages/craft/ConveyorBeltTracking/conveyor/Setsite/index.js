@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
   };
 
   function Setsite(props){
-
+    console.log(props)
     const [copycraftNum, setCopycraftNum] = useState(1)
     const [showSave, setShowSave ] = useState(false)
     const [showemptyModal, setShowemptyModal] = useState(false);
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
       setTrackRangeZMin(props.Setsite.position.trackRangeZMin)
       setTrackRangeZMax(props.Setsite.position.trackRangeZMax)
       setGrabheight(props.Setsite.position.grabheight)
-    },[props.Setsite])
+    },[props.Setsite.conveyorID])
   
     const { Option } = Select;
     const conveyorNumchildren = [];
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
         robot:1,
         conveyorID:props.dataSoure.conveyorID
       }
-      sendMSGtoController("TRACK_CONVEYOR_POSITION_RESPOND",dataList)
+      sendMSGtoController("TRACK_CONVEYOR_POSITION_INQUIRE",dataList)
     },[props.dataSoure.conveyorID])
     
     
@@ -163,13 +163,13 @@ const mapStateToProps = (state) => {
             robot:1,
             conveyorID:props.dataSoure.conveyorID,
             position:{
-              trackStartXPoint:trackStartXPoint,
-              trackRangeXMax:trackRangeXMax,
-              trackRangeYMin:trackRangeYMin,
-              trackRangeYMax:trackRangeYMax,
-              trackRangeZMin:trackRangeZMin,
-              trackRangeZMax:trackRangeZMax,
-              grabheight:grabheight
+              trackStartXPoint:Number(trackStartXPoint),
+              trackRangeXMax:Number(trackRangeXMax),
+              trackRangeYMin:Number(trackRangeYMin),
+              trackRangeYMax:Number(trackRangeYMax),
+              trackRangeZMin:Number(trackRangeZMin),
+              trackRangeZMax:Number(trackRangeZMax),
+              grabheight:Number(grabheight)
             }
           }
           sendMSGtoController("TRACK_CONVEYOR_POSITION_SET",dataList)

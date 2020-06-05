@@ -3,6 +3,7 @@ import { Table, Button, notification, ConfigProvider, Select, Divider, Input } f
 import { connect } from "dva";
 import "./index.css"
 import { sendMSGtoController } from "service/network";
+import { useHistory } from 'react-router-dom';
 
   const mapStateToProps = (state) => {
     return {
@@ -12,6 +13,7 @@ import { sendMSGtoController } from "service/network";
   };
   
   function ConveyorsignTwo(props){
+  let history = useHistory();
   const columns = [
     {title: "参数",dataIndex: "name", },
     {title: "值", dataIndex: "money", },
@@ -44,8 +46,7 @@ import { sendMSGtoController } from "service/network";
             conveyorID:props.dataSoures.conveyorID,
           }
           sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CANCEL",dataList)
-
-          window.location.href = "#/setparameter/conveyorsign"
+          history.push('/setparameter/conveyorsign');
         }}>取消标定</Button>
         <Button type="primary" shape="round"  style = {{ width:"100px",height:"50px",marginLeft:"12%" }} onClick = {() =>{
           let dataList = {
@@ -65,10 +66,10 @@ import { sendMSGtoController } from "service/network";
           sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CLEAR",dataList)
         }}>清除标定线</Button>
         <Button style = {{ width:"100px",height:"50px",marginLeft:"11%" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyorone"
+            history.push('/setparameter/conveyorone');
         }}>上一步 </Button>
         <Button style = {{ width:"100px",height:"50px" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyorthree"
+            history.push('/setparameter/conveyorthree');
         }}>下一步 </Button>
        
     </div>

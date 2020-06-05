@@ -2,24 +2,39 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, notification, ConfigProvider, Select, Divider, Input } from "antd";
 import { connect } from "dva";
 import "./index.css"
+import { sendMSGtoController } from "service/network";
+import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
     return {
+      dataSoures: state.index.conveyor.Basicdata,
+      dataSoure: state.index.conveyor.SensorOne,
+      List: state.index.conveyor.SensorTwo,
     };
   };
 
   function SensorOne(props){
+    let history = useHistory();
+    console.log(props)
+    useEffect(()=>{
+      let dataList = {
+        robot:1,
+        conveyorID:props.dataSoures.conveyorID
+      }
+      sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_CALIBRATION_INQUIRE",dataList)
+    },[props.dataSoures.conveyorID])
 
     const columns = [
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
       {title: "单位", dataIndex: "address", },
     ];
+    console.log("12",props.dataSoure.sensorCalibration)
     const data = [
-      { key: "1", name:"传感器编码器数值",  money: <Input  />, address:"线"},
-      { key: "2", name: "标定点编码器数值", money:<Input  />, address:"线"},
-      { key: "3", name: "标定点X", money: <Input  />, address:"mm"},
-      { key: "3", name: "标定点Y", money: <Input  />, address:"mm"}
+      { key: "1", name:"传感器编码器数值",  money: <Input disabled value={props.dataSoure.sensorCalibration.IO_encodorValue} />, address:"线"},
+      { key: "2", name: "标定点编码器数值", money:<Input disabled value={props.dataSoure.sensorCalibration.calib_encodorValue} />, address:"线"},
+      { key: "3", name: "标定点X", money: <Input disabled value={props.dataSoure.sensorCalibration.calib_X} />, address:"mm"},
+      { key: "3", name: "标定点Y", money: <Input disabled value={props.dataSoure.sensorCalibration.calib_Y} />, address:"mm"}
     ];
 
     return(
@@ -39,16 +54,30 @@ const mapStateToProps = (state) => {
           <img src="../images/sensorsign.png" style={{ width:"400px" }} />
         </div>
           <Button  style = {{ width:"100px",height:"50px", }} onClick = {() =>{
-              window.location.href = "#/setparameter/sensorsign"
+              let dataList = {
+                robot:1,
+                conveyorID:props.dataSoures.conveyorID
+              }
+              sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_CALIBRATION_CANCEL",dataList)
+              history.push('/setparameter/sensorsign');
           }}>取消标定</Button>
           <Button type="primary" shape="round"  style = {{ width:"100px",height:"50px",marginLeft:"12%" }} onClick = {() =>{
-              
+              let dataList = {
+                robot:1,
+                conveyorID:props.dataSoures.conveyorID
+              }
+              sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_CALIBRATE",dataList)
           }}>标定</Button>
           <Button danger type="primary" shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
-             
+              let dataList = {
+                robot:1,
+                conveyorID:props.dataSoures.conveyorID,
+                type:0
+              }
+              sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_CALIBRATION_CLEAR",dataList)
           }}>清除标定线</Button>
           <Button style = {{ width:"100px",height:"50px",marginLeft:"16%" }} onClick = { ()=>{
-              window.location.href = "#/setparameter/sensortwo"
+              history.push('/setparameter/sensortwo');
           }}>下一步 </Button>
          
       </div>

@@ -81,7 +81,16 @@ function Basic(props) {
       );
     }
 
-  
+    useEffect(()=>{
+      setInterval(() => {
+        let dataList = {
+          robot:1,
+          conveyorID:props.dataSoure.conveyorID,
+        }
+        sendMSGtoController("TRACK_CONVEYOR_REALTIME_INQUIRE",dataList)
+      },1000);
+    },[])
+
     const columns = [
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
@@ -92,10 +101,10 @@ function Basic(props) {
       { key: "2", name: "编码器计数最小值", money:<Input disabled = { Iptdsb } value={minEncoderVal} onChange={(e)=>{ setMinEncoderVal(e.target.value) }} />, address: "线", },
       { key: "3", name: "编码器计数最大值", money: <Input disabled = { Iptdsb } value={maxEncoderVal} onChange={(e)=>{setMaxEncoderVal(e.target.value)}}  />, address: "线", },
       { key: "4", name: "编码器分辨率", money: <Input disabled = { Iptdsb } value={encoderResolution} onChange={(e)=>{setEncoderResolution(e.target.value)}}  />, address: "线/毫米", },
-      { key: "5", name: "编码器方向", money: <Select  disabled = { Iptdsb } defaultValue={encoderDirection==1?"正向":"反向"}onChange={(e)=>{ setEncoderDirection(e) }} >{encoderDirectionNumchildren}</Select>, address: "", },
+      { key: "5", name: "编码器方向", money:Iptdsb?  <Input disabled={Iptdsb} value={encoderDirection==1?"正向":"反向"} /> : <Select  disabled = { Iptdsb } defaultValue={encoderDirection==1?"正向":"反向"}onChange={(e)=>{ setEncoderDirection(e) }} >{encoderDirectionNumchildren}</Select>, address: "", },
       { key: "6", name: "当前传送带速度", money: <Input disabled = { Iptdsb } value={speed}  onChange={(e)=>{setSpeed(e.target.value)}} />, address: "毫米/秒",},
-      { key: "7", name: "用户坐标系", money: <Select  disabled  = { Iptdsb } defaultValue={userCoord} onChange={(e)=>{ setUserCoord(e) }} >{userCoordNumchildren}</Select>, address: "用户坐标编号", },
-      { key: "8", name: "传送带停止处理",  money: <Select  disabled = { Iptdsb } defaultValue={checkSpeed==0?"机器人立即结束":"机器人继续运行"} onChange = {(e)=>{ setCheckSpeed(e) }}>{checkSpeedNumchildren}</Select>, address: "", },
+      { key: "7", name: "用户坐标系", money:Iptdsb?  <Input disabled={Iptdsb}  value={userCoord} /> : <Select  disabled  = { Iptdsb } defaultValue={userCoord} onChange={(e)=>{ setUserCoord(e) }} >{userCoordNumchildren}</Select>, address: "用户坐标编号", },
+      { key: "8", name: "传送带停止处理",  money:Iptdsb?  <Input disabled={Iptdsb} value={checkSpeed==0?"机器人立即结束":"机器人继续运行"} /> : <Select  disabled = { Iptdsb } defaultValue={checkSpeed==0?"机器人立即结束":"机器人继续运行"} onChange = {(e)=>{ setCheckSpeed(e) }}>{checkSpeedNumchildren}</Select>, address: "", },
     ];
     const twoColumns = [
       {title: "参数",dataIndex: "name", },

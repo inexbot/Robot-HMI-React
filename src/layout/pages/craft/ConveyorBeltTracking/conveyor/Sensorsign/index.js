@@ -12,22 +12,25 @@ import {
 import { connect } from "dva";
 import "./index.css";
 import { sendMSGtoController } from "service/network";
+import { useHistory } from 'react-router-dom';
 
 
 const mapStateToProps = (state) => {
   return {
-    dataSoure: state.index.conveyor.Basicdata,
+    dataSoures: state.index.conveyor.Basicdata,
+    dataSoure: state.index.conveyor.Sensorsign
   };
 };
 
 function Sensorsign(props) {
+  let history = useHistory();
   const [copycraftNum, setCopycraftNum] = useState(1)
   const [showSave, setShowSave] = useState(false);
   const [showemptyModal, setShowemptyModal] = useState(false);
   const [showcopyModal, setshowcopyModal] = useState(false);
 
   const { Option } = Select;
-
+  console.log(props)
   const columns = [
     { title: "参数", dataIndex: "name" },
     { title: "值", dataIndex: "money" },
@@ -41,24 +44,21 @@ function Sensorsign(props) {
     );
   } 
   
+  useEffect(()=>{
+    let dataList = {
+      robot:1,
+      conveyorID:props.dataSoures.conveyorID
+    }
+    sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_INQUIRE",dataList)
+  },[props.dataSoures.conveyorID])
 
   const handleChange =(value) => {
     setCopycraftNum(Number(value))
   }
 
   const data = [
-    {
-      key: "1",
-      name: "传感器在传送带坐标系X轴的位置",
-      money: <Input />,
-      address: "mm",
-    },
-    {
-      key: "2",
-      name: "传感器在传送带坐标系Y轴的位置",
-      money: <Input />,
-      address: "mm",
-    },
+    { key: "1",   name: "传感器在传送带坐标系X轴的位置", money: <Input disabled value={props.dataSoure.sensorPos.X}  />, address: "mm", },
+    { key: "2",   name: "传感器在传送带坐标系Y轴的位置", money: <Input disabled value={props.dataSoure.sensorPos.Y}  />, address: "mm", },
   ];
   return (
     <div
@@ -76,7 +76,7 @@ function Sensorsign(props) {
           setShowemptyModal(false)
           let dataList = {
             robot:1,
-            conveyorID:props.dataSoure.conveyorID
+            conveyorID:props.dataSoures.conveyorID
           }
           sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
         }}
@@ -94,7 +94,7 @@ function Sensorsign(props) {
         onOk={() => {setshowcopyModal(false) 
           let dataList = {
             robot:1,
-            srcConveyorID:props.dataSoure.conveyorID,
+            srcConveyorID:props.dataSoures.conveyorID,
             dstConveyorID:copycraftNum
           }
           sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY",dataList)
@@ -133,7 +133,8 @@ function Sensorsign(props) {
           <Button
             style={{ width: "100px", height: "50px" }}
             onClick={() => {
-              window.location.href = "#/setparameter/sensorOne";
+
+              history.push('/setparameter/sensorOne');
             }}
           >
             开始标定

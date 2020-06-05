@@ -66,7 +66,34 @@ export const conveyor = {
         posY:0.3,
         encodorValue:2
       },
-
+    },
+    Sensorsign:{
+      robot:1,
+      conveyorID:1,
+      sensorPos:{
+        X:22,
+        Y:33
+      }
+    },
+    SensorOne:{
+      robot:1,
+      conveyorID:1,
+      sensorCalibration:{
+        IO_encodorValue:1,
+        calib_encodorValue:2,
+        calib_X:3,
+        calib_Y:4
+      }
+    },
+    SensorTwo:{
+      robot:1,
+      conveyorID:2,
+      grabGesture:{
+        Z:1,
+        A:2,
+        B:3,
+        C:4
+      }
     }
 }
 

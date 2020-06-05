@@ -328,12 +328,12 @@ export default {
               data: dataString,
             });
             break;  
-
           case "4801":
             dispatch({
               type:"changeBasic",
               data:dataString,
             })
+            break;
           case "4803":
             dispatch({
               type:"inquireBasicdata",
@@ -346,17 +346,35 @@ export default {
               data:dataString,
             });
             break;
-          case "4804":
-              dispatch({
-                type:"changeDiscernData",
-                data:dataString,
-              });
-              break;
+          case  "4808":
+            dispatch({
+              type:"realtimeencodervalue",
+              data:dataString,
+            })
           case "4813":
               dispatch({
                 type:"inquireDiscernOne",
                 data:dataString,
-              })
+              });
+              break;
+          case "4817":
+              dispatch({
+                type:"inquireSensorsign",
+                data:dataString
+              });
+              break;
+          case "4819":
+              dispatch({
+                type:"inquireSensorsignOne",
+                data:dataString
+              });
+              break;
+          case "481d":
+              dispatch({
+                type:"inquireSensorsignTwo",
+                data:dataString
+              });
+              break;
           case "4832":
               dispatch({
                 type:"inquireSetsite",
@@ -373,7 +391,8 @@ export default {
               dispatch({
                 type:"moveSetsite",
                 data:dataString
-              })
+              });
+              break;
           // 接收到报错信息
           case "2b03":
             if (dataString.data === "unInitFinish") {
@@ -391,9 +410,7 @@ export default {
               });
               break;
             }
-          // case "2b05":
-            
-          //   break;
+
             console.error(dataString.data);
             notification.error({
               message: "报错！",
@@ -713,32 +730,32 @@ export default {
         action.data.outerAmount;
       return _state;
     },
-    // 改变工艺中的参数
+    // 获取基本信息的参数
     inquireBasicdata(state, action) {
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.Basicdata = action.data
       return _state
     },
+    // 设置基本信息的参数
     changeBasic(state, action) {
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.Basicdata = action.data
       return _state
     },
+    // 获取识别参数的参数
     inquireDiscernData(state, action) {
       let _state = JSON.parse(JSON.stringify(state))
+      console.log(action.data,_state)
       _state.conveyor.DiscernData = action.data
       return _state
     },
-    changeDiscernData(state, action){
-      let _state = JSON.parse(JSON.stringify(state))
-      _state.conveyor.DiscernData = action.data
-      return _state
-    },
+    // 获取位置设置的参数
     inquireSetsite(state, action){
       let _state = JSON.parse(JSON.stringify(state))
-      _state.conveyor.DiscernDate = action.data
+      _state.conveyor.Setsite = action.data
       return _state
     },
+    // 点击标记获取的参数
     inquiredemarcate(state, action){
       let _state = JSON.parse(JSON.stringify(state))
       let Num = 0
@@ -750,10 +767,12 @@ export default {
         }
       }
     },
+    // 清空传送带参数
     moveSetsite(state, action){
       let _state = JSON.parse(JSON.stringify(state))
       return _state
     },
+    // 标定取坐标
     inquireDiscernOne(state, action){
       let _state = JSON.parse(JSON.stringify(state))
       if(action.data.posNum == 1){
@@ -763,6 +782,33 @@ export default {
       }else if(action.data.posNum == 3){
         _state.conveyor.Conveyorsign.ConveyorThree = action.data
       }
+      return _state
+    },
+    // 传感器位置查询
+    inquireSensorsign(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      console.log( _state.conveyor)
+      _state.conveyor.Sensorsign = action.data
+      console.log("121",_state)
+      return _state
+    },
+    // 传感器位置参数标定
+    inquireSensorsignOne(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      console.log("123")
+      _state.conveyor.SensorOne = action.data
+      return _state
+    },
+    // 传感器跟踪抓取姿态参数查询
+    inquireSensorsignTwo(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      console.log(_state,action.data)
+      _state.conveyor.SensorTwo = action.data
+      return _state
+    },
+    realtimeencodervalue(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.conveyor.Basicdata.conveyor.encoderValue = action.data.conveyor.encoderValue
       return _state
     }
   },

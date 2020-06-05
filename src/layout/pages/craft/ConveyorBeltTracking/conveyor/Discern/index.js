@@ -30,15 +30,31 @@ const mapStateToProps = (state) => {
     const [signalSource, setSignalSource] = useState('')
     const { Option } = Select;
 
-
+    console.log(props)
     useEffect(()=>{
       let dataList = {
         robot:1,
         conveyorID:props.dataSoures.conveyorID
       }
-      sendMSGtoController("TRACK_CONVEYOR_POSCHECKPARAM_RESPOND",dataList)
+      sendMSGtoController("TRACK_CONVEYOR_POSCHECKPARAM_INQUIRE",dataList)
+
     },[props.dataSoures.conveyorID])
-  
+
+    useEffect(()=>{
+      setDiserntype(props.dataSoure.detectSrc.type)
+      setDisernvisionID(props.dataSoure.detectSrc.visionID)
+      setDisernDI_capturePos(props.dataSoure.detectSrc.DI_capturePos)
+      setDisernglobalVar(props.dataSoure.detectSrc.globalVar)
+      setDisernidentype(props.dataSoure.identification.type)
+      setDisernidencommunication(props.dataSoure.identification.communication)
+      setDisernidensensorTrg(props.dataSoure.identification.sensorTrg)
+      
+    },[props.dataSoure.conveyorID,Iptdsb])
+
+    useEffect(()=>{
+      setIptdsb(true)
+      setShowSave(false)
+    },[props.dataSoure.conveyorID,])
 
     const conveyorNumchildren = [];
     for (let i = 1; i <10; i++) {
@@ -91,19 +107,26 @@ const mapStateToProps = (state) => {
     const handleChange =(value) => {
       setCopycraftNum(Number(value))
     }
-  
+
     const columns = [
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
       {title: "单位", dataIndex: "address",}
     ];
-    const data = [
-      { key: "1", name:"工件检测信号", money: <Select  disabled = { Iptdsb } style={{ width:"200px" }} onChange={(value)=>{setDiserntype(value)}} defaultValue={Diserntype==0?"视觉": Diserntype==1?"数字IO":"全局变量"} >{detectionNumchildren}</Select>, address: "视觉/IO/全局变量", },
-      { key: "2", name: "信号源参数", money:<Select  disabled = { Iptdsb } style={{ width:"200px" }} onChange={(value)=>{setSignalSource(value)}} defaultValue={Diserntype==0?DisernvisionID:Diserntype==1?DisernDI_capturePos :DisernglobalVar } >{Diserntype==0?visinoIDrNumchildren:Diserntype==1?DI_capturePosNumchildren :globalVarNumchildren}</Select>, address: "视觉工艺号/IO端口号/变量", },
-      { key: "3", name: "工件识别方式", money: <Select  disabled = { Iptdsb } style={{ width:"200px" }} onChange={(value)=>{setDisernidentype(value)}} defaultValue={Disernidentype==0?"视觉":"传感器" } >{identificationNumchildren}</Select>, address: "视觉/传感器", },
-      { key: "4", name: "视觉通讯方式", money:<Select  disabled = { Iptdsb } style={{ width:"200px" }} onChange={(value)=>{setDisernidencommunication(value)}} defaultValue={Disernidencommunication==0?"以太网":"Modbus" } >{communicationNumchildren}</Select>, address: "以太网/Modbus", },
-      { key: "5", name: "传感器触发方式", money: <Select disabled = { Iptdsb }  style={{ width:"200px" }} onChange={(value)=>{setDisernidensensorTrg(value)}} defaultValue={DisernidensensorTrg==0?"低电平触发":"高电平触发"} >{sensorTrgNumchildren}</Select>, address: "", },
+    const datanone = [
+      { key: "1", name:"工件检测信号", money: <Select   style={{ width:"200px" }} onChange={(value)=>{setDiserntype(value)}} defaultValue={Diserntype==0?"视觉": Diserntype==1?"数字IO":"全局变量"} >{detectionNumchildren}</Select>, address: "视觉/IO/全局变量", },
+      { key: "2", name: "信号源参数", money:<Select  style={{ width:"200px" }} onChange={(value)=>{setSignalSource(value)}} defaultValue={Diserntype==0?DisernvisionID:Diserntype==1?DisernDI_capturePos :DisernglobalVar } >{Diserntype==0?visinoIDrNumchildren:Diserntype==1?DI_capturePosNumchildren :globalVarNumchildren}</Select>, address: "视觉工艺号/IO端口号/变量", },
+      { key: "3", name: "工件识别方式", money: <Select   style={{ width:"200px" }} onChange={(value)=>{setDisernidentype(value)}} defaultValue={Disernidentype==0?"视觉":"传感器" } >{identificationNumchildren}</Select>, address: "视觉/传感器", },
+      { key: "4", name: "视觉通讯方式", money:<Select  style={{ width:"200px" }} onChange={(value)=>{setDisernidencommunication(value)}} defaultValue={Disernidencommunication==0?"以太网":"Modbus" } >{communicationNumchildren}</Select>, address: "以太网/Modbus", },
+      { key: "5", name: "传感器触发方式", money: <Select   style={{ width:"200px" }} onChange={(value)=>{setDisernidensensorTrg(value)}} defaultValue={DisernidensensorTrg==0?"低电平触发":"高电平触发"} >{sensorTrgNumchildren}</Select>, address: "", },
     ];
+    const datadis = [
+      { key: "1", name:"工件检测信号", money:<Input disabled value= { Diserntype==0?"视觉": Diserntype==1?"数字IO":"全局变量" }/> , address: "视觉/IO/全局变量", },
+      { key: "2", name: "信号源参数", money:<Input disabled value= { Diserntype==0?DisernvisionID:Diserntype==1?DisernDI_capturePos :DisernglobalVar  }/> , address: "视觉工艺号/IO端口号/变量", },
+      { key: "3", name: "工件识别方式", money:<Input disabled value= { Disernidentype==0?"视觉":"传感器" } /> ,  address: "视觉/传感器", },
+      { key: "4", name: "视觉通讯方式", money:<Input disabled value= { Disernidencommunication==0?"以太网":"Modbus"  }/> , address: "以太网/Modbus", },
+      { key: "5", name: "传感器触发方式", money:<Input disabled value= { DisernidensensorTrg==0?"低电平触发":"高电平触发" }/> , address: "", },
+    ]
     
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
@@ -114,7 +137,7 @@ const mapStateToProps = (state) => {
             }}
             pagination={false}
             columns={columns}
-            dataSource={data }
+            dataSource={ Iptdsb? datadis : datanone }
           />
         </div>
         <Modal
@@ -129,7 +152,6 @@ const mapStateToProps = (state) => {
           }
           sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
         }
-          
         }
         onCancel={() => setShowemptyModal(false)}
       >
@@ -172,7 +194,7 @@ const mapStateToProps = (state) => {
           if(Diserntype == 0){
             dataList = {
               robot:1,
-              conveyorID:DisernconveyorID,
+              conveyorID:props.dataSoures.conveyorID,
               detectSrc:{
                 type:Number(Diserntype),
                 visinoID:Number(signalSource),
@@ -186,7 +208,7 @@ const mapStateToProps = (state) => {
           }else if(Diserntype == 1){
             dataList = {
               robot:1,
-              conveyorID:DisernconveyorID,
+              conveyorID:props.dataSoures.conveyorID,
               detectSrc:{
                 type:Number(Diserntype),
                 DI_capturePos:0,
@@ -200,7 +222,7 @@ const mapStateToProps = (state) => {
           }else if(Diserntype == 2){
             dataList = {
               robot:1,
-              conveyorID:DisernconveyorID,
+              conveyorID:props.dataSoures.conveyorID,
               detectSrc:{
                 type:Number(Diserntype),
                 globalVar:Number(signalSource)<=9? "GB00"+signalSource : Number(signalSource)<=99?"GB0"+signalSource : "GB"+signalSource ,
@@ -213,6 +235,7 @@ const mapStateToProps = (state) => {
             }
           }
           sendMSGtoController("TRACK_CONVEYOR_POSCHECKPARAM_SET",dataList)
+          // setIptdsb(true)
         }} >保存</Button>
         <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
           setShowSave(false)
@@ -231,7 +254,7 @@ const mapStateToProps = (state) => {
         >
           清空参数
         </Button>
-        <Button style={{ width: "100px", height: "50px" }} onClick={() => {
+        <Button type="primary" style={{ width: "100px", height: "50px" }} onClick={() => {
           setshowcopyModal(true)
         }}>
           复制参数

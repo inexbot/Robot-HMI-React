@@ -10,6 +10,7 @@ import {
 } from "antd";
 import { connect } from "dva";
 import {sendMSGtoController} from "service/network";
+import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
   return {
@@ -19,6 +20,7 @@ const mapStateToProps = (state) => {
 };
 
 function ConveyorsignThree(props) {
+  let history = useHistory();
   const columns = [
     {title: "参数",dataIndex: "name", },
     {title: "值", dataIndex: "money", },
@@ -52,7 +54,7 @@ function ConveyorsignThree(props) {
             }
             sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CANCEL",dataList)
           
-            window.location.href = "#/setparameter/conveyorsign"
+            history.push('/setparameter/conveyorsign');
         }}>取消标定</Button>
         <Button type="primary" shape="round"  style = {{ width:"100px",height:"50px",marginLeft:"12%" }} onClick = {() =>{
           let dataList = {
@@ -72,10 +74,10 @@ function ConveyorsignThree(props) {
           sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CLEAR",dataList)
         }}>清除标定线</Button>
         <Button style = {{ width:"100px",height:"50px",marginLeft:"11%" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyortwo"
+            history.push('/setparameter/conveyortwo');
         }}>上一步 </Button>
         <Button style = {{ width:"100px",height:"50px" }} onClick = { ()=>{
-            window.location.href = "#/setparameter/conveyorfour"
+            history.push('/setparameter/conveyorfour');
         }}>下一步 </Button>
        
     </div>

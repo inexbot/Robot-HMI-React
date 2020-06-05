@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, notification, ConfigProvider, Select, Divider, Input, Modal} from "antd";
 import { connect } from "dva";
 import { sendMSGtoController } from "service/network";
-
+import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
     return {
       dataSoure: state.index.conveyor.Basicdata,
     };
   };
+
 
 
   function Conveyorsign(props){
@@ -24,7 +25,7 @@ const mapStateToProps = (state) => {
         <Option key={i}>{  i}</Option>
       );
     } 
-    
+    let history = useHistory();
     const handleChange =(value) => {
       setCopycraftNum(Number(value))
     }
@@ -34,12 +35,12 @@ const mapStateToProps = (state) => {
       {title: "值", dataIndex: "money", },
     ];
     const data = [
-      { key: "1", name:"x",  money: <Input  />, },
-      { key: "2", name: "y", money:<Input  />, },
-      { key: "3", name: "z", money: <Input  />,},
-      { key: "4", name: "A", money: <Input  />, },
-      { key: "5", name: "B", money: <Input  />,},
-      { key: "6", name: "C", money: <Input  />,}
+      { key: "1", name:"x",  money: <Input disabled  />, },
+      { key: "2", name: "y", money:<Input  disabled />, },
+      { key: "3", name: "z", money: <Input  disabled />,},
+      { key: "4", name: "A", money: <Input  disabled />, },
+      { key: "5", name: "B", money: <Input  disabled />,},
+      { key: "6", name: "C", money: <Input  disabled />,}
     ];
 
     return(
@@ -106,7 +107,8 @@ const mapStateToProps = (state) => {
           setShowSave(false)
         }}>取消</Button>
         <Button style = {{ width:"100px",height:"50px" }} onClick = {() => {
-          window.location.href = "#/setparameter/conveyorone"
+          // window.location.href = "#/setparameter/conveyorone"
+          history.push('/setparameter/conveyorone');
         }}> 开始标定 </Button>
         </span>
          : <Button  style = {{ width:"100px",height:"50px",marginLeft:`25%` }} onClick = {()=>{
