@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
     ];
 
     return(
-      <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
+      <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.674 }}>
         <div className="connect">
           <Table
             size={"middle"}
@@ -102,7 +102,7 @@ const mapStateToProps = (state) => {
           </div>
         </p>
       </Modal>
-        {showSave ? <span style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} >保存</Button>
+        {showSave ? <span style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"17%" }} >保存</Button>
         <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
           setShowSave(false)
         }}>取消</Button>
@@ -111,7 +111,7 @@ const mapStateToProps = (state) => {
           history.push('/setparameter/conveyorone');
         }}> 开始标定 </Button>
         </span>
-         : <Button  style = {{ width:"100px",height:"50px",marginLeft:`25%` }} onClick = {()=>{
+         : <Button  style = {{ width:"100px",height:"50px",marginLeft:`17%` }} onClick = {()=>{
           setShowSave(true)
         }} >修改</Button> }
         <Button

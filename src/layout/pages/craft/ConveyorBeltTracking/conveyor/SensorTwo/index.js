@@ -23,7 +23,6 @@ const mapStateToProps = (state) => {
       sendMSGtoController("TRACK_CONVEYOR_SENSOR_GRABGESTURE_INQUIRE",dataList)
     },[props.dataSoures.conveyorID])
   
-    console.log(props)
     const columns = [ 
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
@@ -39,7 +38,7 @@ const mapStateToProps = (state) => {
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
         
-        <div className="connect" style={{ marginLeft:"0" }}>
+        <div className="connect" style={{ marginLeft:"0",  }} >
         <p style={{ fontSize:"18px",margin:"0" }}>1.将标定锥与机器人尖型工具手拆下，换成实际工作的工件与夹爪;</p>
         <p style={{ fontSize:"18px",margin:"0"  }}>2.将机器人运动到实际抓取的高度与姿态，点击标定按钮;</p>
           <Table

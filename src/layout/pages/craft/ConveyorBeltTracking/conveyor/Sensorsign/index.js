@@ -30,7 +30,6 @@ function Sensorsign(props) {
   const [showcopyModal, setshowcopyModal] = useState(false);
 
   const { Option } = Select;
-  console.log(props)
   const columns = [
     { title: "参数", dataIndex: "name" },
     { title: "值", dataIndex: "money" },
@@ -63,7 +62,7 @@ function Sensorsign(props) {
   return (
     <div
       className="backconnect"
-      style={{ height: document.body.clientHeight * 0.68 }}
+      style={{ height: document.body.clientHeight * 0.674 }}
     >
       <div className="connect">
         <Table pagination={false} columns={columns} dataSource={data} />
@@ -119,7 +118,7 @@ function Sensorsign(props) {
       {showSave ? (
         <div style={{ display:"inline" }}>
           {" "}
-          <Button style={{ width: "100px", height: "50px", marginLeft: "25%" }}>
+          <Button style={{ width: "100px", height: "50px", marginLeft: "17%" }}>
             保存
           </Button>
           <Button
@@ -142,7 +141,7 @@ function Sensorsign(props) {
         </div>
       ) : (
         <Button
-          style={{ width: "100px", height: "50px", marginLeft: "25%" }}
+          style={{ width: "100px", height: "50px", marginLeft: "17%" }}
           onClick={() => {
             setShowSave(true);
           }}

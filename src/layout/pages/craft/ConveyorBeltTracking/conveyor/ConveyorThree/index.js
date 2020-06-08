@@ -35,7 +35,7 @@ function ConveyorsignThree(props) {
   return(
     <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
       
-      <div className="connect" style={{ marginLeft:"0" }}>
+      <div className="connect" style={{ marginLeft:"0",  width:"50%",  }}>
       <p style={{ fontSize:"26px" }}>移动工件使其相对上一点在传送带Y轴正方向有一定位移，并在机器人的运动范围内，移动机器人，使机器人末梢尖对准工件的尖端，点击标定按钮</p>
         <Table
           pagination={false}

@@ -30,7 +30,6 @@ const mapStateToProps = (state) => {
     const [signalSource, setSignalSource] = useState('')
     const { Option } = Select;
 
-    console.log(props)
     useEffect(()=>{
       let dataList = {
         robot:1,
@@ -103,7 +102,6 @@ const mapStateToProps = (state) => {
       );
     }
     
-    // console.log(props.conveyorNum)
     const handleChange =(value) => {
       setCopycraftNum(Number(value))
     }
@@ -129,7 +127,7 @@ const mapStateToProps = (state) => {
     ]
     
     return(
-      <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
+      <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.674 }}>
         <div className="connect">
           <Table
             scroll={{
@@ -189,7 +187,7 @@ const mapStateToProps = (state) => {
           </div>
         </p>
       </Modal>
-        {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {()=>{
+        {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"17%" }} onClick = {()=>{
           let dataList = {}
           if(Diserntype == 0){
             dataList = {
@@ -240,7 +238,7 @@ const mapStateToProps = (state) => {
         <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
           setShowSave(false)
           setIptdsb(true)
-        }}>取消</Button></div> : <Button  style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {()=>{
+        }}>取消</Button></div> : <Button  style = {{ width:"100px",height:"50px",marginLeft:"17%" }} onClick = {()=>{
           setShowSave(true)
           setIptdsb(false)
         }} >修改</Button> }

@@ -15,7 +15,6 @@ const mapStateToProps = (state) => {
 
   function SensorOne(props){
     let history = useHistory();
-    console.log(props)
     useEffect(()=>{
       let dataList = {
         robot:1,
@@ -29,7 +28,6 @@ const mapStateToProps = (state) => {
       {title: "值", dataIndex: "money", },
       {title: "单位", dataIndex: "address", },
     ];
-    console.log("12",props.dataSoure.sensorCalibration)
     const data = [
       { key: "1", name:"传感器编码器数值",  money: <Input disabled value={props.dataSoure.sensorCalibration.IO_encodorValue} />, address:"线"},
       { key: "2", name: "标定点编码器数值", money:<Input disabled value={props.dataSoure.sensorCalibration.calib_encodorValue} />, address:"线"},
@@ -40,7 +38,7 @@ const mapStateToProps = (state) => {
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
         
-        <div className="connect" style={{ marginLeft:"0" }}>
+        <div className="connect" style={{ marginLeft:"0", width:"50%", }}>
         <p style={{ fontSize:"18px",margin:"0" }}>1.准备一个带有尖端的工件，放置在传送带工作时的宽度处，并在机器人法兰上安装一个尖锥;</p>
         <p style={{ fontSize:"18px",margin:"0"  }}>2.移动传送带，使工件移动经过传感器位置，触发IO，然后继续移动传送带，将工件移动到机器人的运动范围内的标定点，将机器人移动到工件处，使尖对准尖;</p>
         <p style={{ fontSize:"18px",margin:"0"  }}>3.点击标定按钮;</p>

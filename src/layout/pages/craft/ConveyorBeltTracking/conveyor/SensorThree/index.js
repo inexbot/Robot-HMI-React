@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
         
-        <div className="connect" >
+        <div className="connect" style={{  width:"50%", marginLeft:"25%"  }}>
         <p style={{ fontSize:"26px",margin:"0" }}>请点击计算按钮，完成标定</p>
         </div>
           <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {() =>{

@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
     let history = useHistory();
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
-        <div className="connect" >
+        <div className="connect" style={{  width:"50%", width:"50%", marginLeft:"25%"  }} >
         <p style={{ fontSize:"26px" }}>上抬机器人一段距离，点击计算按钮。</p>
         </div>
           <Button  style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {() =>{

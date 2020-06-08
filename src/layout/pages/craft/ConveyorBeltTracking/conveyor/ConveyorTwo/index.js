@@ -24,11 +24,10 @@ import { useHistory } from 'react-router-dom';
     { key: "2", name: "y", money:<Input disabled  value={props.dataSoure.posY} />, address:"mm"},
     { key: "3", name: "编码器数值", money: <Input disabled  value={props.dataSoure.encodorValue} />, address:"线"}
   ];
-  console.log(props)
   return(
     <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
       
-      <div className="connect" style={{ marginLeft:"0" }}>
+      <div className="connect" style={{ marginLeft:"0", width:"50%",  }}>
       <p style={{ fontSize:"26px" }}>继续移动传送带，尽量远离上一点并在机器人的运动范围内,移动机器人到工件处，令机器人末梢尖端对准工件尖端，点击标定按钮</p>
         <Table
           pagination={false}

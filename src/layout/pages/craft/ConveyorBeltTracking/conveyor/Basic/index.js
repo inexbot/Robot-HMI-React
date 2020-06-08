@@ -48,6 +48,7 @@ function Basic(props) {
     setCheckSpeed(props.dataSoure.conveyor.checkSpeed)
     setTime(props.dataSoure.compensation.time)
     setEncoderVal(props.dataSoure.compensation.encoderVal)
+
   },[props.dataSoure.conveyor,showemptyModal])
   const { Option } = Select;
   const conveyorNumchildren = [];
@@ -82,14 +83,17 @@ function Basic(props) {
     }
 
     useEffect(()=>{
-      setInterval(() => {
+      let gainSet =  setInterval(() => {
         let dataList = {
           robot:1,
           conveyorID:props.dataSoure.conveyorID,
         }
         sendMSGtoController("TRACK_CONVEYOR_REALTIME_INQUIRE",dataList)
       },1000);
-    },[])
+      return () =>{
+        clearInterval(gainSet)
+      }
+    },[props.dataSoure.conveyorID])
 
     const columns = [
       {title: "参数",dataIndex: "name", },
@@ -117,7 +121,7 @@ function Basic(props) {
     ]
   
   return (           
-    <div className = "backconnect" style={{ height:document.body.clientHeight  * 0.68  }} >
+    <div className = "backconnect" style={{ height:document.body.clientHeight  * 0.674  }} >
       <div className="connect" >
         <Table
           scroll={{
@@ -187,7 +191,7 @@ function Basic(props) {
           </div>
         </p>
       </Modal>
-      {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick={()=>{
+      {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"17%" }} onClick={()=>{
         let dataList = {
           robot:1,
           conveyorID:Number(props.dataSoure.conveyorID),
@@ -209,7 +213,7 @@ function Basic(props) {
       <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
         setShowSave(false)
         setIptdsb(true)
-      }}>取消</Button></div> : <Button  style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {()=>{
+      }}>取消</Button></div> : <Button  style = {{ width:"100px",height:"50px",marginLeft:"17%" }} onClick = {()=>{
         setShowSave(true)
         setIptdsb(false)
       }} >修改</Button> }

@@ -75,6 +75,9 @@ function Setparameter() {
       conveyorID:Number(value),
     }
     sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE",dataList)
+
+
+
   }
 
 
@@ -142,31 +145,31 @@ function Setparameter() {
         </Switch>
           
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/basic">
-          <Button type={ RouterBtn=="basic"? "primary":"" }  style={{ width:"15%",height:"40px" }}  onClick={() => {setCurrent(0);}}>
+          <Button type={ RouterBtn=="basic"? "primary":"" }  style={{ width:"15%",height:"30px" }}  onClick={() => {setCurrent(0);}}>
             基本信息
           </Button>
         </NavLink>
         <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/discern">
-          <Button type={ RouterBtn=="discern"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => { setCurrent(1);}}>
+          <Button type={ RouterBtn=="discern"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => { setCurrent(1);}}>
             识别参数
           </Button>
         </NavLink>
         <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav"  to="/setparameter/conveyorsign">
-          <Button type={ RouterBtn=="conveyorsign"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => {setCurrent(2);}}>
+          <Button type={ RouterBtn=="conveyorsign"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => {setCurrent(2);}}>
             传送带标定
           </Button>
         </NavLink>
         <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/sensorsign">
-          <Button type={ RouterBtn=="sensorsign"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => {setCurrent(3);}}>
+          <Button type={ RouterBtn=="sensorsign"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => {setCurrent(3);}}>
             传感器标定
           </Button>
         </NavLink>
         <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/setsite">
-          <Button type={ RouterBtn=="setsite"? "primary":"" } style={{ width:"15%",height:"40px" }} onClick={() => {setCurrent(4);}}>
+          <Button type={ RouterBtn=="setsite"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => {setCurrent(4);}}>
             位置设置
           </Button>
         </NavLink>

@@ -15,7 +15,6 @@ const mapStateToProps = (state) => {
 
   function ConveyorsignOne(props){
 
-    console.log(props)
     const columns = [
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
@@ -29,7 +28,7 @@ const mapStateToProps = (state) => {
     let history = useHistory();
     return( 
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68 }}>
-        <div className="connect" style={{ marginLeft:"0" }}>
+        <div className="connect" style={{ marginLeft:"0", width:"50%", }}>
         <p style={{ fontSize:"26px" }}>移动传送带，使工件移动到机器人的运动范围内，移动机器人到工件处，使机器人末梢的尖端对准工件的尖端，点击标定</p>
           <Table
             pagination={false}

@@ -12,7 +12,6 @@ const mapStateToProps = (state) => {
   };
 
   function Setsite(props){
-    console.log(props)
     const [copycraftNum, setCopycraftNum] = useState(1)
     const [showSave, setShowSave ] = useState(false)
     const [showemptyModal, setShowemptyModal] = useState(false);
@@ -98,7 +97,7 @@ const mapStateToProps = (state) => {
        address:<Button disabled = { Iptdsb } onClick={sendinquiredemarcate.bind(null,7)} >标记</Button>,move:<Button onClick={sendmoveSetsite.bind(null,7)}>至此</Button> },
     ];
     return(
-      <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.68,marginLeft:"0" }}>
+      <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.674,marginLeft:"0" }}>
         <div style = {{ width:"50%" }}>
           <Table
             size={"small"}
