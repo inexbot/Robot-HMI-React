@@ -76,11 +76,7 @@ function Setparameter() {
     }
     sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE",dataList)
 
-
-
   }
-
-
 
   useEffect(()=>{
     switch(window.location.hash){
@@ -104,6 +100,7 @@ function Setparameter() {
         break;
     }
   })
+
   return (
     <div>
       {/* 选择工艺号 */}
