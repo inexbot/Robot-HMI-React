@@ -110,7 +110,7 @@ const RecoverAndBackup = asyncComponents(() =>
 const Program = asyncComponents(() => import("./layout/pages/program"));
 // 工艺页面
 const Setparameter = asyncComponents(() => import("./layout/pages/craft/ConveyorBeltTracking/conveyor/Setparameter"))
-const Vision = asyncComponents(() => import("./layout/pages/craft/Vision/vision/index"))
+const Vision = asyncComponents(() => import("./layout/pages/craft/Vision/index"))
 
 const mapStateToProps = (state) => {
   return {

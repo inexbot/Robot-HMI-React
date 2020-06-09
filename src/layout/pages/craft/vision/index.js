@@ -9,14 +9,14 @@ import {
   message,
 } from "antd";
 import { connect } from "dva";
-import asyncComponents from "../../../../../AsyncComponents";
+import asyncComponents from "../../../../AsyncComponents";
 import { HashRouter, NavLink, Route, Switch, useHistory, useLocation} from "react-router-dom";
 import "./index.less";
 
-const Parameter = asyncComponents(() => import("../Parameter"))
-const Place = asyncComponents(() => import("../Place"))
-const Placedebug = asyncComponents(() => import("../Placedebug"))
-const Scope = asyncComponents(() => import("../Scope"))
+const Parameter = asyncComponents(() => import("./Parameter"))
+const Place = asyncComponents(() => import("./Place"))
+const Placedebug = asyncComponents(() => import("./Placedebug"))
+const Scope = asyncComponents(() => import("./Scope"))
 
 
 const mapStateToProps = (state) => {

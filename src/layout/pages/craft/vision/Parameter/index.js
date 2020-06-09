@@ -8,10 +8,12 @@ import {
   Divider,
   Input,
   Modal,
-  Switch
+  Switch,
+  Radio
 } from "antd";
 import { connect } from "dva";
-import "./index.css";
+import "./index.less";
+import { useHistory } from 'react-router-dom';
 
 
   const mapStateToProps = (state) => {
@@ -21,9 +23,21 @@ import "./index.css";
   };
 
   function Parameter(props) {
+    const [triggermbtn1, setTriggerbtn1] = useState(true)
+    const [triggermbtn2, setTriggerbtn2] = useState(false)
+    const [triggermbtn3, setTriggerbtn3] = useState(true)
+    const [triggermbtn4, setTriggerbtn4] = useState(false)
+    const [allIpt, setAllIpt] = useState(true)
+    const [showSave, setShowSave] = useState(false)
+    const [clientorsave, setClientorsave] = useState(false)
+    const [clientNum, setClientNum] = useState(true)
+    const [clientway, setClientway] = useState(true)
+    const [ethernetway, setEthernetway] = useState(true)
+    const [conditiontime, setConditiontime] = useState(true)
 
     const { Option } = Select;
     const cameraNumchildren = [];
+    let history = useHistory();
     for (let i = 1; i <10; i++) {
       cameraNumchildren.push(
         <Option key={i}>{  i}</Option>
@@ -36,8 +50,19 @@ import "./index.css";
       );
     }
 
+    const cameratypeNumchildren = []
+    for (let i = 0; i<2; i++) {
+      cameratypeNumchildren.push(
+        <Option key={i}>{ i==0?"客户端": "服务端" }</Option>
+      );
+    }
 
-
+    const portNumchildren = []
+    for (let i = 1; i<3; i++) {
+      portNumchildren.push(
+        <Option key={i}> {i}</Option>
+      );
+    }
 
     const handleChange =(value) => {
       // setCopycraftNum(Number(value))
@@ -46,38 +71,77 @@ import "./index.css";
     const discernChange = (checked) => {
       console.log(`switch to ${checked}`);
     }
- 
 
+    useEffect(()=>{
+      if(triggermbtn1==true){
+        setClientway(false)
+      }else if(triggermbtn1==false){
+        setClientway(true)
+      }
+      
+      if(triggermbtn2==true){
+        setEthernetway(false)
+      }else if(triggermbtn2==false){
+        setEthernetway(true)
+      }
+
+      if(triggermbtn4==true){
+        setConditiontime(false)
+      }else if(triggermbtn4==false){
+        setConditiontime(true)
+      }
+    },[triggermbtn1,triggermbtn2,triggermbtn3,triggermbtn4])
+
+    const showclientorsave = (value)=>{
+      // console.log(value)
+      if(value==0){
+        setClientorsave(true)
+      }else if(value==1){
+        setClientorsave(false)
+      }
+    }
+
+    const showclientnumChange = (value) =>{
+      if(value==1){
+        setClientNum(true)
+      }else if(value==2){
+        setClientNum(false)
+      }
+    }
+ 
     return(
-      <div style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%" }}>
+      <div style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%" ,overflowY:"hidden"}}>
         <div className="top">
           <div className="camera">
             <p className="toptext">
               相机选择
             </p>
-            <span> 工艺号: </span>
-            <Select
-                defaultValue="1"
-                onChange={handleChange}
-                style={{ width: 200 }}
-              >
-                {cameraNumchildren}
-            </Select>
+            <div>
+              <span> 工艺号: </span>
+              <Select
+                  defaultValue="1"
+                  style={{ width: 200 }}
+                >
+                  {cameraNumchildren}
+              </Select>
+            </div>
+            <div>
             <span>类型:</span>
-            <Select
-                defaultValue="customize"
-                onChange={handleChange}
-                style={{ width: 200 }}
-              >
-                {"customize"}
-            </Select>
+              <Select
+                  disabled={allIpt}
+                  defaultValue="customize"
+                  style={{ width: 200 }}
+                >
+                  {"customize"}
+              </Select>
+            </div>
           </div>
           <div className="usercoordinates">
             <p className="topltext">
               用户坐标系
             </p>
             <span>用户坐标编号</span>
-            <Select defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
+            <Select disabled={allIpt} defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
                 {userNumchildren}
             </Select>
           </div>
@@ -86,75 +150,159 @@ import "./index.css";
           <div className="content-l">  
             <div className="networkparam">
               <p className="content-ltext"> 网络参数 </p>
-              <div className="content-ltop"> 控制器ip :
-                <Select defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
-                    {userNumchildren}
-                </Select>
+              <div className="content-ltop">
+                {clientorsave?
+                   <div >
+                     相机ip:
+                   <Input disabled={allIpt}   style={{ width: 100,marginLeft:"14px" }} />
+                   </div> :     
+                  <div >
+                    控制器ip:
+                  <Select disabled="false" defaultValue=""  style={{ width: 100 }} >
+                  </Select></div>}
               </div>
+
               <div className="content-lcenter">
-                 端口数:
-                 <Select defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
-                   {userNumchildren}
+                <div>
+                 <span>端口数:</span>
+                 <Select disabled={allIpt} defaultValue="1" onChange={showclientnumChange} style={{ width: 100,marginLeft:"14px"}} >
+                   {portNumchildren}
                  </Select>
-                 相机:
-                 <Select defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
-                   {userNumchildren}
+                 </div>
+                 <div>
+                 <span>相机:</span>
+                 <Select disabled={allIpt} defaultValue="服务端" onChange={showclientorsave} style={{ width: 100,marginLeft:"15px" }} >
+                   {cameratypeNumchildren}
                  </Select>
+                 </div>
               </div>
               <div className="content-lbtm">
+                  <div>
                   端口1:
-                  <Select defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
-                    {userNumchildren}
-                  </Select>
+                  <Input disabled={allIpt}  style={{ width:"100px",marginLeft:"20px"  }}/>
+                  </div>
+                  <div>
                   端口2:
-                  <Select defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
-                    {userNumchildren}
-                  </Select>
+                  <Input disabled={clientNum}  style={{ width:"100px",marginLeft:"8px"  }}/>
+                  </div>
               </div>
             </div>
             <div className="connectparam">
               <p className="connectparam-ltext"> 连接参数</p>
               <div className="connectparam-ltop">
-                帧头:
-                <Select defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
-                    {userNumchildren}
-                </Select>
-                成功发送标志符:
-                <Select defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
-                    {userNumchildren}
-                </Select>
+                <div>
+                  帧头:
+                  <Input disabled={allIpt}  style={{ width:"100px",marginLeft:"15px"  }}/>
+                </div>
+                <div>
+                  成功发送标志符:
+                  <Input disabled={allIpt}  style={{ width:"28%" }}/>
+                </div>
               </div>
               <div className="connectparam-lttop">
-                分隔符:
-                <Select defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
-                    {userNumchildren}
-                </Select>
-                失败发送标志符:
-                <Select defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
-                    {userNumchildren}
-                </Select>
+                <div>
+                  分隔符:
+                  <Input disabled={allIpt}  style={{ width:"100px" }}/>
+                </div>
+                <div>
+                  失败发送标志符:
+                  <Input disabled={allIpt}  style={{ width:"37%" }}/>
+                </div>
               </div>
               <div className="connectparam-lcneter">
-                结束符:
-                <Select defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
-                    {userNumchildren}
-                </Select>
-                超时时间:
-                <Select defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
-                    {userNumchildren}
-                </Select>s
+                <div>
+                  结束符:
+                  <Input disabled={allIpt}  style={{ width:"100px" }}/>
+                </div>
+                <div>
+                  超时时间:
+                  <Input disabled={allIpt}  style={{ width:"30%",marginLeft:"40px" }}/>s
+                </div>
               </div>
               <div className="connectparam-lbtm">
-                仅识别一个目标
-                <Switch defaultChecked onChange={discernChange} />
-                发送高度信息:
-                <Switch defaultChecked onChange={discernChange} />
+                <div>
+                  仅识别一个目标
+                  <Switch disabled={allIpt} defaultChecked onChange={discernChange} />
+                </div>
+                <div>
+                  发送高度信息:
+                  <Switch disabled={allIpt} defaultChecked onChange={discernChange} />
+                </div>
               </div>
             </div>
           </div>
           <div className="content-r">  
             <div className="content-rtop">
               <p className="content-rtoptext"> 触发方式 </p>
+              
+              <div className="content-rtop-t">
+                <Radio disabled={allIpt} checked={triggermbtn1} onClick={(e)=>{
+                  setTriggerbtn1(!triggermbtn1)
+                  if(e.target.checked==true){
+                    setTriggerbtn2(false)
+                  }
+                }} >I/O</Radio>
+                I/O端口:
+                <Select disabled={clientway} defaultValue="无" onChange={handleChange} style={{ width: 100,marginLeft:"16px" }} >
+                    "无"
+                </Select>
+              </div>
+              <div className="content-rtop-b">
+                <Radio disabled={allIpt}  checked={triggermbtn2} onClick={(e)=>{
+                  setTriggerbtn2(!triggermbtn2)
+                  if(e.target.checked==true){
+                    setTriggerbtn1(false)
+                  }
+                }}>Ethernet</Radio>
+                发送:
+                <Input disabled={ethernetway}  style={{ width:"100px" }}/>
+              </div>
+            </div>
+            <div className="content-rcenter">
+              <p className="content-rcentertext"> 触发条件 </p>
+              <div className="content-rcenter-t">
+                <Radio disabled={allIpt}  checked={triggermbtn3} onClick={(e)=>{
+                  setTriggerbtn3(!triggermbtn3)
+                  if(e.target.checked==true){
+                    setTriggerbtn4(false)
+                  }
+                }} >单次触发</Radio>
+              </div>
+              <div className="content-rcenter-b">
+                <Radio disabled={allIpt}  checked={triggermbtn4} onClick={(e)=>{
+                  setTriggerbtn4(!triggermbtn4)
+                  if(e.target.checked==true){
+                    setTriggerbtn3(false)
+                  }
+                   }} >持续触发</Radio>
+                间隔时间:
+                <Input disabled={conditiontime} style={{ width:"100px" }} />ms
+              </div>
+            </div>
+            <div className="content-rbtm">
+              <p className="content-rbtmtext"> 弧度/角度 </p>
+              <div className="content-rbtmcenter">
+                弧度/角度转换:
+                <Select disabled={allIpt} defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
+                    {userNumchildren}
+                </Select>
+              </div>
+            </div>
+            <div className="content-rBtn">
+              <Button size="large" type="primary" style={{ background:"#009ad6" }} onClick={ ()=>{
+                history.push('/vision')
+              } }>返回</Button>
+              
+              {showSave?
+               <Button size="large" type="primary" style={{ background:"#45b97c",marginLeft:"2px"  }} onClick={ ()=>{
+                setAllIpt(true)
+                setShowSave(false)
+              } }>保存</Button> :
+               <Button size="large" type="primary" style={{ background:"#45b97c",marginLeft:"2px" }} onClick={ ()=>{ 
+                setAllIpt(false)
+                setShowSave(true)
+              } }>修改</Button>}
+             
             </div>
           </div>
         </div>
