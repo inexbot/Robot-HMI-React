@@ -11,12 +11,13 @@ import {
 import { connect } from "dva";
 import asyncComponents from "../../../../AsyncComponents";
 import { HashRouter, NavLink, Route, Switch, useHistory, useLocation} from "react-router-dom";
-import "./index.less";
+
 
 const Parameter = asyncComponents(() => import("./Parameter"))
-const Place = asyncComponents(() => import("./Place"))
-const Placedebug = asyncComponents(() => import("./Placedebug"))
 const Scope = asyncComponents(() => import("./Scope"))
+const Placedebug = asyncComponents(() => import("./Placedebug"))
+const Place = asyncComponents(() => import("./Place"))
+const Scopesign = asyncComponents(() => import("./scopesign"))
 
 
 const mapStateToProps = (state) => {
@@ -34,9 +35,14 @@ const mapStateToProps = (state) => {
                           视觉参数设置
                         </Button>
                       </NavLink>
+                      <NavLink exact activeClassName="selected" to="/vision/scope">
+                        <Button>
+                          视觉范围设置
+                        </Button>
+                      </NavLink>
                       <NavLink exact activeClassName="selected"  to="/vision/place">
                         <Button>
-                            视觉位置参数
+                          视觉位置参数
                         </Button>
                       </NavLink>
                       <NavLink exact activeClassName="selected"  to="/vision/placedebug">
@@ -44,16 +50,12 @@ const mapStateToProps = (state) => {
                           位置调试
                         </Button>
                       </NavLink>
-                      <NavLink exact activeClassName="selected" to="/vision/scope">
-                        <Button>
-                          视觉范围设置
-                        </Button>
-                      </NavLink>
 
                       <Route path="/vision/parameter" component={Parameter} ></Route>
+                      <Route path="/vision/scope" component={Scope} ></Route>
                       <Route  path="/vision/place" component={Place} ></Route>
                       <Route  path="/vision/placedebug" component={Placedebug} ></Route>
-                      <Route path="/vision/scope" component={Scope} ></Route>
+                      <Route path="/vision/scopesign" component={Scopesign} ></Route>
 
                   </HashRouter>
               </div>

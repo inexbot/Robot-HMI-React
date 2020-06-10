@@ -12,9 +12,8 @@ import {
   Radio
 } from "antd";
 import { connect } from "dva";
-import "./index.less";
 import { useHistory } from 'react-router-dom';
-
+import "./parameter.module.less"
 
   const mapStateToProps = (state) => {
     return{
@@ -111,9 +110,9 @@ import { useHistory } from 'react-router-dom';
  
     return(
       <div style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%" ,overflowY:"hidden"}}>
-        <div className="top">
-          <div className="camera">
-            <p className="toptext">
+        <div className="parameter-top">
+          <div className="parameter-camera">
+            <p className="parameter-toptext">
               相机选择
             </p>
             <div>
@@ -136,8 +135,8 @@ import { useHistory } from 'react-router-dom';
               </Select>
             </div>
           </div>
-          <div className="usercoordinates">
-            <p className="topltext">
+          <div className="parameter-usercoordinates">
+            <p className="parameter-topltext">
               用户坐标系
             </p>
             <span>用户坐标编号</span>
@@ -146,11 +145,11 @@ import { useHistory } from 'react-router-dom';
             </Select>
           </div>
         </div>
-        <div className="content">
-          <div className="content-l">  
-            <div className="networkparam">
-              <p className="content-ltext"> 网络参数 </p>
-              <div className="content-ltop">
+        <div className="parameter-content">
+          <div className="parameter-content-l">  
+            <div className="parameter-networkparam">
+              <p className="parameter-content-ltext"> 网络参数 </p>
+              <div className="parameter-content-ltop">
                 {clientorsave?
                    <div >
                      相机ip:
@@ -162,7 +161,7 @@ import { useHistory } from 'react-router-dom';
                   </Select></div>}
               </div>
 
-              <div className="content-lcenter">
+              <div className="parameter-content-lcenter">
                 <div>
                  <span>端口数:</span>
                  <Select disabled={allIpt} defaultValue="1" onChange={showclientnumChange} style={{ width: 100,marginLeft:"14px"}} >
@@ -176,7 +175,7 @@ import { useHistory } from 'react-router-dom';
                  </Select>
                  </div>
               </div>
-              <div className="content-lbtm">
+              <div className="parameter-content-lbtm">
                   <div>
                   端口1:
                   <Input disabled={allIpt}  style={{ width:"100px",marginLeft:"20px"  }}/>
@@ -187,9 +186,9 @@ import { useHistory } from 'react-router-dom';
                   </div>
               </div>
             </div>
-            <div className="connectparam">
-              <p className="connectparam-ltext"> 连接参数</p>
-              <div className="connectparam-ltop">
+            <div className="parameter-connectparam">
+              <p className="parameter-connectparam-ltext"> 连接参数</p>
+              <div className="parameter-connectparam-ltop">
                 <div>
                   帧头:
                   <Input disabled={allIpt}  style={{ width:"100px",marginLeft:"15px"  }}/>
@@ -199,7 +198,7 @@ import { useHistory } from 'react-router-dom';
                   <Input disabled={allIpt}  style={{ width:"28%" }}/>
                 </div>
               </div>
-              <div className="connectparam-lttop">
+              <div className="parameter-connectparam-lttop">
                 <div>
                   分隔符:
                   <Input disabled={allIpt}  style={{ width:"100px" }}/>
@@ -209,7 +208,7 @@ import { useHistory } from 'react-router-dom';
                   <Input disabled={allIpt}  style={{ width:"37%" }}/>
                 </div>
               </div>
-              <div className="connectparam-lcneter">
+              <div className="parameter-connectparam-lcneter">
                 <div>
                   结束符:
                   <Input disabled={allIpt}  style={{ width:"100px" }}/>
@@ -219,7 +218,7 @@ import { useHistory } from 'react-router-dom';
                   <Input disabled={allIpt}  style={{ width:"30%",marginLeft:"40px" }}/>s
                 </div>
               </div>
-              <div className="connectparam-lbtm">
+              <div className="parameter-connectparam-lbtm">
                 <div>
                   仅识别一个目标
                   <Switch disabled={allIpt} defaultChecked onChange={discernChange} />
@@ -231,11 +230,11 @@ import { useHistory } from 'react-router-dom';
               </div>
             </div>
           </div>
-          <div className="content-r">  
-            <div className="content-rtop">
-              <p className="content-rtoptext"> 触发方式 </p>
+          <div className="parameter-content-r">  
+            <div className="parameter-content-rtop">
+              <p className="parameter-content-rtoptext"> 触发方式 </p>
               
-              <div className="content-rtop-t">
+              <div className="parameter-content-rtop-t">
                 <Radio disabled={allIpt} checked={triggermbtn1} onClick={(e)=>{
                   setTriggerbtn1(!triggermbtn1)
                   if(e.target.checked==true){
@@ -247,7 +246,7 @@ import { useHistory } from 'react-router-dom';
                     "无"
                 </Select>
               </div>
-              <div className="content-rtop-b">
+              <div className="parameter-content-rtop-b">
                 <Radio disabled={allIpt}  checked={triggermbtn2} onClick={(e)=>{
                   setTriggerbtn2(!triggermbtn2)
                   if(e.target.checked==true){
@@ -258,9 +257,9 @@ import { useHistory } from 'react-router-dom';
                 <Input disabled={ethernetway}  style={{ width:"100px" }}/>
               </div>
             </div>
-            <div className="content-rcenter">
-              <p className="content-rcentertext"> 触发条件 </p>
-              <div className="content-rcenter-t">
+            <div className="parameter-content-rcenter">
+              <p className="parameter-content-rcentertext"> 触发条件 </p>
+              <div className="parameter-content-rcenter-t">
                 <Radio disabled={allIpt}  checked={triggermbtn3} onClick={(e)=>{
                   setTriggerbtn3(!triggermbtn3)
                   if(e.target.checked==true){
@@ -268,7 +267,7 @@ import { useHistory } from 'react-router-dom';
                   }
                 }} >单次触发</Radio>
               </div>
-              <div className="content-rcenter-b">
+              <div className="parameter-content-rcenter-b">
                 <Radio disabled={allIpt}  checked={triggermbtn4} onClick={(e)=>{
                   setTriggerbtn4(!triggermbtn4)
                   if(e.target.checked==true){
@@ -279,26 +278,25 @@ import { useHistory } from 'react-router-dom';
                 <Input disabled={conditiontime} style={{ width:"100px" }} />ms
               </div>
             </div>
-            <div className="content-rbtm">
-              <p className="content-rbtmtext"> 弧度/角度 </p>
-              <div className="content-rbtmcenter">
+            <div className="parameter-content-rbtm">
+              <p className="parameter-content-rbtmtext"> 弧度/角度 </p>
+              <div className="parameter-content-rbtmcenter">
                 弧度/角度转换:
                 <Select disabled={allIpt} defaultValue="不使用" onChange={handleChange} style={{ width: 100 }} >
                     {userNumchildren}
                 </Select>
               </div>
             </div>
-            <div className="content-rBtn">
+            <div className="parameter-content-rBtn">
               <Button size="large" type="primary" style={{ background:"#009ad6" }} onClick={ ()=>{
                 history.push('/vision')
               } }>返回</Button>
-              
               {showSave?
-               <Button size="large" type="primary" style={{ background:"#45b97c",marginLeft:"2px"  }} onClick={ ()=>{
+               <Button size="large" type="primary" style={{ background:"#45b97c",marginLeft:"2px",border:"none"  }} onClick={ ()=>{
                 setAllIpt(true)
                 setShowSave(false)
               } }>保存</Button> :
-               <Button size="large" type="primary" style={{ background:"#45b97c",marginLeft:"2px" }} onClick={ ()=>{ 
+               <Button size="large" type="primary" style={{ background:"#f36c21",marginLeft:"2px",border:"none" }} onClick={ ()=>{ 
                 setAllIpt(false)
                 setShowSave(true)
               } }>修改</Button>}
