@@ -31,6 +31,7 @@ function SlaveSet(props) {
   useEffect(() => {
     sendMSGtoController("SLAVETYPE_LIST_INQUIRE", "");
   }, []);
+  
   // 修改按钮的回调函数
   const change = () => {
     if (props.isDisabled === true) {

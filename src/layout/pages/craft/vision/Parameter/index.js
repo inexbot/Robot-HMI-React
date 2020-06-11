@@ -14,14 +14,16 @@ import {
 import { connect } from "dva";
 import { useHistory } from 'react-router-dom';
 import "./parameter.module.less"
+import { sendMSGtoController } from "service/network";
 
   const mapStateToProps = (state) => {
     return{
-      
+      parameterList:state.index.vision.parameterList
     }
   };
 
   function Parameter(props) {
+    const [copycraftNum, setCopycraftNum] = useState(1)
     const [triggermbtn1, setTriggerbtn1] = useState(true)
     const [triggermbtn2, setTriggerbtn2] = useState(false)
     const [triggermbtn3, setTriggerbtn3] = useState(true)
@@ -33,6 +35,52 @@ import "./parameter.module.less"
     const [clientway, setClientway] = useState(true)
     const [ethernetway, setEthernetway] = useState(true)
     const [conditiontime, setConditiontime] = useState(true)
+
+    // 使用受控组件来写输入框的数据
+    const [VisionServer, setVisionServer] = useState(props.parameterList.socket.server)
+    const [VisionIp, setVisionIp] = useState(props.parameterList.socket.IP)
+    const [VisionPortNum, setVisionPortNum] = useState(props.parameterList.socket.portNum)
+    const [VisionPortOne, setVisionPortOne] = useState(props.parameterList.socket.portOne)
+    const [VisionPortTwo, setVisionPortTwo] = useState(props.parameterList.socket.portTwo)
+    const [VisionEndMark, setVisionEndMark] = useState(props.parameterList.protocol.endMark)
+    const [VisionSinleTarget, setVisionSinleTarget] = useState(props.parameterList.protocol.singleTarget)
+    const [VisionHeight, setVisionHeight] = useState(props.parameterList.protocol.height)
+    const [VisionFrameHeader, setVisionFrameHeader] = useState(props.parameterList.protocol.frameHeader)
+    const [VisionSeparator, setVisionSeparator] = useState(props.parameterList.protocol.separator)
+    const [VisionFailFlag, setVisionFailFlag] = useState(props.parameterList.protocol.failFlag)
+    const [VisionSuccessFlag, setVisionSuccessFlag] = useState(props.parameterList.protocol.successFlag)
+    const [VisionTimeOut, setVisionTimeOut] = useState(props.parameterList.protocol.timeOut)
+    const [VisionAngleUnit, setVisionAngleUnit] = useState(props.parameterList.protocol.angleUnit)
+    const [VisionUserCoordNum, setVisionUserCoordNum] = useState(props.parameterList.userCoordNum)
+    const [VisionTriggerMode, setVisionTriggerMode] = useState(props.parameterList.trigger.triggerMode)
+    const [VisionTriggerStr, setVisionTriggerStr] = useState(props.parameterList.trigger.triggerStr)
+    const [VisionIOPort, setVisionIOPort] = useState(props.parameterList.trigger.IOPort)
+    const [VisionTriggerOnce, setVisionTriggerOnce] = useState(props.parameterList.trigger.triggerOnce)
+    const [VisionIntervals, setVisionIntervals] = useState(props.parameterList.trigger.intervals)
+
+    useEffect(()=>{
+      sendinquireparameterdata()
+      setVisionServer(props.parameterList.socket.server)
+      setVisionIp(props.parameterList.socket.IP)
+      setVisionPortNum(props.parameterList.socket.portNum)
+      setVisionPortOne(props.parameterList.socket.portOne)
+      setVisionPortTwo(props.parameterList.socket.portTwo)
+      setVisionEndMark(props.parameterList.protocol.endMark)
+      setVisionSinleTarget(props.parameterList.protocol.singleTarget)
+      setVisionHeight(props.parameterList.protocol.height)
+      setVisionFrameHeader(props.parameterList.protocol.frameHeader)
+      setVisionSeparator(props.parameterList.protocol.separator)
+      setVisionFailFlag(props.parameterList.protocol.failFlag)
+      setVisionSuccessFlag(props.parameterList.protocol.successFlag)
+      setVisionTimeOut(props.parameterList.protocol.timeOut)
+      setVisionAngleUnit(props.parameterList.protocol.angleUnit)
+      setVisionUserCoordNum(props.parameterList.userCoordNum)
+      setVisionTriggerMode(props.parameterList.trigger.triggerMode)
+      setVisionTriggerStr(props.parameterList.trigger.triggerStr)
+      setVisionIOPort(props.parameterList.trigger.IOPort)
+      setVisionTriggerOnce(props.parameterList.trigger.triggerOnce)
+      setVisionIntervals(props.parameterList.trigger.intervals)
+    },[copycraftNum])
 
     const { Option } = Select;
     const cameraNumchildren = [];
@@ -64,17 +112,27 @@ import "./parameter.module.less"
     }
 
     const handleChange =(value) => {
-      // setCopycraftNum(Number(value))
-      console.log(value)
+      setCopycraftNum(Number(value))
+      // console.log(value)
     }
     const discernChange = (checked) => {
       console.log(`switch to ${checked}`);
     }
 
+      // 查询视觉参数
+    const sendinquireparameterdata = () =>{
+      let dataList = {
+        robot:1,
+        visionNum:copycraftNum
+      }
+      sendMSGtoController("VISION_PARAMETER_INQUIRE" ,dataList)
+    }
+  
+
     useEffect(()=>{
-      if(triggermbtn1==true){
+      if(triggermbtn1==true && allIpt==false ){
         setClientway(false)
-      }else if(triggermbtn1==false){
+      }else if(triggermbtn1==false  ){
         setClientway(true)
       }
       
@@ -107,8 +165,8 @@ import "./parameter.module.less"
         setClientNum(false)
       }
     }
- 
-    return(
+    console.log( VisionUserCoordNum )
+    return( 
       <div style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%" ,overflowY:"hidden"}}>
         <div className="parameter-top">
           <div className="parameter-camera">
@@ -118,6 +176,7 @@ import "./parameter.module.less"
             <div>
               <span> 工艺号: </span>
               <Select
+                  onChange={handleChange}
                   defaultValue="1"
                   style={{ width: 200 }}
                 >
@@ -127,6 +186,7 @@ import "./parameter.module.less"
             <div>
             <span>类型:</span>
               <Select
+
                   disabled={allIpt}
                   defaultValue="customize"
                   style={{ width: 200 }}
@@ -140,9 +200,12 @@ import "./parameter.module.less"
               用户坐标系
             </p>
             <span>用户坐标编号</span>
-            <Select disabled={allIpt} defaultValue="不使用" onChange={handleChange} style={{ width: 200 }} >
+            {allIpt? <Input disabled={allIpt} value={VisionUserCoordNum} style={{ width: 200 }}/>:
+              <Select disabled={allIpt} defaultValue={VisionUserCoordNum} onChange={handleChange} style={{ width: 200 }} >
                 {userNumchildren}
-            </Select>
+              </Select>
+            }
+            
           </div>
         </div>
         <div className="parameter-content">
@@ -151,38 +214,45 @@ import "./parameter.module.less"
               <p className="parameter-content-ltext"> 网络参数 </p>
               <div className="parameter-content-ltop">
                 {clientorsave?
-                   <div >
-                     相机ip:
-                   <Input disabled={allIpt}   style={{ width: 100,marginLeft:"14px" }} />
-                   </div> :     
                   <div >
                     控制器ip:
-                  <Select disabled="false" defaultValue=""  style={{ width: 100 }} >
-                  </Select></div>}
+                    <Select disabled="false" defaultValue=""  style={{ width: 100 }} >
+                  </Select></div> :
+                  <div >
+                    相机ip:
+                    <Input disabled={allIpt} value={ VisionIp }  style={{ width: 100,marginLeft:"14px" }} />
+                  </div> 
+                }
               </div>
 
               <div className="parameter-content-lcenter">
                 <div>
                  <span>端口数:</span>
-                 <Select disabled={allIpt} defaultValue="1" onChange={showclientnumChange} style={{ width: 100,marginLeft:"14px"}} >
-                   {portNumchildren}
-                 </Select>
+                 {allIpt?
+                  <Input  disabled={allIpt} value={VisionPortNum } style={{ width: 100,marginLeft:"14px" }}/> :
+                  <Select disabled={allIpt} defaultValue={ VisionPortNum } onChange={showclientnumChange} style={{ width: 100,marginLeft:"14px"}} >
+                  {portNumchildren}
+                  </Select> 
+                  }
                  </div>
                  <div>
                  <span>相机:</span>
-                 <Select disabled={allIpt} defaultValue="服务端" onChange={showclientorsave} style={{ width: 100,marginLeft:"15px" }} >
-                   {cameratypeNumchildren}
-                 </Select>
+                 {allIpt?
+                 <Input  disabled={allIpt} value={VisionServer==true? "客户端" : "服务端"} style={{ width: 100,marginLeft:"15px" }}/>:
+                  <Select disabled={allIpt} defaultValue={ VisionServer==true? "客户端" : "服务端" } onChange={showclientorsave} style={{ width: 100,marginLeft:"15px" }} >
+                  {cameratypeNumchildren}
+                  </Select> }
+                 
                  </div>
               </div>
               <div className="parameter-content-lbtm">
                   <div>
                   端口1:
-                  <Input disabled={allIpt}  style={{ width:"100px",marginLeft:"20px"  }}/>
+                  <Input disabled={allIpt} value={VisionPortOne} style={{ width:"100px",marginLeft:"20px"  }}/>
                   </div>
                   <div>
                   端口2:
-                  <Input disabled={clientNum}  style={{ width:"100px",marginLeft:"8px"  }}/>
+                  <Input disabled={clientNum} value={VisionPortTwo} style={{ width:"100px",marginLeft:"8px"  }}/>
                   </div>
               </div>
             </div>
@@ -191,31 +261,31 @@ import "./parameter.module.less"
               <div className="parameter-connectparam-ltop">
                 <div>
                   帧头:
-                  <Input disabled={allIpt}  style={{ width:"100px",marginLeft:"15px"  }}/>
+                  <Input disabled={allIpt} value={VisionFrameHeader} style={{ width:"100px",marginLeft:"15px"  }}/>
                 </div>
                 <div>
                   成功发送标志符:
-                  <Input disabled={allIpt}  style={{ width:"28%" }}/>
+                  <Input disabled={allIpt} value={VisionSuccessFlag}  style={{ width:"28%" }}/>
                 </div>
               </div>
               <div className="parameter-connectparam-lttop">
                 <div>
                   分隔符:
-                  <Input disabled={allIpt}  style={{ width:"100px" }}/>
+                  <Input disabled={allIpt} valye={VisionSeparator}  style={{ width:"100px" }}/>
                 </div>
                 <div>
                   失败发送标志符:
-                  <Input disabled={allIpt}  style={{ width:"37%" }}/>
+                  <Input disabled={allIpt} value={VisionFailFlag}  style={{ width:"37%" }}/>
                 </div>
               </div>
               <div className="parameter-connectparam-lcneter">
                 <div>
                   结束符:
-                  <Input disabled={allIpt}  style={{ width:"100px" }}/>
+                  <Input disabled={allIpt} value={VisionEndMark}  style={{ width:"100px" }}/>
                 </div>
                 <div>
                   超时时间:
-                  <Input disabled={allIpt}  style={{ width:"30%",marginLeft:"40px" }}/>s
+                  <Input disabled={allIpt} value={ VisionTimeOut }  style={{ width:"30%",marginLeft:"40px" }}/>s
                 </div>
               </div>
               <div className="parameter-connectparam-lbtm">

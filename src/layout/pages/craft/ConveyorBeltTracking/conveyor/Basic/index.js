@@ -57,7 +57,7 @@ function Basic(props) {
       <Option key={i}>{ i}</Option>
     );
   } 
-
+  
   const handleChange =(value) => {
     setCopycraftNum(Number(value))
   }

@@ -16,7 +16,8 @@ import { project, program } from "./default/project";
 import { robotEncrypt } from "./default/robotencrypt";
 import { IOConfig } from "./default/ioconfig";
 import { IOName } from "./default/ioname";
-import { conveyor } from "./default/conveyor"
+import { conveyor } from "./default/conveyor";
+import { vision } from "./default/vision"
 
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -85,7 +86,8 @@ export default {
     robotEncrypt,
     IOConfig,
     IOName,
-    conveyor
+    conveyor,
+    vision
   },
 
   subscriptions: {
@@ -393,6 +395,13 @@ export default {
                 data:dataString
               });
               break;
+          case "4103":
+              dispatch({
+                type:"inquireparameterdata",
+                data:dataString
+              })
+              break;
+            
           // 接收到报错信息
           case "2b03":
             if (dataString.data === "unInitFinish") {
@@ -809,6 +818,12 @@ export default {
     realtimeencodervalue(state, action){
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.Basicdata.conveyor.encoderValue = action.data.conveyor.encoderValue
+      return _state
+    },
+    // 视觉参数查询
+    inquireparameterdata(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.vision.parameterList = action.data
       return _state
     }
   },
