@@ -1,10 +1,10 @@
 export const vision = {
     parameterList:{
         socket : {
-            IP : "192.168.1.11",  //若
-            portNum : 2,
-            portOne : 33,
-            portTwo : 44,
+            IP : "1",  //若
+            portNum : 1,
+            portOne : 0,
+            portTwo : 0,
             server : false //0:客户端，1:服务器
         },
         protocol :{
@@ -13,22 +13,22 @@ export const vision = {
             height : true,		//相机取点坐标是否含有高度
             frameHeader : "",
             separator : " ",
-            failFlag : "NG",
-            successFlag : "OK",
-            timeOut : 30,
+            failFlag : "",
+            successFlag : "",
+            timeOut : 0,
             angleUnit:0
         },
         trigger : {
-            triggerMode : 2,
+            triggerMode : 0,
             triggerStr : "TRG",
             IOPort : 0,
             triggerOnce : true,
-            intervals : 35
+            intervals : 0
         },
         userCoordNum:1,
         cameraList : {
             listNum : 2,
-            nameList : ["sensorpart","percipio"],
+            ListName : ["sensorpart","percipio"],
             currentName:"sensorpart"
         }
     }

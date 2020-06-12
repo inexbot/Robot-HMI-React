@@ -382,10 +382,14 @@ export const CommandList = {
     TRACK_CONVEYOR_PARAM_CLEAR:0x4836,
 
     // 视觉参数
+    // 设置视觉参数
+    VISION_PARAMETER_SET:0x4101,
+
     // 视觉参数查询
     VISION_PARAMETER_INQUIRE:0x4102,
 
     // 查询返回
     VISION_PARAMETER_RESPOND:0x4103,
     
+
 };
