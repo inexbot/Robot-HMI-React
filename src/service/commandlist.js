@@ -390,6 +390,23 @@ export const CommandList = {
 
     // 查询返回
     VISION_PARAMETER_RESPOND:0x4103,
+
+    // 修改视觉位置参数
+    VISION_POS_PARAMETER_SET:0x4104 ,
     
+    // 查询视觉位置参数
+    VISION_POS_PARAMETER_INQUIRE:0x4105,
+
+    // 返回视觉位置参数
+    VISION_POS_PARAMETER_RESPOND:0x4106,
+
+    // 查询位置调试参数
+    VISION_DEBUGGING_POS_INQUIRE:0x4107,
+
+    // 返回位置调试参数
+    VISION_DEBUGGING_POS_RESPOND:0x4108,
+
+    // 清空视觉参数点位列表
+    ISION_DEBUGGING_POS_CLEAR:0x4109,
 
 };

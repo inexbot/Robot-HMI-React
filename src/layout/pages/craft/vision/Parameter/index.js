@@ -23,7 +23,7 @@ import { sendMSGtoController} from "service/network";
   };
 
   function Parameter(props) {
-    const [copycraftNum, setCopycraftNum] = useState(1)
+
     const [triggermbtn1, setTriggerbtn1] = useState(true)
     const [triggermbtn2, setTriggerbtn2] = useState(false)
     const [triggermbtn3, setTriggerbtn3] = useState(true)
@@ -37,43 +37,48 @@ import { sendMSGtoController} from "service/network";
     const [conditiontime, setConditiontime] = useState(true)
  
     // 使用受控组件来写输入框的数据
-    const [VisionCurrentName, setVisionCurrentName] = useState(1)
-    const [VisionServer, setVisionServer] = useState(1)
-    const [VisionIp, setVisionIp] = useState(1)
-    const [VisionPortNum, setVisionPortNum] = useState(1)
-    const [VisionPortOne, setVisionPortOne] = useState(1)
-    const [VisionPortTwo, setVisionPortTwo] = useState(1)
-    const [VisionEndMark, setVisionEndMark] = useState(1)
-    const [VisionSinleTarget, setVisionSinleTarget] = useState(1)
-    const [VisionHeight, setVisionHeight] = useState(1)
-    const [VisionFrameHeader, setVisionFrameHeader] = useState(1)
-    const [VisionSeparator, setVisionSeparator] = useState(1)
-    const [VisionFailFlag, setVisionFailFlag] = useState(1)
-    const [VisionSuccessFlag, setVisionSuccessFlag] = useState(1)
-    const [VisionTimeOut, setVisionTimeOut] = useState(1)
-    const [VisionAngleUnit, setVisionAngleUnit] = useState(1)
-    const [VisionUserCoordNum, setVisionUserCoordNum] = useState(1)
-    const [VisionTriggerMode, setVisionTriggerMode] = useState(1)
-    const [VisionTriggerStr, setVisionTriggerStr] = useState(1)
-    const [VisionIOPort, setVisionIOPort] = useState(1)
-    const [VisionTriggerOnce, setVisionTriggerOnce] = useState(1)
-    const [VisionIntervals, setVisionIntervals] = useState(1)
+    const [VisionCurrentName, setVisionCurrentName] = useState(props.parameterList.cameraList.currentName)
+    const [VisionServer, setVisionServer] = useState(props.parameterList.socket.server)
+    const [VisionIp, setVisionIp] = useState(props.parameterList.socket.IP)
+    const [VisionPortNum, setVisionPortNum] = useState(props.parameterList.socket.portNum)
+    const [VisionPortOne, setVisionPortOne] = useState(props.parameterList.socket.portOne)
+    const [VisionPortTwo, setVisionPortTwo] = useState(props.parameterList.socket.portTwo)
+    const [VisionEndMark, setVisionEndMark] = useState(props.parameterList.protocol.endMark)
+    const [VisionSinleTarget, setVisionSinleTarget] = useState(props.parameterList.protocol.singleTarget)
+    const [VisionHeight, setVisionHeight] = useState(props.parameterList.protocol.height)
+    const [VisionFrameHeader, setVisionFrameHeader] = useState(props.parameterList.protocol.frameHeader)
+    const [VisionSeparator, setVisionSeparator] = useState(props.parameterList.protocol.separator)
+    const [VisionFailFlag, setVisionFailFlag] = useState(props.parameterList.protocol.failFlag)
+    const [VisionSuccessFlag, setVisionSuccessFlag] = useState(props.parameterList.protocol.successFlag)
+    const [VisionTimeOut, setVisionTimeOut] = useState(props.parameterList.protocol.timeOut)
+    const [VisionAngleUnit, setVisionAngleUnit] = useState(props.parameterList.protocol.angleUnit)
+    const [VisionUserCoordNum, setVisionUserCoordNum] = useState(props.parameterList.userCoordNum)
+    const [VisionTriggerMode, setVisionTriggerMode] = useState(props.parameterList.trigger.triggerMode)
+    const [VisionTriggerStr, setVisionTriggerStr] = useState(props.parameterList.trigger.triggerStr)
+    const [VisionIOPort, setVisionIOPort] = useState(props.parameterList.trigger.IOPort)
+    const [VisionTriggerOnce, setVisionTriggerOnce] = useState(props.parameterList.trigger.triggerOnce)
+    const [VisionIntervals, setVisionIntervals] = useState(props.parameterList.trigger.intervals)
 
+    const [copycraftNum, setCopycraftNum] = useState(1)
 
 
     // 查询视觉参数
 
     const sendinquireparameterdata = () =>{
+
+    } 
+    // 改变数据
+    useEffect(()=>{
+      // sendinquireparameterdata()
       let dataList = {
         robot:1,
         visionNum:copycraftNum
       }
       sendMSGtoController("VISION_PARAMETER_INQUIRE" ,dataList)
-    } 
-    // 改变数据
+    },[copycraftNum])
 
     useEffect(()=>{
-      sendinquireparameterdata()
+
       setVisionServer(props.parameterList.socket.server)
       setVisionIp(props.parameterList.socket.IP)
       setVisionPortNum(props.parameterList.socket.portNum)
@@ -95,7 +100,7 @@ import { sendMSGtoController} from "service/network";
       setVisionTriggerOnce(props.parameterList.trigger.triggerOnce)
       setVisionIntervals(props.parameterList.trigger.intervals)
       setVisionCurrentName(props.parameterList.cameraList.currentName)
-    },[copycraftNum])
+    },[props.parameterList])
 
     const { Option } = Select;
     const cameraNumchildren = [];
@@ -135,7 +140,7 @@ import { sendMSGtoController} from "service/network";
 
     const handleChange =(value) => {
       setCopycraftNum(Number(value))
-      // console.log(value)
+      console.log(value)
     }
     const heightChange = (checked) => {
       console.log(`switch to ${checked}`);
@@ -188,6 +193,7 @@ import { sendMSGtoController} from "service/network";
         setClientNum(false)
       }
     }
+    console.log(props.parameterList)
     return( 
       <div style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%" ,overflowY:"hidden"}}>
         <div className="parameter-top">
@@ -346,7 +352,7 @@ import { sendMSGtoController} from "service/network";
                   }
                 }} >I/O</Radio>
                 I/O端口:
-                <Select disabled={clientway} defaultValue="无" onChange={handleChange} style={{ width: 100,marginLeft:"16px" }} >
+                <Select disabled={clientway} defaultValue="无"  style={{ width: 100,marginLeft:"16px" }} >
                     "无"
                 </Select>
               </div>

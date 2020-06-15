@@ -15,7 +15,7 @@ import "./scope.module.less"
 
   const mapStateToProps = (state) => {
     return{
-      
+      ScopeList: state.index.vision.ScopeList
     }
   };
 
@@ -25,12 +25,13 @@ import "./scope.module.less"
     const { Option } = Select;
     const cameraNumchildren = [];
     let history = useHistory();
-    for (let i = 1; i <10; i++) {
+    for (let i = 0; i <8; i++) {
       cameraNumchildren.push(
         <Option key={i}>{  i}</Option>
       );
     } 
-    
+
+
     const columns = [
       {title: "参数",dataIndex: "name", },
       {title: "值", dataIndex: "money", },
@@ -45,7 +46,7 @@ import "./scope.module.less"
       { key: "6", name: "mZ", money: <Input disabled={valueChange} value={1} />, address:"Z轴最小值（mm）（不填写则表示无限制）"}
     ];
 
-
+    console.log(props.ScopeList)
     return(
       <div style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%",height:"1000px",overflowY:"hidden"  }}>
           <div style={{ marginLeft:"20%" }}>

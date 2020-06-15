@@ -159,6 +159,7 @@ export default {
         console.group("接收到控制器数据");
         console.log("命令字", command);
         console.log("数据", dataString);
+
         
         console.groupEnd();
         switch (command) {
@@ -401,7 +402,19 @@ export default {
                 data:dataString
               })
               break;
-            
+          case "4106":
+              dispatch({
+                type:"inquirePlacedata",
+                data:dataString
+              })
+              break;
+          case "4108":
+              dispatch({
+                type:"inquirePlacedebug",
+                data:dataString
+              })
+              break;
+
           // 接收到报错信息
           case "2b03":
             if (dataString.data === "unInitFinish") {
@@ -824,6 +837,19 @@ export default {
     inquireparameterdata(state, action){
       let _state = JSON.parse(JSON.stringify(state))
       _state.vision.parameterList = action.data
+      return _state
+    },
+    // 视觉位置参数查询
+    inquirePlacedata(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.vision.PlaceList = action.data
+      return _state
+    },
+    // 位置调试查询
+    inquirePlacedebug(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      console.log(action)
+      _state.vision.PlacedebugList = action.data
       return _state
     }
   },

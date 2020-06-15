@@ -31,5 +31,50 @@ export const vision = {
             ListName : ["sensorpart","percipio"],
             currentName:"sensorpart"
         }
+    },
+    PlaceList:{
+        position:{
+            datumPoint:[0,0,0,0.01,0,0],
+            cameraPoint:[0,0,100,0],
+            excursion :{
+                Xexcursion : 0,
+                Yexcursion : 0,
+                Zexcursion : 0,
+                angle:0.0
+            },
+            scale : 0.001,  //比列系数
+            angleDirection : 1,
+            sampleData:"",
+            cameraData:""
+        }
+    },
+    PlacedebugList:{
+        robot:1, 
+        visionNum:1,
+        originPos:[
+            {X:0.1,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.2,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.3,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.4,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.5,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.6,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.7,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.8,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.9,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.10,Y:0.0,Z:0.0,angle:0.0},
+        ],
+        currentPos:[
+            {X:0.1,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.2,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.3,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.4,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.5,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.6,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.7,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.8,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.9,Y:0.0,Z:0.0,angle:0.0},
+            {X:0.10,Y:0.0,Z:0.0,angle:0.0},
+        ]
     }
 }
+
