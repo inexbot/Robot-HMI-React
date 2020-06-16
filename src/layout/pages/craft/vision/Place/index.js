@@ -58,7 +58,7 @@ import { sendMSGtoController} from "service/network";
     const { Option } = Select;
     const cameraNumchildren = [];
     let history = useHistory();
-    for (let i = 1; i <10; i++) {
+    for (let i = 0; i <9; i++) {
       cameraNumchildren.push(
         <Option key={i}>{  i}</Option>
       );
@@ -101,7 +101,7 @@ import { sendMSGtoController} from "service/network";
     const cameradata = [
       { key: "1", name:"X",  value: <Input value={VisionCameraPoint[0]}  disabled style={{ width:"100px" }} />},
       { key: "1", name:"Y",  value: <Input value={VisionCameraPoint[1]}  disabled style={{ width:"100px" }} />},
-      { key: "1", name:"高度",  value: <Input value={VisionCameraPoint2} onChange={(e)=>{setVisionCameraPoint2(Number(e.target.value)) 
+      { key: "1", name:"高度",  value: <Input value={VisionCameraPoint2} onChange={(e)=>{setVisionCameraPoint2(e.target.value) 
         console.log(e.target.value)}} disabled={allIpt}  style={{ width:"100px" }} />},
       { key: "1", name:"角度",  value: <Input value={VisionCameraPoint[3]} disabled style={{ width:"100px" }} />},
     ]
@@ -121,18 +121,18 @@ import { sendMSGtoController} from "service/network";
           </div>
           <div className="place-content-lc">
             <p>偏移补偿 </p>
-            <div>X轴偏移 <Input disabled={allIpt}  value={VisionXexcursion} onChange={(e)=>{setVisionXexcursion(Number(e.target.value))}} style={{ width:"50%",marginLeft:"8px" }} />mn</div>
-            <div>Y轴偏移 <Input disabled={allIpt}  value={VisionYexcursion} onChange={(e)=>{setVisionYexcursion(Number(e.target.value))}} style={{ width:"50%",marginLeft:"8px" }} />mn</div>
-            <div>Z轴偏移 <Input disabled={allIpt}  value={VisionZexcursion} onChange={(e)=>{setVisionZexcursion(Number(e.target.value))}} style={{ width:"50%",marginLeft:"8px"}} />mn</div>
-            <div>角度偏移 <Input disabled={allIpt} value={VisionAngle} onChange={(e)=>{setVisionAngle(Number(e.target.value))}}  style={{ width:"50%" }} /></div>
-            <div>比例系数 <Input disabled={allIpt} value={VisionScale} onChange={(e)=>{setVisionScale(Number(e.target.value))}}   style={{ width:"50%" }}/></div>
+            <div>X轴偏移 <Input disabled={allIpt}  value={VisionXexcursion} onChange={(e)=>{setVisionXexcursion(e.target.value)}} style={{ width:"50%",marginLeft:"8px" }} />mn</div>
+            <div>Y轴偏移 <Input disabled={allIpt}  value={VisionYexcursion} onChange={(e)=>{setVisionYexcursion(e.target.value)}} style={{ width:"50%",marginLeft:"8px" }} />mn</div>
+            <div>Z轴偏移 <Input disabled={allIpt}  value={VisionZexcursion} onChange={(e)=>{setVisionZexcursion(e.target.value)}} style={{ width:"50%",marginLeft:"8px"}} />mn</div>
+            <div>角度偏移 <Input disabled={allIpt} value={VisionAngle} onChange={(e)=>{setVisionAngle(e.target.value)}}  style={{ width:"50%" }} /></div>
+            <div>比例系数 <Input disabled={allIpt} value={VisionScale} onChange={(e)=>{setVisionScale(e.target.value)}}   style={{ width:"50%" }}/></div>
             { allIpt?   <div>角度方向 <Input disabled={allIpt} value={VisionAngleDirection == -1?"负方向":"正方向"}   style={{ width:"50%" }}/></div>:
             <div>
               角度方向
               <Select
                 defaultValue={VisionAngleDirection == -1?"负方向":"正方向"}
                 style={{ width: "50%",marginLeft:"4px" }}
-                onChange={(value)=>{VisionAngleDirection(Number(value))}}
+                onChange={(value)=>{setVisionAngleDirection(Number(value))}}
               >
                 {DirectionNumchildren}
               </Select>
@@ -158,7 +158,13 @@ import { sendMSGtoController} from "service/network";
             />
           </div>
           <div className="place-content-cb">
-            <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }}>标定抓取姿态</Button>
+            <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }} onClick={()=>{
+              let dataList = {
+                robot:1,
+                visionNum:PlaceNum
+              }
+              sendMSGtoController("VISION_GESTURE_CALIBRATION_SET",dataList)
+            }}>标定抓取姿态</Button>
             <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }}>运行到基准点</Button>
           </div>
         </div>
@@ -174,7 +180,13 @@ import { sendMSGtoController} from "service/network";
             />
           </div>
           <div className="place-content-rb">
-            <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }}>试拍照</Button>
+            <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }} onClick={()=>{
+              let dataList = {
+                robot:1,
+                visionNum:PlaceNum,
+              }
+              sendMSGtoController("VISION_TRY_TAKE_PICTURE",dataList)
+            }} >试拍照</Button>
             <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }}>运行到该点</Button>
           </div>
           <div className="place-moreBtn">
@@ -188,14 +200,14 @@ import { sendMSGtoController} from "service/network";
                 visionNum:PlaceNum,
                 position:{
                   datumPoint:VisionDatumPoint,
-                  cameraPoint:[VisionCameraPoint[0],VisionCameraPoint[1],VisionCameraPoint2,VisionCameraPoint[3]],
+                  cameraPoint:[VisionCameraPoint[0],VisionCameraPoint[1],Number(VisionCameraPoint2),VisionCameraPoint[3]],
                   excursion:{
-                    Xexcursion:VisionXexcursion,
-                    Yexcursion:VisionYexcursion,
-                    Zexcursion:VisionZexcursion,
-                    angle:VisionAngle,
-                  },
-                  scale:VisionScale,
+                    Xexcursion:Number(VisionXexcursion),
+                    Yexcursion:Number(VisionYexcursion),
+                    Zexcursion:Number(VisionZexcursion),
+                    angle:Number(VisionAngle)
+                    },
+                  scale:Number(VisionScale),
                   angleDirection:VisionAngleDirection,
                 }
               }

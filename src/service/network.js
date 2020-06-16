@@ -14,8 +14,6 @@ export function initNetwork() {
     content: `正在连接${IP}:${PORT}，请稍后`,
     duration: 0,
   });
-  // console.log(CommandList.myLove);
-  // console.log(CommandList.webSite);
 }
 // 发送数据到控制器,command是命令字，data是要发送的数据，data为JSON格式，command为CommandList里面的元素名
 export async function sendMSGtoController(command, data) {
@@ -59,11 +57,6 @@ export async function sendMSGtoServer(command, data) {
   data === ""
     ? console.error("发送数据为空")
     : message.push(JSON.stringify(data));
-  // console.log(message)
-  // console.log(dataLength,)
-  // console.log(commandString,)
-  // console.log(dataLength,data.length)
-  // console.log(data)
 
     try {
       if (ws.readyState === 1) {
@@ -74,8 +67,6 @@ export async function sendMSGtoServer(command, data) {
       // 遇到错误了
       alert(e);
     }
-
-
 }
 // 解析收到的数据，返回的值为数组，[command,data]，command为字符串，data为json
 export async function comeMessage(message) {

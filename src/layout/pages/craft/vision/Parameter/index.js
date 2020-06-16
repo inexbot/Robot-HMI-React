@@ -450,46 +450,7 @@ import { sendMSGtoController} from "service/network";
                     userCoordNum:Number(VisionUserCoordNum),
                   }
                 }
-                // let elsesoket = ''
-                // let elsetigger = ''
-                // if(VisionPortNum == 1 ){
-                //   elsesoket = {
-                //     IP:VisionIp,
-                //     portOne:Number(VisionPortOne),
-                //     server:Number(VisionServer),
-                //   }
-                // } else{
-                //   elsesoket = {
-                //       IP:VisionIp,
-                //       portNum:Number(VisionPortNum),
-                //       portOne:Number(VisionPortOne),
-                //       portTwo:Number(VisionPortTwo),
-                //       server:Number(VisionServer),
-                //     }
-                // }
-                // if(VisionTriggerOnce){
-                //   elsetigger = {
-                //     triggerMode:Number(VisionTriggerMode),
-                //     triggerStr:VisionTriggerStr,
-                //     IOPort:Number(VisionIOPort),
-                //     triggerOnce:VisionTriggerOnce,
-                //   }
-                // }else{
-                //   elsetigger = {
-                //     triggerMode:Number(VisionTriggerMode),
-                //     triggerStr:VisionTriggerStr,
-                //     IOPort:Number(VisionIOPort),
-                //     intervals:VisionIntervals
-                //   }
-                // }
-                // dataList.vision.socket = elsesoket
-                // dataList.vision.tigger = elsetigger
 
-                // userCoordNum:Number(VisionUserCoordNum)
-                // "{"robot":1,"visionNum":2,"cameraType":"customize","vision":{"socket":{"IP":"192.168.1.120","portOne":5051,"server":1,
-                // "portTwo":5051,"portNum":1},"protocol":{"endMark":"$222","singleTarget":false,"height":false,"frameHeader":" sss",
-                // "separator":",","failFlag":"NG","successFlag":"OK","timeOut":30,"angleUnit":0},
-                // "trigger":{"triggerMode":2,"triggerStr":"TRG","IOPort":0,"triggerOnce":false,"intervals":35},"userCoordNum":0}}"
                 sendMSGtoController("VISION_PARAMETER_SET",dataList)
                 console.log(dataList)
               } }>保存</Button> :

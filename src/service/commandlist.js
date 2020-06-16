@@ -402,11 +402,41 @@ export const CommandList = {
 
     // 查询位置调试参数
     VISION_DEBUGGING_POS_INQUIRE:0x4107,
-
+ 
     // 返回位置调试参数
     VISION_DEBUGGING_POS_RESPOND:0x4108,
 
     // 清空视觉参数点位列表
     ISION_DEBUGGING_POS_CLEAR:0x4109,
 
+    // 视觉位置参数标定抓取姿态
+    VISION_GESTURE_CALIBRATION_SET:0x4110,
+
+    // 获取视觉位置参数标定抓取姿态
+    VISION_GESTURE_CALIBRATION_RESPOND:0x4111,
+
+    // 视觉位置参数试拍照
+    VISION_TRY_TAKE_PICTURE:0x4112,
+
+    // 返回视觉位置参数拍照
+    VISION_TAKE_PICTURE_RESPOND:0x4113,
+
+    // 拍照
+    VISION_DEBUGGING_TAKE_PICTURE:0x410A,
+
+    // 计算便宜
+    VISION_DEBUGGING_CALCULATE:0x410B,
+
+    // 查询视觉范围参数
+    VISION_RANGE_INQUIRE:0x3F05,
+
+    // 视觉范围参数
+    VISION_RANGE_RESPOND:0x3F06,
+
+    // 视觉范围参数修改
+    VISION_RANGE_SET:0x3F04,
+    
+    // 位置调试移动至此
+    VISION_DEBUGGING_POS_MOVE:0x410C,
+    
 };

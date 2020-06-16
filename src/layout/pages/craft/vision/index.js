@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
   function Vision(){
       return(
               <div>
-                  <HashRouter >
+                  <HashRouter  >
                       <NavLink exact activeClassName="selected"  to="/vision/parameter">
                         <Button>
                           视觉参数设置

@@ -7,7 +7,7 @@ import {
   PORT,
   sendMSGtoController,
 } from "service/network";
-import { notification, message as showMessage, Button } from "antd";
+import { notification, message as showMessage, Button , message } from "antd";
 import { controllerConfig } from "./default/controllerconfig";
 import { robotStatus } from "./default/robotstatus";
 import { robotParameter } from "./default/robotParameter";
@@ -355,66 +355,81 @@ export default {
               data:dataString,
             })
           case "4813":
-              dispatch({
-                type:"inquireDiscernOne",
-                data:dataString,
-              });
-              break;
+            dispatch({
+              type:"inquireDiscernOne",
+              data:dataString,
+            });
+            break;
           case "4817":
-              dispatch({
-                type:"inquireSensorsign",
-                data:dataString
-              });
-              break;
+            dispatch({
+              type:"inquireSensorsign",
+              data:dataString
+            });
+            break;
           case "4819":
-              dispatch({
-                type:"inquireSensorsignOne",
-                data:dataString
-              });
-              break;
+            dispatch({
+              type:"inquireSensorsignOne",
+              data:dataString
+            });
+            break;
           case "481d":
-              dispatch({
-                type:"inquireSensorsignTwo",
-                data:dataString
-              });
-              break;
+            dispatch({
+              type:"inquireSensorsignTwo",
+              data:dataString
+            });
+            break;
           case "4832":
-              dispatch({
-                type:"inquireSetsite",
-                data:dataString,
-              });
-              break;
+            dispatch({
+              type:"inquireSetsite",
+              data:dataString,
+            });
+            break;
           case "4834":
-              dispatch({
-                type:"inquiredemarcate",
-                data:dataString
-              });
-              break;
+            dispatch({
+              type:"inquiredemarcate",
+              data:dataString
+            });
+            break;
           case "4837":
-              dispatch({
-                type:"moveSetsite",
-                data:dataString
-              });
-              break;
+            dispatch({
+              type:"moveSetsite",
+              data:dataString
+            });
+            break;
           case "4103":
-              dispatch({
-                type:"inquireparameterdata",
-                data:dataString
-              })
-              break;
+            dispatch({
+              type:"inquireparameterdata",
+              data:dataString
+            })
+            break;
           case "4106":
-              dispatch({
-                type:"inquirePlacedata",
-                data:dataString
-              })
-              break;
+            dispatch({
+              type:"inquirePlacedata",
+              data:dataString
+            })
+            break;
           case "4108":
-              dispatch({
-                type:"inquirePlacedebug",
-                data:dataString
-              })
-              break;
-
+            dispatch({
+              type:"inquirePlacedebugdata",
+              data:dataString
+            })
+            break;
+          case "3f06":
+            dispatch({
+              type:"inquireScopedata",
+              data:dataString
+            })
+            break;
+          case "4111":
+            dispatch({
+              type:"inquireScopedatumPointdata",
+              data:dataString
+            })
+            break;
+          // case "4113":
+          //   dispatch({
+          //     type:"inquireScope"
+          //   })
           // 接收到报错信息
           case "2b03":
             if (dataString.data === "unInitFinish") {
@@ -846,10 +861,26 @@ export default {
       return _state
     },
     // 位置调试查询
-    inquirePlacedebug(state, action){
+    inquirePlacedebugdata(state, action){
       let _state = JSON.parse(JSON.stringify(state))
-      console.log(action)
-      _state.vision.PlacedebugList = action.data
+      if(action.data.excursion == undefined || action.data.currentPos == undefined ){
+        message.warning('此工艺号和传送带工艺号查询到的数据为空');
+      }else{
+        _state.vision.PlacedebugList = action.data
+      }
+      return _state
+    },
+    // 视觉范围查询
+    inquireScopedata(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      _state.vision.ScopeList = action.data
+      return _state
+    },
+    // 标定抓取姿态
+    inquireScopedatumPointdata(state, action){
+      let _state = JSON.parse(JSON.stringify(state))
+      console.log(action.data)
+      _state.vision.PlaceList.position.datumPoint = action.data.datumPoint
       return _state
     }
   },
