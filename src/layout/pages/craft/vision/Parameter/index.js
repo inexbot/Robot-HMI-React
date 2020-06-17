@@ -33,8 +33,8 @@ import { sendMSGtoController} from "service/network";
     const [clientorsave, setClientorsave] = useState(false)
     const [clientNum, setClientNum] = useState(true)
     const [clientway, setClientway] = useState(true)
-    const [ethernetway, setEthernetway] = useState(true)
-    const [conditiontime, setConditiontime] = useState(true)
+    const [ethernetway, setEthernetway] = useState(false)
+    const [conditiontime, setConditiontime] = useState(false)
  
     // 使用受控组件来写输入框的数据
     const [VisionCurrentName, setVisionCurrentName] = useState(props.parameterList.cameraList.currentName)
@@ -100,6 +100,16 @@ import { sendMSGtoController} from "service/network";
       setVisionTriggerOnce(props.parameterList.trigger.triggerOnce)
       setVisionIntervals(props.parameterList.trigger.intervals)
       setVisionCurrentName(props.parameterList.cameraList.currentName)
+
+      setTriggerbtn1(props.parameterList.trigger.triggerMode==1? true : false)
+      setTriggerbtn2(props.parameterList.trigger.triggerMode==2? true : false)
+      setTriggerbtn3(props.parameterList.trigger.triggerOnce? true : false)
+      setTriggerbtn4(props.parameterList.trigger.triggerOnce? false : true)
+
+      // setEthernetway(props.parameterList.trigger.triggerMode==1? true : false)
+      // setConditiontime(props.parameterList.trigger.triggerOnce? true : false)
+
+      
     },[props.parameterList])
 
     const { Option } = Select;
@@ -158,22 +168,20 @@ import { sendMSGtoController} from "service/network";
 
       if(triggermbtn1==true  ){
         setClientway(false)
-      }else if(triggermbtn1==false  ){
+      }else if(triggermbtn1==false ){
         setClientway(true)
       }
       
-      if(triggermbtn2==true){
+      if(triggermbtn2==true ){
         setEthernetway(false)
-      }else if(triggermbtn2==false){
+      }else if(triggermbtn2==false ){
         setEthernetway(true)
       }
 
-      if(triggermbtn4==true){
+      if(triggermbtn4==true  ){
         setConditiontime(false)
-        setVisionTriggerOnce(true)
-      }else if(triggermbtn4==false){
+      }else if(triggermbtn4==false ){
         setConditiontime(true)
-        setVisionTriggerOnce(false)
       }
     },[triggermbtn1,triggermbtn2,triggermbtn3,triggermbtn4,VisionTriggerOnce])
 
@@ -342,6 +350,7 @@ import { sendMSGtoController} from "service/network";
               
               <div className="parameter-content-rtop-t">
                 <Radio disabled={allIpt} checked={triggermbtn1} onClick={(e)=>{
+                  console.log(e.target.checked)
                   if(triggermbtn1){
 
                   }else if(triggermbtn1==false){
@@ -349,6 +358,7 @@ import { sendMSGtoController} from "service/network";
                   }
                   if(e.target.checked==true){
                     setTriggerbtn2(false)
+                    setVisionTriggerMode(1)
                   }
                 }} >I/O</Radio>
                 I/O端口:
@@ -358,6 +368,7 @@ import { sendMSGtoController} from "service/network";
               </div>
               <div className="parameter-content-rtop-b">
                 <Radio disabled={allIpt}  checked={triggermbtn2} onClick={(e)=>{
+                  console.log(e.target.checked)
                   if(triggermbtn2){
 
                   }else if(triggermbtn2==false){
@@ -365,6 +376,7 @@ import { sendMSGtoController} from "service/network";
                   }
                   if(e.target.checked==true){
                     setTriggerbtn1(false)
+                    setVisionTriggerMode(2)
                   }
                 }}>Ethernet</Radio>
                 发送:
@@ -375,17 +387,20 @@ import { sendMSGtoController} from "service/network";
               <p className="parameter-content-rcentertext"> 触发条件 </p>
               <div className="parameter-content-rcenter-t">
                 <Radio disabled={allIpt}  checked={triggermbtn3} onClick={(e)=>{
+                  console.log(e.target.checked)
                   if(triggermbtn3){
                   }else if(triggermbtn3==false){
                     setTriggerbtn3(true)
                   }
                   if(e.target.checked==true){
                     setTriggerbtn4(false)
+                    setVisionTriggerOnce(true)
                   }
                 }} >单次触发</Radio>
               </div>
               <div className="parameter-content-rcenter-b">
                 <Radio disabled={allIpt}  checked={triggermbtn4 } onClick={(e)=>{
+                  console.log(e.target.checked)
                   if(triggermbtn4){
 
                   }else if(triggermbtn4==false){
@@ -393,6 +408,7 @@ import { sendMSGtoController} from "service/network";
                   }
                   if(e.target.checked==true){
                     setTriggerbtn3(false)
+                    setVisionTriggerOnce(false)
                   }
                    }} >持续触发</Radio>
                 间隔时间:

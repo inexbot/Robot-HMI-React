@@ -695,6 +695,7 @@ export default {
     /* 接收当前位置 */
     receiveCurrentPos(state, action) {
       let _state = JSON.parse(JSON.stringify(state));
+      // console.log(_state.robotStatus.pos, action.data.pos)
       _state.robotStatus.pos = action.data.pos;
       _state.robotStatus.posDeg = action.data.posDeg;
       return _state;
@@ -873,6 +874,7 @@ export default {
     // 视觉范围查询
     inquireScopedata(state, action){
       let _state = JSON.parse(JSON.stringify(state))
+      console.log(_state.vision.ScopeList,action)
       _state.vision.ScopeList = action.data
       return _state
     },

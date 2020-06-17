@@ -34,6 +34,7 @@ import { sendMSGtoController} from "service/network";
     const [VisionScale, setVisionScale] = useState(props.PlaceList.position.scale)
     const [VisionAngleDirection, setVisionAngleDirection] = useState(props.PlaceList.position.angleDirection)
     const [VisionCameraPoint2,setVisionCameraPoint2 ] = useState(props.PlaceList.position.cameraPoint[2])
+    const [VisionSampleData, setVisionSampleData] = useState(props.PlaceList.position.sampleData)
 
     useEffect(()=>{
       let dataList = {
@@ -53,6 +54,7 @@ import { sendMSGtoController} from "service/network";
       setVisionScale(props.PlaceList.position.scale)
       setVisionAngleDirection(props.PlaceList.position.angleDirection)
       setVisionCameraPoint2(props.PlaceList.position.cameraPoint[2])
+      setVisionSampleData(props.PlaceList.position.sampleData)
     },[props.PlaceList])
 
     const { Option } = Select;
@@ -141,7 +143,7 @@ import { sendMSGtoController} from "service/network";
           
           </div>
           <div className="place-content-lb">
-            <p>示例格式</p>
+            <p>示例格式:{VisionSampleData}</p>
             <p>接受数据</p>
           </div>
         </div>  
@@ -193,7 +195,7 @@ import { sendMSGtoController} from "service/network";
             <Button size="large" type="primary" style={{ background:"#009ad6" }} onClick={ ()=>{
               history.push('/vision')
             } }>返回</Button>
-            {showSave?
+            {showSave?  
             <Button size="large" type="primary" style={{ background:"#45b97c",marginLeft:"2px",border:"none"  }} onClick={ ()=>{
               let dataList = {
                 robot:1,

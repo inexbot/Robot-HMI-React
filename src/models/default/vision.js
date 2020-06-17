@@ -83,6 +83,7 @@ export const vision = {
         minX:"0.003",
         minY:"0",
         minZ:"0"
-    }
+    },
+
 }
 

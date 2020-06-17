@@ -92,7 +92,14 @@ import { sendMSGtoController} from "service/network";
             {valueChange? 
               <div style={{ marginLeft:"20%" }}>
                 <Button size="large"  onClick={()=>{ setValueChange(false) }} type="primary" style={{ background:"#f36c21",border:"none" }}>修改</Button>
-                <Button size="large" danger type="primary" style={{ marginLeft:"1%",border:"none" }} onClick={()=>{ setValueChange(false)  }}>清除</Button>
+                <Button size="large" danger type="primary" style={{ marginLeft:"1%",border:"none" }} onClick={()=>{ setValueChange(false) 
+                  setVisionMaxX('')
+                  setVisionMaxY('')
+                  setVisionMaxZ('')
+                  setVisionMinX('')
+                  setVisionMinY('')
+                  setVisionMinZ('')
+                }}>清除</Button>
               </div>:
               <div style={{ marginLeft:"20%" }}>
                 <Button size="large"  onClick={(e)=>{ setValueChange(true)
@@ -119,7 +126,7 @@ import { sendMSGtoController} from "service/network";
                 history.push("/vision")
               }}>返回</Button>
               <Button size="large" type="primary" style={{ background:"#009ad6",marginLeft:"1px" }} onClick={()=>{
-                history.push("/vision/scopesign")
+                history.push({pathname:"/vision/scopesign",query:{a:Number(ScopeNum)}})
               }}>范围标定</Button>
             </div>
       </div>
