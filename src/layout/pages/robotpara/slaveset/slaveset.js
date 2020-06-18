@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
 import { Button, Col, Select, Alert, Row } from "antd";
 import { servoAmount, ENIname, ENIstate } from "./slaveset_header";
-import { sendMSGtoController } from "../../../../service/network";
+import { sendMSGtoController } from "service/network";
 import { connect } from "dva";
 import SlaveSetRobot from "./slaveset_robot";
 import SlaveSetPrimary from "./slaveset_primary";
-import ConTitle from "../../../../components/title";
+import ConTitle from "components/title";
 import intl from "react-intl-universal";
 import "./slaveset.css";
 
@@ -31,12 +31,13 @@ function SlaveSet(props) {
   useEffect(() => {
     sendMSGtoController("SLAVETYPE_LIST_INQUIRE", "");
   }, []);
-  
   // 修改按钮的回调函数
   const change = () => {
+    // console.log(props.dispatch())
+    console.log(props)
     if (props.isDisabled === true) {
       props.dispatch({
-        type: "RobotPara/changeDisabled",
+        type: "Slave_Set/changeDisabled",
         data: {
           isDisabled: false,
           buttoncharacter: "保存",
@@ -45,7 +46,7 @@ function SlaveSet(props) {
       });
     } else {
       props.dispatch({
-        type: "RobotPara/changeDisabled",
+        type: "Slave_Set/changeDisabled",
         data: {
           isDisabled: true,
           buttoncharacter: "修改",
@@ -54,6 +55,7 @@ function SlaveSet(props) {
       });
     }
   };
+
   // 用来动态加载右边的主要页面
   const pages = () => {
     if (state.page === "robot") {

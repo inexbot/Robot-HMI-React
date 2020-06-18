@@ -16,6 +16,7 @@ import { sendMSGtoController} from "service/network";
 
   const mapStateToProps = (state) => {
     return{
+      currentRobot: state.index.robotStatus.currentRobot,
       ScopeList:state.index.vision.ScopeList,
       ScopePos:state.index.robotStatus.pos
     }
@@ -54,7 +55,7 @@ import { sendMSGtoController} from "service/network";
     useEffect(()=>{
       let gainSet =  setInterval(() => {
         let dataList = {
-          robot:1,
+          robot:props.currentRobot,
           coord:-1,
         }
         sendMSGtoController("CURRENTPOS_INQUIRE",dataList)
@@ -92,7 +93,7 @@ import { sendMSGtoController} from "service/network";
               setVisionMinZ(props.ScopePos[5])} }>标定mZ</Button>
               <Button type="primary" style={{  background:"#45b97c",border:"none" }} onClick={()=>{
                 let dataList = {
-                  robot:1,
+                  robot:props.currentRobot,
                   visionNum:props.history.location.query.a,
                   visionRange:{
                     maxX:String(VisionMaxX),

@@ -6,6 +6,7 @@ import { sendMSGtoController } from "service/network";
 
 const mapStateToProps = (state) => {
     return {
+      currentRobot: state.index.robotStatus.currentRobot,
       dataSoure: state.index.conveyor.Basicdata,
       Setsite: state.index.conveyor.Setsite
     };
@@ -45,7 +46,7 @@ const mapStateToProps = (state) => {
     } 
     useEffect(()=>{
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         conveyorID:props.dataSoure.conveyorID
       }
       sendMSGtoController("TRACK_CONVEYOR_POSITION_INQUIRE",dataList)
@@ -58,7 +59,7 @@ const mapStateToProps = (state) => {
 
     const sendinquiredemarcate = ( value ) =>{
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         conveyorID:props.dataSoure.conveyorID,
         type:value
       }
@@ -67,7 +68,7 @@ const mapStateToProps = (state) => {
     
     const sendmoveSetsite = (value) =>{
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         conveyorID:props.dataSoure.conveyorID,
         type:value
       }
@@ -116,7 +117,7 @@ const mapStateToProps = (state) => {
           onOk={() => {
             setShowemptyModal(false)
             let dataList = {
-              robot:1,
+              robot:props.currentRobot,
               conveyorID:props.dataSoure.conveyorID
             }
             sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
@@ -134,7 +135,7 @@ const mapStateToProps = (state) => {
           visible={showcopyModal}
           onOk={() => {setshowcopyModal(false)
             let dataList = {
-              robot:1,
+              robot:props.currentRobot,
               srcConveyorID:props.dataSoure.conveyorID,
               dstConveyorID:copycraftNum
             }
@@ -159,7 +160,7 @@ const mapStateToProps = (state) => {
         </Modal>
         {showSave ? <div style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px", }} onClick={()=>{
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             conveyorID:props.dataSoure.conveyorID,
             position:{
               trackStartXPoint:Number(trackStartXPoint),

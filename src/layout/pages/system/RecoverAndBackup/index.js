@@ -85,7 +85,7 @@ function RecoverAndBackup() {
             <div>
               <Upload {...props}>
                 <Button>
-                  <UploadOutlined /> 升级系统
+                  <UploadOutlined /> 上传文件
                 </Button>
               </Upload>
               <Button

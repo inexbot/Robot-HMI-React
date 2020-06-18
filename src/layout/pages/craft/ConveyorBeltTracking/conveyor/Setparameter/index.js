@@ -32,11 +32,11 @@ const ConveyorFour = asyncComponents(() => import("../ConveyorFour"))
 
 const mapStateToProps = (state) => {
   return {
-    
+    currentRobot: state.index.robotStatus.currentRobot,
   };
 };
 
-function Setparameter() {
+function Setparameter(props) {
   const { Option } = Select;
 
   const { Step } = Steps;
@@ -71,7 +71,7 @@ function Setparameter() {
 
   const handleChange =(value) => {
     let dataList = {
-      robot:1,
+      robot:props.currentRobot,
       conveyorID:Number(value),
     }
     sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE",dataList)

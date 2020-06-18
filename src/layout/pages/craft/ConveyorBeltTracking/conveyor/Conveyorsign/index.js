@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
     return {
+      currentRobot: state.index.robotStatus.currentRobot,
       dataSoure: state.index.conveyor.Basicdata,
     };
   };
@@ -61,7 +62,7 @@ const mapStateToProps = (state) => {
         onOk={() => {
           setShowemptyModal(false)
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             conveyorID:props.dataSoure.conveyorID
           }
           sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
@@ -79,7 +80,7 @@ const mapStateToProps = (state) => {
         visible={showcopyModal}
         onOk={() => {setshowcopyModal(false) 
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             srcConveyorID:props.dataSoure.conveyorID,
             dstConveyorID:copycraftNum
           }

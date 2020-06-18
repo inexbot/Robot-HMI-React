@@ -446,7 +446,7 @@ function SlaveSetRobot(props) {
                   <th>
                     <Select
                       defaultValue="4"
-                      disabled={true}
+                      disabled={props.isDisabled}
                       className="table_btn"
                     >
                       <Option value="1">单轴旋转台</Option>
@@ -544,7 +544,7 @@ function SlaveSetRobot(props) {
               defaultValue={props.robotAmount}
               onChange={(value) => changeRobotAmount(value)}
               disabled={props.isDisabled}
-              style={{ width: 80 }}
+              style={{ width: 200 }}
             >
               <Option value="1">1</Option>
               <Option value="2">2</Option>

@@ -196,7 +196,7 @@ function Project(props) {
         content: <Input allowClear placeholder={name} onChange={changeName} />,
         onOk() {
           let dataList = {
-            robot: 1,
+            robot: props.currentRobot,
             oldjobName: name,
             newjobName: programName + ".JBR",
           };
@@ -244,7 +244,7 @@ function Project(props) {
                       ),
                       onOk() {
                         let dataList = {
-                          robot: 1,
+                          robot: props.currentRobot,
                           oldjobName: value.name,
                           newjobName: newProgramName + ".JBR",
                         };

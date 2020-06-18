@@ -15,6 +15,7 @@ import { sendMSGtoController } from "service/network";
 
 const mapStateToProps = (state) => {
   return{
+    currentRobot: state.index.robotStatus.currentRobot,
     dataSoure: state.index.conveyor.Basicdata,
   }
 };
@@ -85,7 +86,7 @@ function Basic(props) {
     useEffect(()=>{
       let gainSet =  setInterval(() => {
         let dataList = {
-          robot:1,
+          robot:props.currentRobot,
           conveyorID:props.dataSoure.conveyorID,
         }
         sendMSGtoController("TRACK_CONVEYOR_REALTIME_INQUIRE",dataList)
@@ -149,7 +150,7 @@ function Basic(props) {
         visible={showemptyModal}
         onOk={() => {setShowemptyModal(false)
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             conveyorID:props.dataSoure.conveyorID
           }
           sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
@@ -168,7 +169,7 @@ function Basic(props) {
         visible={showcopyModal}
         onOk={() => { setshowcopyModal(false) 
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             srcConveyorID:props.dataSoure.conveyorID,
             dstConveyorID:copycraftNum
           }
@@ -193,7 +194,7 @@ function Basic(props) {
       </Modal>
       {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"17%" }} onClick={()=>{
         let dataList = {
-          robot:1,
+          robot:props.currentRobot,
           conveyorID:Number(props.dataSoure.conveyorID),
           conveyor:{
             maxEncoderVal:Number(maxEncoderVal),

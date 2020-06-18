@@ -16,6 +16,7 @@ import { sendMSGtoController} from "service/network";
 
   const mapStateToProps = (state) => {
     return{
+      currentRobot: state.index.robotStatus.currentRobot,
       ScopeList: state.index.vision.ScopeList
     }
   };
@@ -41,7 +42,7 @@ import { sendMSGtoController} from "service/network";
 
     useEffect(()=>{
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         visionNum:Number(ScopeNum)
       }
       sendMSGtoController("VISION_RANGE_INQUIRE",dataList)
@@ -104,7 +105,7 @@ import { sendMSGtoController} from "service/network";
               <div style={{ marginLeft:"20%" }}>
                 <Button size="large"  onClick={(e)=>{ setValueChange(true)
                   let dataList = {
-                    robot:1,
+                    robot:props.currentRobot,
                     visionNum:Number(ScopeNum),
                     visionRange:{
                       maxX:String(VisionMaxX) ,

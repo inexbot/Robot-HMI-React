@@ -17,6 +17,7 @@ import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
   return {
+    currentRobot: state.index.robotStatus.currentRobot,
     dataSoures: state.index.conveyor.Basicdata,
     dataSoure: state.index.conveyor.Sensorsign
   };
@@ -45,7 +46,7 @@ function Sensorsign(props) {
   
   useEffect(()=>{
     let dataList = {
-      robot:1,
+      robot:props.currentRobot,
       conveyorID:props.dataSoures.conveyorID
     }
     sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_INQUIRE",dataList)
@@ -74,7 +75,7 @@ function Sensorsign(props) {
         onOk={() => { 
           setShowemptyModal(false)
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             conveyorID:props.dataSoures.conveyorID
           }
           sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
@@ -92,7 +93,7 @@ function Sensorsign(props) {
         visible={showcopyModal}
         onOk={() => {setshowcopyModal(false) 
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             srcConveyorID:props.dataSoures.conveyorID,
             dstConveyorID:copycraftNum
           }

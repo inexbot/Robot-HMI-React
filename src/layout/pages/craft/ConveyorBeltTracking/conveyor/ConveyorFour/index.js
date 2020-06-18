@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
     return {
+      currentRobot: state.index.robotStatus.currentRobot,
       dataSoure: state.index.conveyor.Basicdata,
     };
   };
@@ -19,7 +20,7 @@ const mapStateToProps = (state) => {
         </div>
           <Button  style = {{ width:"100px",height:"50px",marginLeft:"25%" }} onClick = {() =>{
               let dataList = {
-                robot:1,
+                robot:props.currentRobot,
                 conveyorID:props.dataSoure.conveyorID,
               }
               sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CANCEL",dataList)
@@ -30,7 +31,7 @@ const mapStateToProps = (state) => {
           }}>上一步 </Button>
           <Button style = {{ width:"100px",height:"50px" }} onClick = { ()=>{
              let dataList = {
-               robot:1,
+               robot:props.currentRobot,
                conveyorID:props.dataSoure.conveyorID
              }
               sendMSGtoController("TRACK_CONVEYOR_USERCOORD_CALIBRATION",dataList)

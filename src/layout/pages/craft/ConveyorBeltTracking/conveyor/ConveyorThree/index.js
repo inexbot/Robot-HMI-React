@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
   return {
+    currentRobot: state.index.robotStatus.currentRobot,
     dataSoures:state.index.conveyor.Basicdata,
     dataSoure:state.index.conveyor.Conveyorsign.ConveyorThree
   };
@@ -49,7 +50,7 @@ function ConveyorsignThree(props) {
         </div>
         <Button style = {{ width:"100px",height:"50px", }} onClick = {() =>{
             let dataList = {
-              robot:1,
+              robot:props.currentRobot,
               conveyorID:props.dataSoures.conveyorID,
             }
             sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CANCEL",dataList)
@@ -58,7 +59,7 @@ function ConveyorsignThree(props) {
         }}>取消标定</Button>
         <Button type="primary" shape="round"  style = {{ width:"100px",height:"50px",marginLeft:"12%" }} onClick = {() =>{
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             conveyorID:props.dataSoures.conveyorID,
             posNum:3,
           }
@@ -67,7 +68,7 @@ function ConveyorsignThree(props) {
         }}>标定</Button>
         <Button type="primary" danger shape="round" style = {{ width:"100px",height:"50px", }} onClick = {() =>{
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             conveyorID:props.dataSoures.conveyorID,
             posNum:3,
           }

@@ -6,6 +6,7 @@ import { sendMSGtoController } from "service/network";
 
 const mapStateToProps = (state) => {
     return {
+      currentRobot: state.index.robotStatus.currentRobot,
       dataSoure: state.index.conveyor.DiscernData,
       conveyorNum: state.index.conveyor.conveyorNum,
       dataSoures:state.index.conveyor.Basicdata
@@ -32,7 +33,7 @@ const mapStateToProps = (state) => {
 
     useEffect(()=>{
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         conveyorID:props.dataSoures.conveyorID
       }
       sendMSGtoController("TRACK_CONVEYOR_POSCHECKPARAM_INQUIRE",dataList)
@@ -145,7 +146,7 @@ const mapStateToProps = (state) => {
         onOk={() => {
           setShowemptyModal(false)
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             conveyorID:props.dataSoure.conveyorID
           }
           sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
@@ -164,7 +165,7 @@ const mapStateToProps = (state) => {
         visible={showcopyModal}
         onOk={() => {setshowcopyModal(false) 
           let dataList = {
-            robot:1,
+            robot:props.currentRobot,
             srcConveyorID:props.dataSoure.conveyorID,
             dstConveyorID:copycraftNum
           }
@@ -191,7 +192,7 @@ const mapStateToProps = (state) => {
           let dataList = {}
           if(Diserntype == 0){
             dataList = {
-              robot:1,
+              robot:props.currentRobot,
               conveyorID:props.dataSoures.conveyorID,
               detectSrc:{
                 type:Number(Diserntype),
@@ -205,7 +206,7 @@ const mapStateToProps = (state) => {
             }
           }else if(Diserntype == 1){
             dataList = {
-              robot:1,
+              robot:props.currentRobot,
               conveyorID:props.dataSoures.conveyorID,
               detectSrc:{
                 type:Number(Diserntype),
@@ -219,7 +220,7 @@ const mapStateToProps = (state) => {
             }
           }else if(Diserntype == 2){
             dataList = {
-              robot:1,
+              robot:props.currentRobot,
               conveyorID:props.dataSoures.conveyorID,
               detectSrc:{
                 type:Number(Diserntype),

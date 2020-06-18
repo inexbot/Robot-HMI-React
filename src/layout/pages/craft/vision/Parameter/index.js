@@ -18,6 +18,7 @@ import { sendMSGtoController} from "service/network";
 
   const mapStateToProps = (state) => {
     return{
+      currentRobot: state.index.robotStatus.currentRobot,
       parameterList:state.index.vision.parameterList
     }
   };
@@ -71,7 +72,7 @@ import { sendMSGtoController} from "service/network";
     useEffect(()=>{
       // sendinquireparameterdata()
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         visionNum:copycraftNum
       }
       sendMSGtoController("VISION_PARAMETER_INQUIRE" ,dataList)
@@ -234,8 +235,8 @@ import { sendMSGtoController} from "service/network";
               用户坐标系
             </p>
             <span>用户坐标编号</span>
-            {allIpt? <Input disabled={allIpt} value={VisionUserCoordNum} style={{ width: 200 }}/>:
-              <Select disabled={allIpt} defaultValue={VisionUserCoordNum} onChange={(value)=>{ setVisionUserCoordNum(value) }} style={{ width: 200 }} >
+            {allIpt? <Input disabled={allIpt} value={VisionUserCoordNum ==0?"不使用" : VisionUserCoordNum} style={{ width: 200 }}/>:
+              <Select disabled={allIpt} defaultValue={VisionUserCoordNum ==0?"不使用" : VisionUserCoordNum} onChange={(value)=>{ setVisionUserCoordNum(value) }} style={{ width: 200 }} >
                 {userNumchildren}
               </Select>
             }
@@ -419,9 +420,13 @@ import { sendMSGtoController} from "service/network";
               <p className="parameter-content-rbtmtext"> 弧度/角度 </p>
               <div className="parameter-content-rbtmcenter">
                 弧度/角度转换:
-                <Select disabled={allIpt} defaultValue={ VisionAngleUnit==0?"角度":"弧度" } onChange={(value)=>{setVisionAngleUnit(value)}} style={{ width: 100 }} >
-                    {angleUnitNumchildren}
+                {allIpt?  <Input disabled = { allIpt} value={ VisionAngleUnit==0?"角度":"弧度"} style={{ width: 100 }}  /> : 
+                <Select disabled={allIpt} defaultValue={ VisionAngleUnit==0?"角度":"弧度" } onChange={(value)=>{setVisionAngleUnit(Number(value)) 
+                console.log(value)
+                }} style={{ width: 100 }} >
+                  {angleUnitNumchildren}
                 </Select>
+                }
               </div>
             </div>
             <div className="parameter-content-rBtn">
@@ -433,7 +438,7 @@ import { sendMSGtoController} from "service/network";
                 setAllIpt(true)
                 setShowSave(false)
                 let dataList = {
-                  robot:1,
+                  robot:props.currentRobot,
                   visionNum:copycraftNum,
                   cameraType:"customize",
                   vision:{
@@ -453,8 +458,7 @@ import { sendMSGtoController} from "service/network";
                       failFlag:VisionFailFlag,
                       successFlag:VisionSuccessFlag,
                       timeOut:Number(VisionTimeOut),
-                      angleUnit:0,
-                      // Number(angleUnitNumchildren == null? 0:angleUnitNumchildren ),
+                      angleUnit:VisionAngleUnit,
                     },
                     trigger:{
                        triggerMode:Number(VisionTriggerMode),

@@ -110,7 +110,7 @@ const RecoverAndBackup = asyncComponents(() =>
 const Program = asyncComponents(() => import("./layout/pages/program"));
 // 工艺页面
 const Setparameter = asyncComponents(() => import("./layout/pages/craft/ConveyorBeltTracking/conveyor/Setparameter"))
-const Vision = asyncComponents(() => import("./layout/pages/craft/Vision/index"))
+const Vision = asyncComponents(() => import("./layout/pages/craft/vision"))
 
 const mapStateToProps = (state) => {
   return {
@@ -139,10 +139,7 @@ function Router(props) {
         <RouterDom.Route path="/user" component={User} />
         <RouterDom.Route path="/autoLoadPro" component={AutoLoadPro} />
         <RouterDom.Route path="/robotRange" component={RobotRange} />
-        <RouterDom.Route
-          path="/interferenceRegion"
-          component={InterferenceRegion}
-        />
+        <RouterDom.Route path="/interferenceRegion" component={InterferenceRegion} />
         <RouterDom.Route path="/dynamic" component={Dynamic} />
         {/* 外设参数 */}
         <RouterDom.Route path="/IORemote" component={IORemote} />
@@ -178,7 +175,9 @@ function Router(props) {
         <RouterDom.Route path="/Language" component={Language} />
         <RouterDom.Route path="/Backup" component={RecoverAndBackup} />
         {/* 工艺页面 */}
+          {/* 跳转到传送带参数页面 */}
         <RouterDom.Route path="/setparameter" component={Setparameter} />
+          {/* 跳转到视觉参数页面 */}
         <RouterDom.Route path="/vision" component={Vision} />
       </RouterDom.Switch>
     </App>

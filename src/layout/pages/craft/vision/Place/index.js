@@ -16,6 +16,7 @@ import { sendMSGtoController} from "service/network";
 
   const mapStateToProps = (state) => {
     return{
+      currentRobot: state.index.robotStatus.currentRobot,
       PlaceList: state.index.vision.PlaceList
     }
   };
@@ -38,7 +39,7 @@ import { sendMSGtoController} from "service/network";
 
     useEffect(()=>{
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         visionNum:PlaceNum
       }
       sendMSGtoController("VISION_POS_PARAMETER_INQUIRE",dataList)
@@ -162,7 +163,7 @@ import { sendMSGtoController} from "service/network";
           <div className="place-content-cb">
             <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }} onClick={()=>{
               let dataList = {
-                robot:1,
+                robot:props.currentRobot,
                 visionNum:PlaceNum
               }
               sendMSGtoController("VISION_GESTURE_CALIBRATION_SET",dataList)
@@ -184,7 +185,7 @@ import { sendMSGtoController} from "service/network";
           <div className="place-content-rb">
             <Button type="primary" disabled={allIpt} style={{ background:"#f36c21",border:"none" }} onClick={()=>{
               let dataList = {
-                robot:1,
+                robot:props.currentRobot,
                 visionNum:PlaceNum,
               }
               sendMSGtoController("VISION_TRY_TAKE_PICTURE",dataList)
@@ -198,7 +199,7 @@ import { sendMSGtoController} from "service/network";
             {showSave?  
             <Button size="large" type="primary" style={{ background:"#45b97c",marginLeft:"2px",border:"none"  }} onClick={ ()=>{
               let dataList = {
-                robot:1,
+                robot:props.currentRobot,
                 visionNum:PlaceNum,
                 position:{
                   datumPoint:VisionDatumPoint,

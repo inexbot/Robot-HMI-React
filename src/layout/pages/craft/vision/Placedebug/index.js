@@ -16,6 +16,7 @@ import { sendMSGtoController} from "service/network";
 
   const mapStateToProps = (state) => {
     return{
+      currentRobot: state.index.robotStatus.currentRobot,
       PlacedebugList: state.index.vision.PlacedebugList
     }
   };
@@ -43,7 +44,7 @@ import { sendMSGtoController} from "service/network";
 
     useEffect(()=>{
       let dataList = {
-        robot:1,
+        robot:props.currentRobot,
         visionNum:Number(PlacedebugNum),
         conveyorNum:Number(PlacedebugConveyorNum),
       }
@@ -141,21 +142,21 @@ import { sendMSGtoController} from "service/network";
           <Button type="primary" style={{ width:"100px",height:"40px", }} onClick={()=>{ history.push("/vision") }}>返回</Button>
           <Button type="primary" style={{ width:"100px",height:"40px",background:"#f36c21",border:"none" }} onClick={()=>{
             let dataList = {
-              robot:1,
+              robot:props.currentRobot,
               visionNum:Number(PlacedebugNum)
             }
             sendMSGtoController("VISION_DEBUGGING_TAKE_PICTURE",dataList)
           }} >拍照</Button>
           <Button type="primary" style={{ width:"100px",height:"40px",background:"#f36c21",border:"none" }} onClick={()=>{
             let dataList = {
-              robot:1,
+              robot:props.currentRobot,
               visionNum:Number(PlacedebugNum)
             }
             sendMSGtoController("VISION_DEBUGGING_CALCULATE",dataList)
           }}>计算偏移</Button>
           <Button type="primary" style={{ width:"100px",height:"40px",background:"#f36c21",border:"none" }} onClick={()=>{
             let dataList = {
-              robot:1,
+              robot:props.currentRobot,
               visionNum:Number(PlacedebugNum),
               type:0
             }
@@ -168,7 +169,7 @@ import { sendMSGtoController} from "service/network";
           }} >移动至此</Button>
           <Button type="primary" danger style={{ width:"100px",height:"40px" }} onClick={()=>{
             let dataList = {
-              robot:1,
+              robot:props.currentRobot,
               visionNum:Number(PlacedebugNum),
               conveyorNum:Number(PlacedebugConveyorNum)
             }
