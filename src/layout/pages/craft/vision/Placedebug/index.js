@@ -76,20 +76,25 @@ import { sendMSGtoController} from "service/network";
     for(let i = 0;i<10; i++){
       cameradata.push(
         { key: `${i+1}`, site:<Button  type="primary"  style= { PitchOn == i?{ width:"50%",height:"100%",background:"#45b97c",border:"none" } : { width:"50%",height:"100%",background:"#f36c21",border:"none" }}  onClick={()=>{ 
-          if(PitchOn <= 0){
+          console.log(PitchOn)
+          if(PitchOn < 0 ){
             setPitchOn(i)
-          }else{
+          }else if(PitchOn == i){
             setPitchOn(-1)
+          }else {
+            setPitchOn(i)
           }
 
         }} >原{i+1}</Button>,  Xvalue: VisionOriginPos[i].X, Yvalue:  VisionOriginPos[i].Y,Zvalue: VisionOriginPos[i].Z,angle: VisionOriginPos[i].angle,},
       )
       conveyordata.push(
         { key: `${i+1}`, site:<Button type="primary"  style= { PitchOn == i+10?{ width:"50%",height:"100%",background:"#45b97c",border:"none" } : { width:"50%",height:"100%",background:"#f36c21",border:"none" }}  onClick={()=>{
-          if(PitchOn<=0){
+          if(PitchOn<0){
             setPitchOn(i+10)
-          }else{
+          }else if(PitchOn == i+10){
             setPitchOn(-1)
+          }else {
+            setPitchOn(i+10)
           }
         }}>偏{i+1}</Button>, Xvalue: VisionCurrentPos[i].X, Yvalue:  VisionCurrentPos[i].Y,Zvalue: VisionCurrentPos[i].Z,angle: VisionCurrentPos[i].angle,},
       )

@@ -50,7 +50,9 @@ function Basic(props) {
     setTime(props.dataSoure.compensation.time)
     setEncoderVal(props.dataSoure.compensation.encoderVal)
 
-  },[props.dataSoure.conveyor,showemptyModal])
+  },[props.dataSoure.conveyor.maxEncoderVal,props.dataSoure.conveyor.minEncoderVal,props.dataSoure.conveyor.encoderDirection,
+    props.dataSoure.conveyor.encoderResolution,props.dataSoure.conveyor.speed,
+    props.dataSoure.conveyor.userCoord,props.dataSoure.conveyor.checkSpeed,showemptyModal])
   const { Option } = Select;
   const conveyorNumchildren = [];
   for (let i = 1; i <10; i++) {
@@ -210,6 +212,8 @@ function Basic(props) {
           }
         }
         sendMSGtoController("SET_THE_CONVEYOR_PARAMETERS",dataList)
+        setShowSave(false)
+        setIptdsb(true)
       }} >保存</Button>
       <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
         setShowSave(false)

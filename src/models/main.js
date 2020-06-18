@@ -844,6 +844,7 @@ export default {
       _state.conveyor.SensorTwo = action.data
       return _state
     },
+    // 响应传感器位置标定参数查询
     realtimeencodervalue(state, action){
       let _state = JSON.parse(JSON.stringify(state))
       _state.conveyor.Basicdata.conveyor.encoderValue = action.data.conveyor.encoderValue

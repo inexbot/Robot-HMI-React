@@ -29,7 +29,7 @@ function SlaveSet(props) {
     icon: <SwapRightOutlined />,
   });
   useEffect(() => {
-    sendMSGtoController("SLAVETYPE_LIST_INQUIRE", "");
+    sendMSGtoController("SLAVETYPE_LIST_INQUIRE",'');
   }, []);
   // 修改按钮的回调函数
   const change = () => {

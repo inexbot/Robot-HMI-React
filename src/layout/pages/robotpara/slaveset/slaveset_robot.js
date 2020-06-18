@@ -256,6 +256,7 @@ function SlaveSetRobot(props) {
                       defaultValue="1"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"100%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -268,6 +269,7 @@ function SlaveSetRobot(props) {
                       defaultValue="2"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"100%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -280,6 +282,7 @@ function SlaveSetRobot(props) {
                       defaultValue="3"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"100%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -292,6 +295,7 @@ function SlaveSetRobot(props) {
                       defaultValue="4"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"100%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -304,6 +308,7 @@ function SlaveSetRobot(props) {
                       defaultValue="5"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"100%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -316,6 +321,7 @@ function SlaveSetRobot(props) {
                       defaultValue="6"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"100%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -328,6 +334,7 @@ function SlaveSetRobot(props) {
                       defaultValue="7"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"100%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -344,6 +351,7 @@ function SlaveSetRobot(props) {
                 onChange={(value) => changeRobotOuter(value)}
                 disabled={props.isDisabled}
                 className="table_btn"
+                style={{ width:"30%" }}
               >
                 <Option value="0">0</Option>
                 <Option value="1">1</Option>
@@ -361,6 +369,7 @@ function SlaveSetRobot(props) {
                       onChange={(value) => changeRobotOuter1(value)}
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"80%" }}
                     >
                       <Option value="1">单轴旋转台</Option>
                       <Option value="2">单轴翻转台</Option>
@@ -376,6 +385,7 @@ function SlaveSetRobot(props) {
                       defaultValue="8"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"80%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -388,6 +398,7 @@ function SlaveSetRobot(props) {
                       defaultValue="9"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"80%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -405,6 +416,7 @@ function SlaveSetRobot(props) {
                       onChange={(value) => changeRobotOuter2(value)}
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"80%" }}
                     >
                       <Option value="1">单轴旋转台</Option>
                       <Option value="2">单轴翻转台</Option>
@@ -420,6 +432,7 @@ function SlaveSetRobot(props) {
                       defaultValue="10"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"80%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -432,6 +445,7 @@ function SlaveSetRobot(props) {
                       defaultValue="11"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"80%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -448,6 +462,7 @@ function SlaveSetRobot(props) {
                       defaultValue="4"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"88%" }}
                     >
                       <Option value="1">单轴旋转台</Option>
                       <Option value="2">单轴翻转台</Option>
@@ -463,6 +478,7 @@ function SlaveSetRobot(props) {
                       defaultValue="12"
                       disabled={props.isDisabled}
                       className="table_btn"
+                      style={{ width:"88%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
