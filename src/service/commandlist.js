@@ -440,4 +440,13 @@ export const CommandList = {
     // 位置调试移动至此
     VISION_DEBUGGING_POS_MOVE:0x410C,
     
+    // 从站配置查询机器人轴数
+    ROBOTTYPE_AXISMAP_INQUIRE:0x2e15,
+
+    // 返回从站配置查询机器人轴数
+    ROBOTTYPE_AXISMAP_RESPOND:2e16,
+
+    // 版本号查询
+    VERSIONNUM_INQUIRE:0x3402 ,
+    VERSIONNUM_RESPOND:0x3403 ,
 };

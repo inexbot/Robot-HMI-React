@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Tabs, Select, Row } from "antd";
 import { connect } from "dva";
 import "./slaveset.css";
@@ -16,11 +16,14 @@ const mapStateToProps = (state) => {
     robot1OuterAmount: state.index.robotStatus.robot1OuterAmount,
     robot2OuterAmount: state.index.robotStatus.robot2OuterAmount,
     robot3OuterAmount: state.index.robotStatus.robot3OuterAmount,
-    robot4OuterAmount: state.index.robotStatus.robot4OuterAmount,
+    // robot4OuterAmount: state.index.robotStatus.robot4OuterAmount,
   };
 };
 
 function SlaveSetRobot(props) {
+
+  const [RobotServo, setRobotServo] = useState("虚拟伺服")
+
   const [state, setState] = useState({
     robotActiveKey: "robot1",
     primaryRobotActiveKey: "robot1",
@@ -30,6 +33,7 @@ function SlaveSetRobot(props) {
     robot3Disabled: true,
     robot4Disabled: true,
   });
+  console.log(props)
   // 伺服选择下拉框的内容生成
   const servoSelectOption = (servoAmount) => {
     const options = [];
@@ -83,20 +87,27 @@ function SlaveSetRobot(props) {
           "table-row";
         break;
       default:
-        document.getElementById(activeRobot + "Joint1").style.display =
-          "table-row";
-        document.getElementById(activeRobot + "Joint2").style.display =
-          "table-row";
-        document.getElementById(activeRobot + "Joint3").style.display =
-          "table-row";
-        document.getElementById(activeRobot + "Joint4").style.display =
-          "table-row";
-        document.getElementById(activeRobot + "Joint5").style.display =
-          "table-row";
-        document.getElementById(activeRobot + "Joint6").style.display =
-          "table-row";
-        document.getElementById(activeRobot + "Joint7").style.display = "none";
-        break;
+        for(let i = 0; i < 8; i++){
+          document.getElementById(activeRobot + `Joint${i}`).style.display = "table-row";
+          if(i==7){
+            document.getElementById(activeRobot + "Joint7" ).style.display = "none";
+            break;
+          }
+        }
+        // document.getElementById(activeRobot + "Joint1").style.display =
+        //   "table-row";
+        // document.getElementById(activeRobot + "Joint2").style.display =
+        //   "table-row";
+        // document.getElementById(activeRobot + "Joint3").style.display =
+        //   "table-row";
+        // document.getElementById(activeRobot + "Joint4").style.display =
+        //   "table-row";
+        // document.getElementById(activeRobot + "Joint5").style.display =
+        //   "table-row";
+        // document.getElementById(activeRobot + "Joint6").style.display =
+        //   "table-row";
+        // document.getElementById(activeRobot + "Joint7").style.display = "none";
+        // break;
     }
   };
   // 切换机器人外部轴个数的回调函数
@@ -214,6 +225,12 @@ function SlaveSetRobot(props) {
         break;
     }
   };
+
+  useEffect(()=>{
+    changeRobotOuter(String(0))
+    changeRobotType(String(1))
+  },[])
+
   // tabs的内容
   const tabsContent = (robot) => {
     var robotName;
@@ -226,7 +243,7 @@ function SlaveSetRobot(props) {
     } else if (robot === "robot4") {
       robotName = "机器人4";
     }
-
+    console.log(robot)
     return (
       <TabPane tab={robotName} key={robot}>
         <Row>
@@ -234,26 +251,26 @@ function SlaveSetRobot(props) {
             <div className="slaveset1" style={{ paddingBottom: 15 }}>
               <span className="p1">机器人类型</span>
               <Select
-                defaultValue="2"
-                onChange={(value) => changeRobotType(value)}
+                defaultValue="1"
+                onChange={(value) => {changeRobotType(value) ;console.log(value)}}
                 disabled={props.isDisabled}
                 className="table_btn"
               >
-                <Option value="1">6轴</Option>
-                <Option value="2">7轴</Option>
+                <Option key="1" value="1">6轴</Option>
+                <Option key="2" value="2">7轴</Option>
               </Select>
             </div>
-            <div className="slaveset1">
-              <table>
-                <tr className="table_head">
-                  <th>机器人</th>
-                  <th>伺服</th>
+            <div className="slaveset1" style={{ width:"100%" }}>
+              <table  > 
+                <tr className="table_head" key="1">
+                  <th key="1">机器人</th>
+                  <th key="2">伺服</th>
                 </tr>
-                <tr id={robot + "Joint1"}>
-                  <td>轴1</td>
-                  <td>
+                <tr id={robot + "Joint1"} key="2">
+                  <td key="1">轴1</td>
+                  <td key="2">
                     <Select
-                      defaultValue="1"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"100%" }}
@@ -262,11 +279,11 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint2"}>
-                  <td>轴2</td>
-                  <td>
+                <tr id={robot + "Joint2"} key="3">
+                  <td key="1">轴2</td>
+                  <td key="2">
                     <Select
-                      defaultValue="2"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"100%" }}
@@ -275,11 +292,11 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint3"}>
-                  <td>轴3</td>
-                  <td>
+                <tr id={robot + "Joint3"} key="3" >
+                  <td key="1">轴3</td>
+                  <td key="2">
                     <Select
-                      defaultValue="3"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"100%" }}
@@ -288,11 +305,11 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint4"}>
-                  <td>轴4</td>
-                  <td>
+                <tr id={robot + "Joint4"} key="4" >
+                  <td key="1">轴4</td>
+                  <td key="2">
                     <Select
-                      defaultValue="4"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"100%" }}
@@ -301,11 +318,11 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint5"}>
-                  <td>轴5</td>
-                  <td>
+                <tr id={robot + "Joint5"} key="5" >
+                  <td key="1" >轴5</td>
+                  <td key="2" >
                     <Select
-                      defaultValue="5"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"100%" }}
@@ -314,11 +331,11 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint6"}>
-                  <td>轴6</td>
-                  <td>
+                <tr id={robot + "Joint6"} key="6" >
+                  <td key="1" >轴6</td>
+                  <td key="2" >
                     <Select
-                      defaultValue="6"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"100%" }}
@@ -327,11 +344,11 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint7"}>
-                  <td>轴7</td>
-                  <td>
+                <tr id={robot + "Joint7"} key="7" >
+                  <td key="1" >轴7</td>
+                  <td key="2" >
                     <Select
-                      defaultValue="7"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"100%" }}
@@ -353,14 +370,14 @@ function SlaveSetRobot(props) {
                 className="table_btn"
                 style={{ width:"30%" }}
               >
-                <Option value="0">0</Option>
-                <Option value="1">1</Option>
-                <Option value="2">2</Option>
-                <Option value="3">3</Option>
+                <Option key="1" value="0">0</Option>
+                <Option key="2" value="1">1</Option>
+                <Option key="3" value="2">2</Option>
+                <Option key="4" value="3">3</Option>
               </Select>
             </div>
             <div className="slaveset1">
-              <table id={robot + "Outer1"}>
+              <table id={robot + "Outer1"} style={{ width:"100%" }}>
                 <tr className="table_head">
                   <th>组1</th>
                   <th>
@@ -371,10 +388,10 @@ function SlaveSetRobot(props) {
                       className="table_btn"
                       style={{ width:"80%" }}
                     >
-                      <Option value="1">单轴旋转台</Option>
-                      <Option value="2">单轴翻转台</Option>
-                      <Option value="3">双轴翻转台</Option>
-                      <Option value="4">地轨</Option>
+                      <Option key="1" value="1">单轴旋转台</Option>
+                      <Option key="2" value="2">单轴翻转台</Option>
+                      <Option key="3" value="3">双轴翻转台</Option>
+                      <Option key="4" value="4">地轨</Option>
                     </Select>
                   </th>
                 </tr>
@@ -382,7 +399,7 @@ function SlaveSetRobot(props) {
                   <td>轴1</td>
                   <td>
                     <Select
-                      defaultValue="8"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"80%" }}
@@ -395,7 +412,7 @@ function SlaveSetRobot(props) {
                   <td>轴2</td>
                   <td>
                     <Select
-                      defaultValue="9"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"80%" }}
@@ -412,7 +429,7 @@ function SlaveSetRobot(props) {
                   <th>组2</th>
                   <th>
                     <Select
-                      defaultValue="3"
+                      defaultValue="2"
                       onChange={(value) => changeRobotOuter2(value)}
                       disabled={props.isDisabled}
                       className="table_btn"
@@ -429,7 +446,7 @@ function SlaveSetRobot(props) {
                   <td>轴1</td>
                   <td>
                     <Select
-                      defaultValue="10"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"80%" }}
@@ -442,7 +459,7 @@ function SlaveSetRobot(props) {
                   <td>轴2</td>
                   <td>
                     <Select
-                      defaultValue="11"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
                       style={{ width:"80%" }}
@@ -459,15 +476,15 @@ function SlaveSetRobot(props) {
                   <th>组3</th>
                   <th>
                     <Select
-                      defaultValue="4"
+                      defaultValue={"4"}
                       disabled={props.isDisabled}
                       className="table_btn"
-                      style={{ width:"88%" }}
+                      style={{ width:"80%" }}
                     >
-                      <Option value="1">单轴旋转台</Option>
-                      <Option value="2">单轴翻转台</Option>
-                      <Option value="3">双轴翻转台</Option>
-                      <Option value="4">地轨</Option>
+                      <Option key="1" value="1">单轴旋转台</Option>
+                      <Option key="2" value="2">单轴翻转台</Option>
+                      <Option key="3" value="3">双轴翻转台</Option>
+                      <Option key="4" value="4">地轨</Option>
                     </Select>
                   </th>
                 </tr>
@@ -475,10 +492,10 @@ function SlaveSetRobot(props) {
                   <td>轴</td>
                   <td>
                     <Select
-                      defaultValue="12"
+                      defaultValue={RobotServo}
                       disabled={props.isDisabled}
                       className="table_btn"
-                      style={{ width:"88%" }}
+                      style={{ width:"80%" }}
                     >
                       {servoSelectOption(servoAmount)}
                     </Select>
@@ -562,10 +579,10 @@ function SlaveSetRobot(props) {
               disabled={props.isDisabled}
               style={{ width: 200 }}
             >
-              <Option value="1">1</Option>
-              <Option value="2">2</Option>
-              <Option value="3">3</Option>
-              <Option value="4">4</Option>
+              <Option key="1" value="1">1</Option>
+              <Option key="2" value="2">2</Option>
+              <Option key="3" value="3">3</Option>
+              <Option key="4" value="4">4</Option>
             </Select>
           </span>
         </div>

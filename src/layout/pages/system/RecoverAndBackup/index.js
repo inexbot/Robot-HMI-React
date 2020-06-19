@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { Tabs, Button, Upload, message } from "antd";
 import ConTitle from "components/title";
@@ -7,11 +7,20 @@ import { UploadOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 
+
 function RecoverAndBackup() {
   const [version, setVersion] = useState("20.02.04.11");
   const [udiskState, setUdiskState] = useState("未插入");
   const [fileList, setFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
+
+  
+  useEffect(()=>{
+    let dataList = {
+      version:"v1.0-rc1-67-gf34dae7"
+    }
+    sendMSGtoServer("VERSIONNUM_INQUIRE",dataList)
+  },[])
 
   const handleUpload = () => {
     const formData = new FormData();
@@ -35,6 +44,7 @@ function RecoverAndBackup() {
     }
     return;
   };
+  // 获取当前版本号
   const props = {
     onRemove: (file) => {
       const index = fileList.indexOf(file);
@@ -48,7 +58,7 @@ function RecoverAndBackup() {
       return false;
     },
     fileList,
-    
+
   };
   const updateSystem = () => {
     return;
