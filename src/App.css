@@ -57,7 +57,8 @@
 .IOSet,
 .visionpara,
 .servopara,
-.teachlayout {
+.teachlayout,
+.Parameter {
   /* width: 90vw; */
   height: 70vh;
   background-color: white;

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {
+  Table,
   Button,
+  notification,
+  ConfigProvider,
   Select,
+  Divider,
   Input,
+  Modal,
   Switch,
   Radio,
 } from "antd";
-import intl from "react-intl-universal";
-import ConTitle from "../../../../components/title";
 import { connect } from "dva";
 import { useHistory } from "react-router-dom";
 import "./parameter.module.less";
 import { sendMSGtoController } from "service/network";
-import "./index.css";
 
 
 const mapStateToProps = (state) => {
@@ -234,46 +236,37 @@ function Parameter(props) {
   };
   console.log(props.parameterList);
   return (
-    <div
-      style={{
-        background: "#fff",
-        marginTop: "-30px",
-        zIndex: "2",
-        position: "relative",
-        width: "100%",
-        overflowY: "hidden",
-      }}
+    <div className="Parameter" 
+    // style={{background: "#fff",marginTop: "-30px",zIndex: "2",position: "relative",width: "100%",overflowY: "hidden",}}
     >
-      <div className="linkButton">
-        <Button type="dashed">{intl.get("7点标定")}</Button>
-        <Button type="dashed">{intl.get("20点标定")}</Button>
-      </div>
       <div className="parameter-top">
         <div className="parameter-camera">
-          <p className="parameter-toptext">相机选择</p>
+          <p className="parameter-topTitle" style={{left:"3vw"}}>相机选择</p>
           <div>
-            <span> 工艺号: </span>
+            工艺号:
             <Select
               onChange={handleChange}
               defaultValue="1"
-              style={{ width: 200 }}
-            >
+              style={{ width: 180 }}
+              className="text-lp"
+           >
               {cameraNumchildren}
             </Select>
           </div>
           <div>
-            <span>类型:</span>
+            类型:
             {allIpt == true ? (
               <Input
                 disabled={allIpt}
                 value={VisionCurrentName}
-                style={{ width: 200 }}
+                style={{ width: 180, marginLeft: 10}}
               ></Input>
             ) : (
               <Select
                 disabled={allIpt}
                 defaultValue="customize"
-                style={{ width: 200 }}
+                className="text-lp"
+                style={{ width: 180 }}
               >
                 {"customize"}
               </Select>
@@ -281,13 +274,14 @@ function Parameter(props) {
           </div>
         </div>
         <div className="parameter-usercoordinates">
-          <p className="parameter-topltext">用户坐标系</p>
-          <span>用户坐标编号</span>
+          <p className="parameter-topTitle" style={{left:"59vw"}}>用户坐标系</p>
+          <span className="text-lp">用户坐标编号:</span>
           {allIpt ? (
             <Input
               disabled={allIpt}
               value={VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum}
-              style={{ width: 200 }}
+              style={{ width: 180 }}
+              className="text-lp"
             />
           ) : (
             <Select
@@ -308,7 +302,7 @@ function Parameter(props) {
       <div className="parameter-content">
         <div className="parameter-content-l">
           <div className="parameter-networkparam">
-            <p className="parameter-content-ltext"> 网络参数 </p>
+            <p className="parameter-topTitle"> 网络参数 </p>
             <div className="parameter-content-ltop">
               {clientorsave ? (
                 <div>
@@ -405,14 +399,14 @@ function Parameter(props) {
             </div>
           </div>
           <div className="parameter-connectparam">
-            <p className="parameter-connectparam-ltext"> 连接参数</p>
+            <p className="parameter-topTitle"> 连接参数</p>
             <div className="parameter-connectparam-ltop">
               <div>
                 帧头:
                 <Input
                   disabled={allIpt}
                   value={VisionFrameHeader}
-                  style={{ width: "100px", marginLeft: "15px" }}
+                  style={{ width: "120px", marginLeft: "24px" }}
                   onChange={(e) => {
                     setVisionFrameHeader(e.target.value);
                   }}
@@ -424,6 +418,7 @@ function Parameter(props) {
                   disabled={allIpt}
                   value={VisionSuccessFlag}
                   style={{ width: "28%" }}
+                  className="text-lm"
                   onChange={(e) => {
                     setVisionSuccessFlag(e.target.value);
                   }}
@@ -436,7 +431,8 @@ function Parameter(props) {
                 <Input
                   disabled={allIpt}
                   value={VisionSeparator}
-                  style={{ width: "100px" }}
+                  style={{ width: "120px" }}
+                  className="text-lm"
                   onChange={(e) => {
                     setVisionSeparator(e.target.value);
                   }}
@@ -448,6 +444,7 @@ function Parameter(props) {
                   disabled={allIpt}
                   value={VisionFailFlag}
                   style={{ width: "37%" }}
+                  className="text-lm"
                   onChange={(e) => {
                     setVisionFailFlag(e.target.value);
                   }}
@@ -460,7 +457,8 @@ function Parameter(props) {
                 <Input
                   disabled={allIpt}
                   value={VisionEndMark}
-                  style={{ width: "100px" }}
+                  style={{ width: "120px" }}
+                  className="text-lm"
                   onChange={(e) => {
                     // console.log(e.target.value)
                     setVisionEndMark(e.target.value);
@@ -472,7 +470,7 @@ function Parameter(props) {
                 <Input
                   disabled={allIpt}
                   value={VisionTimeOut}
-                  style={{ width: "30%", marginLeft: "40px" }}
+                  style={{ width: "30%", marginLeft: "52px" }}
                   onChange={(e) => {
                     setVisionTimeOut(e.target.value);
                   }}
@@ -482,9 +480,10 @@ function Parameter(props) {
             </div>
             <div className="parameter-connectparam-lbtm">
               <div>
-                仅识别一个目标
+                仅识别一个目标:
                 <Switch
                   disabled={allIpt}
+                  className="text-lm"
                   checked={VisionSinleTarget}
                   onChange={singleTargetChange}
                 />
@@ -494,6 +493,7 @@ function Parameter(props) {
                 <Switch
                   disabled={allIpt}
                   checked={VisionHeight}
+                  className="text-lm"
                   onChange={heightChange}
                 />
               </div>
@@ -502,7 +502,7 @@ function Parameter(props) {
         </div>
         <div className="parameter-content-r">
           <div className="parameter-content-rtop">
-            <p className="parameter-content-rtoptext"> 触发方式 </p>
+            <p className="parameter-topTitle"> 触发方式 </p>
 
             <div className="parameter-content-rtop-t">
               <Radio
@@ -561,7 +561,7 @@ function Parameter(props) {
             </div>
           </div>
           <div className="parameter-content-rcenter">
-            <p className="parameter-content-rcentertext"> 触发条件 </p>
+            <p className="parameter-topTitle"> 触发条件 </p>
             <div className="parameter-content-rcenter-t">
               <Radio
                 disabled={allIpt}
@@ -612,7 +612,7 @@ function Parameter(props) {
             </div>
           </div>
           <div className="parameter-content-rbtm">
-            <p className="parameter-content-rbtmtext"> 弧度/角度 </p>
+            <p className="parameter-topTitle"> 弧度/角度 </p>
             <div className="parameter-content-rbtmcenter">
               弧度/角度转换:
               {allIpt ? (
