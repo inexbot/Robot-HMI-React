@@ -244,15 +244,6 @@ function Parameter(props) {
         overflowY: "hidden",
       }}
     >
-      {/* 头部 */}
-      <ConTitle title={intl.get("工具手")} subtitle={intl.get("工具手设置")} />
-      {/* 悬浮按钮 */}
-      <div className="hoverButton1">
-        <Button type={buttonType1} shape="circle" size="large" onClick={change}>
-          {buttonCharacter1}
-        </Button>
-      </div>
-
       <div className="linkButton">
         <Button type="dashed">{intl.get("7点标定")}</Button>
         <Button type="dashed">{intl.get("20点标定")}</Button>
