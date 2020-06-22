@@ -43,11 +43,11 @@ function Setparameter(props) {
   const [current, setCurrent] = useState(0);
 
   const steps = [
-    { title: "基本信息", path: "/setparameter/basic", },
-    { title: "识别参数", path: "/setparameter/discern", },
-    { title: "传送带标定", path: "/setparameter/conveyorsign", },
-    { title: "传感器标定", path: "/setparameter/sensorsign", },
-    { title: "位置设置", path: "/setparameter/setsite", },
+      { title: "基本信息", path: "/setparameter/basic", },
+      { title: "识别参数", path: "/setparameter/discern", },
+      { title: "传送带标定", path: "/setparameter/conveyorsign", },
+      { title: "传感器标定", path: "/setparameter/sensorsign", },
+      { title: "位置设置", path: "/setparameter/setsite", },
   ];
   const [RouterBtn, setRouterBtn] = useState('');
   const [conveyorNum, setConveyorNum] = useState();
@@ -115,15 +115,10 @@ function Setparameter(props) {
           {conveyorNumchildren}
         </Select>
         </div>
-      {/* 进度条 */}
-      <Steps current={current}>
-        {steps.map((item) => (
-          <Step key={item.title} title={item.title} />
-        ))}
-      </Steps>
+
       {/* 使用hash路由来控制 */}
       <div >
-      <HashRouter >
+      <HashRouter>
         <Route path="/setparameter/basic" component={Basic}></Route>
         <Route path="/setparameter/discern" component={Discern}></Route>
         <Route  path="/setparameter/conveyorsign" component={Conveyorsign}></Route>
@@ -140,7 +135,6 @@ function Setparameter(props) {
         <Switch>
           <Route exact path='/setparameter' component={Basic}></Route>
         </Switch>
-          
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/basic">
           <Button type={ RouterBtn=="basic"? "primary":"" }  style={{ width:"15%",height:"30px" }}  onClick={() => {setCurrent(0);}}>
             基本信息

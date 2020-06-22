@@ -109,8 +109,8 @@ const RecoverAndBackup = asyncComponents(() =>
 );
 const Program = asyncComponents(() => import("./layout/pages/program"));
 // 工艺页面
-const Setparameter = asyncComponents(() => import("./layout/pages/craft/ConveyorBeltTracking/conveyor/Setparameter"))
-const Vision = asyncComponents(() => import("./layout/pages/craft/vision"))
+const Setparameter = asyncComponents(() => import("./layout/pages/craft/ConveyorBeltTracking/conveyor/Setparameter"));
+const Vision = asyncComponents(() => import("./layout/pages/craft/vision"));
 
 const mapStateToProps = (state) => {
   return {
@@ -179,6 +179,7 @@ function Router(props) {
         <RouterDom.Route path="/setparameter" component={Setparameter} />
           {/* 跳转到视觉参数页面 */}
         <RouterDom.Route path="/vision" component={Vision} />
+
       </RouterDom.Switch>
     </App>
   );

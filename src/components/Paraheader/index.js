@@ -134,14 +134,14 @@ export const paraIndex = [
       {
         type: "para",
         name: "视觉参数",
-        link: "/VisionPara/1",
+        link: "/vision",
         authority: "技术员",
         modeDisplay:config.modeDisplay["视觉参数"]
       },
       {
         type: "para",
         name: "传送带参数",
-        link: "/ConveyorPara/1",
+        link: "/setparameter",
         authority: "技术员",
         modeDisplay:config.modeDisplay["传送带参数"]
       },
