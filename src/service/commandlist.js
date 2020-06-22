@@ -449,4 +449,13 @@ export const CommandList = {
     // 版本号查询
     VERSIONNUM_INQUIRE:0x3402 ,
     VERSIONNUM_RESPOND:0x3403 ,
+
+    // 向服务端发送上传文件信息   客户端向服务端发送上传控制器程序
+    INQUIRE_UPGRADE_SYSTEM:0x2111,
+
+    // 服务端回复是否同意上传
+    REPLAY_UPGRADE_SYSTEM:0x2112,
+
+    // 服务端同意上传，向服务端发送数据
+    UPLOADING_UPGRADE_SYSTEM:0x2113
 };

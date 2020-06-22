@@ -2,26 +2,38 @@ import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
 import { Tabs, Button, Upload, message } from "antd";
 import ConTitle from "components/title";
-import { sendMSGtoServer } from "service/network";
+import { connect } from "dva";
+import { sendMSGtoController } from "service/network";
 import { UploadOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 
+const mapStateToProps = (state) => {
+  return{
+    currentRobot: state.index.robotStatus.currentRobot,
+    showUploading: state.Backup.showUploading,
+  }
+};
 
-function RecoverAndBackup() {
+
+function RecoverAndBackup (props) {
   const [version, setVersion] = useState("20.02.04.11");
   const [udiskState, setUdiskState] = useState("未插入");
   const [fileList, setFileList] = useState([]);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState(props.showUploading);
 
   
   useEffect(()=>{
     let dataList = {
       version:"v1.0-rc1-67-gf34dae7"
     }
-    sendMSGtoServer("VERSIONNUM_INQUIRE",dataList)
+    // sendMSGtoController("VERSIONNUM_INQUIRE",dataList)
   },[])
+  console.log(props)
 
+  useEffect(()=>{ 
+    setUploading(props.showUploading)
+  },[props.showUploading])
   const handleUpload = () => {
     const formData = new FormData();
     console.log(fileList)
@@ -29,23 +41,33 @@ function RecoverAndBackup() {
       console.log(file)
       formData.append("file", file);
     }); 
-    setUploading(true);
+    // setUploading(true);
+    props.dispatch({
+      type: "Backup/changeShowUploading",
+      data: { showUploading:true },
+    });
+
     console.log(formData,fileList)
     if(fileList[0].type != "application/x-zip-compressed"){
       message.error("请选择正确的zip类型文件")
-      setUploading(false)
+      // setUploading(false)
+      props.dispatch({
+        type: "Backup/changeShowUploading",
+        data: { showUploading:false },
+      });
+    
     }else{
       let sendData = {
-        rbot:1,
+        rbot:props.currentRobot,
         name:fileList[0].name,
         size:fileList[0].size
       }
-      sendMSGtoServer("UPGRADE_COMMAND",sendData)
+      sendMSGtoController("INQUIRE_UPGRADE_SYSTEM",sendData)
     }
     return;
   };
   // 获取当前版本号
-  const props = {
+  const inquireVersionNum = {
     onRemove: (file) => {
       const index = fileList.indexOf(file);
       const newFileList = fileList.slice();
@@ -93,7 +115,7 @@ function RecoverAndBackup() {
           <TabPane tab="升级系统" key="1">
             <p>当前软件版本：{version}</p>
             <div>
-              <Upload {...props}>
+              <Upload {...inquireVersionNum}>
                 <Button>
                   <UploadOutlined /> 上传文件
                 </Button>
@@ -112,7 +134,7 @@ function RecoverAndBackup() {
           <TabPane tab="程序" key="2">
             <Button onClick={exportJobs}>导出程序</Button>
             <div>
-              <Upload {...props}>
+              <Upload {...inquireVersionNum}>
                 <Button>
                   <UploadOutlined /> 导入程序
                 </Button>
@@ -141,4 +163,4 @@ function RecoverAndBackup() {
     </div>
   );
 }
-export default RecoverAndBackup;
+export default connect(mapStateToProps)(RecoverAndBackup);

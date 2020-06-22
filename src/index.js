@@ -14,6 +14,7 @@ app.model(require("./models/slave_set").default);
 app.model(require("./models/app").default);
 app.model(require("./models/main").default);
 app.model(require("./models/leftstatus").default);
+app.model(require("./models/RecoverAndBackup").default);
 
 // 4. Router
 app.router(() => <Router />);

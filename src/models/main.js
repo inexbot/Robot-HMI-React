@@ -73,7 +73,7 @@ export default {
     IOConfig,
     IOName,
     conveyor,
-    vision,
+    vision
   },
 
   subscriptions: {
@@ -412,11 +412,13 @@ export default {
               data:dataString
             })
             break;
-          // case "4113":
-          //   dispatch({
-          //     type:"inquireScope"
-          //   })
-          // 接收到报错信息
+          case "2112":
+            dispatch({
+              type:"inquireUpgradeSystem",
+              data:dataString
+            })
+            break;
+          
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);
@@ -433,7 +435,6 @@ export default {
               });
               break;
             }
-
             console.error(dataString.data);
             notification.error({
               message: "报错！",
