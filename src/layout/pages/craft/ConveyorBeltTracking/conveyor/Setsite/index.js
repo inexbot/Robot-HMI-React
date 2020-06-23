@@ -99,7 +99,7 @@ const mapStateToProps = (state) => {
     ];
     return(
       <div className="backconnect" style = {{ height:document.body.clientHeight  * 0.674,marginLeft:"0" }}>
-        <div style = {{ width:"50%" }}>
+        <div style = {{ width:"55%" }}>
           <Table
             size={"small"}
             pagination={false}
@@ -107,8 +107,8 @@ const mapStateToProps = (state) => {
             dataSource={data }
           />
         </div>
-        <div style={{ position:"absolute",left:"50%",top:"20%" }}>
-          <img src="../images/setsite.png" style={{ width:"400px" }} />
+        <div style={{ position:"absolute",left:"53%",top:"26%" }}>
+          <img src="../images/setsite.png" style={{ width:"370px",}} />
         </div>
         <Modal
           title="提示"

@@ -45,7 +45,7 @@ function ConveyorsignThree(props) {
           dataSource={data }
         />
       </div>
-      <div style={{ position:"absolute",left:"50%",top:"23%" }}>
+      <div style={{ position:"absolute",left:"50%",top:"31%" }}>
           <img src="../images/conveyorsign.png" style={{ width:"400px" }} />
         </div>
         <Button style = {{ width:"100px",height:"50px", }} onClick = {() =>{
