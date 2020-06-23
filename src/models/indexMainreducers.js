@@ -429,8 +429,13 @@ export const indexMainreducers = {
         // 标定抓取姿态
         inquireScopedatumPointdata(state, action){
           let _state = JSON.parse(JSON.stringify(state))
-          console.log(action.data)
           _state.vision.PlaceList.position.datumPoint = action.data.datumPoint
+          return _state
+        },
+        // 获取机器人从动轴
+        inquirerobotAxle(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.slaveSertCommit.robotAxle = action.data
           return _state
         }
     }

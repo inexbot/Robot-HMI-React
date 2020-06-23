@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
     isDisabled: state.Slave_Set.isDisabled,
     buttoncharacter: state.Slave_Set.buttoncharacter,
     buttontype: state.Slave_Set.buttontype,
+    robotAxle: state.index.slaveSertCommit.robotAxle,
   };
 };
 
@@ -28,11 +29,14 @@ function SlaveSet(props) {
     RPbuttoncharacter: "机器人",
     icon: <SwapRightOutlined />,
   });
+  const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
+
   useEffect(() => {
     sendMSGtoController("SLAVETYPE_LIST_INQUIRE","");
     sendMSGtoController("ROBOTTYPE_AXISMAP_INQUIRE","");
   }, []);
   // 修改按钮的回调函数
+  
   const change = () => {
     // console.log(props.dispatch())
     console.log(props)

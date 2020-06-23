@@ -17,14 +17,15 @@ const mapStateToProps = (state) => {
     robot2OuterAmount: state.index.robotStatus.robot2OuterAmount,
     robot3OuterAmount: state.index.robotStatus.robot3OuterAmount,
     // robot4OuterAmount: state.index.robotStatus.robot4OuterAmount,
+    robotAxle: state.index.slaveSertCommit.robotAxle,
   };
 };
 
 function SlaveSetRobot(props) {
 
-  const [RobotServo, setRobotServo] = useState("虚拟伺服")
-
-  const [state, setState] = useState({
+  const [ RobotServo, setRobotServo] = useState("虚拟伺服")
+  const [ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
+  const [ state, setState] = useState({
     robotActiveKey: "robot1",
     primaryRobotActiveKey: "robot1",
     primaryJointActiveKey: "Joint1",
@@ -33,7 +34,12 @@ function SlaveSetRobot(props) {
     robot3Disabled: true,
     robot4Disabled: true,
   });
-  console.log(props)
+  console.log(SalveRobotAxle)
+
+  // useEffect(()=>{
+  //   setSalveRobotAxle(props.robotAxle)
+  // },[props.robotAxle])
+
   // 伺服选择下拉框的内容生成
   const servoSelectOption = (servoAmount) => {
     const options = [];
@@ -251,7 +257,7 @@ function SlaveSetRobot(props) {
             <div className="slaveset1" style={{ paddingBottom: 15 }}>
               <span className="p1">机器人类型</span>
               <Select
-                defaultValue="1"
+                defaultValue={String(SalveRobotAxle.servoSum+1) }
                 onChange={(value) => {changeRobotType(value) ;console.log(value)}}
                 disabled={props.isDisabled}
                 className="table_btn"
