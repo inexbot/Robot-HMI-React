@@ -237,7 +237,7 @@ function Parameter(props) {
   };
   console.log(props.parameterList);
   return (
-    <div style={{ marginTop:"-40px" }}>
+    <div style={{ marginTop:"-31px" }}>
       <div>
         {/* 头部 */}
         <ConTitle title={intl.get("视觉参数")} subtitle={intl.get("视觉参数设置")} />
@@ -314,7 +314,7 @@ function Parameter(props) {
               )}
         </div>
       </div>
-      <div className="Parameter" style={{ marginTop:"30px" }}>
+      <div className="Parameter" style={{ marginTop:"45px",height:"65vh" }}>
         <div className="parameter-top">
           <div className="parameter-camera">
             <p className="parameter-topTitle" style={{ left: "3vw" }}>
@@ -590,6 +590,7 @@ function Parameter(props) {
 
               <div className="parameter-content-rtop-t">
                 <Radio
+                style={{paddingRight:38}}
                   disabled={allIpt}
                   checked={triggermbtn1}
                   onClick={(e) => {
@@ -610,7 +611,7 @@ function Parameter(props) {
                 <Select
                   disabled={clientway}
                   defaultValue="无"
-                  style={{ width: 100, marginLeft: "16px" }}
+                  style={{ width: 100, marginLeft: "10px" }}
                 >
                   "无"
                 </Select>

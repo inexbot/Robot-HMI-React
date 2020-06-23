@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
     return(
             <div>
                 <HashRouter  >
-                     <Steps current={-1} onChange={onChange} style={{ position:"relative",top:"44px",zIndex:"2" }}>
+                     <Steps current={-1} onChange={onChange} style={{ position:"relative",top:"60px",zIndex:"2",width:"90%",margin:"0 auto" }}>
                        <Step title="视觉参数设置"  />
                        <Step title="视觉范围奢姿" />
                        <Step title="视觉位置设置" />
