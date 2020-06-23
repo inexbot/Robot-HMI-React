@@ -374,5 +374,6 @@
   "MOVJDOUBLE": "双机关节",
   "MOVLDOUBLE": "双机直线",
   "MOVCDOUBLE": "双机圆弧",
-  "MOVCADOUBLE": "双机整圆"
+  "MOVCADOUBLE": "双机整圆",
+  "视觉参数设置": "视觉参数设置"
 }

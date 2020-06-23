@@ -13,9 +13,10 @@ import {
 } from "antd";
 import { connect } from "dva";
 import { useHistory } from "react-router-dom";
+import intl from "react-intl-universal";
+import ConTitle from "components/title";
 import "./parameter.module.less";
 import { sendMSGtoController } from "service/network";
-
 
 const mapStateToProps = (state) => {
   return {
@@ -236,408 +237,491 @@ function Parameter(props) {
   };
   console.log(props.parameterList);
   return (
-    <div className="Parameter" 
-    // style={{background: "#fff",marginTop: "-30px",zIndex: "2",position: "relative",width: "100%",overflowY: "hidden",}}
-    >
-      <div className="parameter-top">
-        <div className="parameter-camera">
-          <p className="parameter-topTitle" style={{left:"3vw"}}>相机选择</p>
-          <div>
-            工艺号:
-            <Select
-              onChange={handleChange}
-              defaultValue="1"
-              style={{ width: 180 }}
-              className="text-lp"
-           >
-              {cameraNumchildren}
-            </Select>
-          </div>
-          <div>
-            类型:
-            {allIpt == true ? (
-              <Input
-                disabled={allIpt}
-                value={VisionCurrentName}
-                style={{ width: 180, marginLeft: 10}}
-              ></Input>
-            ) : (
-              <Select
-                disabled={allIpt}
-                defaultValue="customize"
-                className="text-lp"
-                style={{ width: 180 }}
-              >
-                {"customize"}
-              </Select>
-            )}
-          </div>
-        </div>
-        <div className="parameter-usercoordinates">
-          <p className="parameter-topTitle" style={{left:"59vw"}}>用户坐标系</p>
-          <span className="text-lp">用户坐标编号:</span>
-          {allIpt ? (
-            <Input
-              disabled={allIpt}
-              value={VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum}
-              style={{ width: 180 }}
-              className="text-lp"
-            />
-          ) : (
-            <Select
-              disabled={allIpt}
-              defaultValue={
-                VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum
-              }
-              onChange={(value) => {
-                setVisionUserCoordNum(value);
-              }}
-              style={{ width: 200 }}
-            >
-              {userNumchildren}
-            </Select>
-          )}
+    <div>
+      <div>
+        {/* 头部 */}
+        <ConTitle title={intl.get("视觉参数")} subtitle={intl.get("视觉参数设置")} />
+        {/* 悬浮按钮 */}
+        <div className="hoverButton1">
+        {showSave ? (
+                <Button
+                  size="large"
+                  type="primary"
+                  style={{
+                    background: "#45b97c",
+                    marginLeft: "2px",
+                    border: "none",
+                  }}
+                  onClick={() => {
+                    setAllIpt(true);
+                    setShowSave(false);
+                    let dataList = {
+                      robot: props.currentRobot,
+                      visionNum: copycraftNum,
+                      cameraType: "customize",
+                      vision: {
+                        socket: {
+                          IP: VisionIp,
+                          portOne: Number(VisionPortOne),
+                          server: Number(VisionServer),
+                          portTwo: Number(VisionPortTwo),
+                          portNum: Number(VisionPortNum),
+                        },
+                        protocol: {
+                          endMark: VisionEndMark,
+                          singleTarget: VisionSinleTarget,
+                          height: VisionHeight,
+                          frameHeader: VisionFrameHeader,
+                          separator: VisionSeparator,
+                          failFlag: VisionFailFlag,
+                          successFlag: VisionSuccessFlag,
+                          timeOut: Number(VisionTimeOut),
+                          angleUnit: VisionAngleUnit,
+                        },
+                        trigger: {
+                          triggerMode: Number(VisionTriggerMode),
+                          triggerStr: VisionTriggerStr,
+                          IOPort: Number(VisionIOPort),
+                          triggerOnce: VisionTriggerOnce,
+                          intervals: VisionIntervals,
+                        },
+                        userCoordNum: Number(VisionUserCoordNum),
+                      },
+                    };
+
+                    sendMSGtoController("VISION_PARAMETER_SET", dataList);
+                    console.log(dataList);
+                  }}
+                >
+                  保存
+                </Button>
+              ) : (
+                <Button
+                  size="large"
+                  type="primary"
+                  style={{
+                    background: "#f36c21",
+                    marginLeft: "2px",
+                    border: "none",
+                  }}
+                  onClick={() => {
+                    setAllIpt(false);
+                    setShowSave(true);
+                  }}
+                >
+                  修改
+                </Button>
+              )}
         </div>
       </div>
-      <div className="parameter-content">
-        <div className="parameter-content-l">
-          <div className="parameter-networkparam">
-            <p className="parameter-topTitle"> 网络参数 </p>
-            <div className="parameter-content-ltop">
-              {clientorsave ? (
-                <div>
-                  控制器ip:
-                  <Select
-                    disabled="false"
-                    defaultValue=""
-                    style={{ width: 100 }}
-                  ></Select>
-                </div>
-              ) : (
-                <div>
-                  相机ip:
-                  <Input
-                    disabled={allIpt}
-                    value={VisionIp}
-                    style={{ width: 150, marginLeft: "14px" }}
-                    onChange={(e) => {
-                      setVisionIp(e.target.value);
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div className="parameter-content-lcenter">
-              <div>
-                <span>端口数:</span>
-                {allIpt ? (
-                  <Input
-                    disabled={allIpt}
-                    value={VisionPortNum}
-                    style={{ width: 100, marginLeft: "14px" }}
-                  />
-                ) : (
-                  <Select
-                    disabled={allIpt}
-                    defaultValue={VisionPortNum}
-                    onChange={(value) => {
-                      setVisionPortNum(value);
-                      showclientnumChange(value);
-                    }}
-                    style={{ width: 100, marginLeft: "14px" }}
-                  >
-                    {portNumchildren}
-                  </Select>
-                )}
-              </div>
-              <div>
-                <span>相机:</span>
-                {allIpt ? (
-                  <Input
-                    disabled={allIpt}
-                    value={VisionServer == true ? "客户端" : "服务端"}
-                    style={{ width: 100, marginLeft: "15px" }}
-                  />
-                ) : (
-                  <Select
-                    disabled={allIpt}
-                    defaultValue={VisionServer == true ? "客户端" : "服务端"}
-                    onChange={(value) => {
-                      setVisionServer(value);
-                    }}
-                    style={{ width: 100, marginLeft: "15px" }}
-                  >
-                    {cameratypeNumchildren}
-                  </Select>
-                )}
-              </div>
-            </div>
-            <div className="parameter-content-lbtm">
-              <div>
-                端口1:
-                <Input
-                  disabled={allIpt}
-                  value={VisionPortOne}
-                  style={{ width: "100px", marginLeft: "20px" }}
-                  onChange={(e) => {
-                    setVisionPortOne(e.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                端口2:
-                <Input
-                  disabled={clientNum}
-                  value={VisionPortTwo}
-                  style={{ width: "100px", marginLeft: "8px" }}
-                  onChange={(e) => {
-                    setVisionPortTwo(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="parameter-connectparam">
-            <p className="parameter-topTitle"> 连接参数</p>
-            <div className="parameter-connectparam-ltop">
-              <div>
-                帧头:
-                <Input
-                  disabled={allIpt}
-                  value={VisionFrameHeader}
-                  style={{ width: "120px", marginLeft: "24px" }}
-                  onChange={(e) => {
-                    setVisionFrameHeader(e.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                成功发送标志符:
-                <Input
-                  disabled={allIpt}
-                  value={VisionSuccessFlag}
-                  style={{ width: "28%" }}
-                  className="text-lm"
-                  onChange={(e) => {
-                    setVisionSuccessFlag(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="parameter-connectparam-lttop">
-              <div>
-                分隔符:
-                <Input
-                  disabled={allIpt}
-                  value={VisionSeparator}
-                  style={{ width: "120px" }}
-                  className="text-lm"
-                  onChange={(e) => {
-                    setVisionSeparator(e.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                失败发送标志符:
-                <Input
-                  disabled={allIpt}
-                  value={VisionFailFlag}
-                  style={{ width: "37%" }}
-                  className="text-lm"
-                  onChange={(e) => {
-                    setVisionFailFlag(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="parameter-connectparam-lcneter">
-              <div>
-                结束符:
-                <Input
-                  disabled={allIpt}
-                  value={VisionEndMark}
-                  style={{ width: "120px" }}
-                  className="text-lm"
-                  onChange={(e) => {
-                    // console.log(e.target.value)
-                    setVisionEndMark(e.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                超时时间:
-                <Input
-                  disabled={allIpt}
-                  value={VisionTimeOut}
-                  style={{ width: "30%", marginLeft: "52px" }}
-                  onChange={(e) => {
-                    setVisionTimeOut(e.target.value);
-                  }}
-                />
-                s
-              </div>
-            </div>
-            <div className="parameter-connectparam-lbtm">
-              <div>
-                仅识别一个目标:
-                <Switch
-                  disabled={allIpt}
-                  className="text-lm"
-                  checked={VisionSinleTarget}
-                  onChange={singleTargetChange}
-                />
-              </div>
-              <div>
-                发送高度信息:
-                <Switch
-                  disabled={allIpt}
-                  checked={VisionHeight}
-                  className="text-lm"
-                  onChange={heightChange}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="parameter-content-r">
-          <div className="parameter-content-rtop">
-            <p className="parameter-topTitle"> 触发方式 </p>
-
-            <div className="parameter-content-rtop-t">
-              <Radio
-                disabled={allIpt}
-                checked={triggermbtn1}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                  if (triggermbtn1) {
-                  } else if (triggermbtn1 == false) {
-                    setTriggerbtn1(true);
-                  }
-                  if (e.target.checked == true) {
-                    setTriggerbtn2(false);
-                    setVisionTriggerMode(1);
-                  }
-                }}
-              >
-                I/O
-              </Radio>
-              I/O端口:
+      <div className="Parameter">
+        <div className="parameter-top">
+          <div className="parameter-camera">
+            <p className="parameter-topTitle" style={{ left: "3vw" }}>
+              相机选择
+            </p>
+            <div>
+              工艺号:
               <Select
-                disabled={clientway}
-                defaultValue="无"
-                style={{ width: 100, marginLeft: "16px" }}
+                onChange={handleChange}
+                defaultValue="1"
+                style={{ width: 180 }}
+                className="text-lp"
               >
-                "无"
+                {cameraNumchildren}
               </Select>
             </div>
-            <div className="parameter-content-rtop-b">
-              <Radio
-                disabled={allIpt}
-                checked={triggermbtn2}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                  if (triggermbtn2) {
-                  } else if (triggermbtn2 == false) {
-                    setTriggerbtn2(true);
-                  }
-                  if (e.target.checked == true) {
-                    setTriggerbtn1(false);
-                    setVisionTriggerMode(2);
-                  }
-                }}
-              >
-                Ethernet
-              </Radio>
-              发送:
-              <Input
-                disabled={ethernetway}
-                value={VisionTriggerStr}
-                style={{ width: "100px" }}
-                onChange={(e) => {
-                  setVisionTriggerStr(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <div className="parameter-content-rcenter">
-            <p className="parameter-topTitle"> 触发条件 </p>
-            <div className="parameter-content-rcenter-t">
-              <Radio
-                disabled={allIpt}
-                checked={triggermbtn3}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                  if (triggermbtn3) {
-                  } else if (triggermbtn3 == false) {
-                    setTriggerbtn3(true);
-                  }
-                  if (e.target.checked == true) {
-                    setTriggerbtn4(false);
-                    setVisionTriggerOnce(true);
-                  }
-                }}
-              >
-                单次触发
-              </Radio>
-            </div>
-            <div className="parameter-content-rcenter-b">
-              <Radio
-                disabled={allIpt}
-                checked={triggermbtn4}
-                onClick={(e) => {
-                  console.log(e.target.checked);
-                  if (triggermbtn4) {
-                  } else if (triggermbtn4 == false) {
-                    setTriggerbtn4(true);
-                  }
-                  if (e.target.checked == true) {
-                    setTriggerbtn3(false);
-                    setVisionTriggerOnce(false);
-                  }
-                }}
-              >
-                持续触发
-              </Radio>
-              间隔时间:
-              <Input
-                disabled={conditiontime}
-                value={VisionIntervals}
-                style={{ width: "100px" }}
-                onChange={(e) => {
-                  setVisionIntervals(e.target.value);
-                }}
-              />
-              ms
-            </div>
-          </div>
-          <div className="parameter-content-rbtm">
-            <p className="parameter-topTitle"> 弧度/角度 </p>
-            <div className="parameter-content-rbtmcenter">
-              弧度/角度转换:
-              {allIpt ? (
+            <div>
+              类型:
+              {allIpt == true ? (
                 <Input
                   disabled={allIpt}
-                  value={VisionAngleUnit == 0 ? "角度" : "弧度"}
-                  style={{ width: 100 }}
-                />
+                  value={VisionCurrentName}
+                  style={{ width: 180, marginLeft: 10 }}
+                ></Input>
               ) : (
                 <Select
                   disabled={allIpt}
-                  defaultValue={VisionAngleUnit == 0 ? "角度" : "弧度"}
-                  onChange={(value) => {
-                    setVisionAngleUnit(Number(value));
-                    console.log(value);
-                  }}
-                  style={{ width: 100 }}
+                  defaultValue="customize"
+                  className="text-lp"
+                  style={{ width: 180 }}
                 >
-                  {angleUnitNumchildren}
+                  {"customize"}
                 </Select>
               )}
             </div>
           </div>
-          <div className="parameter-content-rBtn">
-            <Button
+          <div className="parameter-usercoordinates">
+            <p className="parameter-topTitle" style={{ left: "59vw" }}>
+              用户坐标系
+            </p>
+            <span className="text-lp">用户坐标编号:</span>
+            {allIpt ? (
+              <Input
+                disabled={allIpt}
+                value={VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum}
+                style={{ width: 180 }}
+                className="text-lp"
+              />
+            ) : (
+              <Select
+                disabled={allIpt}
+                defaultValue={
+                  VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum
+                }
+                onChange={(value) => {
+                  setVisionUserCoordNum(value);
+                }}
+                style={{ width: 200 }}
+              >
+                {userNumchildren}
+              </Select>
+            )}
+          </div>
+        </div>
+        <div className="parameter-content">
+          <div className="parameter-content-l">
+            <div className="parameter-networkparam">
+              <p className="parameter-topTitle"> 网络参数 </p>
+              <div className="parameter-content-ltop">
+                {clientorsave ? (
+                  <div>
+                    控制器ip:
+                    <Select
+                      disabled="false"
+                      defaultValue=""
+                      style={{ width: 100 }}
+                    ></Select>
+                  </div>
+                ) : (
+                  <div>
+                    相机ip:
+                    <Input
+                      disabled={allIpt}
+                      value={VisionIp}
+                      style={{ width: 150, marginLeft: "14px" }}
+                      onChange={(e) => {
+                        setVisionIp(e.target.value);
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="parameter-content-lcenter">
+                <div>
+                  <span>端口数:</span>
+                  {allIpt ? (
+                    <Input
+                      disabled={allIpt}
+                      value={VisionPortNum}
+                      style={{ width: 100, marginLeft: "14px" }}
+                    />
+                  ) : (
+                    <Select
+                      disabled={allIpt}
+                      defaultValue={VisionPortNum}
+                      onChange={(value) => {
+                        setVisionPortNum(value);
+                        showclientnumChange(value);
+                      }}
+                      style={{ width: 100, marginLeft: "14px" }}
+                    >
+                      {portNumchildren}
+                    </Select>
+                  )}
+                </div>
+                <div>
+                  <span>相机:</span>
+                  {allIpt ? (
+                    <Input
+                      disabled={allIpt}
+                      value={VisionServer == true ? "客户端" : "服务端"}
+                      style={{ width: 100, marginLeft: "15px" }}
+                    />
+                  ) : (
+                    <Select
+                      disabled={allIpt}
+                      defaultValue={VisionServer == true ? "客户端" : "服务端"}
+                      onChange={(value) => {
+                        setVisionServer(value);
+                      }}
+                      style={{ width: 100, marginLeft: "15px" }}
+                    >
+                      {cameratypeNumchildren}
+                    </Select>
+                  )}
+                </div>
+              </div>
+              <div className="parameter-content-lbtm">
+                <div>
+                  端口1:
+                  <Input
+                    disabled={allIpt}
+                    value={VisionPortOne}
+                    style={{ width: "100px", marginLeft: "20px" }}
+                    onChange={(e) => {
+                      setVisionPortOne(e.target.value);
+                    }}
+                  />
+                </div>
+                <div>
+                  端口2:
+                  <Input
+                    disabled={clientNum}
+                    value={VisionPortTwo}
+                    style={{ width: "100px", marginLeft: "8px" }}
+                    onChange={(e) => {
+                      setVisionPortTwo(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="parameter-connectparam">
+              <p className="parameter-topTitle"> 连接参数</p>
+              <div className="parameter-connectparam-ltop">
+                <div>
+                  帧头:
+                  <Input
+                    disabled={allIpt}
+                    value={VisionFrameHeader}
+                    style={{ width: "120px", marginLeft: "24px" }}
+                    onChange={(e) => {
+                      setVisionFrameHeader(e.target.value);
+                    }}
+                  />
+                </div>
+                <div>
+                  成功发送标志符:
+                  <Input
+                    disabled={allIpt}
+                    value={VisionSuccessFlag}
+                    style={{ width: "28%" }}
+                    className="text-lm"
+                    onChange={(e) => {
+                      setVisionSuccessFlag(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="parameter-connectparam-lttop">
+                <div>
+                  分隔符:
+                  <Input
+                    disabled={allIpt}
+                    value={VisionSeparator}
+                    style={{ width: "120px" }}
+                    className="text-lm"
+                    onChange={(e) => {
+                      setVisionSeparator(e.target.value);
+                    }}
+                  />
+                </div>
+                <div>
+                  失败发送标志符:
+                  <Input
+                    disabled={allIpt}
+                    value={VisionFailFlag}
+                    style={{ width: "37%" }}
+                    className="text-lm"
+                    onChange={(e) => {
+                      setVisionFailFlag(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="parameter-connectparam-lcneter">
+                <div>
+                  结束符:
+                  <Input
+                    disabled={allIpt}
+                    value={VisionEndMark}
+                    style={{ width: "120px" }}
+                    className="text-lm"
+                    onChange={(e) => {
+                      // console.log(e.target.value)
+                      setVisionEndMark(e.target.value);
+                    }}
+                  />
+                </div>
+                <div>
+                  超时时间:
+                  <Input
+                    disabled={allIpt}
+                    value={VisionTimeOut}
+                    style={{
+                      width: "30%",
+                      marginLeft: "52px",
+                      marginRight: 10,
+                    }}
+                    onChange={(e) => {
+                      setVisionTimeOut(e.target.value);
+                    }}
+                  />
+                  s
+                </div>
+              </div>
+              <div className="parameter-connectparam-lbtm">
+                <div>
+                  仅识别一个目标:
+                  <Switch
+                    disabled={allIpt}
+                    className="text-lm"
+                    checked={VisionSinleTarget}
+                    onChange={singleTargetChange}
+                  />
+                </div>
+                <div>
+                  发送高度信息:
+                  <Switch
+                    disabled={allIpt}
+                    checked={VisionHeight}
+                    className="text-lm"
+                    onChange={heightChange}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="parameter-content-r">
+            <div className="parameter-content-rtop">
+              <p className="parameter-topTitle"> 触发方式 </p>
+
+              <div className="parameter-content-rtop-t">
+                <Radio
+                  disabled={allIpt}
+                  checked={triggermbtn1}
+                  onClick={(e) => {
+                    console.log(e.target.checked);
+                    if (triggermbtn1) {
+                    } else if (triggermbtn1 == false) {
+                      setTriggerbtn1(true);
+                    }
+                    if (e.target.checked == true) {
+                      setTriggerbtn2(false);
+                      setVisionTriggerMode(1);
+                    }
+                  }}
+                >
+                  I/O
+                </Radio>
+                I/O端口:
+                <Select
+                  disabled={clientway}
+                  defaultValue="无"
+                  style={{ width: 100, marginLeft: "16px" }}
+                >
+                  "无"
+                </Select>
+              </div>
+              <div className="parameter-content-rtop-b">
+                <Radio
+                  disabled={allIpt}
+                  checked={triggermbtn2}
+                  onClick={(e) => {
+                    console.log(e.target.checked);
+                    if (triggermbtn2) {
+                    } else if (triggermbtn2 == false) {
+                      setTriggerbtn2(true);
+                    }
+                    if (e.target.checked == true) {
+                      setTriggerbtn1(false);
+                      setVisionTriggerMode(2);
+                    }
+                  }}
+                >
+                  Ethernet
+                </Radio>
+                发送:
+                <Input
+                  disabled={ethernetway}
+                  value={VisionTriggerStr}
+                  style={{ width: "100px" }}
+                  onChange={(e) => {
+                    setVisionTriggerStr(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="parameter-content-rcenter">
+              <p className="parameter-topTitle"> 触发条件 </p>
+              <div className="parameter-content-rcenter-t">
+                <Radio
+                  disabled={allIpt}
+                  checked={triggermbtn3}
+                  onClick={(e) => {
+                    console.log(e.target.checked);
+                    if (triggermbtn3) {
+                    } else if (triggermbtn3 == false) {
+                      setTriggerbtn3(true);
+                    }
+                    if (e.target.checked == true) {
+                      setTriggerbtn4(false);
+                      setVisionTriggerOnce(true);
+                    }
+                  }}
+                >
+                  单次触发
+                </Radio>
+              </div>
+              <div className="parameter-content-rcenter-b">
+                <Radio
+                  disabled={allIpt}
+                  checked={triggermbtn4}
+                  onClick={(e) => {
+                    console.log(e.target.checked);
+                    if (triggermbtn4) {
+                    } else if (triggermbtn4 == false) {
+                      setTriggerbtn4(true);
+                    }
+                    if (e.target.checked == true) {
+                      setTriggerbtn3(false);
+                      setVisionTriggerOnce(false);
+                    }
+                  }}
+                >
+                  持续触发
+                </Radio>
+                间隔时间:
+                <Input
+                  disabled={conditiontime}
+                  value={VisionIntervals}
+                  style={{ width: "100px" }}
+                  onChange={(e) => {
+                    setVisionIntervals(e.target.value);
+                  }}
+                />
+                ms
+              </div>
+            </div>
+            <div className="parameter-content-rbtm">
+              <p className="parameter-topTitle"> 弧度/角度 </p>
+              <div className="parameter-content-rbtmcenter">
+                弧度/角度转换:
+                {allIpt ? (
+                  <Input
+                    disabled={allIpt}
+                    value={VisionAngleUnit == 0 ? "角度" : "弧度"}
+                    style={{ width: 100 }}
+                  />
+                ) : (
+                  <Select
+                    disabled={allIpt}
+                    defaultValue={VisionAngleUnit == 0 ? "角度" : "弧度"}
+                    onChange={(value) => {
+                      setVisionAngleUnit(Number(value));
+                      console.log(value);
+                    }}
+                    style={{ width: 100 }}
+                  >
+                    {angleUnitNumchildren}
+                  </Select>
+                )}
+              </div>
+            </div>
+            <div className="parameter-content-rBtn">
+              {/* <Button
               size="large"
               type="primary"
               style={{ background: "#009ad6" }}
@@ -646,76 +730,77 @@ function Parameter(props) {
               }}
             >
               返回
-            </Button>
-            {showSave ? (
-              <Button
-                size="large"
-                type="primary"
-                style={{
-                  background: "#45b97c",
-                  marginLeft: "2px",
-                  border: "none",
-                }}
-                onClick={() => {
-                  setAllIpt(true);
-                  setShowSave(false);
-                  let dataList = {
-                    robot: props.currentRobot,
-                    visionNum: copycraftNum,
-                    cameraType: "customize",
-                    vision: {
-                      socket: {
-                        IP: VisionIp,
-                        portOne: Number(VisionPortOne),
-                        server: Number(VisionServer),
-                        portTwo: Number(VisionPortTwo),
-                        portNum: Number(VisionPortNum),
+            </Button> */}
+              {showSave ? (
+                <Button
+                  size="large"
+                  type="primary"
+                  style={{
+                    background: "#45b97c",
+                    marginLeft: "2px",
+                    border: "none",
+                  }}
+                  onClick={() => {
+                    setAllIpt(true);
+                    setShowSave(false);
+                    let dataList = {
+                      robot: props.currentRobot,
+                      visionNum: copycraftNum,
+                      cameraType: "customize",
+                      vision: {
+                        socket: {
+                          IP: VisionIp,
+                          portOne: Number(VisionPortOne),
+                          server: Number(VisionServer),
+                          portTwo: Number(VisionPortTwo),
+                          portNum: Number(VisionPortNum),
+                        },
+                        protocol: {
+                          endMark: VisionEndMark,
+                          singleTarget: VisionSinleTarget,
+                          height: VisionHeight,
+                          frameHeader: VisionFrameHeader,
+                          separator: VisionSeparator,
+                          failFlag: VisionFailFlag,
+                          successFlag: VisionSuccessFlag,
+                          timeOut: Number(VisionTimeOut),
+                          angleUnit: VisionAngleUnit,
+                        },
+                        trigger: {
+                          triggerMode: Number(VisionTriggerMode),
+                          triggerStr: VisionTriggerStr,
+                          IOPort: Number(VisionIOPort),
+                          triggerOnce: VisionTriggerOnce,
+                          intervals: VisionIntervals,
+                        },
+                        userCoordNum: Number(VisionUserCoordNum),
                       },
-                      protocol: {
-                        endMark: VisionEndMark,
-                        singleTarget: VisionSinleTarget,
-                        height: VisionHeight,
-                        frameHeader: VisionFrameHeader,
-                        separator: VisionSeparator,
-                        failFlag: VisionFailFlag,
-                        successFlag: VisionSuccessFlag,
-                        timeOut: Number(VisionTimeOut),
-                        angleUnit: VisionAngleUnit,
-                      },
-                      trigger: {
-                        triggerMode: Number(VisionTriggerMode),
-                        triggerStr: VisionTriggerStr,
-                        IOPort: Number(VisionIOPort),
-                        triggerOnce: VisionTriggerOnce,
-                        intervals: VisionIntervals,
-                      },
-                      userCoordNum: Number(VisionUserCoordNum),
-                    },
-                  };
+                    };
 
-                  sendMSGtoController("VISION_PARAMETER_SET", dataList);
-                  console.log(dataList);
-                }}
-              >
-                保存
-              </Button>
-            ) : (
-              <Button
-                size="large"
-                type="primary"
-                style={{
-                  background: "#f36c21",
-                  marginLeft: "2px",
-                  border: "none",
-                }}
-                onClick={() => {
-                  setAllIpt(false);
-                  setShowSave(true);
-                }}
-              >
-                修改
-              </Button>
-            )}
+                    sendMSGtoController("VISION_PARAMETER_SET", dataList);
+                    console.log(dataList);
+                  }}
+                >
+                  保存
+                </Button>
+              ) : (
+                <Button
+                  size="large"
+                  type="primary"
+                  style={{
+                    background: "#f36c21",
+                    marginLeft: "2px",
+                    border: "none",
+                  }}
+                  onClick={() => {
+                    setAllIpt(false);
+                    setShowSave(true);
+                  }}
+                >
+                  修改
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
