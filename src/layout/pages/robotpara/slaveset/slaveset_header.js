@@ -1,4 +1,6 @@
 // slaveset从站配置的固定的几个东西，ENI名称、ENI状态和伺服的数量、型号等
+
+
 export var ENIname = "eni-RC-6-mecat-1-1000.xml";
 export var ENIstate = "已识别到ENI，已连接伺服";
 export var servoAmount = [

@@ -457,5 +457,11 @@ export const CommandList = {
     REPLAY_UPGRADE_SYSTEM:0x2112,
 
     // 服务端同意上传，向服务端发送数据
-    UPLOADING_UPGRADE_SYSTEM:0x2113
+    UPLOADING_UPGRADE_SYSTEM:0x2113,
+
+    // 查询需要的ENI文件名
+    ENINAME_INQUIRE:0x2e1b,
+    
+    // 接收所查询需要的ENI文件名
+    ENINAME_RESPOND:0x2e1c
 };

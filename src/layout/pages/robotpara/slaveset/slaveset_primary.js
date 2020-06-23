@@ -309,7 +309,7 @@ function SlaveSetPrimary(props) {
               {primaryTabsContent("robot2", "O1")}
               {primaryTabsContent("robot2", "O2")}
               {primaryTabsContent("robot2", "O3")}
-              {primaryTabsContent("robot2", "O4")}
+              {primaryTabsContent("robot2", "O4")} 
               {primaryTabsContent("robot2", "O5")}
             </Tabs>
           </TabPane>

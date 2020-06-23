@@ -231,11 +231,15 @@ function SlaveSetRobot(props) {
         break;
     }
   };
+  console.log(SalveRobotAxle.servoSum)
+  useEffect(()=>{
+    changeRobotOuter(String(SalveRobotAxle.robot[0].syncNum))
+    changeRobotType(String(SalveRobotAxle.servoSum))
+  },[])
 
   useEffect(()=>{
-    changeRobotOuter(String(0))
-    changeRobotType(String(1))
-  },[])
+    setSalveRobotAxle(props.robotAxle)
+  },[props.robotAxle])
 
   // tabs的内容
   const tabsContent = (robot) => {
@@ -257,7 +261,7 @@ function SlaveSetRobot(props) {
             <div className="slaveset1" style={{ paddingBottom: 15 }}>
               <span className="p1">机器人类型</span>
               <Select
-                defaultValue={String(SalveRobotAxle.servoSum+1) }
+                defaultValue={String(SalveRobotAxle.servoSum) }
                 onChange={(value) => {changeRobotType(value) ;console.log(value)}}
                 disabled={props.isDisabled}
                 className="table_btn"
@@ -298,7 +302,7 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint3"} key="3" >
+                <tr id={robot + "Joint3"} key="4" >
                   <td key="1">轴3</td>
                   <td key="2">
                     <Select
@@ -311,7 +315,7 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint4"} key="4" >
+                <tr id={robot + "Joint4"} key="5" >
                   <td key="1">轴4</td>
                   <td key="2">
                     <Select
@@ -324,7 +328,7 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint5"} key="5" >
+                <tr id={robot + "Joint5"} key="6" >
                   <td key="1" >轴5</td>
                   <td key="2" >
                     <Select
@@ -337,7 +341,7 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint6"} key="6" >
+                <tr id={robot + "Joint6"} key="7" >
                   <td key="1" >轴6</td>
                   <td key="2" >
                     <Select
@@ -350,7 +354,7 @@ function SlaveSetRobot(props) {
                     </Select>
                   </td>
                 </tr>
-                <tr id={robot + "Joint7"} key="7" >
+                <tr id={robot + "Joint7"} key="8" >
                   <td key="1" >轴7</td>
                   <td key="2" >
                     <Select
@@ -402,8 +406,8 @@ function SlaveSetRobot(props) {
                   </th>
                 </tr>
                 <tr id={robot + "Outer1Joint1"}>
-                  <td>轴1</td>
-                  <td>
+                  <td key="1">轴1</td>
+                  <td key="2">
                     <Select
                       defaultValue={RobotServo}
                       disabled={props.isDisabled}
@@ -415,8 +419,8 @@ function SlaveSetRobot(props) {
                   </td>
                 </tr>
                 <tr id={robot + "Outer1Joint2"}>
-                  <td>轴2</td>
-                  <td>
+                  <td key="1">轴2</td>
+                  <td key="2">
                     <Select
                       defaultValue={RobotServo}
                       disabled={props.isDisabled}
@@ -432,8 +436,8 @@ function SlaveSetRobot(props) {
             <div className="slaveset1">
               <table id={robot + "Outer2"}>
                 <tr className="table_head">
-                  <th>组2</th>
-                  <th>
+                  <th key="1">组2</th>
+                  <th key="2">
                     <Select
                       defaultValue="2"
                       onChange={(value) => changeRobotOuter2(value)}
@@ -449,8 +453,8 @@ function SlaveSetRobot(props) {
                   </th>
                 </tr>
                 <tr id={robot + "Outer2Joint1"}>
-                  <td>轴1</td>
-                  <td>
+                  <td key="1">轴1</td>
+                  <td key="2">
                     <Select
                       defaultValue={RobotServo}
                       disabled={props.isDisabled}
@@ -462,8 +466,8 @@ function SlaveSetRobot(props) {
                   </td>
                 </tr>
                 <tr id={robot + "Outer2Joint2"}>
-                  <td>轴2</td>
-                  <td>
+                  <td key="1">轴2</td>
+                  <td key="2">
                     <Select
                       defaultValue={RobotServo}
                       disabled={props.isDisabled}
@@ -479,8 +483,8 @@ function SlaveSetRobot(props) {
             <div className="slaveset1">
               <table id={robot + "Outer3"}>
                 <tr className="table_head">
-                  <th>组3</th>
-                  <th>
+                  <th key="1">组3</th>
+                  <th key="2">
                     <Select
                       defaultValue={"4"}
                       disabled={props.isDisabled}
@@ -495,8 +499,8 @@ function SlaveSetRobot(props) {
                   </th>
                 </tr>
                 <tr id={robot + "Outer3Joint1"}>
-                  <td>轴</td>
-                  <td>
+                  <td key="1">轴</td>
+                  <td key="2">
                     <Select
                       defaultValue={RobotServo}
                       disabled={props.isDisabled}

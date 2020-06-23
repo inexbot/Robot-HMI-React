@@ -435,7 +435,14 @@ export const indexMainreducers = {
         // 获取机器人从动轴
         inquirerobotAxle(state, action){
           let _state = JSON.parse(JSON.stringify(state)) 
+          // console.log(_state.slaveSertCommit.robotAxle,action.data,"这里是获取机器人从动轴")
           _state.slaveSertCommit.robotAxle = action.data
+          return _state
+        },
+        // 获取ENI文件名
+        inquirerobotENIname(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.slaveSertCommit.ENIname = action.data
           return _state
         }
     }
