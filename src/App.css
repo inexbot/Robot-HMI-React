@@ -59,7 +59,9 @@
 .servopara,
 .teachlayout,
 .Parameter,
-.Place {
+.Place,
+.Placebug,
+.Scope {
   /* width: 90vw; */
   height: 70vh;
   background-color: white;
