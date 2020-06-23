@@ -237,7 +237,7 @@ function Parameter(props) {
   };
   console.log(props.parameterList);
   return (
-    <div>
+    <div style={{ marginTop:"-40px" }}>
       <div>
         {/* 头部 */}
         <ConTitle title={intl.get("视觉参数")} subtitle={intl.get("视觉参数设置")} />
@@ -314,7 +314,7 @@ function Parameter(props) {
               )}
         </div>
       </div>
-      <div className="Parameter">
+      <div className="Parameter" style={{ marginTop:"30px" }}>
         <div className="parameter-top">
           <div className="parameter-camera">
             <p className="parameter-topTitle" style={{ left: "3vw" }}>

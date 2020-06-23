@@ -42,6 +42,22 @@ function Setparameter(props) {
   const { Step } = Steps;
   const [current, setCurrent] = useState(0);
 
+  const onChange = current => {
+    console.log(current)
+    setCurrent(current)
+    if(current == 0){
+      history.push("/setparameter/basic")
+    }else if(current == 1){
+      history.push("/setparameter/discern")
+    }else if(current == 2){
+      history.push("/setparameter/conveyorsign")
+    }else if(current == 3){
+      history.push("/setparameter/sensorsign")
+    }else if(current == 4){
+      history.push("/setparameter/setsite")
+    }
+  } 
+
   const steps = [
       { title: "基本信息", path: "/setparameter/basic", },
       { title: "识别参数", path: "/setparameter/discern", },
@@ -49,7 +65,6 @@ function Setparameter(props) {
       { title: "传感器标定", path: "/setparameter/sensorsign", },
       { title: "位置设置", path: "/setparameter/setsite", },
   ];
-  const [RouterBtn, setRouterBtn] = useState('');
   const [conveyorNum, setConveyorNum] = useState();
   const next = () => {
     setCurrent(current + 1);
@@ -78,28 +93,6 @@ function Setparameter(props) {
 
   }
 
-  useEffect(()=>{
-    switch(window.location.hash){
-      case "#/setparameter/basic":
-        setRouterBtn("basic")
-        break;
-      case "#/setparameter":
-        setRouterBtn("basic")
-        break;
-      case "#/setparameter/discern":
-        setRouterBtn("discern")
-        break;
-      case "#/setparameter/conveyorsign":
-        setRouterBtn("conveyorsign")
-        break;
-      case "#/setparameter/sensorsign":
-        setRouterBtn("sensorsign")
-        break;
-      case "#/setparameter/setsite":
-        setRouterBtn("setsite")
-        break;
-    }
-  })
 
   return (
     <div>
@@ -118,7 +111,7 @@ function Setparameter(props) {
 
       {/* 使用hash路由来控制 */}
       <div >
-      <HashRouter>
+      <HashRouter >
         <Route path="/setparameter/basic" component={Basic}></Route>
         <Route path="/setparameter/discern" component={Discern}></Route>
         <Route  path="/setparameter/conveyorsign" component={Conveyorsign}></Route>
@@ -135,41 +128,14 @@ function Setparameter(props) {
         <Switch>
           <Route exact path='/setparameter' component={Basic}></Route>
         </Switch>
-        {/* <Button onClick = {()=>{
-          console.log("sss")
-          history.push("/setparameter/discern")
-        }}>
-          传送带标定
-        </Button> */}
-        <NavLink exact activeClassName="selected" className="nav" to="/setparameter/basic">
-          <Button type={ RouterBtn=="basic"? "primary":"" }  style={{ width:"15%",height:"30px" }}  onClick={() => {setCurrent(0);}}>
-            基本信息
-          </Button>
-        </NavLink>
-        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
-        <NavLink exact activeClassName="selected" className="nav" to="/setparameter/discern">
-          <Button type={ RouterBtn=="discern"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => { setCurrent(1);}}>
-            识别参数
-          </Button>
-        </NavLink>
-        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
-        <NavLink exact activeClassName="selected" className="nav"  to="/setparameter/conveyorsign">
-          <Button type={ RouterBtn=="conveyorsign"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => {setCurrent(2);}}>
-            传送带标定
-          </Button>
-        </NavLink>
-        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
-        <NavLink exact activeClassName="selected" className="nav" to="/setparameter/sensorsign">
-          <Button type={ RouterBtn=="sensorsign"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => {setCurrent(3);}}>
-            传感器标定
-          </Button>
-        </NavLink>
-        <ArrowRightOutlined style = {{ width:"6%",fontSize:"30px",textAlign:"center" }} />
-        <NavLink exact activeClassName="selected" className="nav" to="/setparameter/setsite">
-          <Button type={ RouterBtn=="setsite"? "primary":"" } style={{ width:"15%",height:"30px" }} onClick={() => {setCurrent(4);}}>
-            位置设置
-          </Button>
-        </NavLink>
+        <Steps current={current} onChange={onChange} style={{ marginTop:"10px"}}>
+          <Step title="基本信息"  />
+          <Step title="识别参数" />
+          <Step title="传送带标定" />
+          <Step title="传感器标定"  />
+          <Step title="位置设置"  />
+        </Steps>
+
       </HashRouter>
       </div>
     </div>

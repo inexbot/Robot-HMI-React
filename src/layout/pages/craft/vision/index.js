@@ -50,27 +50,7 @@ const mapStateToProps = (state) => {
     return(
             <div>
                 <HashRouter  >
-                    {/* <NavLink exact activeClassName="selected"  to="/vision/parameter">
-                      <Button>
-                        视觉参数设置
-                      </Button>
-                    </NavLink>
-                    <NavLink exact activeClassName="selected" to="/vision/scope">
-                      <Button>
-                        视觉范围设置
-                      </Button>
-                    </NavLink>
-                    <NavLink exact activeClassName="selected"  to="/vision/place">
-                      <Button>
-                        视觉位置参数
-                      </Button>
-                    </NavLink>
-                    <NavLink exact activeClassName="selected"  to="/vision/placedebug">
-                      <Button>
-                        位置调试
-                      </Button>
-                    </NavLink> */}
-                     <Steps current={current} onChange={onChange} style={{ width:"65%",position:"relative",top:"50px",left:"220px",zIndex:"2" }}>
+                     <Steps current={-1} onChange={onChange} style={{ position:"relative",top:"44px",zIndex:"2" }}>
                        <Step title="视觉参数设置"  />
                        <Step title="视觉范围奢姿" />
                        <Step title="视觉位置设置" />
