@@ -128,7 +128,7 @@ function Basic(props) {
       <div className="connect" >
         <Table
           scroll={{
-            y: window.screen.height * 0.3,
+            y: window.screen.height * 0.27,
           }}
           pagination={false}
           size = {"small"}

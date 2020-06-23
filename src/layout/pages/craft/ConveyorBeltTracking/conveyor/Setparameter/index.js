@@ -101,7 +101,7 @@ function Setparameter(props) {
 
 
   return (
-    <div>
+    <div style={{ marginTop:"-10px" }}>
       {/* 头部 */}
       <ConTitle
         title={intl.get("传送带参数")}
@@ -109,6 +109,16 @@ function Setparameter(props) {
       />
       {/* 悬浮按钮 */}
       <div className="hoverButton1"></div>
+      {/* 导航 */}
+      <div style={{ margin:"-3px 0 4px 0" }}>
+        <Steps current={current} onChange={onChange} >
+          <Step title="基本信息"  />
+          <Step title="识别参数" />
+          <Step title="传送带标定" />
+          <Step title="传感器标定"  />
+          <Step title="位置设置"  />
+        </Steps>
+      </div>
 
       {/* 选择工艺号 */}
       <div style={{ marginLeft: "25%" }}>
@@ -126,6 +136,7 @@ function Setparameter(props) {
       {/* 使用hash路由来控制 */}
       <div >
       <HashRouter >
+
         <Route path="/setparameter/basic" component={Basic}></Route>
         <Route path="/setparameter/discern" component={Discern}></Route>
         <Route  path="/setparameter/conveyorsign" component={Conveyorsign}></Route>
@@ -142,13 +153,7 @@ function Setparameter(props) {
         <Switch>
           <Route exact path='/setparameter' component={Basic}></Route>
         </Switch>
-        <Steps current={current} onChange={onChange} style={{ marginTop:"10px"}}>
-          <Step title="基本信息"  />
-          <Step title="识别参数" />
-          <Step title="传送带标定" />
-          <Step title="传感器标定"  />
-          <Step title="位置设置"  />
-        </Steps>
+
 
       </HashRouter>
 
