@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import intl from "react-intl-universal";
+import ConTitle from "components/title";
 import {
   Table,
   Button,
@@ -8,27 +10,33 @@ import {
   Steps,
   message,
 } from "antd";
-import {ArrowRightOutlined} from "@ant-design/icons"
+import { ArrowRightOutlined } from "@ant-design/icons";
 import { connect } from "dva";
 import asyncComponents from "../../../../../../AsyncComponents";
-import { HashRouter, NavLink, Route, Switch, useHistory, useLocation} from "react-router-dom";
+import {
+  HashRouter,
+  NavLink,
+  Route,
+  Switch,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 import "./index.css";
 import { sendMSGtoController } from "service/network";
 
+const Basic = asyncComponents(() => import("../Basic"));
+const Discern = asyncComponents(() => import("../Discern"));
+const Conveyorsign = asyncComponents(() => import("../Conveyorsign"));
+const Sensorsign = asyncComponents(() => import("../Sensorsign"));
+const SensorOne = asyncComponents(() => import("../SensorOne"));
+const SensorTwo = asyncComponents(() => import("../SensorTwo"));
+const SensorThree = asyncComponents(() => import("../SensorThree"));
 
-const Basic = asyncComponents(() => import("../Basic"))
-const Discern = asyncComponents(() => import("../Discern"))
-const Conveyorsign = asyncComponents(() => import("../Conveyorsign"))
-const Sensorsign = asyncComponents(() => import("../Sensorsign"))
-const SensorOne = asyncComponents(() => import("../SensorOne"))
-const SensorTwo = asyncComponents(() => import("../SensorTwo"))
-const SensorThree = asyncComponents(() => import("../SensorThree"))
-
-const Setsite = asyncComponents(() => import("../Setsite"))
-const ConveyorOne = asyncComponents(() => import("../ConveyorOne"))
-const ConveyorTwo = asyncComponents(() => import("../ConveyorTwo"))
-const ConveyorThree = asyncComponents(() => import("../ConveyorThree"))
-const ConveyorFour = asyncComponents(() => import("../ConveyorFour"))
+const Setsite = asyncComponents(() => import("../Setsite"));
+const ConveyorOne = asyncComponents(() => import("../ConveyorOne"));
+const ConveyorTwo = asyncComponents(() => import("../ConveyorTwo"));
+const ConveyorThree = asyncComponents(() => import("../ConveyorThree"));
+const ConveyorFour = asyncComponents(() => import("../ConveyorFour"));
 
 const mapStateToProps = (state) => {
   return {
@@ -59,12 +67,13 @@ function Setparameter(props) {
   } 
 
   const steps = [
-      { title: "基本信息", path: "/setparameter/basic", },
-      { title: "识别参数", path: "/setparameter/discern", },
-      { title: "传送带标定", path: "/setparameter/conveyorsign", },
-      { title: "传感器标定", path: "/setparameter/sensorsign", },
-      { title: "位置设置", path: "/setparameter/setsite", },
+    { title: "基本信息", path: "/setparameter/basic" },
+    { title: "识别参数", path: "/setparameter/discern" },
+    { title: "传送带标定", path: "/setparameter/conveyorsign" },
+    { title: "传感器标定", path: "/setparameter/sensorsign" },
+    { title: "位置设置", path: "/setparameter/setsite" },
   ];
+
   const [conveyorNum, setConveyorNum] = useState();
   const next = () => {
     setCurrent(current + 1);
@@ -74,31 +83,36 @@ function Setparameter(props) {
   };
 
   const conveyorNumchildren = [];
-  for (let i = 1; i <10; i++) {
-    conveyorNumchildren.push(
-      <Option key={i}>{i}</Option>
-    );
+  for (let i = 1; i < 10; i++) {
+    conveyorNumchildren.push(<Option key={i}>{i}</Option>);
   }
 
-  const handleSizeChange = e => {
-    setConveyorNum( e.target.value );
+  const handleSizeChange = (e) => {
+    setConveyorNum(e.target.value);
   };
 
-  const handleChange =(value) => {
+  const handleChange = (value) => {
     let dataList = {
-      robot:props.currentRobot,
-      conveyorID:Number(value),
-    }
-    sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE",dataList)
-
-  }
+      robot: props.currentRobot,
+      conveyorID: Number(value),
+    };
+    sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE", dataList);
+  };
 
 
   return (
     <div>
+      {/* 头部 */}
+      <ConTitle
+        title={intl.get("传送带参数")}
+        subtitle={intl.get("传送带参数")}
+      />
+      {/* 悬浮按钮 */}
+      <div className="hoverButton1"></div>
+
       {/* 选择工艺号 */}
-      <div style = {{marginLeft:'25%'}}>
-        工艺号: 
+      <div style={{ marginLeft: "25%" }}>
+        工艺号:
         <Select
           size={conveyorNum}
           defaultValue="请选择工艺号"
@@ -107,7 +121,7 @@ function Setparameter(props) {
         >
           {conveyorNumchildren}
         </Select>
-        </div>
+      </div>
 
       {/* 使用hash路由来控制 */}
       <div >
@@ -137,6 +151,7 @@ function Setparameter(props) {
         </Steps>
 
       </HashRouter>
+
       </div>
     </div>
   );
