@@ -233,18 +233,13 @@ function Place(props) {
   ];
 
   return (
-    <div>
+    <div style={{ marginTop:"-31px" }}>
       {/* 头部 */}
       <ConTitle title={intl.get("视觉位置")} subtitle={intl.get("视觉位置参数")} />
       {/* 悬浮按钮 */}
-      <div className="hoverButton1">
+      <div className="hoverButton1"></div>
 
-      </div>
-
-      <div
-        className="Place"
-        // style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%",height:"1000px",overflowY:"hidden" }}
-      >
+      <div className="Place" style={{ marginTop:"45px",height:"65vh" }}>
         <div className="place-content-l">
           <div style={{ marginLeft: "20%", marginTop: "5%" }}>
             <span> 工艺号: </span>

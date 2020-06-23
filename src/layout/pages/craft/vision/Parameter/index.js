@@ -247,10 +247,12 @@ function Parameter(props) {
                 <Button
                   size="large"
                   type="primary"
+                  shape="circle"
                   style={{
-                    background: "#45b97c",
-                    marginLeft: "2px",
-                    border: "none",
+                    border: "1px #0AA8EB dashed",
+                    background:"#ffffff",
+                    color:"#0AA8EB",
+                    boxShadow:"0px 1px 8px rgba(10, 168, 235, 0.6)"
                   }}
                   onClick={() => {
                     setAllIpt(true);
@@ -299,9 +301,8 @@ function Parameter(props) {
                 <Button
                   size="large"
                   type="primary"
+                  shape="circle"
                   style={{
-                    background: "#f36c21",
-                    marginLeft: "2px",
                     border: "none",
                   }}
                   onClick={() => {
@@ -325,8 +326,7 @@ function Parameter(props) {
               <Select
                 onChange={handleChange}
                 defaultValue="1"
-                style={{ width: 180 }}
-                className="text-lp"
+                style={{ width: 180, marginLeft: 10 }}
               >
                 {cameraNumchildren}
               </Select>
@@ -343,8 +343,7 @@ function Parameter(props) {
                 <Select
                   disabled={allIpt}
                   defaultValue="customize"
-                  className="text-lp"
-                  style={{ width: 180 }}
+                  style={{ width: 180, marginLeft: 10  }}
                 >
                   {"customize"}
                 </Select>
@@ -355,13 +354,12 @@ function Parameter(props) {
             <p className="parameter-topTitle" style={{ left: "59vw" }}>
               用户坐标系
             </p>
-            <span className="text-lp">用户坐标编号:</span>
+            <span>用户坐标编号:</span>
             {allIpt ? (
               <Input
                 disabled={allIpt}
                 value={VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum}
                 style={{ width: 180 }}
-                className="text-lp"
               />
             ) : (
               <Select
@@ -372,7 +370,7 @@ function Parameter(props) {
                 onChange={(value) => {
                   setVisionUserCoordNum(value);
                 }}
-                style={{ width: 200 }}
+                style={{ width: 180 }}
               >
                 {userNumchildren}
               </Select>
@@ -638,6 +636,7 @@ function Parameter(props) {
                 <Input
                   disabled={ethernetway}
                   value={VisionTriggerStr}
+                  className="text-lm"
                   style={{ width: "100px" }}
                   onChange={(e) => {
                     setVisionTriggerStr(e.target.value);
@@ -688,7 +687,8 @@ function Parameter(props) {
                 <Input
                   disabled={conditiontime}
                   value={VisionIntervals}
-                  style={{ width: "100px" }}
+                  className="text-lm"
+                  style={{ width: "90px",marginRight:10 }}
                   onChange={(e) => {
                     setVisionIntervals(e.target.value);
                   }}
@@ -705,6 +705,7 @@ function Parameter(props) {
                     disabled={allIpt}
                     value={VisionAngleUnit == 0 ? "角度" : "弧度"}
                     style={{ width: 100 }}
+                    className="text-lm"
                   />
                 ) : (
                   <Select
@@ -715,23 +716,14 @@ function Parameter(props) {
                       console.log(value);
                     }}
                     style={{ width: 100 }}
+                    className="text-lm"
                   >
                     {angleUnitNumchildren}
                   </Select>
                 )}
               </div>
             </div>
-            <div className="parameter-content-rBtn">
-              {/* <Button
-              size="large"
-              type="primary"
-              style={{ background: "#009ad6" }}
-              onClick={() => {
-                history.push("/vision");
-              }}
-            >
-              返回
-            </Button> */}
+            {/* <div className="parameter-content-rBtn">
               {showSave ? (
                 <Button
                   size="large"
@@ -801,7 +793,7 @@ function Parameter(props) {
                   修改
                 </Button>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

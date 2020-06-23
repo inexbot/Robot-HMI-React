@@ -156,7 +156,7 @@ function Scope(props) {
   }
 
   return (
-    <div>
+    <div style={{ marginTop:"-31px" }}>
       {/* 头部 */}
       <ConTitle
         title={intl.get("位置调试")}
@@ -165,7 +165,7 @@ function Scope(props) {
       {/* 悬浮按钮 */}
       <div className="hoverButton1"></div>
 
-      <div className="Placebug">
+      <div className="Placebug" style={{ marginTop:"45px",height:"65vh" }}>
         <div className="placedebug-content-t">
           <div>
             <span>工艺号</span>

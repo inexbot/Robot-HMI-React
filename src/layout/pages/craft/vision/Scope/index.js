@@ -150,48 +150,34 @@ function Scope(props) {
   ];
 
   return (
-    <div>
+    <div style={{ marginTop: "-31px" }}>
       {/* 头部 */}
       <ConTitle
         title={intl.get("位置调试")}
         subtitle={intl.get("位置调试参数")}
       />
       {/* 悬浮按钮 */}
-      <div className="hoverButton1"></div>
-
-      <div className="Scope">
+      {/* <div className=""> */}
+      {valueChange ? (
         <div style={{ marginLeft: "20%" }}>
-          <span> 工艺号: </span>
-          <Select
-            defaultValue={ScopeNum}
-            style={{ width: 200 }}
-            onChange={(value) => {
-              setScopeNum(Number(value));
-            }}
-          >
-            {cameraNumchildren}
-          </Select>
-        </div>
-        <div className="scope-center">
-          <Table pagination={false} columns={columns} dataSource={data} />
-        </div>
-        {valueChange ? (
-          <div style={{ marginLeft: "20%" }}>
+          <div className="hoverButton1">
             <Button
               size="large"
+              shape="circle"
               onClick={() => {
                 setValueChange(false);
               }}
               type="primary"
-              style={{ background: "#f36c21", border: "none" }}
             >
               修改
             </Button>
+          </div>
+          <div className="hoverButton2">
             <Button
               size="large"
-              danger
+              shape="circle"
               type="primary"
-              style={{ marginLeft: "1%", border: "none" }}
+              style={{ color:"#1890ff" ,border: "1px #1890ff dashed",background:"#ffffff",boxShadow:"0 1px 8px rgba(200, 200, 200, 0.6)" }}
               onClick={() => {
                 setValueChange(false);
                 setVisionMaxX("");
@@ -205,10 +191,13 @@ function Scope(props) {
               清除
             </Button>
           </div>
-        ) : (
-          <div style={{ marginLeft: "20%" }}>
+        </div>
+      ) : (
+        <div style={{ marginLeft: "20%" }}>
+          <div className="hoverButton1">
             <Button
               size="large"
+              shape="circle"
               onClick={(e) => {
                 setValueChange(true);
                 let dataList = {
@@ -231,12 +220,14 @@ function Scope(props) {
             >
               保存
             </Button>
+          </div>
+          <div className="hoverButton2">
             <Button
               size="large"
+              shape="circle"
               style={{
-                marginLeft: "1%",
                 background: "#45b97c",
-                border: "none",
+                color:"#45b97c" ,border: "1px #45b97c dashed",background:"#ffffff",boxShadow:"0 1px 8px rgba(200, 200, 200, 0.6)"
               }}
               onClick={() => {
                 setValueChange(true);
@@ -246,18 +237,36 @@ function Scope(props) {
               取消
             </Button>
           </div>
-        )}
-        <div style={{ marginLeft: "70%" }}>
-          <Button
-            size="large"
-            type="primary"
-            style={{ background: "#009ad6" }}
-            onClick={() => {
-              history.push("/vision");
+        </div>
+      )}
+
+      <div className="Scope" style={{ marginTop: "45px", height: "65vh" }}>
+        <div style={{ textAlign: "center", margin: 10 }}>
+          <p style={{ paddingTop: 10 }}></p>
+          <span> 工艺号: </span>
+          <Select
+            defaultValue={ScopeNum}
+            style={{ width: 200, marginLeft: 10 }}
+            onChange={(value) => {
+              setScopeNum(Number(value));
             }}
           >
-            返回
-          </Button>
+            {cameraNumchildren}
+          </Select>
+        </div>
+        <div className="scope-center">
+          <Table
+            pagination={false}
+            columns={columns}
+            dataSource={data}
+            style={{
+              width: "76%",
+              margin: "0 auto",
+              boxShadow: "0px 1px 8px #ddd",
+            }}
+          />
+        </div>
+        <div style={{ textAlign:"center",marginTop:10 }}>
           <Button
             size="large"
             type="primary"
