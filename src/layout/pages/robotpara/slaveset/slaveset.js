@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
-import { Button, Col, Select, Alert, Row } from "antd";
+import { Button, Col, Select, Alert, Row, Input } from "antd";
 import { servoAmount, ENIname, ENIstate } from "./slaveset_header";
 import { sendMSGtoController } from "service/network";
 import { connect } from "dva";
@@ -19,24 +19,31 @@ const mapStateToProps = (state) => {
     buttoncharacter: state.Slave_Set.buttoncharacter,
     buttontype: state.Slave_Set.buttontype,
     robotAxle: state.index.slaveSertCommit.robotAxle,
+    ENIname: state.index.slaveSertCommit.ENIname,
   };
 };
 
 function SlaveSet(props) {
+  const [ SlaveENIname, setSlaveENIname ] = useState(props.ENIname)
   const [state, setState] = useState({
     page: "robot",
     RPbuttontype: "dashed",
     RPbuttoncharacter: "机器人",
     icon: <SwapRightOutlined />,
   });
-  const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
-
+  // const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
   useEffect(() => {
     sendMSGtoController("SLAVETYPE_LIST_INQUIRE","");
-    sendMSGtoController("ROBOTTYPE_AXISMAP_INQUIRE","");
+    // sendMSGtoController("ROBOTTYPE_AXISMAP_INQUIRE","");
+    sendMSGtoController("ENINAME_INQUIRE","");
   }, []);
+
+  useEffect(()=>{
+    setSlaveENIname(props.ENIname)
+  },[props.ENIname])
+
+
   // 修改按钮的回调函数
-  
   const change = () => {
     // console.log(props.dispatch())
     console.log(props)
@@ -91,9 +98,9 @@ function SlaveSet(props) {
     const tables = [];
     for (let i = 0; i < servoAmount.length; i++) {
       tables.push(
-        <tr>
-          <td>{i + 1}</td>
-          <td>{servoAmount[i]}</td>
+        <tr key="1">
+          <td key="1">{i + 1}</td>
+          <td key="2">{servoAmount[i]}</td>
         </tr>
       );
     }
@@ -101,6 +108,7 @@ function SlaveSet(props) {
   };
 
   return (
+    
     <div>
       {/* 头部 */}
       <ConTitle
@@ -153,14 +161,16 @@ function SlaveSet(props) {
               <span className="p1">ms</span>
             </div>
             <p>{intl.get("需要的ENI文件名")}：</p>
-            <Alert message={ENIname} type="info" />
-            <p style={{ paddingTop: 6 }}>{ENIstate}</p>
+            <Alert message={SlaveENIname.ENIName} type="info" />
+            <p style={{ paddingTop: 6 }}>{SlaveENIname.isHaveENI == -1? " 未识别到ENI，未连接伺服  " : "已识别到ENI，已连接伺服"}</p>
             <div className="slaveset-table">
-              <table border="1">
-                <tr>
-                  <th>{intl.get("型号")}</th>
-                  <th>{intl.get("伺服型号")}</th>
-                </tr>
+              <table border="2" key="10">
+                <tbody key="2" >
+                  <tr key="2">
+                    <th key="1">{intl.get("型号")}</th>
+                    <th key="2">{intl.get("伺服型号")}</th>
+                  </tr>
+                </tbody>
                 {servoTable(servoAmount)}
               </table>
             </div>
