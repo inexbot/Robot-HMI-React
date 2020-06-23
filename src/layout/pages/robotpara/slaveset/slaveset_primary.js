@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     isDisabled: state.Slave_Set.isDisabled,
     buttoncharacter: state.Slave_Set.buttoncharacter,
     buttontype: state.Slave_Set.buttontype,
+    robotAxle: state.index.slaveSertCommit.robotAxle,
   };
 };
 
@@ -21,6 +22,8 @@ function SlaveSetPrimary(props) {
     primaryRobotActiveKey: "robot1",
     primaryJointActiveKey: "J1",
   });
+  const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
+
   const servoSelectOption = (servoAmount) => {
     const options = [];
     for (let i = 0; i < servoAmount.length; i++) {

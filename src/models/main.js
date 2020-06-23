@@ -18,6 +18,7 @@ import { IOConfig } from "./default/ioconfig";
 import { IOName } from "./default/ioname";
 import { conveyor } from "./default/conveyor";
 import { vision } from "./default/vision"
+import { slaveSertCommit } from "./default/slaveSetCommit"
 import { indexMainreducers } from "./indexMainreducers"
 
 const Setting = {
@@ -73,7 +74,8 @@ export default {
     IOConfig,
     IOName,
     conveyor,
-    vision
+    vision,
+    slaveSertCommit
   },
 
   subscriptions: {
@@ -418,7 +420,12 @@ export default {
               data:dataString
             })
             break;
-          
+          case "2e16":
+            dispatch({
+              type:"inquirerobotAxle",
+              data:dataString
+            })
+            break;
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);

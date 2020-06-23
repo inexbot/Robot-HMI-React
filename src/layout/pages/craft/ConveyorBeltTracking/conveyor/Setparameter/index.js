@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
 
 function Setparameter(props) {
   const { Option } = Select;
-
+  let history = useHistory();
   const { Step } = Steps;
   const [current, setCurrent] = useState(0);
 
@@ -135,6 +135,12 @@ function Setparameter(props) {
         <Switch>
           <Route exact path='/setparameter' component={Basic}></Route>
         </Switch>
+        {/* <Button onClick = {()=>{
+          console.log("sss")
+          history.push("/setparameter/discern")
+        }}>
+          传送带标定
+        </Button> */}
         <NavLink exact activeClassName="selected" className="nav" to="/setparameter/basic">
           <Button type={ RouterBtn=="basic"? "primary":"" }  style={{ width:"15%",height:"30px" }}  onClick={() => {setCurrent(0);}}>
             基本信息
