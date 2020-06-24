@@ -20,7 +20,8 @@ import { conveyor } from "./default/conveyor";
 import { vision } from "./default/vision"
 import { slaveSertCommit } from "./default/slaveSetCommit"
 import { indexMainreducers } from "./indexMainreducers"
-
+import { IO_longPattern } from "./default/IO_longPattern"
+ 
 const Setting = {
   inquireFailedRetryTime: 1000,
 };
@@ -75,7 +76,8 @@ export default {
     IOName,
     conveyor,
     vision,
-    slaveSertCommit
+    slaveSertCommit,
+    IO_longPattern
   },
 
   subscriptions: {
@@ -429,6 +431,18 @@ export default {
           case "2e1c":
             dispatch({
               type:"inquirerobotENIname",
+              data:dataString
+            })
+            break;
+          case "0x2f1c":
+            dispatch({
+              type:"inquireIOlongPattern",
+              data:dataString
+            })
+            break;
+          case "5033":
+            dispatch({
+              type:"inquirelongPactternstatus",
               data:dataString
             })
             break;
