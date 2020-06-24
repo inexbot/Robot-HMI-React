@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
     return(
             <div>
                 <HashRouter  >
-                     <Steps current={-1} onChange={onChange} style={{ position:"relative",top:"60px",zIndex:"2",width:"90%",margin:"0 auto" }}>
+                     <Steps current={current} onChange={onChange} style={{ position:"relative",top:"60px",zIndex:"2",width:"90%",margin:"0 auto" }}>
                        <Step title="视觉参数设置"  />
                        <Step title="视觉范围设置" />
                        <Step title="视觉位置设置" />
@@ -62,6 +62,9 @@ const mapStateToProps = (state) => {
                     <Route  path="/vision/place" component={Place} ></Route>
                     <Route  path="/vision/placedebug" component={Placedebug} ></Route>
                     <Route path="/vision/scopesign" component={Scopesign} ></Route>
+                    <Switch>
+                      <Route exact path='/vision' component={Parameter}></Route>
+                    </Switch>
                 </HashRouter>
             </div>
     )
