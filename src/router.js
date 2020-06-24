@@ -11,46 +11,23 @@ import Dhpara from "./layout/pages/robotpara/Dhpara";
 
 const App = asyncComponents(() => import("./App"));
 // 主界面
-const Welcome = asyncComponents(() =>
-  import("./layout/pages/main_interface/Welcome")
-);
-const Project = asyncComponents(() =>
-  import("./layout/pages/main_interface/Project")
-);
+const Welcome = asyncComponents(() => import("./layout/pages/main_interface/Welcome") );
+const Project = asyncComponents(() => import("./layout/pages/main_interface/Project") );
 // 角色选择界面
-const Authority = asyncComponents(() =>
-  import("./layout/pages/role_choices/authority")
-);
+const Authority = asyncComponents(() => import("./layout/pages/role_choices/authority") );
 // 应用参数
-const Toolhands = asyncComponents(() =>
-  import("./layout/pages/adhibition/Toolhands")
-);
-const Usercoo = asyncComponents(() =>
-  import("./layout/pages/adhibition/Usercoo")
-);
-const Remotepro = asyncComponents(() =>
-  import("./layout/pages/adhibition/Remotepro")
-);
+const Toolhands = asyncComponents(() => import("./layout/pages/adhibition/Toolhands") );
+const Usercoo = asyncComponents(() => import("./layout/pages/adhibition/Usercoo") );
+const Remotepro = asyncComponents(() => import("./layout/pages/adhibition/Remotepro") );
 const User = asyncComponents(() => import("./layout/pages/adhibition/User"));
-const AutoLoadPro = asyncComponents(() =>
-  import("./layout/pages/adhibition/AutoLoadPro")
-);
-const RobotRange = asyncComponents(() =>
-  import("./layout/pages/adhibition/RobotRange")
-);
-const InterferenceRegion = asyncComponents(() =>
-  import("./layout/pages/adhibition/InterferenceRegion")
-);
-const Dynamic = asyncComponents(() =>
-  import("./layout/pages/adhibition/Dynamic")
-);
+const AutoLoadPro = asyncComponents(() => import("./layout/pages/adhibition/AutoLoadPro") );
+const RobotRange = asyncComponents(() => import("./layout/pages/adhibition/RobotRange") );
+const InterferenceRegion = asyncComponents(() => import("./layout/pages/adhibition/InterferenceRegion") );
+const Dynamic = asyncComponents(() => import("./layout/pages/adhibition/Dynamic") );
 
 // 外设参数
-const IORemote = asyncComponents(() =>
-  import("./layout/pages/device/Ioremote")
-);
-const IOStatusHint = asyncComponents(() =>
-  import("./layout/pages/device/Iostatushint")
+const IORemote = asyncComponents(() => import("./layout/pages/device/Ioremote") );
+const IOStatusHint = asyncComponents(() => import("./layout/pages/device/Iostatushint")
 );
 const IOReset = asyncComponents(() => import("./layout/pages/device/IOReset"));
 const IOWarning = asyncComponents(() =>
@@ -112,6 +89,8 @@ const Program = asyncComponents(() => import("./layout/pages/program"));
 const Setparameter = asyncComponents(() => import("./layout/pages/craft/ConveyorBeltTracking/conveyor/Setparameter"));
 const Vision = asyncComponents(() => import("./layout/pages/craft/vision"));
 
+// IO远程模式界面
+const IO_longPattern = asyncComponents(() => import ("./layout/pages/IO_longPattern"))
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
@@ -180,6 +159,8 @@ function Router(props) {
           {/* 跳转到视觉参数页面 */}
         <RouterDom.Route path="/vision" component={Vision} />
 
+        {/* IO远程模式界面 */}
+        <RouterDom.Route path="/iolongPatter" component={IO_longPattern} />
       </RouterDom.Switch>
     </App>
   );

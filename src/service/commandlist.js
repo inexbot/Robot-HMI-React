@@ -463,5 +463,17 @@ export const CommandList = {
     ENINAME_INQUIRE:0x2e1b,
     
     // 接收所查询需要的ENI文件名
-    ENINAME_RESPOND:0x2e1c
+    ENINAME_RESPOND:0x2e1c,
+
+    // 远程模式界面，示教盒查询预约执行状态是发送
+    RESERVE_EXE_STATE_INQUIRE: 0x2f1b,
+
+    // 接收示教盒查询预约执行状态
+    RESERVE_EXE_STATE_RESPOND:0x2f1c,
+
+    // 远程模式连接状态查询
+    REMOTE_CONNECT_INQUIRE:0x5032,
+
+    // 返回远程模式连接状态
+    REMOTE_CONNECT_RESPOND:0x5033,
 };

@@ -17,7 +17,7 @@ export const slaveSertCommit = {
   ENIname:{
     ENIName:"eni-RC-6-mecat-1-1000.xml",
     isHaveENI:false
-  }
+  },
   // aaa:{
   //   robot:[
   //    { axis:[
