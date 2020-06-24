@@ -177,7 +177,7 @@ function Scope(props) {
               size="large"
               shape="circle"
               type="primary"
-              style={{ color:"#1890ff" ,border: "1px #1890ff dashed",background:"#ffffff",boxShadow:"0 1px 8px rgba(200, 200, 200, 0.6)" }}
+              style={{ color:"#ff4d4f" ,border: "1px #ff4d4f dashed",background:"#ffffff",boxShadow:"0 1px 8px rgba(200, 200, 200, 0.6)" }}
               onClick={() => {
                 setValueChange(false);
                 setVisionMaxX("");

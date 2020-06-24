@@ -12,20 +12,19 @@ import {
 import { connect } from "dva";
 import "./index.css";
 import { sendMSGtoController } from "service/network";
-import { useHistory } from 'react-router-dom';
-
+import { useHistory } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
     dataSoures: state.index.conveyor.Basicdata,
-    dataSoure: state.index.conveyor.Sensorsign
+    dataSoure: state.index.conveyor.Sensorsign,
   };
 };
 
 function Sensorsign(props) {
   let history = useHistory();
-  const [copycraftNum, setCopycraftNum] = useState(1)
+  const [copycraftNum, setCopycraftNum] = useState(1);
   const [showSave, setShowSave] = useState(false);
   const [showemptyModal, setShowemptyModal] = useState(false);
   const [showcopyModal, setshowcopyModal] = useState(false);
@@ -38,33 +37,77 @@ function Sensorsign(props) {
   ];
 
   const conveyorNumchildren = [];
-  for (let i = 1; i <10; i++) {
-    conveyorNumchildren.push(
-      <Option key={i}>{  i}</Option>
-    );
-  } 
-  
-  useEffect(()=>{
-    let dataList = {
-      robot:props.currentRobot,
-      conveyorID:props.dataSoures.conveyorID
-    }
-    sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_INQUIRE",dataList)
-  },[props.dataSoures.conveyorID])
-
-  const handleChange =(value) => {
-    setCopycraftNum(Number(value))
+  for (let i = 1; i < 10; i++) {
+    conveyorNumchildren.push(<Option key={i}>{i}</Option>);
   }
 
+  useEffect(() => {
+    let dataList = {
+      robot: props.currentRobot,
+      conveyorID: props.dataSoures.conveyorID,
+    };
+    sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_INQUIRE", dataList);
+  }, [props.dataSoures.conveyorID]);
+
+  const handleChange = (value) => {
+    setCopycraftNum(Number(value));
+  };
+
   const data = [
-    { key: "1",   name: "传感器在传送带坐标系X轴的位置", money: <Input disabled value={props.dataSoure.sensorPos.X}  />, address: "mm", },
-    { key: "2",   name: "传感器在传送带坐标系Y轴的位置", money: <Input disabled value={props.dataSoure.sensorPos.Y}  />, address: "mm", },
+    {
+      key: "1",
+      name: "传感器在传送带坐标系X轴的位置",
+      money: <Input disabled value={props.dataSoure.sensorPos.X} />,
+      address: "mm",
+    },
+    {
+      key: "2",
+      name: "传感器在传送带坐标系Y轴的位置",
+      money: <Input disabled value={props.dataSoure.sensorPos.Y} />,
+      address: "mm",
+    },
   ];
   return (
     <div
       className="backconnect"
       style={{ height: document.body.clientHeight * 0.674 }}
     >
+      {/* 悬浮按钮 */}
+      <div >
+      {showSave ? (
+        <div style={{ display: "inline" }} className="hoverButton1">
+          {" "}
+          <Button style={{ width: "100px", height: "50px", marginLeft: "17%" }}>
+            保存
+          </Button>
+          <Button
+            style={{ width: "100px", height: "50px" }}
+            onClick={() => {
+              setShowSave(false);
+            }}
+          >
+            取消
+          </Button>
+          <Button
+            style={{ width: "100px", height: "50px" }}
+            onClick={() => {
+              history.push("/setparameter/sensorOne");
+            }}
+          >
+            开始标定
+          </Button>
+        </div>
+      ) : (
+        <Button
+          style={{ width: "100px", height: "50px", marginLeft: "17%" }}
+          onClick={() => {
+            setShowSave(true);
+          }}
+        >
+          修改
+        </Button>
+      )}
+      </div>
       <div className="connect">
         <Table pagination={false} columns={columns} dataSource={data} />
       </div>
@@ -72,13 +115,13 @@ function Sensorsign(props) {
         title="提示"
         style={{ top: 100 }}
         visible={showemptyModal}
-        onOk={() => { 
-          setShowemptyModal(false)
+        onOk={() => {
+          setShowemptyModal(false);
           let dataList = {
-            robot:props.currentRobot,
-            conveyorID:props.dataSoures.conveyorID
-          }
-          sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
+            robot: props.currentRobot,
+            conveyorID: props.dataSoures.conveyorID,
+          };
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR", dataList);
         }}
         onCancel={() => setShowemptyModal(false)}
       >
@@ -91,13 +134,14 @@ function Sensorsign(props) {
         title="提示"
         style={{ top: 100 }}
         visible={showcopyModal}
-        onOk={() => {setshowcopyModal(false) 
+        onOk={() => {
+          setshowcopyModal(false);
           let dataList = {
-            robot:props.currentRobot,
-            srcConveyorID:props.dataSoures.conveyorID,
-            dstConveyorID:copycraftNum
-          }
-          sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY",dataList)
+            robot: props.currentRobot,
+            srcConveyorID: props.dataSoures.conveyorID,
+            dstConveyorID: copycraftNum,
+          };
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY", dataList);
         }}
         onCancel={() => setshowcopyModal(false)}
       >
@@ -116,53 +160,28 @@ function Sensorsign(props) {
           </div>
         </p>
       </Modal>
-      {showSave ? (
-        <div style={{ display:"inline" }}>
-          {" "}
-          <Button style={{ width: "100px", height: "50px", marginLeft: "17%" }}>
-            保存
-          </Button>
-          <Button
-            style={{ width: "100px", height: "50px" }}
-            onClick={() => {
-              setShowSave(false);
-            }}
-          >
-            取消
-          </Button>
-          <Button
-            style={{ width: "100px", height: "50px" }}
-            onClick={() => {
-
-              history.push('/setparameter/sensorOne');
-            }}
-          >
-            开始标定
-          </Button>
-        </div>
-      ) : (
-        <Button
-          style={{ width: "100px", height: "50px", marginLeft: "17%" }}
-          onClick={() => {
-            setShowSave(true);
-          }}
-        >
-          修改
-        </Button>
-      )}
+      
       <Button
         type="primary"
         danger
-        style={{ width: "100px", height: "50px", marginLeft: `${showSave?"23" :"34"}%` }}
+        style={{
+          width: "100px",
+          height: "50px",
+          marginLeft: `${showSave ? "23" : "34"}%`,
+        }}
         onClick={() => {
           setShowemptyModal(true);
         }}
       >
         清空参数
       </Button>
-      <Button type="primary" style={{ width: "100px", height: "50px" }} onClick={() => {
-        setshowcopyModal(true)
-      }}>
+      <Button
+        type="primary"
+        style={{ width: "100px", height: "50px" }}
+        onClick={() => {
+          setshowcopyModal(true);
+        }}
+      >
         复制参数
       </Button>
     </div>

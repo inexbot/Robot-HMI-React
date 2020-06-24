@@ -61,7 +61,8 @@
 .Parameter,
 .Place,
 .Placebug,
-.Scope {
+.Scope,
+.Setparameter {
   /* width: 90vw; */
   height: 70vh;
   background-color: white;

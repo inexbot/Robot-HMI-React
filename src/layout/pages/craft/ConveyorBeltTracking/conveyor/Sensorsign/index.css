@@ -8,3 +8,7 @@
     background:white;
     height:"8000px"
 }
+
+.Setparameter .ant-table.ant-table-middle .ant-table-tbody > tr > td{
+    padding: 4px 8px !important;
+}

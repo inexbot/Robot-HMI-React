@@ -60,19 +60,19 @@ function Scope(props) {
 
   const cameracolumns = [
     { title: "原始点位", dataIndex: "site" },
-    { title: "X", dataIndex: "Xvalue" },
-    { title: "Y", dataIndex: "Yvalue" },
-    { title: "Z", dataIndex: "Zvalue" },
-    { title: "角度", dataIndex: "angle" },
+    { title: "原始X", dataIndex: "Xvalue" },
+    { title: "原始Y", dataIndex: "Yvalue" },
+    { title: "原始Z", dataIndex: "Zvalue" },
+    { title: "原始角度", dataIndex: "angle" },
   ];
 
   const cameradata = [];
   const conveyorcolumns = [
     { title: "偏移后点位", dataIndex: "site" },
-    { title: "X", dataIndex: "Xvalue" },
-    { title: "Y", dataIndex: "Yvalue" },
-    { title: "Z", dataIndex: "Zvalue" },
-    { title: "角度", dataIndex: "angle" },
+    { title: "偏移X", dataIndex: "Xvalue" },
+    { title: "偏移Y", dataIndex: "Yvalue" },
+    { title: "偏移Z", dataIndex: "Zvalue" },
+    { title: "偏移角度", dataIndex: "angle" },
   ];
   const conveyordata = [];
   for (let i = 0; i < 10; i++) {
@@ -165,13 +165,13 @@ function Scope(props) {
       {/* 悬浮按钮 */}
       <div className="hoverButton1"></div>
 
-      <div className="Placebug" style={{ marginTop:"45px",height:"65vh" }}>
+      <div className="Placebug" style={{ marginTop:"45px",height:"65vh",padding:14 }}>
         <div className="placedebug-content-t">
           <div>
-            <span>工艺号</span>
+            <span>工艺号:</span>
             <Select
               defaultValue={PlacedebugNum}
-              style={{ width: 200 }}
+              style={{ width: 200,margin:"0 0 10px 10px"}}
               onChange={(value) => {
                 setPlacedebugNum(Number(value));
               }}
@@ -180,10 +180,10 @@ function Scope(props) {
             </Select>
           </div>
           <div>
-            <span>传送带工艺号</span>
+            <span>传送带工艺号:</span>
             <Select
               defaultValue={PlacedebugConveyorNum}
-              style={{ width: 200 }}
+              style={{ width: 200,margin:"0 0 10px 10px" }}
               onChange={(value) => {
                 setPlacedebugConveyorNum(Number(value));
               }}
@@ -213,19 +213,9 @@ function Scope(props) {
         <div className="placedebug-content-b">
           <Button
             type="primary"
-            style={{ width: "100px", height: "40px" }}
-            onClick={() => {
-              history.push("/vision");
-            }}
-          >
-            返回
-          </Button>
-          <Button
-            type="primary"
             style={{
               width: "100px",
               height: "40px",
-              background: "#f36c21",
               border: "none",
             }}
             onClick={() => {
@@ -243,7 +233,6 @@ function Scope(props) {
             style={{
               width: "100px",
               height: "40px",
-              background: "#f36c21",
               border: "none",
             }}
             onClick={() => {
@@ -261,7 +250,6 @@ function Scope(props) {
             style={{
               width: "100px",
               height: "40px",
-              background: "#f36c21",
               border: "none",
             }}
             onClick={() => {

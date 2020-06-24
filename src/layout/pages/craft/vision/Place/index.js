@@ -233,15 +233,74 @@ function Place(props) {
   ];
 
   return (
-    <div style={{ marginTop:"-31px" }}>
+    <div style={{ marginTop: "-31px" }}>
       {/* 头部 */}
-      <ConTitle title={intl.get("视觉位置")} subtitle={intl.get("视觉位置参数")} />
+      <ConTitle
+        title={intl.get("视觉位置")}
+        subtitle={intl.get("视觉位置参数")}
+      />
       {/* 悬浮按钮 */}
-      <div className="hoverButton1"></div>
-
-      <div className="Place" style={{ marginTop:"45px",height:"65vh" }}>
+      <div className="hoverButton1" style={{bottom:110}}>
+        {showSave ? (
+          <Button
+            size="large"
+            type="primary"
+            shape="circle"
+            style={{
+              border: "1px #0AA8EB dashed",
+              background:"#ffffff",
+              color:"#0AA8EB",
+              boxShadow:"0px 1px 8px rgba(10, 168, 235, 0.6)"
+            }}
+            onClick={() => {
+              let dataList = {
+                robot: props.currentRobot,
+                visionNum: PlaceNum,
+                position: {
+                  datumPoint: VisionDatumPoint,
+                  cameraPoint: [
+                    VisionCameraPoint[0],
+                    VisionCameraPoint[1],
+                    Number(VisionCameraPoint2),
+                    VisionCameraPoint[3],
+                  ],
+                  excursion: {
+                    Xexcursion: Number(VisionXexcursion),
+                    Yexcursion: Number(VisionYexcursion),
+                    Zexcursion: Number(VisionZexcursion),
+                    angle: Number(VisionAngle),
+                  },
+                  scale: Number(VisionScale),
+                  angleDirection: VisionAngleDirection,
+                },
+              };
+              sendMSGtoController("VISION_POS_PARAMETER_SET", dataList);
+              setShowSave(false);
+              setAllIpt(true);
+            }}
+          >
+            保存
+          </Button>
+        ) : (
+          <Button
+            size="large"
+            type="primary"
+            shape="circle"
+            onClick={() => {
+              setShowSave(true);
+              setAllIpt(false);
+            }}
+          >
+            修改
+          </Button>
+        )}
+      </div>
+      <div
+        className="Place"
+        style={{ marginTop: "45px", height: "65vh", paddingTop: "14px" }}
+      >
         <div className="place-content-l">
-          <div style={{ marginLeft: "20%", marginTop: "5%" }}>
+          <div style={{ marginLeft: "20%" }}>
             <span> 工艺号: </span>
             <Select
               defaultValue={PlaceNum}
@@ -252,82 +311,82 @@ function Place(props) {
             </Select>
           </div>
           <div className="place-content-lc">
-            <p className="parameter-topTitle">偏移补偿 </p>
+            <p className="place-topTitle">偏移补偿 </p>
             <div>
-              X轴偏移{" "}
+              X轴偏移:{" "}
               <Input
                 disabled={allIpt}
                 value={VisionXexcursion}
                 onChange={(e) => {
                   setVisionXexcursion(e.target.value);
                 }}
-                style={{ width: "50%", marginLeft: "8px" }}
+                className="text-w"
               />
               mn
             </div>
             <div>
-              Y轴偏移{" "}
+              Y轴偏移:{" "}
               <Input
                 disabled={allIpt}
                 value={VisionYexcursion}
                 onChange={(e) => {
                   setVisionYexcursion(e.target.value);
                 }}
-                style={{ width: "50%", marginLeft: "8px" }}
+                className="text-w"
               />
               mn
             </div>
             <div>
-              Z轴偏移{" "}
+              Z轴偏移:{" "}
               <Input
                 disabled={allIpt}
                 value={VisionZexcursion}
                 onChange={(e) => {
                   setVisionZexcursion(e.target.value);
                 }}
-                style={{ width: "50%", marginLeft: "8px" }}
+                className="text-w"
               />
               mn
             </div>
             <div>
-              角度偏移{" "}
+              角度偏移:{" "}
               <Input
                 disabled={allIpt}
                 value={VisionAngle}
                 onChange={(e) => {
                   setVisionAngle(e.target.value);
                 }}
-                style={{ width: "50%" }}
+                className="text-w"
               />
             </div>
             <div>
-              比例系数{" "}
+              比例系数:{" "}
               <Input
                 disabled={allIpt}
                 value={VisionScale}
+                className="text-w"
                 onChange={(e) => {
                   setVisionScale(e.target.value);
                 }}
-                style={{ width: "50%" }}
               />
             </div>
             {allIpt ? (
               <div>
-                角度方向{" "}
+                角度方向:{" "}
                 <Input
                   disabled={allIpt}
+                  className="text-w"
                   value={VisionAngleDirection == -1 ? "负方向" : "正方向"}
-                  style={{ width: "50%" }}
                 />
               </div>
             ) : (
               <div>
-                角度方向
+                角度方向:
                 <Select
                   defaultValue={
                     VisionAngleDirection == -1 ? "负方向" : "正方向"
                   }
-                  style={{ width: "50%", marginLeft: "4px" }}
+                  className="text-w"
                   onChange={(value) => {
                     setVisionAngleDirection(Number(value));
                   }}
@@ -339,13 +398,13 @@ function Place(props) {
           </div>
           <div className="place-content-lb">
             <p>示例格式:{VisionSampleData}</p>
-            <p>接受数据</p>
+            <p>接受数据:</p>
           </div>
         </div>
         <div className="place-content-c">
           <div className="place-content-ct">
             <p>机器人抓取时的姿态</p>
-            <p>(坐标系都是直角坐标系)</p>
+            <p style={{ fontSize: 14 }}>(坐标系都是直角坐标系)</p>
           </div>
           <div className="place-content-cc">
             <Table
@@ -358,7 +417,7 @@ function Place(props) {
             <Button
               type="primary"
               disabled={allIpt}
-              style={{ background: "#f36c21", border: "none" }}
+              style={{ border: "none" }}
               onClick={() => {
                 let dataList = {
                   robot: props.currentRobot,
@@ -369,11 +428,7 @@ function Place(props) {
             >
               标定抓取姿态
             </Button>
-            <Button
-              type="primary"
-              disabled={allIpt}
-              style={{ background: "#f36c21", border: "none" }}
-            >
+            <Button type="primary" disabled={allIpt} style={{ border: "none" }}>
               运行到基准点
             </Button>
           </div>
@@ -391,7 +446,7 @@ function Place(props) {
             <Button
               type="primary"
               disabled={allIpt}
-              style={{ background: "#f36c21", border: "none" }}
+              style={{ border: "none" }}
               onClick={() => {
                 let dataList = {
                   robot: props.currentRobot,
@@ -402,80 +457,9 @@ function Place(props) {
             >
               试拍照
             </Button>
-            <Button
-              type="primary"
-              disabled={allIpt}
-              style={{ background: "#f36c21", border: "none" }}
-            >
+            <Button type="primary" disabled={allIpt} style={{ border: "none" }}>
               运行到该点
             </Button>
-          </div>
-          <div className="place-moreBtn">
-            <Button
-              size="large"
-              type="primary"
-              style={{ background: "#009ad6" }}
-              onClick={() => {
-                history.push("/vision");
-              }}
-            >
-              返回
-            </Button>
-            {showSave ? (
-              <Button
-                size="large"
-                type="primary"
-                style={{
-                  background: "#45b97c",
-                  marginLeft: "2px",
-                  border: "none",
-                }}
-                onClick={() => {
-                  let dataList = {
-                    robot: props.currentRobot,
-                    visionNum: PlaceNum,
-                    position: {
-                      datumPoint: VisionDatumPoint,
-                      cameraPoint: [
-                        VisionCameraPoint[0],
-                        VisionCameraPoint[1],
-                        Number(VisionCameraPoint2),
-                        VisionCameraPoint[3],
-                      ],
-                      excursion: {
-                        Xexcursion: Number(VisionXexcursion),
-                        Yexcursion: Number(VisionYexcursion),
-                        Zexcursion: Number(VisionZexcursion),
-                        angle: Number(VisionAngle),
-                      },
-                      scale: Number(VisionScale),
-                      angleDirection: VisionAngleDirection,
-                    },
-                  };
-                  sendMSGtoController("VISION_POS_PARAMETER_SET", dataList);
-                  setShowSave(false);
-                  setAllIpt(true);
-                }}
-              >
-                保存
-              </Button>
-            ) : (
-              <Button
-                size="large"
-                type="primary"
-                style={{
-                  background: "#f36c21",
-                  marginLeft: "2px",
-                  border: "none",
-                }}
-                onClick={() => {
-                  setShowSave(true);
-                  setAllIpt(false);
-                }}
-              >
-                修改
-              </Button>
-            )}
           </div>
         </div>
       </div>

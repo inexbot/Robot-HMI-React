@@ -495,7 +495,7 @@ function Parameter(props) {
                   <Input
                     disabled={allIpt}
                     value={VisionSuccessFlag}
-                    style={{ width: "28%" }}
+                    style={{ width: "10vw" }}
                     className="text-lm"
                     onChange={(e) => {
                       setVisionSuccessFlag(e.target.value);
@@ -521,7 +521,7 @@ function Parameter(props) {
                   <Input
                     disabled={allIpt}
                     value={VisionFailFlag}
-                    style={{ width: "37%" }}
+                    style={{ width: "10vw" }}
                     className="text-lm"
                     onChange={(e) => {
                       setVisionFailFlag(e.target.value);
