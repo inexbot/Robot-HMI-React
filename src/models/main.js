@@ -434,7 +434,7 @@ export default {
               data:dataString
             })
             break;
-          case "0x2f1c":
+          case "2f1c":
             dispatch({
               type:"inquireIOlongPattern",
               data:dataString

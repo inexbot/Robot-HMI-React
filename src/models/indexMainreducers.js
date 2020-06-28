@@ -448,7 +448,11 @@ export const indexMainreducers = {
         // 查询远程模式预约执行状态
         inquireIOlongPattern(state, action){
           let _state = JSON.parse(JSON.stringify(state)) 
-          _state.IO_longPattern.longPattern = action.data
+          if(action.data.queue==undefined){
+            // message.warning('没有程序在运行');
+          }else{
+            _state.IO_longPattern.longPattern = action.data
+          }
           return _state
         } ,
         // 查询远程模式连接状态

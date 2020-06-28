@@ -98,7 +98,7 @@ function SlaveSet(props) {
     const tables = [];
     for (let i = 0; i < servoAmount.length; i++) {
       tables.push(
-        <tr key="1">
+        <tr key={String(i)}>
           <td key="1">{i + 1}</td>
           <td key="2">{servoAmount[i]}</td>
         </tr>
@@ -163,15 +163,17 @@ function SlaveSet(props) {
             <p>{intl.get("需要的ENI文件名")}：</p>
             <Alert message={SlaveENIname.ENIName} type="info" />
             <p style={{ paddingTop: 6 }}>{SlaveENIname.isHaveENI == -1? " 未识别到ENI，未连接伺服  " : "已识别到ENI，已连接伺服"}</p>
-            <div className="slaveset-table">
-              <table border="2" key="10">
-                <tbody key="2" >
-                  <tr key="2">
-                    <th key="1">{intl.get("型号")}</th>
-                    <th key="2">{intl.get("伺服型号")}</th>
+            <div  className="slaveset-table">
+              <table border="2" >
+                <tbody >
+                  <tr >
+                    <th >{intl.get("型号")}</th>
+                    <th >{intl.get("伺服型号")}</th>
                   </tr>
                 </tbody>
-                {servoTable(servoAmount)}
+                <tbody>
+                  {servoTable(servoAmount)}
+                </tbody>
               </table>
             </div>
           </Col>

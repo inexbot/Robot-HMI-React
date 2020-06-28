@@ -272,101 +272,103 @@ function SlaveSetRobot(props) {
             </div>
             <div className="slaveset1" style={{ width:"100%" }}>
               <table  > 
-                <tr className="table_head" key="1">
-                  <th key="1">机器人</th>
-                  <th key="2">伺服</th>
-                </tr>
-                <tr id={robot + "Joint1"} key="2">
-                  <td key="1">轴1</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"100%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Joint2"} key="3">
-                  <td key="1">轴2</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"100%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Joint3"} key="4" >
-                  <td key="1">轴3</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"100%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Joint4"} key="5" >
-                  <td key="1">轴4</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"100%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Joint5"} key="6" >
-                  <td key="1" >轴5</td>
-                  <td key="2" >
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"100%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Joint6"} key="7" >
-                  <td key="1" >轴6</td>
-                  <td key="2" >
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"100%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Joint7"} key="8" >
-                  <td key="1" >轴7</td>
-                  <td key="2" >
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"100%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr className="table_head" key="1">
+                    <th key="1">机器人</th>
+                    <th key="2">伺服</th>
+                  </tr>
+                  <tr id={robot + "Joint1"} key="2">
+                    <td key="1">轴1</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"100%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Joint2"} key="3">
+                    <td key="1">轴2</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"100%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Joint3"} key="4" >
+                    <td key="1">轴3</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"100%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Joint4"} key="5" >
+                    <td key="1">轴4</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"100%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Joint5"} key="6" >
+                    <td key="1" >轴5</td>
+                    <td key="2" >
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"100%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Joint6"} key="7" >
+                    <td key="1" >轴6</td>
+                    <td key="2" >
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"100%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Joint7"} key="8" >
+                    <td key="1" >轴7</td>
+                    <td key="2" >
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"100%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </Col>
@@ -388,129 +390,135 @@ function SlaveSetRobot(props) {
             </div>
             <div className="slaveset1">
               <table id={robot + "Outer1"} style={{ width:"100%" }}>
-                <tr className="table_head">
-                  <th>组1</th>
-                  <th>
-                    <Select
-                      defaultValue="3"
-                      onChange={(value) => changeRobotOuter1(value)}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      <Option key="1" value="1">单轴旋转台</Option>
-                      <Option key="2" value="2">单轴翻转台</Option>
-                      <Option key="3" value="3">双轴翻转台</Option>
-                      <Option key="4" value="4">地轨</Option>
-                    </Select>
-                  </th>
-                </tr>
-                <tr id={robot + "Outer1Joint1"}>
-                  <td key="1">轴1</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Outer1Joint2"}>
-                  <td key="1">轴2</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr className="table_head">
+                    <th>组1</th>
+                    <th>
+                      <Select
+                        defaultValue="3"
+                        onChange={(value) => changeRobotOuter1(value)}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        <Option key="1" value="1">单轴旋转台</Option>
+                        <Option key="2" value="2">单轴翻转台</Option>
+                        <Option key="3" value="3">双轴翻转台</Option>
+                        <Option key="4" value="4">地轨</Option>
+                      </Select>
+                    </th>
+                  </tr>
+                  <tr id={robot + "Outer1Joint1"}>
+                    <td key="1">轴1</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Outer1Joint2"}>
+                    <td key="1">轴2</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div className="slaveset1">
               <table id={robot + "Outer2"}>
-                <tr className="table_head">
-                  <th key="1">组2</th>
-                  <th key="2">
-                    <Select
-                      defaultValue="2"
-                      onChange={(value) => changeRobotOuter2(value)}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      <Option value="1">单轴旋转台</Option>
-                      <Option value="2">单轴翻转台</Option>
-                      <Option value="3">双轴翻转台</Option>
-                      <Option value="4">地轨</Option>
-                    </Select>
-                  </th>
-                </tr>
-                <tr id={robot + "Outer2Joint1"}>
-                  <td key="1">轴1</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
-                <tr id={robot + "Outer2Joint2"}>
-                  <td key="1">轴2</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr className="table_head">
+                    <th key="1">组2</th>
+                    <th key="2">
+                      <Select
+                        defaultValue="2"
+                        onChange={(value) => changeRobotOuter2(value)}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        <Option value="1">单轴旋转台</Option>
+                        <Option value="2">单轴翻转台</Option>
+                        <Option value="3">双轴翻转台</Option>
+                        <Option value="4">地轨</Option>
+                      </Select>
+                    </th>
+                  </tr>
+                  <tr id={robot + "Outer2Joint1"}>
+                    <td key="1">轴1</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                  <tr id={robot + "Outer2Joint2"}>
+                    <td key="1">轴2</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div className="slaveset1">
               <table id={robot + "Outer3"}>
-                <tr className="table_head">
-                  <th key="1">组3</th>
-                  <th key="2">
-                    <Select
-                      defaultValue={"4"}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      <Option key="1" value="1">单轴旋转台</Option>
-                      <Option key="2" value="2">单轴翻转台</Option>
-                      <Option key="3" value="3">双轴翻转台</Option>
-                      <Option key="4" value="4">地轨</Option>
-                    </Select>
-                  </th>
-                </tr>
-                <tr id={robot + "Outer3Joint1"}>
-                  <td key="1">轴</td>
-                  <td key="2">
-                    <Select
-                      defaultValue={RobotServo}
-                      disabled={props.isDisabled}
-                      className="table_btn"
-                      style={{ width:"80%" }}
-                    >
-                      {servoSelectOption(servoAmount)}
-                    </Select>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr className="table_head">
+                    <th key="1">组3</th>
+                    <th key="2">
+                      <Select
+                        defaultValue={"4"}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        <Option key="1" value="1">单轴旋转台</Option>
+                        <Option key="2" value="2">单轴翻转台</Option>
+                        <Option key="3" value="3">双轴翻转台</Option>
+                        <Option key="4" value="4">地轨</Option>
+                      </Select>
+                    </th>
+                  </tr>
+                  <tr id={robot + "Outer3Joint1"}>
+                    <td key="1">轴</td>
+                    <td key="2">
+                      <Select
+                        defaultValue={RobotServo}
+                        disabled={props.isDisabled}
+                        className="table_btn"
+                        style={{ width:"80%" }}
+                      >
+                        {servoSelectOption(servoAmount)}
+                      </Select>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </Col>
