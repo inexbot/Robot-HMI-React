@@ -1,18 +1,18 @@
 export const IO_longPattern = {
   longPattern:{
     robot:1,
-    current:{station:1,name:"Q1",times:3,count:1,status:2},
+    current:{station:'',name:"无",times:'',count:'',status:5},
     queue:[
-      {station:1,name:"Q1",times:1,count:0,status:1},
-      {station:1,name:"Q2",times:2,count:0,status:1},
-      {station:1,name:"Q3",times:3,count:0,status:0},
-      {station:1,name:"Q4",times:4,count:0,status:1},
-      {station:1,name:"Q5",times:5,count:0,status:1},
-      {station:1,name:"Q6",times:6,count:0,status:0},
-      {station:1,name:"Q7",times:7,count:0,status:1},
-      {station:1,name:"Q8",times:8,count:0,status:0},
-      {station:1,name:"Q9",times:9,count:0,status:1},
-      {station:1,name:"Q10",times:10,count:0,status:1},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
+      {station:'',name:"无",times:'',count:'',status:5},
     ]
   },
   longStatus:{

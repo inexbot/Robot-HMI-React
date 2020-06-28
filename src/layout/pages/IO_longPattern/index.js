@@ -11,27 +11,33 @@ import {
 } from "antd";
 import { connect } from "dva";
 import { useHistory } from 'react-router-dom';
+import intl from "react-intl-universal";
+import ConTitle from "components/title";
 import "./IO_longPattern-module.less"
 import { sendMSGtoController} from "service/network";
 
 const mapStateToProps = (state) => {
   return{
-    longStatus:state.index.IO_longPattern.longStatus
+    longStatus:state.index.IO_longPattern.longStatus,
+    longPattern:state.index.IO_longPattern.longPattern
   }
 };
 
 function IO_longPattern(props){
+  // 定义变量代表机器人
   const [SeleValue, setSeleValue] = useState(1)
-  
   const { Option } = Select;
+
+  // 切换机器人查询预约执行状态
   const handleSizeChange = e => {
     setSeleValue(e)
     let dataList = {
-      robot:Number(SeleValue)
+      robot:Number(e)
     }
     sendMSGtoController("RESERVE_EXE_STATE_INQUIRE",dataList)
   };
 
+  // 选择机器人的子元素
   const conveyorNumchildren = [];
   for (let i = 1; i <5; i++) {
     conveyorNumchildren.push(
@@ -39,15 +45,18 @@ function IO_longPattern(props){
     );
   } 
 
-  console.log(props.longStatus)
+  // 跳转到当前页面获取数据
   useEffect(()=>{
-    sendMSGtoController("REMOTE_CONNECT_INQUIRE",'')
-  },[])
-
-  useEffect(()=>{
-    
+    // 使用定时器一秒获取一次
+    let inquireConnect = setInterval(()=>{
+      sendMSGtoController("REMOTE_CONNECT_INQUIRE",'')
+      sendMSGtoController("RESERVE_EXE_STATE_INQUIRE",{robot:Number(SeleValue)})
+    },1000)
+    return () =>{
+      clearInterval(inquireConnect)
+    }
   },[SeleValue])
-
+  // 定义columns
   const columns = [
     {title: "IO程序",dataIndex: "name",align:"center" ,},
     {title: "工位", dataIndex: "station",align:"center" },
@@ -56,48 +65,61 @@ function IO_longPattern(props){
     {title: "运行总数", dataIndex: "operationNums",align:"center"},
     {title: "状态", dataIndex: "status",align:"center"},
   ];
-
+  // 定义data
   const data = [
-    { key: "1", name:"当前运行",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "2", name:"队列1",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "3", name:"队列2",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "4", name:"队列3",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "5", name:"队列4",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "6", name:"队列5",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "7", name:"队列6",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "8", name:"队列7",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "9", name:"队列8",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "10", name:"队列9",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
-    { key: "11", name:"队列10",  station: '', programName: "无",operationNum:"",operationNums:"",status:"" },
+    { key: "1", name:"当前运行",  station: props.longPattern.current.station, programName: props.longPattern.current.name,operationNum:props.longPattern.current.times,operationNums:props.longPattern.current.count,
+    status:props.longPattern.current.status ==0?"无预约": props.longPattern.current.status ==1?"预约中":props.longPattern.current.status ==2?"运行中":props.longPattern.current.status ==3?"已预约":props.longPattern.current.status==4?"程序暂停":''  },
   ];
-
+  // 使用循环把数据放到data里
+  for(let i = 0; i<10; i++){
+    data.push(
+      { key: `${i+2}`, name:`队列${i+1}`,  station:props.longPattern.queue[i].station, programName: props.longPattern.queue[i].name,operationNum:props.longPattern.queue[i].times,operationNums:props.longPattern.queue[i].count,
+      status:props.longPattern.queue[i].status ==0?"无预约": props.longPattern.queue[i].status ==1?"预约中":props.longPattern.queue[i].status ==2?"运行中":props.longPattern.queue[i].status ==3?"已预约":props.longPattern.queue[i].status==4?"程序暂停":''  },
+    )
+  }
   return(
-    <div>
-      <p className = "headertext">
-        远程模式
-      </p>
+    <div className="IO_long">
+
+      {/* 头部 */}
+      <ConTitle title={intl.get("远程模式")}/>
       <div className = "header-hint">
         <div>
-            <Select defaultValue={"机器人"+SeleValue}
-              onChange={(value)=>{handleSizeChange(value)}}
-              style={{ width:"150px",marginTop:"24px",marginLeft:"20%" }} >
-              {conveyorNumchildren}
-            </Select>
+          {/* 机器人选择器 */}
+          <Select defaultValue={"机器人"+SeleValue}
+            onChange={(value)=>{handleSizeChange(value)}}
+            style={{ width:"150px",marginTop:"24px",marginLeft:"20%" }} >
+            {conveyorNumchildren}
+          </Select>
         </div>
         <div className="header-hint-r">
+          {/* 使用三元运算符来判断获Modbus和IO模块的连接状态 */}
           <p>Modbus:  <span style={{ marginLeft:"25px" }}>{props.longStatus.ModbusConnect==0?"未连接":"已连接"}</span> </p>
           <p>I/O模块: <span style={{ marginLeft:"30px" }}>{props.longStatus.ExternIOConnect==0?"未连接":"已连接"}</span> </p>
         </div>
       </div>
+      {/* 表格 */}
       <Table
+      style={{ width:"90%",marginLeft:"3%" }}
       bordered={true}
       size = {"small"}
       pagination={false}
       columns={columns}
-      
       dataSource={data }>
-
       </Table>
+        {/* 悬浮按钮 */}
+        <div className="hoverButton1">
+          <Button
+           size="large"
+           type="primary"
+           shape="circle"
+           style={{
+             border: "none",
+             fontSize:"14px"
+           }}
+          >
+            查看程序
+          </Button>
+        </div>
     </div>
   )
 }
