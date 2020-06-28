@@ -7,156 +7,391 @@ import {
   Select,
   Divider,
   Input,
-  Modal
+  Modal,
 } from "antd";
 import { connect } from "dva";
 import "./index.css";
 import { sendMSGtoController } from "service/network";
 
 const mapStateToProps = (state) => {
-  return{
+  return {
     currentRobot: state.index.robotStatus.currentRobot,
     dataSoure: state.index.conveyor.Basicdata,
-  }
+  };
 };
 
 function Basic(props) {
-
-  const [copycraftNum, setCopycraftNum] = useState(1)
-  const [showSave, setShowSave ] = useState(false)
+  const [copycraftNum, setCopycraftNum] = useState(1);
+  const [showSave, setShowSave] = useState(false);
   const [showemptyModal, setShowemptyModal] = useState(false);
   const [showcopyModal, setshowcopyModal] = useState(false);
-  const [Iptdsb, setIptdsb ] = useState(true)
-  const [minEncoderVal, setMinEncoderVal] = useState(props.dataSoure.conveyor.minEncoderVal)
-  const [encoderValue, setEncoderValue] = useState(props.dataSoure.conveyor.encoderValue)
-  const [maxEncoderVal, setMaxEncoderVal] = useState(props.dataSoure.conveyor.maxEncoderVal)
-  const [encoderResolution, setEncoderResolution] = useState(props.dataSoure.conveyor.encoderResolution)
-  const [encoderDirection, setEncoderDirection] = useState(props.dataSoure.conveyor.encoderDirection)
-  const [speed, setSpeed] = useState(props.dataSoure.conveyor.speed)
-  const [userCoord, setUserCoord] = useState(props.dataSoure.conveyor.userCoord)
-  const [checkSpeed, setCheckSpeed] = useState(props.dataSoure.conveyor.checkSpeed)
-  const [time, setTime] = useState(props.dataSoure.compensation.time)
-  const [encoderVal, setEncoderVal] = useState(props.dataSoure.compensation.encoderVal)
+  const [Iptdsb, setIptdsb] = useState(true);
+  const [minEncoderVal, setMinEncoderVal] = useState(
+    props.dataSoure.conveyor.minEncoderVal
+  );
+  const [encoderValue, setEncoderValue] = useState(
+    props.dataSoure.conveyor.encoderValue
+  );
+  const [maxEncoderVal, setMaxEncoderVal] = useState(
+    props.dataSoure.conveyor.maxEncoderVal
+  );
+  const [encoderResolution, setEncoderResolution] = useState(
+    props.dataSoure.conveyor.encoderResolution
+  );
+  const [encoderDirection, setEncoderDirection] = useState(
+    props.dataSoure.conveyor.encoderDirection
+  );
+  const [speed, setSpeed] = useState(props.dataSoure.conveyor.speed);
+  const [userCoord, setUserCoord] = useState(
+    props.dataSoure.conveyor.userCoord
+  );
+  const [checkSpeed, setCheckSpeed] = useState(
+    props.dataSoure.conveyor.checkSpeed
+  );
+  const [time, setTime] = useState(props.dataSoure.compensation.time);
+  const [encoderVal, setEncoderVal] = useState(
+    props.dataSoure.compensation.encoderVal
+  );
 
-  useEffect(()=>{
-    setMinEncoderVal(props.dataSoure.conveyor.minEncoderVal)
-    setEncoderValue(props.dataSoure.conveyor.encoderValue)
-    setMaxEncoderVal(props.dataSoure.conveyor.maxEncoderVal)
-    setEncoderResolution(props.dataSoure.conveyor.encoderResolution)
-    setEncoderDirection(props.dataSoure.conveyor.encoderDirection)
-    setSpeed(props.dataSoure.conveyor.speed)
-    setUserCoord(props.dataSoure.conveyor.userCoord)
-    setCheckSpeed(props.dataSoure.conveyor.checkSpeed)
-    setTime(props.dataSoure.compensation.time)
-    setEncoderVal(props.dataSoure.compensation.encoderVal)
-
-  },[props.dataSoure.conveyor.maxEncoderVal,props.dataSoure.conveyor.minEncoderVal,props.dataSoure.conveyor.encoderDirection,
-    props.dataSoure.conveyor.encoderResolution,props.dataSoure.conveyor.speed,
-    props.dataSoure.conveyor.userCoord,props.dataSoure.conveyor.checkSpeed,showemptyModal])
+  useEffect(() => {
+    setMinEncoderVal(props.dataSoure.conveyor.minEncoderVal);
+    setEncoderValue(props.dataSoure.conveyor.encoderValue);
+    setMaxEncoderVal(props.dataSoure.conveyor.maxEncoderVal);
+    setEncoderResolution(props.dataSoure.conveyor.encoderResolution);
+    setEncoderDirection(props.dataSoure.conveyor.encoderDirection);
+    setSpeed(props.dataSoure.conveyor.speed);
+    setUserCoord(props.dataSoure.conveyor.userCoord);
+    setCheckSpeed(props.dataSoure.conveyor.checkSpeed);
+    setTime(props.dataSoure.compensation.time);
+    setEncoderVal(props.dataSoure.compensation.encoderVal);
+  }, [
+    props.dataSoure.conveyor.maxEncoderVal,
+    props.dataSoure.conveyor.minEncoderVal,
+    props.dataSoure.conveyor.encoderDirection,
+    props.dataSoure.conveyor.encoderResolution,
+    props.dataSoure.conveyor.speed,
+    props.dataSoure.conveyor.userCoord,
+    props.dataSoure.conveyor.checkSpeed,
+    showemptyModal,
+  ]);
   const { Option } = Select;
   const conveyorNumchildren = [];
-  for (let i = 1; i <10; i++) {
-    conveyorNumchildren.push(
-      <Option key={i}>{ i}</Option>
-    );
-  } 
-  
-  const handleChange =(value) => {
-    setCopycraftNum(Number(value))
+  for (let i = 1; i < 10; i++) {
+    conveyorNumchildren.push(<Option key={i}>{i}</Option>);
   }
-    const encoderDirectionNumchildren = [];
-    for (let i = -1; i <2; i++) {
-      if(i!=0){
-        encoderDirectionNumchildren.push(
-          <Option key={i}>{i==1?"正向":"反向"}</Option>
-        );
-      }
-    }
-    const checkSpeedNumchildren = [];
-    for (let i = 0; i <2; i++) {
-      checkSpeedNumchildren.push(
-        <Option key={i}>{i==0?"机器人立即结束":"机器人继续运行"}</Option>
+
+  const handleChange = (value) => {
+    setCopycraftNum(Number(value));
+  };
+  const encoderDirectionNumchildren = [];
+  for (let i = -1; i < 2; i++) {
+    if (i != 0) {
+      encoderDirectionNumchildren.push(
+        <Option key={i}>{i == 1 ? "正向" : "反向"}</Option>
       );
     }
-    const userCoordNumchildren = [];
-    for (let i = 1; i <10; i++) {
-      userCoordNumchildren.push(
-        <Option key={i}>{i}</Option>
-      );
-    }
+  }
+  const checkSpeedNumchildren = [];
+  for (let i = 0; i < 2; i++) {
+    checkSpeedNumchildren.push(
+      <Option key={i}>{i == 0 ? "机器人立即结束" : "机器人继续运行"}</Option>
+    );
+  }
+  const userCoordNumchildren = [];
+  for (let i = 1; i < 10; i++) {
+    userCoordNumchildren.push(<Option key={i}>{i}</Option>);
+  }
 
-    useEffect(()=>{
-      let gainSet =  setInterval(() => {
-        let dataList = {
-          robot:props.currentRobot,
-          conveyorID:props.dataSoure.conveyorID,
-        }
-        sendMSGtoController("TRACK_CONVEYOR_REALTIME_INQUIRE",dataList)
-      },1000);
-      return () =>{
-        clearInterval(gainSet)
-      }
-    },[props.dataSoure.conveyorID])
+  useEffect(() => {
+    let gainSet = setInterval(() => {
+      let dataList = {
+        robot: props.currentRobot,
+        conveyorID: props.dataSoure.conveyorID,
+      };
+      sendMSGtoController("TRACK_CONVEYOR_REALTIME_INQUIRE", dataList);
+    }, 1000);
+    return () => {
+      clearInterval(gainSet);
+    };
+  }, [props.dataSoure.conveyorID]);
 
-    const columns = [
-      {title: "参数",dataIndex: "name", },
-      {title: "值", dataIndex: "money", },
-      {title: "单位", dataIndex: "address",}
-    ];
-    const data = [
-      { key: "1", name:"编码器值",  money: <Input disabled = { Iptdsb } value={encoderValue} onChange={(e)=>{setEncoderValue(e.target.value)}} />, address: "线", },
-      { key: "2", name: "编码器计数最小值", money:<Input disabled = { Iptdsb } value={minEncoderVal} onChange={(e)=>{ setMinEncoderVal(e.target.value) }} />, address: "线", },
-      { key: "3", name: "编码器计数最大值", money: <Input disabled = { Iptdsb } value={maxEncoderVal} onChange={(e)=>{setMaxEncoderVal(e.target.value)}}  />, address: "线", },
-      { key: "4", name: "编码器分辨率", money: <Input disabled = { Iptdsb } value={encoderResolution} onChange={(e)=>{setEncoderResolution(e.target.value)}}  />, address: "线/毫米", },
-      { key: "5", name: "编码器方向", money:Iptdsb?  <Input disabled={Iptdsb} value={encoderDirection==1?"正向":"反向"} /> : <Select  disabled = { Iptdsb } defaultValue={encoderDirection==1?"正向":"反向"}onChange={(e)=>{ setEncoderDirection(e) }} >{encoderDirectionNumchildren}</Select>, address: "", },
-      { key: "6", name: "当前传送带速度", money: <Input disabled = { Iptdsb } value={speed}  onChange={(e)=>{setSpeed(e.target.value)}} />, address: "毫米/秒",},
-      { key: "7", name: "用户坐标系", money:Iptdsb?  <Input disabled={Iptdsb}  value={userCoord} /> : <Select  disabled  = { Iptdsb } defaultValue={userCoord} onChange={(e)=>{ setUserCoord(e) }} >{userCoordNumchildren}</Select>, address: "用户坐标编号", },
-      { key: "8", name: "传送带停止处理",  money:Iptdsb?  <Input disabled={Iptdsb} value={checkSpeed==0?"机器人立即结束":"机器人继续运行"} /> : <Select  disabled = { Iptdsb } defaultValue={checkSpeed==0?"机器人立即结束":"机器人继续运行"} onChange = {(e)=>{ setCheckSpeed(e) }}>{checkSpeedNumchildren}</Select>, address: "", },
-    ];
-    const twoColumns = [
-      {title: "参数",dataIndex: "name", },
-      {title: "值", dataIndex: "money", },
-      {title: "单位", dataIndex: "address",}
-    ];
-    const twoData = [
-      { key: "1", name:"时间",  money: <Input disabled = { Iptdsb } value={time} onChange={(e)=>{setTime(e.target.value)}} />, address: "ms", },
-      { key: "2", name: "编码器值", money:<Input disabled = { Iptdsb } value={encoderVal} onChange={(e)=>{setEncoderVal(e.target.value)}} />, address: "线", },
-    ]
-  
-  return (           
-    <div className = "backconnect" style={{ height:document.body.clientHeight  * 0.674  }} >
-      <div className="connect" >
+  const columns = [
+    { title: "参数", dataIndex: "name" },
+    { title: "值", dataIndex: "money" },
+    { title: "单位", dataIndex: "address" },
+  ];
+  const data = [
+    {
+      key: "1",
+      name: "编码器值",
+      money: (
+        <Input
+          disabled={Iptdsb}
+          value={encoderValue}
+          onChange={(e) => {
+            setEncoderValue(e.target.value);
+          }}
+        />
+      ),
+      address: "线",
+    },
+    {
+      key: "2",
+      name: "编码器计数最小值",
+      money: (
+        <Input
+          disabled={Iptdsb}
+          value={minEncoderVal}
+          onChange={(e) => {
+            setMinEncoderVal(e.target.value);
+          }}
+        />
+      ),
+      address: "线",
+    },
+    {
+      key: "3",
+      name: "编码器计数最大值",
+      money: (
+        <Input
+          disabled={Iptdsb}
+          value={maxEncoderVal}
+          onChange={(e) => {
+            setMaxEncoderVal(e.target.value);
+          }}
+        />
+      ),
+      address: "线",
+    },
+    {
+      key: "4",
+      name: "编码器分辨率",
+      money: (
+        <Input
+          disabled={Iptdsb}
+          value={encoderResolution}
+          onChange={(e) => {
+            setEncoderResolution(e.target.value);
+          }}
+        />
+      ),
+      address: "线/毫米",
+    },
+    {
+      key: "5",
+      name: "编码器方向",
+      money: Iptdsb ? (
+        <Input
+          disabled={Iptdsb}
+          value={encoderDirection == 1 ? "正向" : "反向"}
+        />
+      ) : (
+        <Select
+          disabled={Iptdsb}
+          defaultValue={encoderDirection == 1 ? "正向" : "反向"}
+          onChange={(e) => {
+            setEncoderDirection(e);
+          }}
+        >
+          {encoderDirectionNumchildren}
+        </Select>
+      ),
+      address: "",
+    },
+    {
+      key: "6",
+      name: "当前传送带速度",
+      money: (
+        <Input
+          disabled={Iptdsb}
+          value={speed}
+          onChange={(e) => {
+            setSpeed(e.target.value);
+          }}
+        />
+      ),
+      address: "毫米/秒",
+    },
+    {
+      key: "7",
+      name: "用户坐标系",
+      money: Iptdsb ? (
+        <Input disabled={Iptdsb} value={userCoord} />
+      ) : (
+        <Select
+          disabled={Iptdsb}
+          defaultValue={userCoord}
+          onChange={(e) => {
+            setUserCoord(e);
+          }}
+        >
+          {userCoordNumchildren}
+        </Select>
+      ),
+      address: "用户坐标编号",
+    },
+    {
+      key: "8",
+      name: "传送带停止处理",
+      money: Iptdsb ? (
+        <Input
+          disabled={Iptdsb}
+          value={checkSpeed == 0 ? "机器人立即结束" : "机器人继续运行"}
+        />
+      ) : (
+        <Select
+          disabled={Iptdsb}
+          defaultValue={checkSpeed == 0 ? "机器人立即结束" : "机器人继续运行"}
+          onChange={(e) => {
+            setCheckSpeed(e);
+          }}
+        >
+          {checkSpeedNumchildren}
+        </Select>
+      ),
+      address: "",
+    },
+  ];
+  const twoColumns = [
+    { title: "参数", dataIndex: "name" },
+    { title: "值", dataIndex: "money" },
+    { title: "单位", dataIndex: "address" },
+  ];
+  const twoData = [
+    {
+      key: "1",
+      name: "时间",
+      money: (
+        <Input
+          disabled={Iptdsb}
+          value={time}
+          onChange={(e) => {
+            setTime(e.target.value);
+          }}
+        />
+      ),
+      address: "ms",
+    },
+    {
+      key: "2",
+      name: "编码器值",
+      money: (
+        <Input
+          disabled={Iptdsb}
+          value={encoderVal}
+          onChange={(e) => {
+            setEncoderVal(e.target.value);
+          }}
+        />
+      ),
+      address: "线",
+    },
+  ];
+
+  return (
+    <div
+      className="backconnect"
+      style={{ height: document.body.clientHeight * 0.674 }}
+    >
+      {/* 悬浮按钮 */}
+      <div className="hoverButton1">
+        {showSave ? (
+          <div style={{ display: "inline" }}>
+            {" "}
+            <Button
+              style={{ right: "-60px" }}
+              shape="circle"
+              size="large"
+              type="primary"
+              onClick={() => {
+                let dataList = {
+                  robot: props.currentRobot,
+                  conveyorID: Number(props.dataSoure.conveyorID),
+                  conveyor: {
+                    maxEncoderVal: Number(maxEncoderVal),
+                    minEncoderVal: Number(minEncoderVal),
+                    encoderDirection: Number(encoderDirection),
+                    encoderResolution: Number(encoderResolution),
+                    userCoord: Number(userCoord),
+                    checkSpeed: Number(checkSpeed),
+                  },
+                  compensation: {
+                    time: Number(time),
+                    encoderVal: Number(encoderVal),
+                  },
+                };
+                sendMSGtoController("SET_THE_CONVEYOR_PARAMETERS", dataList);
+                setShowSave(false);
+                setIptdsb(true);
+              }}
+            >
+              保存
+            </Button>
+            <Button
+              style={{
+                top: "-80px",
+                border: "1px dashed rgb(10, 168, 235)",
+                background: "rgb(255, 255, 255)",
+                color: "rgb(10, 168, 235)",
+                boxShadow: "rgba(10, 168, 235, 0.6) 0px 1px 8px",
+              }}
+              shape="circle"
+              size="large"
+              onClick={() => {
+                setShowSave(false);
+                setIptdsb(true);
+              }}
+            >
+              取消
+            </Button>
+          </div>
+        ) : (
+          <Button
+            shape="circle"
+            size="large"
+            type="primary"
+            onClick={() => {
+              setShowSave(true);
+              setIptdsb(false);
+            }}
+          >
+            修改
+          </Button>
+        )}
+      </div>
+      <div className="connect" style={{width:"52%",float:"left"}}>
         <Table
           scroll={{
             y: window.screen.height * 0.27,
           }}
           pagination={false}
-          size = {"small"}
+          size={"small"}
           columns={columns}
-          dataSource={data }
+          dataSource={data}
           title={() => "传送带参数："}
         />
       </div>
-      <div className="connect">
+      <div className="connect" style={{width:"45%",float:"left",marginLeft:20}}>
         <Table
-            pagination={false}
-            size = {"small"}
-            columns={twoColumns}
-            dataSource={twoData }
-            title={() => "补偿参数："}
-          />
+          pagination={false}
+          size={"small"}
+          columns={twoColumns}
+          dataSource={twoData}
+          title={() => "补偿参数："}
+        />
       </div>
       <Modal
         title="提示"
         style={{ top: 100 }}
         visible={showemptyModal}
-        onOk={() => {setShowemptyModal(false)
+        onOk={() => {
+          setShowemptyModal(false);
           let dataList = {
-            robot:props.currentRobot,
-            conveyorID:props.dataSoure.conveyorID
-          }
-          sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR",dataList)
-          sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE",dataList)
+            robot: props.currentRobot,
+            conveyorID: props.dataSoure.conveyorID,
+          };
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_CLEAR", dataList);
+          sendMSGtoController("TRACK_CONVEYOR_CONVEYORPARAM_INQUIRE", dataList);
         }}
         onCancel={() => setShowemptyModal(false)}
       >
@@ -169,13 +404,14 @@ function Basic(props) {
         title="提示"
         style={{ top: 100 }}
         visible={showcopyModal}
-        onOk={() => { setshowcopyModal(false) 
+        onOk={() => {
+          setshowcopyModal(false);
           let dataList = {
-            robot:props.currentRobot,
-            srcConveyorID:props.dataSoure.conveyorID,
-            dstConveyorID:copycraftNum
-          }
-          sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY",dataList)
+            robot: props.currentRobot,
+            srcConveyorID: props.dataSoure.conveyorID,
+            dstConveyorID: copycraftNum,
+          };
+          sendMSGtoController("TRACK_CONVEYOR_PARAM_COPY", dataList);
         }}
         onCancel={() => setshowcopyModal(false)}
       >
@@ -194,51 +430,31 @@ function Basic(props) {
           </div>
         </p>
       </Modal>
-      {showSave ? <div  style={{ display:"inline" }}> <Button style = {{ width:"100px",height:"50px",marginLeft:"17%" }} onClick={()=>{
-        let dataList = {
-          robot:props.currentRobot,
-          conveyorID:Number(props.dataSoure.conveyorID),
-          conveyor:{
-            maxEncoderVal:Number(maxEncoderVal),
-            minEncoderVal:Number(minEncoderVal),
-            encoderDirection:Number(encoderDirection),
-            encoderResolution:Number(encoderResolution),
-            userCoord:Number(userCoord),
-            checkSpeed:Number(checkSpeed),
-          },
-          compensation:{
-            time:Number(time),
-            encoderVal:Number(encoderVal),
-          }
-        }
-        sendMSGtoController("SET_THE_CONVEYOR_PARAMETERS",dataList)
-        setShowSave(false)
-        setIptdsb(true)
-      }} >保存</Button>
-      <Button style = {{ width:"100px",height:"50px"}} onClick={()=>{
-        setShowSave(false)
-        setIptdsb(true)
-      }}>取消</Button></div> : <Button  style = {{ width:"100px",height:"50px",marginLeft:"17%" }} onClick = {()=>{
-        setShowSave(true)
-        setIptdsb(false)
-      }} >修改</Button> }
-       <Button
-       type="primary"
-        danger 
-        style={{ width: "100px", height: "50px", marginLeft: `${showSave?"28" :"34"}%`  }}
-        onClick={() => {
-          setShowemptyModal(true);
-        }}
-      >
-        清空参数
-      </Button>
-      <Button type="primary" style={{ width: "100px", height: "50px" }} onClick={() => {
-        setshowcopyModal(true)
-      }}>
-        复制参数
-      </Button>
-
-    </div >
+      <div style={{textAlign:"center"}}>
+        <Button
+          type="primary"
+          danger
+          style={{
+            width: "100px",
+            height:"40px"
+          }}
+          onClick={() => {
+            setShowemptyModal(true);
+          }}
+        >
+          清空参数
+        </Button>
+        <Button
+          type="primary"
+          style={{ width: "100px",height:"40px",marginLeft:20,marginTop:20 }}
+          onClick={() => {
+            setshowcopyModal(true);
+          }}
+        >
+          复制参数
+        </Button>
+      </div>
+    </div>
   );
 }
 
