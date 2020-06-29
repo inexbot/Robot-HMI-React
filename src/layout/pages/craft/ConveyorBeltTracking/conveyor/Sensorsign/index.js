@@ -73,42 +73,66 @@ function Sensorsign(props) {
       style={{ height: document.body.clientHeight * 0.674 }}
     >
       {/* 悬浮按钮 */}
-      <div >
-      {showSave ? (
-        <div style={{ display: "inline" }} className="hoverButton1">
-          {" "}
-          <Button style={{ width: "100px", height: "50px", marginLeft: "17%" }}>
-            保存
-          </Button>
+      <div className="hoverButton1">
+        {showSave ? (
+          <div style={{ display: "inline" }}>
+            {" "}
+            <Button
+              style={{ right: "-120px" }}
+              shape="circle"
+              size="large"
+              type="primary"
+            >
+              保存
+            </Button>
+            <Button
+              style={{
+                top: "-80px",
+                right: "-60px",
+                border: "1px dashed rgb(10, 168, 235)",
+                background: "rgb(255, 255, 255)",
+                color: "rgb(10, 168, 235)",
+                boxShadow: "rgba(10, 168, 235, 0.6) 0px 1px 8px",
+              }}
+              shape="circle"
+              size="large"
+              onClick={() => {
+                setShowSave(false);
+              }}
+            >
+              取消
+            </Button>
+            <Button
+              style={{
+                top: "-160px",
+                border: "1px dashed rgb(10, 168, 235)",
+                background: "rgb(255, 255, 255)",
+                color: "rgb(10, 168, 235)",
+                boxShadow: "rgba(10, 168, 235, 0.6) 0px 1px 8px",
+              }}
+              shape="circle"
+              size="large"
+              onClick={() => {
+                history.push("/setparameter/sensorOne");
+              }}
+            >
+              开始标定
+            </Button>
+          </div>
+        ) : (
           <Button
-            style={{ width: "100px", height: "50px" }}
+            shape="circle"
+            size="large"
+            type="primary"
             onClick={() => {
-              setShowSave(false);
+              setShowSave(true);
             }}
           >
-            取消
+            修改
           </Button>
-          <Button
-            style={{ width: "100px", height: "50px" }}
-            onClick={() => {
-              history.push("/setparameter/sensorOne");
-            }}
-          >
-            开始标定
-          </Button>
-        </div>
-      ) : (
-        <Button
-          style={{ width: "100px", height: "50px", marginLeft: "17%" }}
-          onClick={() => {
-            setShowSave(true);
-          }}
-        >
-          修改
-        </Button>
-      )}
+        )}
       </div>
-      <div className="connect">
+      <div className="connect" style={{marginTop:10}}>
         <Table pagination={false} columns={columns} dataSource={data} />
       </div>
       <Modal
@@ -160,30 +184,33 @@ function Sensorsign(props) {
           </div>
         </p>
       </Modal>
-      
-      <Button
-        type="primary"
-        danger
-        style={{
-          width: "100px",
-          height: "50px",
-          marginLeft: `${showSave ? "23" : "34"}%`,
-        }}
-        onClick={() => {
-          setShowemptyModal(true);
-        }}
-      >
-        清空参数
-      </Button>
-      <Button
-        type="primary"
-        style={{ width: "100px", height: "50px" }}
-        onClick={() => {
-          setshowcopyModal(true);
-        }}
-      >
-        复制参数
-      </Button>
+      <div style={{ textAlign: "center" }}>
+        <Button
+          type="danger"
+          style={{
+            width: "100px",
+            height: "40px",
+          }}
+          onClick={() => {
+            setShowemptyModal(true);
+          }}
+        >
+          清空参数
+        </Button>
+        <Button
+          type="primary"
+          style={{
+            width: "100px",
+            height: "40px",
+            margin: "10px 0 0 20px",
+          }}
+          onClick={() => {
+            setshowcopyModal(true);
+          }}
+        >
+          复制参数
+        </Button>
+      </div>
     </div>
   );
 }

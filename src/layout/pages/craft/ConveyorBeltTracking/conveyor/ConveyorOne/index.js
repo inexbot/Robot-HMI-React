@@ -49,77 +49,94 @@ function ConveyorsignOne(props) {
   ];
   let history = useHistory();
   return (
-    <div
-      className="backconnect"
-      style={{ height: document.body.clientHeight * 0.68 }}
-    >
-      <div className="connect" style={{ marginLeft: "0", width: "50%" }}>
-        <p style={{ fontSize: "26px" }}>
-          移动传送带，使工件移动到机器人的运动范围内，移动机器人到工件处，使机器人末梢的尖端对准工件的尖端，点击标定
-        </p>
-        <Table
-          pagination={false}
-          size={"small"}
-          columns={columns}
-          dataSource={data}
-        />
+    <div className="backconnect">
+      <div style={{ display: "flex" }}>
+        <div className="connect" style={{ marginLeft: "0", width: "50%" }}>
+          <p
+            style={{
+              fontSize: "14px",
+              backgroundColor: "#fffbe6",
+              border: "1px solid #ffe58f",
+              padding: "15px 10px",
+              borderRadius: "5px",
+              marginTop: 10,
+            }}
+          >
+            <strong style={{fontSize: "18px"}}>步骤一</strong><br />
+            移动传送带，使工件移动到机器人的运动范围内，移动机器人到工件处，使机器人末梢的尖端对准工件的尖端，点击标定。
+          </p>
+          <Table
+            pagination={false}
+            size={"small"}
+            columns={columns}
+            dataSource={data}
+          />
+        </div>
+        <div>
+          <img
+            src="../images/conveyorsign.png"
+            style={{ width: "400px", margin: "10px 0 0 20px " }}
+          />
+        </div>
       </div>
-      <div style={{ position: "absolute", left: "50%", top: "31%" }}>
-        <img src="../images/conveyorsign.png" style={{ width: "400px" }} />
+      <div style={{paddingTop:20,textAlign:"center"}}>
+        <Button
+          style={{ width: "100px", height: "40px" }}
+          onClick={() => {
+            let dataList = {
+              robot: props.currentRobot,
+              conveyorID: props.dataSoures.conveyorID,
+            };
+            sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CANCEL", dataList);
+            history.push("/setparameter/conveyorsign");
+          }}
+        >
+          取消标定
+        </Button>
+        <Button
+          type="primary"
+          shape="round"
+          style={{ width: "100px", height: "40px", marginLeft: "12%" }}
+          onClick={() => {
+            let dataList = {
+              robot: props.currentRobot,
+              conveyorID: props.dataSoures.conveyorID,
+              posNum: 1,
+            };
+            sendMSGtoController(
+              "TRACK_CONVEYOR_USERCOORD_CALIBRATION",
+              dataList
+            );
+            sendMSGtoController("RACK_CONVEYOR_CALIBRATION_INQUIRE", dataList);
+          }}
+        >
+          标定
+        </Button>
+        <Button
+          type="primary"
+          danger
+          shape="round"
+          style={{ width: "100px", height: "40px", marginLeft: "2%" }}
+          onClick={() => {
+            let dataList = {
+              robot: props.currentRobot,
+              conveyorID: props.dataSoures.conveyorID,
+              posNum: 3,
+            };
+            sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CLEAR", dataList);
+          }}
+        >
+          清除标定线
+        </Button>
+        <Button
+          style={{ width: "100px", height: "40px", marginLeft: "16%" }}
+          onClick={() => {
+            history.push("/setparameter/conveyortwo");
+          }}
+        >
+          下一步{" "}
+        </Button>
       </div>
-      <Button
-        style={{ width: "100px", height: "50px" }}
-        onClick={() => {
-          let dataList = {
-            robot: props.currentRobot,
-            conveyorID: props.dataSoures.conveyorID,
-          };
-          sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CANCEL", dataList);
-          history.push("/setparameter/conveyorsign");
-        }}
-      >
-        取消标定
-      </Button>
-      <Button
-        type="primary"
-        shape="round"
-        style={{ width: "100px", height: "50px", marginLeft: "12%" }}
-        onClick={() => {
-          let dataList = {
-            robot: props.currentRobot,
-            conveyorID: props.dataSoures.conveyorID,
-            posNum: 1,
-          };
-          sendMSGtoController("TRACK_CONVEYOR_USERCOORD_CALIBRATION", dataList);
-          sendMSGtoController("RACK_CONVEYOR_CALIBRATION_INQUIRE", dataList);
-        }}
-      >
-        标定
-      </Button>
-      <Button
-        type="primary"
-        danger
-        shape="round"
-        style={{ width: "100px", height: "50px" }}
-        onClick={() => {
-          let dataList = {
-            robot: props.currentRobot,
-            conveyorID: props.dataSoures.conveyorID,
-            posNum: 3,
-          };
-          sendMSGtoController("TRACK_CONVEYOR_CALIBRATION_CLEAR", dataList);
-        }}
-      >
-        清除标定线
-      </Button>
-      <Button
-        style={{ width: "100px", height: "50px", marginLeft: "16%" }}
-        onClick={() => {
-          history.push("/setparameter/conveyortwo");
-        }}
-      >
-        下一步{" "}
-      </Button>
     </div>
   );
 }

@@ -1,9 +1,7 @@
-.connect{
-    background:white
+.backconnect .ant-table-thead > tr > th,.backconnect .ant-table-tbody > tr > td{
+    padding: 6px 16px !important;
 }
 
-.backconnect{
-    width:100%;
-    background:white;
-    height:"8000px"
+.ant-table-wrapper{
+    background: none;
 }

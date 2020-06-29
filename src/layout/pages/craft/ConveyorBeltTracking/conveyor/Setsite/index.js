@@ -11,6 +11,7 @@ import {
 } from "antd";
 import { connect } from "dva";
 import { sendMSGtoController } from "service/network";
+import "./index.css";
 
 const mapStateToProps = (state) => {
   return {
@@ -236,10 +237,7 @@ function Setsite(props) {
     },
   ];
   return (
-    <div
-      className="backconnect"
-      style={{ height: document.body.clientHeight * 0.674, marginLeft: "0" }}
-    >
+    <div className="backconnect">
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
         {showSave ? (
@@ -301,17 +299,49 @@ function Setsite(props) {
           </Button>
         )}
       </div>
-
-      <div style={{ width: "55%" }}>
-        <Table
-          size={"small"}
-          pagination={false}
-          columns={columns}
-          dataSource={data}
-        />
-      </div>
-      <div style={{ position: "absolute", left: "53%", top: "26%" }}>
-        <img src="../images/setsite.png" style={{ width: "370px" }} />
+      <div style={{ display: "flex", marginTop: 10 }}>
+        <div style={{ width: "55%" }}>
+          <Table
+            size={"small"}
+            pagination={false}
+            columns={columns}
+            dataSource={data}
+          />
+        </div>
+        <div>
+          <img
+            src="../images/setsite.png"
+            style={{ width: "340px", marginLeft: 20 }}
+          />
+          <div style={{ textAlign: "center" }}>
+            <Button
+              type="primary"
+              danger
+              style={{
+                width: "100px",
+                height: "40px",
+              }}
+              onClick={() => {
+                setShowemptyModal(true);
+              }}
+            >
+              清空参数
+            </Button>
+            <Button
+              type="primary"
+              style={{
+                width: "100px",
+                height: "40px",
+                margin: "10px 0 0 20px",
+              }}
+              onClick={() => {
+                setshowcopyModal(true);
+              }}
+            >
+              复制参数
+            </Button>
+          </div>
+        </div>
       </div>
       <Modal
         title="提示"
@@ -362,29 +392,6 @@ function Setsite(props) {
           </div>
         </p>
       </Modal>
-      <Button
-        type="primary"
-        danger
-        style={{
-          width: "100px",
-          height: "50px",
-          marginLeft: `${showSave ? "28" : "34"}%`,
-        }}
-        onClick={() => {
-          setShowemptyModal(true);
-        }}
-      >
-        清空参数
-      </Button>
-      <Button
-        type="primary"
-        style={{ width: "100px", height: "50px" }}
-        onClick={() => {
-          setshowcopyModal(true);
-        }}
-      >
-        复制参数
-      </Button>
     </div>
   );
 }

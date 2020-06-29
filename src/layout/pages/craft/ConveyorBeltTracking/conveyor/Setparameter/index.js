@@ -121,7 +121,7 @@ function Setparameter(props) {
         </Steps>
       </div>
 
-      <div className="Setparameter" style={{marginTop:15,padding:20,height:"65vh"}}>
+      <div className="Setparameter" style={{marginTop:15,padding:"20px 10px 10px 10px",height:"65vh"}}>
         {/* 选择工艺号 */}
         <div style={{ textAlign:"center" }}>
           工艺号:
