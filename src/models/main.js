@@ -21,6 +21,7 @@ import { vision } from "./default/vision"
 import { slaveSertCommit } from "./default/slaveSetCommit"
 import { indexMainreducers } from "./indexMainreducers"
 import { IO_longPattern } from "./default/IO_longPattern"
+import { remotepro } from "./default/remotepro"
  
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -77,7 +78,8 @@ export default {
     conveyor,
     vision,
     slaveSertCommit,
-    IO_longPattern
+    IO_longPattern,
+    remotepro
   },
 
   subscriptions: {
