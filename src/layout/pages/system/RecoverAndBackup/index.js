@@ -15,7 +15,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-
 function RecoverAndBackup (props) {
   const [version, setVersion] = useState("20.02.04.11");
   const [udiskState, setUdiskState] = useState("未插入");
@@ -55,7 +54,6 @@ function RecoverAndBackup (props) {
         type: "Backup/changeShowUploading",
         data: { showUploading:false },
       });
-    
     }else{
       let sendData = {
         rbot:props.currentRobot,

@@ -448,6 +448,30 @@ export default {
               data:dataString
             })
             break;
+          case "5703":
+            dispatch({
+              type:"inquireModbusprocedure",
+              data:dataString
+            })
+            break;
+          case "2c03":
+            dispatch({
+              type:"inquireIOprocedure",
+              data:dataString
+            })
+            break;
+          case "2c01":
+            dispatch({
+              type:"setIOprocedure",
+              data:dataString
+            })
+            break;
+          case "5701":
+            dispatch({
+              type:"setModbusprocedure",
+              data:dataString
+            })
+            break;
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);
