@@ -190,7 +190,6 @@ export const CommandList = {
   SLAVETYPE_LIST_INQUIRE: 0x2e0e, // 发送查询从站列表
   SLAVETYPE_LIST_RESPOND:0x2e0f, // 收到从站列表
 
-  UPGRADE_COMMAND: 0x2111,// 升级系统
 
 
   //传送带跟踪
@@ -476,4 +475,23 @@ export const CommandList = {
 
     // 返回远程模式连接状态
     REMOTE_CONNECT_RESPOND:0x5033,
+
+    // 查询Modbus程序
+    EXTERN_PROGRAM_INQUIRE:0x5702,
+
+    // 接收查询Modbus程序
+    EXTERN_PROGRAM_RESPOND:0x5703,
+
+    // 修改Modbus程序
+    EXTERN_PROGRAM_SET:0x5701,
+
+    // 查询IO程序
+    REMOTE_JOBFILE_INQUIRE:0x2c02,
+
+    // 接收查询IO程序
+    REMOTE_JOBFILE_RESPOND:0x2c03,
+
+    // 修改IO程序
+    REMOTE_JOBFILE_SET:0x2c01,
+    
 };

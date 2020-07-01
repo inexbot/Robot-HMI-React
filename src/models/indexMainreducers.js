@@ -460,7 +460,48 @@ export const indexMainreducers = {
           let _state = JSON.parse(JSON.stringify(state)) 
           _state.IO_longPattern.longStatus = action.data
           return _state
+        },
+        // 查询Modbus程序
+        inquireModbusprocedure(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.remotepro.Moproce = action.data
+          return _state
+        },
+        // 查询IO程序
+        inquireIOprocedure(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.remotepro.IOproce = action.data
+          return _state
+        },
+        // IO程序选择程序
+        setIOSelectprocedure(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.remotepro.IOproce.jobFile[action.data.SelectNum] = action.data.Selectprocedure
+          return _state
+        },
+        // IO程序取消选择程序
+        unSelectIOprocedure(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.remotepro.IOproce.jobFile[action.data.unSelectNum].name = ''
+          return _state
+        },
+        // 修改IO程序
+        setIOprocedure(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.remotepro.IOproce = action.data
+          return _state
+        },
+        // Modbus程序选择程序
+        setModbusSelectprocedure(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.remotepro.Moproce.jobnamelist[action.data.SelectNum] = action.data.Selectprocedure.name
+          return _state
+        },
+        // 修改Modbus程序
+        setModbusprocedure(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          _state.remotepro.Moproce = action.data
+          return _state
         }
-        
     }
 }
