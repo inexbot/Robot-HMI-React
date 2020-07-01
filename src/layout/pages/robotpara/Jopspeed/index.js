@@ -42,7 +42,7 @@ function JogSpeed(props) {
             <Tabs
               defaultActiveKey="1"
               tabPosition="top"
-              style={{ height: 220, maxWidth: "60vw" }}
+              style={{ height: 220, maxWidth: "88vw",margin:"0 auto" }}
             >
               <TabPane tab="J1" key="1">
                 <div className="jogspeed1">
@@ -205,7 +205,7 @@ function JogSpeed(props) {
         </Tabs>
         <div className="jogspeed2">
           <p className="p1">{intl.get("点动灵敏度")}</p>
-          <Input disabled={isDisabled} />
+          <Input disabled={isDisabled} style={{width:200}}/>
           <p className="p2">{intl.get("默认值0.001")}</p>
         </div>
       </div>

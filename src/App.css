@@ -62,7 +62,7 @@
 .Place,
 .Placebug,
 .Scope,
-.Setparameter {
+.Setparameter,.Language {
   /* width: 90vw; */
   height: 70vh;
   background-color: white;

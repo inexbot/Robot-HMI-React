@@ -12,20 +12,23 @@
 .jogspeed1 {
   display: flex;
   flex-flow: row;
-  /* width: 420px; */
+  width: 420px;
   margin: 0 auto;
   padding-top: 30px;
 }
 
-/* .jogspeed1 .p1, .jogspeed2 .p1{
+.jogspeed1 .p1, .jogspeed2 .p1{
     width: 140px;
-} */
+}
+.jogspeed1 .p2{
+  margin-left: 10px;
+}
 
 .jogspeed2 {
   display: flex;
   flex-flow: row;
   margin-top: 100px;
-  /* width: 420px; */
+  width: 420px;
   margin: 0 auto;
-  /* padding-top: 30px; */
+  padding-top: 30px;
 }

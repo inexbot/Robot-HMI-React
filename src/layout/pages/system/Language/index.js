@@ -38,12 +38,12 @@ function Language() {
 
       {/* 主要内容 */}
       <div className="Language">
-        <div style={{ paddingBottom: 10 }}>
-          <p>
+        <div style={{ paddingBottom: 10, paddingTop:30 }}>
+          <p style={{textAlign:"center"}}>
             <span>{intl.get("选择语言")}:</span>
             <Select
               defaultValue={localStorage.getItem("lang")}
-              style={{ width: 200, padding: 20 }}
+              style={{ width: 200, margin: 20 }}
               disabled={isDisabled}
               onChange={changeLanguage}
             >
