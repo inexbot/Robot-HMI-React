@@ -22,6 +22,7 @@ import { slaveSertCommit } from "./default/slaveSetCommit"
 import { indexMainreducers } from "./indexMainreducers"
 import { IO_longPattern } from "./default/IO_longPattern"
 import { remotepro } from "./default/remotepro"
+import { Backup } from "./default/Backup"
  
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -79,7 +80,8 @@ export default {
     vision,
     slaveSertCommit,
     IO_longPattern,
-    remotepro
+    remotepro,
+    Backup
   },
 
   subscriptions: {
@@ -424,7 +426,7 @@ export default {
               data:dataString
             })
             break;
-          case "2e16":
+          case "2e19":
             dispatch({
               type:"inquirerobotAxle",
               data:dataString

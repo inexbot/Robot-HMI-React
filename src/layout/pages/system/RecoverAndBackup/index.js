@@ -3,7 +3,7 @@ import intl from "react-intl-universal";
 import { Tabs, Button, Upload, message } from "antd";
 import ConTitle from "components/title";
 import { connect } from "dva";
-import { sendMSGtoController } from "service/network";
+import { sendMSGtoController , sendMSGtoServer } from "service/network";
 import { UploadOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
@@ -11,15 +11,17 @@ const { TabPane } = Tabs;
 const mapStateToProps = (state) => {
   return{
     currentRobot: state.index.robotStatus.currentRobot,
-    showUploading: state.Backup.showUploading,
+    showUploading: state.index.Backup.showUploading,
+    Uploading: state.index.Backup.Uploading
   }
 };
 
 function RecoverAndBackup (props) {
-  const [version, setVersion] = useState("20.02.04.11");
-  const [udiskState, setUdiskState] = useState("未插入");
-  const [fileList, setFileList] = useState([]);
-  const [uploading, setUploading] = useState(props.showUploading);
+  const [ version, setVersion] = useState("20.02.04.11");
+  const [ udiskState, setUdiskState] = useState("未插入");
+  const [ fileList, setFileList] = useState([]);
+  const [ uploading, setUploading] = useState(props.showUploading);
+  const [ WhetherUp,setWhetherUp ] = useState(props.Uploading)
 
   
   useEffect(()=>{
@@ -28,30 +30,34 @@ function RecoverAndBackup (props) {
     }
     // sendMSGtoController("VERSIONNUM_INQUIRE",dataList)
   },[])
-  console.log(props)
+  // console.log(props)
+
+  useEffect(()=>{
+    setWhetherUp(props.Uploading)
+  },[props.Uploading])
 
   useEffect(()=>{ 
     setUploading(props.showUploading)
-  },[props.showUploading])
+    setUploading(props.showUploading)
+  },[props.Uploading,props.showUploading])
   const handleUpload = () => {
     const formData = new FormData();
-    console.log(fileList)
+    // console.log(fileList)
     fileList.forEach((file) => {
-      console.log(file)
+      // console.log(file)
       formData.append("file", file);
     }); 
     // setUploading(true);
     props.dispatch({
-      type: "Backup/changeShowUploading",
+      type: "index/changeShowUploading",
       data: { showUploading:true },
     });
-
-    console.log(formData,fileList)
+    // console.log(formData,fileList)
     if(fileList[0].type != "application/x-zip-compressed"){
       message.error("请选择正确的zip类型文件")
       // setUploading(false)
       props.dispatch({
-        type: "Backup/changeShowUploading",
+        type: "index/changeShowUploading",
         data: { showUploading:false },
       });
     }else{
@@ -60,7 +66,12 @@ function RecoverAndBackup (props) {
         name:fileList[0].name,
         size:fileList[0].size
       }
-      sendMSGtoController("INQUIRE_UPGRADE_SYSTEM",sendData)
+      sendMSGtoServer("INQUIRE_UPGRADE_SYSTEM",sendData)
+
+      console.log(WhetherUp)
+      if(WhetherUp == 'yes'){
+        sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",{ finish:true, sendDta:formData })
+      }
     }
     return;
   };
@@ -71,6 +82,10 @@ function RecoverAndBackup (props) {
       const newFileList = fileList.slice();
       newFileList.splice(index, 1);
       setFileList(newFileList)
+      props.dispatch({
+        type: "index/changeShowUploading",
+        data: { showUploading:false },
+      });
     },
     
     beforeUpload: (file) => {

@@ -440,10 +440,10 @@ export const CommandList = {
     VISION_DEBUGGING_POS_MOVE:0x410C,
     
     // 从站配置查询机器人轴数
-    ROBOTTYPE_AXISMAP_INQUIRE:0x2e15,
+    DRIVENSHAFT_INQUIRE:0x2e18,
 
     // 返回从站配置查询机器人轴数
-    ROBOTTYPE_AXISMAP_RESPOND:2e16,
+    DRIVENSHAFT_RESPOND:0x2e19,
 
     // 版本号查询
     VERSIONNUM_INQUIRE:0x3402 ,

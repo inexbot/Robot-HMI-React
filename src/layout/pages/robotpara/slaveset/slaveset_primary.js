@@ -22,6 +22,7 @@ function SlaveSetPrimary(props) {
     primaryRobotActiveKey: "robot1",
     primaryJointActiveKey: "J1",
   });
+
   const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
 
   const servoSelectOption = (servoAmount) => {
@@ -33,6 +34,7 @@ function SlaveSetPrimary(props) {
   };
 
   const changePrimary = (value) => {
+    console.log(value)
     var activeRobot = state.primaryRobotActiveKey;
     var activeJoint = state.primaryJointActiveKey;
     var primary1 = activeRobot + activeJoint + "Primary1";
@@ -187,6 +189,7 @@ function SlaveSetPrimary(props) {
                 activeKey={state.primaryJointActiveKey}
                 size="small"
                 onChange={(key) => {
+                  console.log(key)
                   setState({ primaryJointActiveKey: key });
                 }}
               >

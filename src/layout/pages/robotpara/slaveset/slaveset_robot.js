@@ -53,7 +53,7 @@ function SlaveSetRobot(props) {
     props.dispatch({
       type: "index/changeRobotAmount",
       data: {
-        robotAmount: value,
+        robotAmount: Number(value),
       },
     });
   };
@@ -61,7 +61,7 @@ function SlaveSetRobot(props) {
   const changeRobotType = (value) => {
     var activeRobot = state.robotActiveKey;
     switch (value) {
-      case "1":
+      case 1:
         document.getElementById(activeRobot + "Joint1").style.display =
           "table-row";
         document.getElementById(activeRobot + "Joint2").style.display =
@@ -74,9 +74,8 @@ function SlaveSetRobot(props) {
           "table-row";
         document.getElementById(activeRobot + "Joint6").style.display =
           "table-row";
-        document.getElementById(activeRobot + "Joint7").style.display = "none";
         break;
-      case "2":
+      case 2:
         document.getElementById(activeRobot + "Joint1").style.display =
           "table-row";
         document.getElementById(activeRobot + "Joint2").style.display =
@@ -93,7 +92,7 @@ function SlaveSetRobot(props) {
           "table-row";
         break;
       default:
-        for(let i = 0; i < 8; i++){
+        for(let i = 0; i <= 7; i++){
           document.getElementById(activeRobot + `Joint${i}`).style.display = "table-row";
           if(i==7){
             document.getElementById(activeRobot + "Joint7" ).style.display = "none";
@@ -231,7 +230,6 @@ function SlaveSetRobot(props) {
         break;
     }
   };
-  console.log(SalveRobotAxle.servoSum)
   useEffect(()=>{
     changeRobotOuter(String(SalveRobotAxle.robot[0].syncNum))
     changeRobotType(String(SalveRobotAxle.servoSum))
@@ -253,7 +251,6 @@ function SlaveSetRobot(props) {
     } else if (robot === "robot4") {
       robotName = "机器人4";
     }
-    console.log(robot)
     return (
       <TabPane tab={robotName} key={robot}>
         <Row>

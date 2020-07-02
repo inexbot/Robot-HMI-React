@@ -435,7 +435,7 @@ export const indexMainreducers = {
         // 获取机器人从动轴
         inquirerobotAxle(state, action){
           let _state = JSON.parse(JSON.stringify(state)) 
-          // console.log(_state.slaveSertCommit.robotAxle,action.data,"这里是获取机器人从动轴")
+          console.log(_state.slaveSertCommit.robotAxle,action.data,"这里是获取机器人从动轴")
           _state.slaveSertCommit.robotAxle = action.data
           return _state
         },
@@ -502,6 +502,20 @@ export const indexMainreducers = {
           let _state = JSON.parse(JSON.stringify(state)) 
           _state.remotepro.Moproce = action.data
           return _state
-        }
+        },
+        // 向服务器发送文件是否通过
+        inquireUpgradeSystem(state, action){
+          let _state = JSON.parse(JSON.stringify(state)) 
+          // console.log('向服务器发送了文件')
+          console.log(action,'接收到服务器传过来的数据')
+          return _state
+        },
+        // 修改发送文件按钮的状态
+        changeShowUploading(state, action) {
+          let _state = JSON.parse(JSON.stringify(state));
+          console.log(_state,action,"这里是changeShowUploading")
+          _state.Backup.showUploading = action.data.showUploading;
+          return _state;
+        },
     }
 }

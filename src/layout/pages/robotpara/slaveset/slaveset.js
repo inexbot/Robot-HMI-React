@@ -34,7 +34,7 @@ function SlaveSet(props) {
   // const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
   useEffect(() => {
     sendMSGtoController("SLAVETYPE_LIST_INQUIRE","");
-    // sendMSGtoController("ROBOTTYPE_AXISMAP_INQUIRE","");
+    // sendMSGtoController("DRIVENSHAFT_INQUIRE","");
     sendMSGtoController("ENINAME_INQUIRE","");
   }, []);
 

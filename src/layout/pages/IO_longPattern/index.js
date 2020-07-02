@@ -44,7 +44,7 @@ function IO_longPattern(props){
       <Option key={i}>{ "机器人"+i}</Option>
     );
   } 
-
+  console.log(props.longPattern.current.station)
   // 跳转到当前页面获取数据
   useEffect(()=>{
     // 使用定时器一秒获取一次
@@ -66,10 +66,18 @@ function IO_longPattern(props){
     {title: "状态", dataIndex: "status",align:"center"},
   ];
   // 定义data
-  const data = [
-    { key: "1", name:"当前运行",  station: props.longPattern.current.station, programName: props.longPattern.current.name,operationNum:props.longPattern.current.times,operationNums:props.longPattern.current.count,
-    status:props.longPattern.current.status ==0?"无预约": props.longPattern.current.status ==1?"预约中":props.longPattern.current.status ==2?"运行中":props.longPattern.current.status ==3?"已预约":props.longPattern.current.status==4?"程序暂停":''  },
-  ];
+  const data = []
+  if( props.longPattern.current == undefined ){
+    data.push(
+      {station:'',name:"无",times:'',count:'',status:5}
+    )
+  }else{
+    data.push(
+      { key: "1", name:"当前运行",  station: props.longPattern.current.station, programName: props.longPattern.current.name,operationNum:props.longPattern.current.times,operationNums:props.longPattern.current.count,
+      status:props.longPattern.current.status ==0?"无预约": props.longPattern.current.status ==1?"预约中":props.longPattern.current.status ==2?"运行中":props.longPattern.current.status ==3?"已预约":props.longPattern.current.status==4?"程序暂停":''  },
+    )
+  }
+
   // 使用循环把数据放到data里
   for(let i = 0; i<10; i++){
     data.push(
@@ -77,6 +85,7 @@ function IO_longPattern(props){
       status:props.longPattern.queue[i].status ==0?"无预约": props.longPattern.queue[i].status ==1?"预约中":props.longPattern.queue[i].status ==2?"运行中":props.longPattern.queue[i].status ==3?"已预约":props.longPattern.queue[i].status==4?"程序暂停":''  },
     )
   }
+
   return(
     <div className="IO_long">
 
