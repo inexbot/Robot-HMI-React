@@ -8,7 +8,7 @@ import SlaveSetRobot from "./slaveset_robot";
 import SlaveSetPrimary from "./slaveset_primary";
 import ConTitle from "components/title";
 import intl from "react-intl-universal";
-import "./slaveset.css";
+import  "./slaveset.less";
 
 const { Option } = Select;
 
@@ -28,7 +28,7 @@ function SlaveSet(props) {
   const [state, setState] = useState({
     page: "robot",
     RPbuttontype: "dashed",
-    RPbuttoncharacter: "机器人",
+    RPbuttoncharacter: "从动轴",
     icon: <SwapRightOutlined />,
   });
   // const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
@@ -80,16 +80,17 @@ function SlaveSet(props) {
   const changeRP = () => {
     if (state.RPbuttoncharacter === "机器人") {
       setState({
-        page: "primary",
+        page: "robot",
         RPbuttoncharacter: "从动轴",
-        icon: <SwapLeftOutlined />,
+        icon: <SwapRightOutlined />,
+        
       });
     }
     if (state.RPbuttoncharacter === "从动轴") {
       setState({
-        page: "robot",
+        page: "primary",
         RPbuttoncharacter: "机器人",
-        icon: <SwapRightOutlined />,
+        icon: <SwapLeftOutlined />,
       });
     }
   };
@@ -116,7 +117,7 @@ function SlaveSet(props) {
         subtitle={intl.get("配置伺服、IO等EtherCAT从站设备")}
       />
       {/* 悬浮按钮 */}
-      <div className="linkButton">
+      <div className='linkButton'>
         <Button
           type={state.RPbuttontype}
           onClick={changeRP.bind(this)}
@@ -130,7 +131,7 @@ function SlaveSet(props) {
         <Switch checkedChildren="机器人" unCheckedChildren="从动轴" defaultChecked />
         </div> */}
 
-      <div className="hoverButton1">
+      <div className='hoverButton1'>
         <Button
           type={props.buttontype}
           shape="circle"
@@ -141,11 +142,11 @@ function SlaveSet(props) {
         </Button>
       </div>
       {/* 主要内容 */}
-      <div className="slaveset">
+      <div className='slaveset'>
         <Row>
-          <Col span={6} className="slave_l">
-            <div className="slaveset1" style={{ paddingBottom: 15 }}>
-              <span className="p1">{intl.get("通讯周期")}</span>
+          <Col span={6} className='slave_l'>
+            <div className='slaveset1' style={{ paddingBottom: 15 }}>
+              <span className='p1'>{intl.get("通讯周期")}</span>
               <span>
                 <Select
                   defaultValue="1"
@@ -158,12 +159,12 @@ function SlaveSet(props) {
                   <Option value="8">8</Option>
                 </Select>
               </span>
-              <span className="p1">ms</span>
+              <span className='p1'>ms</span>
             </div>
             <p>{intl.get("需要的ENI文件名")}：</p>
             <Alert message={SlaveENIname.ENIName} type="info" />
             <p style={{ paddingTop: 6 }}>{SlaveENIname.isHaveENI == -1? " 未识别到ENI，未连接伺服  " : "已识别到ENI，已连接伺服"}</p>
-            <div  className="slaveset-table">
+            <div  className='slaveset-table'>
               <table border="2" >
                 <tbody >
                   <tr >
@@ -179,7 +180,7 @@ function SlaveSet(props) {
           </Col>
           <Col span={18} style={{ paddingLeft: 20, marginTop: 10 }}>
             {/* 通过调用上面的pages()函数来动态加载 */}
-            <div id="slaveset">{pages()}</div>
+            <div id='slaveset'>{pages()}</div>
           </Col>
         </Row>
       </div>

@@ -289,12 +289,12 @@ export const indexMainreducers = {
           /* _state.robotParameter.dhPara = action.data; */
           return _state;
         },
-        /* 改变机器人总数 */
-        changeRobotAmount(state, action) {
-          let _state = JSON.parse(JSON.stringify(state));
-          _state.robotStatus.robotAmount = action.data.robotAmount;
-          return _state;
-        },
+        // /* 改变机器人总数 */
+        // changeRobotAmount(state, action) {
+        //   let _state = JSON.parse(JSON.stringify(state));
+        //   _state.robotStatus.robotAmount = action.data.robotAmount;
+        //   return _state;
+        // },
         /* 改变当前选中的机器人 */
         changeOuterActivedRobot(state, action) {
           let _state = JSON.parse(JSON.stringify(state));
@@ -435,8 +435,8 @@ export const indexMainreducers = {
         // 获取机器人从动轴
         inquirerobotAxle(state, action){
           let _state = JSON.parse(JSON.stringify(state)) 
-          console.log(_state.slaveSertCommit.robotAxle,action.data,"这里是获取机器人从动轴")
-          _state.slaveSertCommit.robotAxle = action.data
+          console.log(_state.slaveSertCommit.robot,action.data.robot,"这里是获取机器人从动轴")
+          _state.slaveSertCommit.robot = action.data.robot
           return _state
         },
         // 获取ENI文件名
@@ -511,11 +511,11 @@ export const indexMainreducers = {
           return _state
         },
         // 修改发送文件按钮的状态
-        changeShowUploading(state, action) {
-          let _state = JSON.parse(JSON.stringify(state));
-          console.log(_state,action,"这里是changeShowUploading")
-          _state.Backup.showUploading = action.data.showUploading;
-          return _state;
-        },
+        // changeShowUploading(state, action) {
+        //   let _state = JSON.parse(JSON.stringify(state));
+        //   console.log(_state,action,"这里是changeShowUploading")
+        //   _state.Backup.showUploading = action.data.showUploading;
+        //   return _state;
+        // },
     }
 }

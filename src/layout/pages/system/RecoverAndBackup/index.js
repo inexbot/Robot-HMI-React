@@ -21,7 +21,8 @@ function RecoverAndBackup (props) {
   const [ udiskState, setUdiskState] = useState("未插入");
   const [ fileList, setFileList] = useState([]);
   const [ uploading, setUploading] = useState(props.showUploading);
-  const [ WhetherUp,setWhetherUp ] = useState(props.Uploading)
+  const [ WhetherUp, setWhetherUp ] = useState(props.Uploading)
+  const [ FormDatas, setFormDatas ] = useState('')
 
   
   useEffect(()=>{
@@ -53,28 +54,31 @@ function RecoverAndBackup (props) {
       data: { showUploading:true },
     });
     // console.log(formData,fileList)
-    if(fileList[0].type != "application/x-zip-compressed"){
-      message.error("请选择正确的zip类型文件")
-      // setUploading(false)
-      props.dispatch({
-        type: "index/changeShowUploading",
-        data: { showUploading:false },
-      });
-    }else{
+    // if(fileList[0].type != "application/x-zip-compressed"){
+    //   message.error("请选择正确的zip类型文件")
+    //   // setUploading(false)
+    //   props.dispatch({
+    //     type: "index/changeShowUploading",
+    //     data: { showUploading:false },
+    //   });
+    // }else{
       let sendData = {
         rbot:props.currentRobot,
         name:fileList[0].name,
         size:fileList[0].size
       }
       sendMSGtoServer("INQUIRE_UPGRADE_SYSTEM",sendData)
-
-      console.log(WhetherUp)
-      if(WhetherUp == 'yes'){
-        sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",{ finish:true, sendDta:formData })
-      }
-    }
+      setFormDatas(formData)
+    // }
     return;
   };
+
+  useEffect(()=>{
+    if(WhetherUp == 'yes'){
+      sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",{ finish:true, sendDta:FormDatas })
+    }
+  },[WhetherUp])
+
   // 获取当前版本号
   const inquireVersionNum = {
     onRemove: (file) => {
