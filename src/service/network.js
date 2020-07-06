@@ -53,7 +53,7 @@ export async function sendMSGtoServer(command, data) {
   message.push(0x67);
   message.push(dataLength);
   message.push(commandString);
-  console.log(message)
+  // console.log(message)
   data === ""
     ? console.error("发送数据为空")
     : message.push(JSON.stringify(data));

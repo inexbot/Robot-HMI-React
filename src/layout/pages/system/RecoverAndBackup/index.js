@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
   return{
     currentRobot: state.index.robotStatus.currentRobot,
     showUploading: state.index.Backup.showUploading,
-    Uploading: state.index.Backup.Uploading
+    Uploading: state.index.Backup.Uploading,
+
   }
 };
 
@@ -23,7 +24,6 @@ function RecoverAndBackup (props) {
   const [ uploading, setUploading] = useState(props.showUploading);
   const [ WhetherUp, setWhetherUp ] = useState(props.Uploading)
   const [ FormDatas, setFormDatas ] = useState('')
-
   
   useEffect(()=>{
     let dataList = {
@@ -41,13 +41,25 @@ function RecoverAndBackup (props) {
     setUploading(props.showUploading)
     setUploading(props.showUploading)
   },[props.Uploading,props.showUploading])
+
+  // 文件转化文base64格式发送
+  function imgChange(obj) {
+   
+  }
   const handleUpload = () => {
     const formData = new FormData();
-    // console.log(fileList)
+    // // console.log(fileList)
     fileList.forEach((file) => {
       // console.log(file)
       formData.append("file", file);
     }); 
+    var reader = new FileReader(); // 实例化文件读取对象
+    reader.readAsDataURL(fileList[0]); // 将文件读取为 DataURL,也就是base64编码
+    reader.onload = function(ev) { // 文件读取成功完成时触发
+        var dataURL = ev.target.result; // 获得文件读取成功后的DataURL,也就是base64编码
+        setFormDatas(dataURL)
+    }
+    
     // setUploading(true);
     props.dispatch({
       type: "index/changeShowUploading",
@@ -68,16 +80,26 @@ function RecoverAndBackup (props) {
         size:fileList[0].size
       }
       sendMSGtoServer("INQUIRE_UPGRADE_SYSTEM",sendData)
-      setFormDatas(formData)
     // }
     return;
   };
 
   useEffect(()=>{
-    if(WhetherUp == 'yes'){
-      sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",{ finish:true, sendDta:FormDatas })
+    if( props.Uploading != 'no' ){
+      if( FormDatas != '' ){
+        let sal = 'aaaa'
+        console.log(typeof(FormDatas))
+
+        // console.log(FormDatas.toString())
+        let dataList = FormDatas.slice(0,FormDatas.length/100)
+        console.log(dataList)
+        sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",{ finish:false, sendData:dataList })
+        // for(let i = 1;i <= FormDatas.length/2097152; i++ ){
+        //   console.log(i)
+        // }
+      }
     }
-  },[WhetherUp])
+  },[FormDatas,props.Uploading])
 
   // 获取当前版本号
   const inquireVersionNum = {

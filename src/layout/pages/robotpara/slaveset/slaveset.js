@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
     isDisabled: state.Slave_Set.isDisabled,
     buttoncharacter: state.Slave_Set.buttoncharacter,
     buttontype: state.Slave_Set.buttontype,
-    robotAxle: state.index.slaveSertCommit.robotAxle,
+    robotAxle: state.index.slaveSertCommit.axis,
     ENIname: state.index.slaveSertCommit.ENIname,
   };
 };

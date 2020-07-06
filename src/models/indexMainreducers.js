@@ -508,6 +508,7 @@ export const indexMainreducers = {
           let _state = JSON.parse(JSON.stringify(state)) 
           // console.log('向服务器发送了文件')
           console.log(action,'接收到服务器传过来的数据')
+          _state.Backup.Uploading = action.data.answer
           return _state
         },
         // 修改发送文件按钮的状态

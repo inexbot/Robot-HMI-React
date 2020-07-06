@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 
 const mapStateToProps = (state) => {
   return {
-    robotAxle: state.index.slaveSertCommit.robot,
+    robotAxle: state.index.slaveSertCommit.axis,
   };
 };
 
@@ -60,7 +60,6 @@ function SlaveSetRobot(props) {
               <Option key="8" value={8}>六轴异形一</Option>
               <Option key="9" value={9}>六轴SCARA</Option>
             </Select>
-
           </div>
         </div>
         <div style={{ width:'50%'}}>
