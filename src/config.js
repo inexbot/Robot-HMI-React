@@ -1,6 +1,6 @@
 
 export const config ={
-    serverIP: "192.168.0.52",
+    serverIP: "192.168.0.38",
     serverPort: "9000",
     modeDisplay:{
         伺服参数: "none",
@@ -10,4 +10,3 @@ export const config ={
         工艺按钮:"none"
     }
 }
-

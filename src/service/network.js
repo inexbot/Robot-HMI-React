@@ -53,11 +53,10 @@ export async function sendMSGtoServer(command, data) {
   message.push(0x67);
   message.push(dataLength);
   message.push(commandString);
-  // console.log(message)
+  console.log(data)
   data === ""
-    ? console.error("发送数据为空")
-    : message.push(JSON.stringify(data));
-
+    ? console.error("发送数据为空") : data.finish == undefined?  message.push(JSON.stringify(data)) : message.push(data) ;
+  console.log(message)
     try {
       if (ws.readyState === 1) {
         ws.send(message);
