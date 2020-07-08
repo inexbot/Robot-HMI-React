@@ -51,14 +51,14 @@ function SlaveSetRobot(props) {
               style={{ width: '40%',marginLeft:'15%' }}
             >
               <Option key="1" value={1}>无</Option>
-              <Option key="2" value={2}>六轴</Option>
-              <Option key="3" value={3}>四轴SCARA</Option>
-              <Option key="4" value={4}>四轴码垛</Option>
-              <Option key="5" value={5}>四轴</Option>
-              <Option key="6" value={6}>一轴</Option>
-              <Option key="7" value={7}>五轴</Option>
-              <Option key="8" value={8}>六轴异形一</Option>
-              <Option key="9" value={9}>六轴SCARA</Option>
+              <Option key="2" value={'R_GENERAL_6S'}>六轴</Option>
+              <Option key="3" value={'R_SCARA'}>四轴SCARA</Option>
+              <Option key="4" value={'R_FOURAXIS_PALLET'}>四轴码垛</Option>
+              <Option key="5" value={'R_FOURAXIS'}>四轴</Option>
+              <Option key="6" value={'R_GENERAL_1S'}>一轴</Option>
+              <Option key="7" value={'R_GENERAL_5S'}>五轴</Option>
+              <Option key="8" value={'R_GENERAL_6S_1'}>六轴异形一</Option>
+              <Option key="9" value={'R_SCARA_TWOAXIS'}>二轴SCARA</Option>
             </Select>
           </div>
         </div>

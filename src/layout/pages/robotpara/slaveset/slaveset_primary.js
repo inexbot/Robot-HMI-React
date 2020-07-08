@@ -4,6 +4,7 @@ import { connect } from "dva";
 import { servoAmount } from "./slaveset_header";
 import { useState } from "react";
 import './slaveset.less'
+import { sendMSGtoController } from "service/network";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
