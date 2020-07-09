@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Col, Tabs, Select, Row } from "antd";
+import { Col, Tabs, Select, Row, Table } from "antd";
 import { connect } from "dva";
 import "./slaveset.less";
 import { servoAmount } from "./slaveset_header";
@@ -18,7 +18,10 @@ function SlaveSetRobot(props) {
   const [ RobotServo, setRobotServo] = useState("虚拟伺服")
   const [ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
   const [ RobotNum, setRobotNum ] = useState(props.robotAxle.length)
-  const [ RobotTypeNum, setRobotTypeNum ] = useState()
+  const [ RobotTypeNum, setRobotTypeNum ] = useState(6)
+  const [ TypeColumns, setTypeColumns ] = useState('')
+  const [ TypeDatas, setTypeDatas ] = useState('')
+
   console.log(SalveRobotAxle)
   // useEffect(()=>{
   //   setSalveRobotAxle(props.robotAxle)
@@ -47,10 +50,42 @@ function SlaveSetRobot(props) {
             <Select
               defaultValue={1}
               disabled={props.isDisabled}
-              onChange = {(value)=>{ console.log(value) }}
+              onChange = {(value)=>{ 
+                switch ( value ){
+                  case 0 :
+                    setRobotTypeNum(0)
+                    break;
+                  case 'R_GENERAL_6S':
+                    setRobotTypeNum(6)
+                    break;
+                  case 'R_SCARA':
+                    setRobotTypeNum(4)
+                    break;
+                  case 'R_FOURAXIS_PALLET':
+                    setRobotTypeNum(4)
+                    break;
+                  case 'R_FOURAXIS':
+                    setRobotTypeNum(4)
+                    break;
+                  case 'R_GENERAL_1S':
+                    setRobotTypeNum(1)
+                    break;
+                  case 'R_GENERAL_5S':
+                    setRobotTypeNum(5)
+                    break;
+                  case 'R_GENERAL_6S_1':
+                    setRobotTypeNum(6)
+                    break;
+                  case 'R_SCARA_TWOAXIS':
+                    setRobotTypeNum(2)
+                    break;
+                  default:
+
+                }
+              }}
               style={{ width: '40%',marginLeft:'15%' }}
             >
-              <Option key="1" value={1}>无</Option>
+              <Option key="1" value={0}>无</Option>
               <Option key="2" value={'R_GENERAL_6S'}>六轴</Option>
               <Option key="3" value={'R_SCARA'}>四轴SCARA</Option>
               <Option key="4" value={'R_FOURAXIS_PALLET'}>四轴码垛</Option>
@@ -59,8 +94,20 @@ function SlaveSetRobot(props) {
               <Option key="7" value={'R_GENERAL_5S'}>五轴</Option>
               <Option key="8" value={'R_GENERAL_6S_1'}>六轴异形一</Option>
               <Option key="9" value={'R_SCARA_TWOAXIS'}>二轴SCARA</Option>
+              {/* <Option key="10" value={'R_SCARA_TWOAXIS'}>二轴SCARA</Option>
+              <Option key="11" value={'R_SCARA_TWOAXIS'}>二轴SCARA</Option>
+              <Option key="12" value={'R_SCARA_TWOAXIS'}>二轴SCARA</Option>
+              <Option key="13" value={'R_SCARA_TWOAXIS'}>二轴SCARA</Option> */}
             </Select>
           </div>
+          <Table
+            style={{ marginTop:'10px' }}
+            columns = { TypeColumns }
+            dataSource = { TypeDatas }
+            pagination={false}
+            size="small"
+          >
+          </Table>
         </div>
         <div style={{ width:'50%'}}>
           bb
@@ -69,8 +116,24 @@ function SlaveSetRobot(props) {
     )
   }
   
-
-
+  useEffect(()=>{
+    let TypeColumn = [];
+    let TypeData = [];
+    TypeColumn.push(
+      { title:'轴', dataIndex:'name' },
+      { title:'伺服', dataIndex:'servo' }
+    )
+    console.log(RobotTypeNum)
+    for( let i = 0; i < RobotTypeNum; i++){
+      TypeData.push(
+        { key:`${i+1}`, name:`${i+1}轴`, servo: <Select defaultValue='虚拟伺服' ><Option key={i+1} value={i+1}>虚拟伺服</Option></Select> }
+      )
+    }
+    setTypeColumns(TypeColumn)
+    setTypeDatas(TypeData)
+    console.log(TypeColumn,TypeData)
+  },[RobotTypeNum])
+  // console.log(RobotTypeNum)
   useEffect(()=>{
     setSalveRobotAxle(props.robotAxle)
     setRobotNum(props.robotAxle.length)

@@ -512,11 +512,11 @@ export const indexMainreducers = {
           return _state
         },
         // 修改发送文件按钮的状态
-        // changeShowUploading(state, action) {
-        //   let _state = JSON.parse(JSON.stringify(state));
-        //   console.log(_state,action,"这里是changeShowUploading")
-        //   _state.Backup.showUploading = action.data.showUploading;
-        //   return _state;
-        // },
+        changeShowUploading(state, action) {
+          let _state = JSON.parse(JSON.stringify(state));
+          console.log(_state,action,"这里是changeShowUploading")
+          _state.Backup.showUploading = action.data.showUploading;
+          return _state;
+        },
     }
 }

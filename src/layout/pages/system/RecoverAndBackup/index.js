@@ -26,7 +26,8 @@ function RecoverAndBackup (props) {
   const [ FormDatas, setFormDatas ] = useState('')
   
   var totalPieces;
-  var bytesPerPiece = 1048574;
+  // first 2045
+  var bytesPerPiece = 2731 ;
   useEffect(()=>{
     let dataList = {
       version:"v1.0-rc1-67-gf34dae7"
@@ -50,24 +51,25 @@ function RecoverAndBackup (props) {
       // console.log(file)
       formData.append("file", file);
     }); 
+    // console.log(fileList[0])
+      var reader = new FileReader();
     console.log(fileList[0])
 
+    // setFormDatas(formData)
     // 转化base64字符串上传
-    setFormDatas(formData)
-    var reader = new FileReader(); // 实例化文件读取对象
-    reader.readAsDataURL(fileList[0]); // 将文件读取为 DataURL,也就是base64编码
-    reader.onload = function(ev) { // 文件读取成功完成时触发
-        var dataURL = ev.target.result; // 获得文件读取成功后的DataURL,也就是base64编码
-        setFormDatas(dataURL)
-        // console.log(dataURL + dataURL)
-    }
+    // var reader = new FileReader(); // 实例化文件读取对象
+    // reader.readAsDataURL(fileList[0]); // 将文件读取为 DataURL,也就是base64编码
+    // reader.onload = function(ev) { // 文件读取成功完成时触发
+    //     var dataURL = ev.target.result; // 获得文件读取成功后的DataURL,也就是base64编码
+    //     setFormDatas(dataURL)
+    //     // console.log(dataURL)
+    // }
 
-    
     // // setUploading(true);
-    // props.dispatch({
-    //   type: "index/changeShowUploading",
-    //   data: { showUploading:true },
-    // });
+    props.dispatch({
+      type: "index/changeShowUploading",
+      data: { showUploading:true },
+    });
     // // console.log(formData,fileList)
     // // if(fileList[0].type != "application/x-zip-compressed"){
     // //   message.error("请选择正确的zip类型文件")
@@ -87,122 +89,53 @@ function RecoverAndBackup (props) {
     // }
     return;
 
-
-    // 分包直接发送文件
-    // var blob = document.getElementById("file").files[0];
-    // console.log(blob)
-    // var start = 0;
-    // var end;
-    // var index = 0;
-    // var filesize = blob.size;
-    // var filename = blob.name;
-    // // 文件切片的总数
-    // totalPieces = Math.ceil(filesize / bytesPerPiece);
-    // console.log(totalPieces)
-    // while ( start < filesize ){
-    //   console.log(start,filesize)
-    //   end = start + bytesPerPiece;
-    //   if(end > filesize) {
-    //     end = filesize;
-    //   }
-    //   var chunk = blob.slice(start,end);//切割文件  
-    //   var sliceIndex= blob.name + index;
-    //   var formData = new FormData();
-    //   formData.append("file", chunk, filename);
-    //   sendMSGtoServer('UPLOADING_UPGRADE_SYSTEM',formData)
-    //   console.log(formData)
-    //   start = end;
-    //   index++;
-    // }
-
   };
-  // useEffect(()=>{
-  //   if( WhetherUp != 'no' ){
-  //     let DataList = {
-  //       finish:false,
-  //       sendData:FormDatas
-  //     }
-  //     sendMSGtoServer('UPLOADING_UPGRADE_SYSTEM',DataList)
-  //   }
-  // },[WhetherUp])
 
-  // const Upload = () =>{
-  //   console.log(fileList[0])
-    
-  // }
-
-  var reader = null;  //读取操作对象
-  var step = 1024 * 1024 * 2;  //每次读取文件大小 ,字节数
-  var cuLoaded = 0; //当前已经读取总数
-  var file = null; //当前读取的文件对象
-  var total = 0;        //记录当前文件总字节数
   useEffect(()=>{
     // let appls = []
     if( props.Uploading == 'yes' ){
 
-      // 使用ArrayBuffer发送
-      // file = fileList[0];
-      // total = file.size;
-      // console.info("文件大小：" + file.size);
-      // bindReader()
-
-      // // 绑定reader
-      // const bindReader = () =>{
-      //   bindReader = 0;
-      //   reader = new FileReader();
-      //   // 读取一段成功
-      //   reader.onload = function (e) {
-      //     console.info('读取总数：' + e.loaded);
-      //     // 继续读取
-      //     loadSuccess(e.loaded);
-      //   }
-      //   // 开始读取
-      //   readBlob()
-      // }
-
-      // // 读取文件成功处理
-      // const loadSuccess = (loaded) =>{
-      //   var blob = reader.result;
-
-      // }
-
       // 使用字符串的方式来分包上传文件
-      if( FormDatas != '' ){
-        var start = 0;
-        var end;
-        var index = 0;
-        totalPieces = Math.ceil(FormDatas.length / bytesPerPiece);
-        console.log(totalPieces)
-        while( start < FormDatas.length ){
-          console.log(start,FormDatas.length)
-          end = start + bytesPerPiece;
-          let dataList = FormDatas.slice( start, end )
-          console.log(dataList.length)
+      // if( FormDatas != '' ){
+      //   var start = 0;
+      //   var end;
+      //   var index = 0;
+      //   totalPieces = Math.ceil(FormDatas.length / bytesPerPiece);
+      //   // console.log(totalPieces)
+      //   while( start < FormDatas.length ){
+      //     // console.log(start,FormDatas.length)
+      //     end = start + bytesPerPiece;
+      //     let dataList = FormDatas.slice( start, end )
+      //     console.log(dataList.length)
+      //     sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",dataList)
+      //     // appls.push(dataList)
+      //     start = end ;
+      //     index++;
+      //   }
+      //   if( start >= FormDatas.length ){
+      //     sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",{ finish : true })
+      //     props.dispatch({
+      //       type: "index/changeShowUploading",
+      //       data: { showUploading:false },
+      //     });
+      //     message.success('文件上传成功');
+      //   }
+      //   // console.log(typeof(FormDatas))
+      //   // console.log(FormDatas.length)
+      //   // console.log(FormDatas.toString())
 
-          sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",dataList)
-          // appls.push(dataList)
-          start = end ;
-          index++;
-        }
-        if( start >= FormDatas.length ){
-          sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",{ finish : true })
-        }
-        // console.log(typeof(FormDatas))
-        // console.log(FormDatas.length)
-        // console.log(FormDatas.toString())
-
-        // console.log(dataList)
+      //   // console.log(dataList)
         
-      //   // for(let i = 1;i <= FormDatas.length/2097152; i++ ){
-      //   //   console.log(i)
-      //   // }
-      }
+      // //   // for(let i = 1;i <= FormDatas.length/2097152; i++ ){
+      // //   //   console.log(i)
+      // //   // }
+      // }
+      // sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",FormDatas)
+
     }
     // console.log(appls)
     // console.log(JSON.parse(JSON.stringify(appls[0]+appls[1]+appls[2])))
   },[FormDatas,props.Uploading])
-
-
 
   // 获取当前版本号
   const inquireVersionNum = {
@@ -245,8 +178,6 @@ function RecoverAndBackup (props) {
   };
   return (
     <div>
-      <input type="file" name="file" id="file" />
-      <button id="upload" onClick={handleUpload}>upload</button>
       {/* 头部 */}
       <ConTitle
         title={intl.get("恢复与备份")}
@@ -261,7 +192,7 @@ function RecoverAndBackup (props) {
             <div>
               <Upload {...inquireVersionNum}>
                 <Button>
-                  <UploadOutlined /> 上传文件
+                  <UploadOutlined /> 选择文件
                 </Button>
               </Upload>
               <Button
@@ -271,7 +202,7 @@ function RecoverAndBackup (props) {
                 loading={uploading}
                 style={{ marginTop: 16 }}
               >
-                {uploading ? "Uploading" : "Start Upload"}
+                {uploading ? "上传中,请勿做其它操作" : "点击上传"}
               </Button>
             </div>
           </TabPane>
