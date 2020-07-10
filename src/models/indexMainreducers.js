@@ -284,11 +284,11 @@ export const indexMainreducers = {
           return _state;
         },
         /* 接收从站列表 */
-        receiveSlaveTypeList(state, action) {
-          let _state = JSON.parse(JSON.stringify(state));
-          /* _state.robotParameter.dhPara = action.data; */
-          return _state;
-        },
+        // receiveSlaveTypeList(state, action) {
+        //   let _state = JSON.parse(JSON.stringify(state));
+        //   /* _state.robotParameter.dhPara = action.data; */
+        //   return _state;
+        // },
         // /* 改变机器人总数 */
         // changeRobotAmount(state, action) {
         //   let _state = JSON.parse(JSON.stringify(state));
@@ -435,8 +435,7 @@ export const indexMainreducers = {
         // 获取机器人从动轴
         inquirerobotAxle(state, action){
           let _state = JSON.parse(JSON.stringify(state)) 
-          console.log(_state.slaveSertCommit.robot,action.data.robot,"这里是获取机器人从动轴")
-          _state.slaveSertCommit.robot = action.data.robot
+          _state.slaveSertCommit.axis = action.data.robot
           return _state
         },
         // 获取ENI文件名
@@ -514,9 +513,15 @@ export const indexMainreducers = {
         // 修改发送文件按钮的状态
         changeShowUploading(state, action) {
           let _state = JSON.parse(JSON.stringify(state));
-          console.log(_state,action,"这里是changeShowUploading")
-          _state.Backup.showUploading = action.data.showUploading;
+          _state.Backup.showUploading = action.data.showUploading
           return _state;
         },
+        // 查询从站配置页面机器人
+        inquireConfigRobot(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          console.log('这里是擦汗寻从站配置机器人',_state.slaveSertCommit.robot,action.data)
+          _state.slaveSertCommit.robot = action.data
+          return _state;
+        }
     }
 }

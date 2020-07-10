@@ -493,5 +493,11 @@ export const CommandList = {
 
     // 修改IO程序
     REMOTE_JOBFILE_SET:0x2c01,
-    
+
+    // 查询从站配置机器人
+    ROBOTTYPE_AXISMAP_INQUIRE:0x2e15,
+
+    // 接受查询从站配置机器人
+    ROBOTTYPE_AXISMAP_RESPOND:0x2e16,
+
 };

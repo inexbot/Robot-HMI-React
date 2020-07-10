@@ -8,7 +8,7 @@ import SlaveSetRobot from "./slaveset_robot";
 import SlaveSetPrimary from "./slaveset_primary";
 import ConTitle from "components/title";
 import intl from "react-intl-universal";
-import  "./slaveset.less";
+import  "./slaveset.module.less";
 
 const { Option } = Select;
 
@@ -33,8 +33,8 @@ function SlaveSet(props) {
   });
   // const[ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
   useEffect(() => {
-    sendMSGtoController("SLAVETYPE_LIST_INQUIRE","");
-    // sendMSGtoController("DRIVENSHAFT_INQUIRE","");
+    sendMSGtoController("DRIVENSHAFT_INQUIRE","");
+    sendMSGtoController("ROBOTTYPE_AXISMAP_INQUIRE","");
     sendMSGtoController("ENINAME_INQUIRE","");
   }, []);
 
@@ -46,7 +46,6 @@ function SlaveSet(props) {
   // 修改按钮的回调函数
   const change = () => {
     // console.log(props.dispatch())
-    console.log(props)
     if (props.isDisabled === true) {
       props.dispatch({
         type: "Slave_Set/changeDisabled",

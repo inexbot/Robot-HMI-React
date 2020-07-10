@@ -1,28 +1,35 @@
 import React, { useEffect } from "react";
-import { Col, Tabs, Select, Row, Table } from "antd";
+import { Col, Tabs, Select, Row, Table, Input } from "antd";
 import { connect } from "dva";
-import "./slaveset.less";
+import './slaveset.module.less'
 import { servoAmount } from "./slaveset_header";
 import { useState } from "react";
+import { sendMSGtoController } from "service/network";
 const { Option } = Select;
 const { TabPane } = Tabs;
 
 const mapStateToProps = (state) => {
   return {
     robotAxle: state.index.slaveSertCommit.axis,
+    Robot: state.index.slaveSertCommit.robot,
+    isDisabled: state.Slave_Set.isDisabled,
   };
 };
 
 function SlaveSetRobot(props) {
-
   const [ RobotServo, setRobotServo] = useState("虚拟伺服")
-  const [ SalveRobotAxle, setSalveRobotAxle ] = useState(props.robotAxle)
-  const [ RobotNum, setRobotNum ] = useState(props.robotAxle.length)
+  const [ RobotNum, setRobotNum ] = useState(props.Robot.sum)
+  const [ RobotType, setRobotType ] = useState(props.Robot.robot[0].robotType)
   const [ RobotTypeNum, setRobotTypeNum ] = useState(6)
+  const [ RobotAxisNum, setRobotAxisNum ] = useState(1)
+  const [ RobotAxisGroupNumone, setRobotAxisGroupNumone ] = useState(0)
+  const [ RobotAxisGroupNumtwo, setRobotAxisGroupNumtwo ] = useState(0)
+  const [ RobotAxisGroupNumthree, setRobotAxisGroupNumthree ] = useState(0)
   const [ TypeColumns, setTypeColumns ] = useState('')
   const [ TypeDatas, setTypeDatas ] = useState('')
+  const [ AxisColumns, setAxisColumns ] = useState('')
+  const [ AxisDatas, setAxisDatas ] = useState('')
 
-  console.log(SalveRobotAxle)
   // useEffect(()=>{
   //   setSalveRobotAxle(props.robotAxle)
   // },[props.robotAxle])
@@ -39,16 +46,27 @@ function SlaveSetRobot(props) {
     console.log('sss')
     // setRobotNum()
   }
-  const RobotType = []
+  console.log(RobotNum)
+  
+  useEffect(()=>{
+    
+  },[])
+  // 
+  useEffect(()=>{
+    setRobotNum(props.Robot.sum)
+    console.log(props.Robot.sum)
+  },[props.Robot])
 
+  const RobotTypeList = []
+  // 使用循环来循环出机器人及其内容
   for(let i = 0; i < RobotNum; i++){
-    RobotType.push(
+    RobotTypeList.push(
       <TabPane tab={`机器人${i+1}`} key={i+1} style={{ display:'flex' }}>
         <div style={{ width:'50%' }}>
           <div>
             机器人类型:
             <Select
-              defaultValue={1}
+              defaultValue={RobotType}
               disabled={props.isDisabled}
               onChange = {(value)=>{ 
                 switch ( value ){
@@ -80,7 +98,6 @@ function SlaveSetRobot(props) {
                     setRobotTypeNum(2)
                     break;
                   default:
-
                 }
               }}
               style={{ width: '40%',marginLeft:'15%' }}
@@ -110,12 +127,51 @@ function SlaveSetRobot(props) {
           </Table>
         </div>
         <div style={{ width:'50%'}}>
-          bb
+          <div>
+            外部轴组数:
+            <Select
+              defaultValue={RobotAxisNum}
+              disabled={props.isDisabled}
+              onChange = {(value)=>{ 
+                switch ( value ){
+                  case 0 :
+                    setRobotAxisNum(0)
+                  break;
+                  case 1 :
+                    setRobotAxisNum(1)
+                  break;
+                  case 2 :
+                    setRobotAxisNum(2)
+                  break;
+                  case 3 :
+                    setRobotAxisNum(3)
+                  break;
+                  default:
+
+                }
+              }}
+              style={{ width: '40%',marginLeft:'15%' }}
+            >
+              <Option key="1" value={0}>无</Option>
+              <Option key="2" value={1}>1</Option>
+              <Option key="3" value={2}>2</Option>
+              <Option key="4" value={3}>3</Option>
+            </Select>
+          </div>
+          <Table
+            style={{ marginTop:'10px' }}
+            rowClassName='Axistable'
+            columns = { AxisColumns }
+            dataSource = { AxisDatas }
+            pagination={false}
+            size="small"
+          >
+          </Table>
         </div>
       </TabPane>
     )
   }
-  
+  // 机器人类型
   useEffect(()=>{
     let TypeColumn = [];
     let TypeData = [];
@@ -126,19 +182,44 @@ function SlaveSetRobot(props) {
     console.log(RobotTypeNum)
     for( let i = 0; i < RobotTypeNum; i++){
       TypeData.push(
-        { key:`${i+1}`, name:`${i+1}轴`, servo: <Select defaultValue='虚拟伺服' ><Option key={i+1} value={i+1}>虚拟伺服</Option></Select> }
+        { key:`${i+1}`, name:`${i+1}轴`, servo:
+            <Select style={{ width:'100%' }} disabled={props.isDisabled} defaultValue='虚拟伺服' ><Option key={i+1} value={i+1}>虚拟伺服</Option></Select> },
       )
     }
     setTypeColumns(TypeColumn)
     setTypeDatas(TypeData)
     console.log(TypeColumn,TypeData)
   },[RobotTypeNum])
-  // console.log(RobotTypeNum)
-  useEffect(()=>{
-    setSalveRobotAxle(props.robotAxle)
-    setRobotNum(props.robotAxle.length)
-  },props.robotAxle)
 
+  // 从动轴组数
+  useEffect(()=>{
+    let AxisColumn = [];
+    let AxisData = [];
+    AxisColumn.push(
+      { title:'外部轴', dataIndex:'name', colSpan:0 },
+      { title:'伺服', dataIndex:'servo', colSpan:0 }
+    )
+    for( let i = 0; i < RobotAxisNum; i++ ){
+      AxisData.push(
+        { key:`${i+1}`,  name:`组${i+1}`,servo: 
+          <Select key={i+1} disabled={props.isDisabled} style={{ width:'100%' }} defaultValue={1} > 
+            <Option key='1' value={1}>单轴旋转台</Option>
+            <Option key='2' value={2}>双轴旋转台</Option>
+            <Option key='5' value={3}>地轨</Option>
+          </Select>
+         },
+      )
+    }
+    setAxisColumns(AxisColumn)
+    setAxisDatas(AxisData)
+  },[RobotAxisNum])
+  // console.log(RobotTypeNum)
+
+  useEffect(()=>{
+    for(let i = 0; i < RobotAxisGroupNumone; i++){
+
+    }
+  },[RobotAxisGroupNumone])
   // 机器人
   return (
     <div>
@@ -152,9 +233,9 @@ function SlaveSetRobot(props) {
           <span className='p1'>机器人数目</span>
           <span>
             <Select
-              defaultValue={SalveRobotAxle.length}
+              value = { RobotNum }
               disabled={props.isDisabled}
-              onChange = {(value)=>{ setRobotNum(Number(value)) }}
+              onChange = {(value)=>{ setRobotNum(Number(value));  console.log(value)}}
               style={{ width: 200 }}
             >
               <Option key="1" value="1">1</Option>
@@ -166,7 +247,7 @@ function SlaveSetRobot(props) {
         </div>
         <div>
           <Tabs defaultActiveKey="1" onChange={callback}>
-            {RobotType}
+            {RobotTypeList}
           </Tabs>
         </div>
       </div>

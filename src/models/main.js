@@ -474,6 +474,12 @@ export default {
               data:dataString
             })
             break;
+          case "2e16":
+            dispatch({
+              type:"inquireConfigRobot",
+              data:dataString
+            })
+            break;
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);
