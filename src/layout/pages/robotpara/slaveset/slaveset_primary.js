@@ -65,7 +65,9 @@ function SlaveSetPrimary(props) {
   useEffect(()=>{
     const RobotTyleNum = [];
     const axisTypeNum = [];
-    // console.log(RobotNum)
+    console.log(RobotNum)
+    console.log(props.Robot)
+    console.log(SalveRobotAxle)
     for(let j = 0; j < SalveRobotAxle[RobotNum].axis.length; j++){
       RobotTyleNum.push(
         <TabPane tab={`J${j+1}`} key={j+1} style={{  }} >
@@ -74,7 +76,7 @@ function SlaveSetPrimary(props) {
             <Select
               defaultValue={axisNum}
               style={{ width: 100 , marginLeft:'40px'}}
-              onChange={(value)=>{ setaxisNum(Number(value)) }}
+              onChange={(value)=>{ setaxisNum(Number(value)) ; console.log(value) }}
             >
               <Option key='1' value={0}>0</Option>
               <Option key='2' value={1}>1</Option>

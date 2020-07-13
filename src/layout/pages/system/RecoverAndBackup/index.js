@@ -52,18 +52,28 @@ function RecoverAndBackup (props) {
       formData.append("file", file);
     }); 
     // console.log(fileList[0])
-      var reader = new FileReader();
-    console.log(fileList[0])
+    //   var reader = new FileReader();
+    // console.log(fileList[0])
+    // reader.readAsArrayBuffer(fileList[0]);//安字节读取文件并存储至二进制缓存区
+
+    // reader.onload = function (e) {
+    //   let result = e.target.result;
+    //   let blob = new Blob([result])
+    //   console.log(blob)
+    // }
+
+
+
 
     // setFormDatas(formData)
     // 转化base64字符串上传
-    // var reader = new FileReader(); // 实例化文件读取对象
-    // reader.readAsDataURL(fileList[0]); // 将文件读取为 DataURL,也就是base64编码
-    // reader.onload = function(ev) { // 文件读取成功完成时触发
-    //     var dataURL = ev.target.result; // 获得文件读取成功后的DataURL,也就是base64编码
-    //     setFormDatas(dataURL)
-    //     // console.log(dataURL)
-    // }
+    var reader = new FileReader(); // 实例化文件读取对象
+    reader.readAsDataURL(fileList[0]); // 将文件读取为 DataURL,也就是base64编码
+    reader.onload = function(ev) { // 文件读取成功完成时触发
+        var dataURL = this.result; // 获得文件读取成功后的DataURL,也就是base64编码
+        setFormDatas(dataURL)
+        console.log(dataURL)
+    }
 
     // // setUploading(true);
     props.dispatch({

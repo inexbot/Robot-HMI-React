@@ -22,9 +22,9 @@ function SlaveSetRobot(props) {
   const [ RobotType, setRobotType ] = useState(props.Robot.robot[0].robotType)
   const [ RobotTypeNum, setRobotTypeNum ] = useState(6)
   const [ RobotAxisNum, setRobotAxisNum ] = useState(1)
-  const [ RobotAxisGroupNumone, setRobotAxisGroupNumone ] = useState(0)
-  const [ RobotAxisGroupNumtwo, setRobotAxisGroupNumtwo ] = useState(0)
-  const [ RobotAxisGroupNumthree, setRobotAxisGroupNumthree ] = useState(0)
+  const [ RobotAxisGroupNum1, setRobotAxisGroupNum1 ] = useState(0)
+  const [ RobotAxisGroupNum2, setRobotAxisGroupNum2 ] = useState(0)
+  const [ RobotAxisGroupNum3, setRobotAxisGroupNum3 ] = useState(0)
   const [ TypeColumns, setTypeColumns ] = useState('')
   const [ TypeDatas, setTypeDatas ] = useState('')
   const [ AxisColumns, setAxisColumns ] = useState('')
@@ -56,6 +56,8 @@ function SlaveSetRobot(props) {
     setRobotNum(props.Robot.sum)
     console.log(props.Robot.sum)
   },[props.Robot])
+
+  
 
   const RobotTypeList = []
   // 使用循环来循环出机器人及其内容
@@ -165,6 +167,9 @@ function SlaveSetRobot(props) {
             dataSource = { AxisDatas }
             pagination={false}
             size="small"
+            expandable= {{ 
+              expandRowByClick:false
+             }}
           >
           </Table>
         </div>
@@ -199,27 +204,111 @@ function SlaveSetRobot(props) {
       { title:'外部轴', dataIndex:'name', colSpan:0 },
       { title:'伺服', dataIndex:'servo', colSpan:0 }
     )
+    // 根据外部轴组数变量来循环出来要显示的表格内容
     for( let i = 0; i < RobotAxisNum; i++ ){
       AxisData.push(
         { key:`${i+1}`,  name:`组${i+1}`,servo: 
-          <Select key={i+1} disabled={props.isDisabled} style={{ width:'100%' }} defaultValue={1} > 
-            <Option key='1' value={1}>单轴旋转台</Option>
-            <Option key='2' value={2}>双轴旋转台</Option>
-            <Option key='5' value={3}>地轨</Option>
-          </Select>
+          <Select key={i+1} disabled={props.isDisabled} style={{ width:'100%' }} defaultValue={1} onChange={(value)=>{
+            console.log(value)
+            if( i==0 ){
+              setRobotAxisGroupNum1(value)
+            }else if( i==1 ){
+              setRobotAxisGroupNum2(value)
+            }else if( i==2 ){
+              setRobotAxisGroupNum3(value)
+            }
+          }} > 
+            <Option key='1' value={1} >单轴旋转台</Option>
+            <Option key='2' value={2} >双轴旋转台</Option>
+            <Option key='5' value={3} >地轨</Option>
+          </Select>,
+          // 表格子内容使用三元运算符来判断
+          children: i == 0? RobotAxisGroupNum1 == 1?[ {
+              key:`${i+1}`,
+              name:`轴`,
+              servo:
+              <Select defaultValue='虚拟伺服' ><Option value={0}>虚拟伺服</Option></Select>
+            },
+          ] : RobotAxisGroupNum1 == 2? [
+            {
+              key:`${(i+1)}`,
+              name:`轴1`,
+              servo:
+              <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+            },
+            {
+              key:`${(i+2)}`,
+              name:`轴2`,
+              servo:
+              <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+            }
+          ] : [
+            {
+              key:`${(i+1)}`,
+              name:`轴`,
+              servo:
+              <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+            }
+          ]: i==1? RobotAxisGroupNum2 == 1?[ {
+            key:`${i+1}`,
+            name:`轴`,
+            servo:
+            <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+          },
+        ] : RobotAxisGroupNum2 == 2? [
+          {
+            key:`${(i+1)}`,
+            name:`轴1`,
+            servo:
+            <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+          },
+          {
+            key:`${(i+2)}`,
+            name:`轴2`,
+            servo:
+            <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+          }
+        ] : [
+          {
+            key:`${(i+1)}`,
+            name:`轴`,
+            servo:
+            <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+          }
+        ]: RobotAxisGroupNum3 == 1?[ {
+          key:`${i+1}`,
+          name:`轴`,
+          servo:
+          <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+        },
+        ] : RobotAxisGroupNum3 == 2? [
+          {
+            key:`${(i+1)}`,
+            name:`轴1`,
+            servo:
+            <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+          },
+          {
+            key:`${(i+2)}`,
+            name:`轴2`,
+            servo:
+            <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+          }
+        ] : [
+          {
+            key:`${(i+1)}`,
+            name:`轴`,
+            servo:
+            <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
+          }
+        ]
          },
       )
     }
     setAxisColumns(AxisColumn)
     setAxisDatas(AxisData)
-  },[RobotAxisNum])
-  // console.log(RobotTypeNum)
+  },[RobotAxisNum,RobotAxisGroupNum1,RobotAxisGroupNum2,RobotAxisGroupNum3])
 
-  useEffect(()=>{
-    for(let i = 0; i < RobotAxisGroupNumone; i++){
-
-    }
-  },[RobotAxisGroupNumone])
   // 机器人
   return (
     <div>
