@@ -30,9 +30,7 @@ function SlaveSetRobot(props) {
   const [ AxisColumns, setAxisColumns ] = useState('')
   const [ AxisDatas, setAxisDatas ] = useState('')
 
-  // useEffect(()=>{
-  //   setSalveRobotAxle(props.robotAxle)
-  // },[props.robotAxle])
+
 
   // 伺服选择下拉框的内容生成
   const servoSelectOption = (servoAmount) => {

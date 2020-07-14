@@ -519,9 +519,15 @@ export const indexMainreducers = {
         // 查询从站配置页面机器人
         inquireConfigRobot(state, action){
           let _state = JSON.parse(JSON.stringify(state));
-          console.log('这里是擦汗寻从站配置机器人',_state.slaveSertCommit.robot,action.data)
+          // console.log('这里是擦汗寻从站配置机器人',_state.slaveSertCommit.robot,action.data)
           _state.slaveSertCommit.robot = action.data
           return _state;
+        },
+        // 查询IO远程控制页面机器人
+        inquireIoremote(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          _state.Ioremote = action.data
+          return _state
         }
     }
 }

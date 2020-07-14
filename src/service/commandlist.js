@@ -500,4 +500,13 @@ export const CommandList = {
     // 接受查询从站配置机器人
     ROBOTTYPE_AXISMAP_RESPOND:0x2e16,
 
+    // IO远程控制设置
+    IO_CONTROL_SET:0x2f01,
+
+    // IO远程控制查询
+    IO_CONTROL_INQUIRE:0x2f02,
+
+    // 接收IO远程控制
+    IO_CONTROL_RESPOND:0x2f03,
+
 };

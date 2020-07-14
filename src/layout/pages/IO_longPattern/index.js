@@ -77,13 +77,20 @@ function IO_longPattern(props){
       status:props.longPattern.current.status ==0?"无预约": props.longPattern.current.status ==1?"预约中":props.longPattern.current.status ==2?"运行中":props.longPattern.current.status ==3?"已预约":props.longPattern.current.status==4?"程序暂停":''  },
     )
   }
-
+  console.log(props.longPattern.queue.length-1)
   // 使用循环把数据放到data里
   for(let i = 0; i<10; i++){
-    data.push(
-      { key: `${i+2}`, name:`队列${i+1}`,  station:props.longPattern.queue[i].station, programName: props.longPattern.queue[i].name,operationNum:props.longPattern.queue[i].times,operationNums:props.longPattern.queue[i].count,
-      status:props.longPattern.queue[i].status ==0?"无预约": props.longPattern.queue[i].status ==1?"预约中":props.longPattern.queue[i].status ==2?"运行中":props.longPattern.queue[i].status ==3?"已预约":props.longPattern.queue[i].status==4?"程序暂停":''  },
-    )
+
+    if(  i > props.longPattern.queue.length-1 ){
+      data.push(
+        {station:'',name:"无",times:'',count:'',status:5}
+      )
+    }else{
+      data.push(
+        { key: `${i+2}`, name:`队列${i+1}`,  station:props.longPattern.queue[i].station, programName: props.longPattern.queue[i].name,operationNum:props.longPattern.queue[i].times,operationNums:props.longPattern.queue[i].count,
+        status:props.longPattern.queue[i].status ==0?"无预约": props.longPattern.queue[i].status ==1?"预约中":props.longPattern.queue[i].status ==2?"运行中":props.longPattern.queue[i].status ==3?"已预约":props.longPattern.queue[i].status==4?"程序暂停":''  },
+      )
+    }
   }
 
   return(

@@ -23,6 +23,7 @@ import { indexMainreducers } from "./indexMainreducers"
 import { IO_longPattern } from "./default/IO_longPattern"
 import { remotepro } from "./default/remotepro"
 import { Backup } from "./default/Backup"
+import { Ioremote } from "./default/Ioremote"
  
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -81,7 +82,8 @@ export default {
     slaveSertCommit,
     IO_longPattern,
     remotepro,
-    Backup
+    Backup,
+    Ioremote
   },
 
   subscriptions: {
@@ -477,6 +479,12 @@ export default {
           case "2e16":
             dispatch({
               type:"inquireConfigRobot",
+              data:dataString
+            })
+            break;
+          case "2f03":
+            dispatch({
+              type:"inquireIoremote",
               data:dataString
             })
             break;

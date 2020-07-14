@@ -62,9 +62,6 @@ function RecoverAndBackup (props) {
     //   console.log(blob)
     // }
 
-
-
-
     // setFormDatas(formData)
     // 转化base64字符串上传
     var reader = new FileReader(); // 实例化文件读取对象
