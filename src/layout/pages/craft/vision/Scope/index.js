@@ -4,12 +4,8 @@ import ConTitle from "components/title";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
   Input,
-  Modal,
 } from "antd";
 import { connect } from "dva";
 import { useHistory } from "react-router-dom";
@@ -46,7 +42,7 @@ function Scope(props) {
       visionNum: Number(ScopeNum),
     };
     sendMSGtoController("VISION_RANGE_INQUIRE", dataList);
-  }, [ScopeNum]);
+  }, [ScopeNum,props.currentRobot]);
 
   useEffect(() => {
     setVisionMaxX(props.ScopeList.maxX);
@@ -227,7 +223,7 @@ function Scope(props) {
               shape="circle"
               style={{
                 background: "#45b97c",
-                color:"#45b97c" ,border: "1px #45b97c dashed",background:"#ffffff",boxShadow:"0 1px 8px rgba(200, 200, 200, 0.6)"
+                color:"#45b97c" ,border: "1px #45b97c dashed",boxShadow:"0 1px 8px rgba(200, 200, 200, 0.6)"
               }}
               onClick={() => {
                 setValueChange(true);

@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from "react";
-import { Button, Col, Input, Tabs, Row, Popover, Select, Modal, Table, Pagination } from "antd";
+import { Button, Input, Tabs, Select, Modal, Table, Pagination } from "antd";
 import intl from "react-intl-universal";
 import { connect } from "dva";
 import ConTitle from "components/title";
@@ -56,25 +56,25 @@ function Remotepro(props) {
 
   // 渲染IO程序的表格内容
   let IOdata = [
-    { key:'1', procedurenum:'程序1',procedure:props.remotepro.jobFile[0].name==''?'未设置':props.remotepro.jobFile[0].name,nums:<Input disabled={ Showallipt } value={Times1} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes1(e.target.value)   }} />,
+    { key:'1', procedurenum:'程序1',procedure:props.remotepro.jobFile[0].name===''?'未设置':props.remotepro.jobFile[0].name,nums:<Input disabled={ Showallipt } value={Times1} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes1(e.target.value)   }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button  disabled={ Showallipt }  style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(0) }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(0)}}>取消选择</Button> </div> )  },
-    { key:'2', procedurenum:'程序2',procedure:props.remotepro.jobFile[1].name==''?'未设置':props.remotepro.jobFile[1].name,nums:<Input disabled={ Showallipt } value={Times2} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes2(e.target.value)  }} />,
+    { key:'2', procedurenum:'程序2',procedure:props.remotepro.jobFile[1].name===''?'未设置':props.remotepro.jobFile[1].name,nums:<Input disabled={ Showallipt } value={Times2} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes2(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(1)  }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(1)}} >取消选择</Button> </div> )  },
-    { key:'3', procedurenum:'程序3',procedure:props.remotepro.jobFile[2].name==''?'未设置':props.remotepro.jobFile[2].name,nums:<Input disabled={ Showallipt } value={Times3} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes3(e.target.value)  }} />,
+    { key:'3', procedurenum:'程序3',procedure:props.remotepro.jobFile[2].name===''?'未设置':props.remotepro.jobFile[2].name,nums:<Input disabled={ Showallipt } value={Times3} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes3(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(2) }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(2)}} >取消选择</Button> </div> )  },
-    { key:'4', procedurenum:'程序4',procedure:props.remotepro.jobFile[3].name==''?'未设置':props.remotepro.jobFile[3].name,nums:<Input disabled={ Showallipt } value={Times4} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes4(e.target.value)  }} />,
+    { key:'4', procedurenum:'程序4',procedure:props.remotepro.jobFile[3].name===''?'未设置':props.remotepro.jobFile[3].name,nums:<Input disabled={ Showallipt } value={Times4} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes4(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(3)  }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(3)}} >取消选择</Button> </div> )  },
-    { key:'5', procedurenum:'程序5',procedure:props.remotepro.jobFile[4].name==''?'未设置':props.remotepro.jobFile[4].name,nums:<Input disabled={ Showallipt } value={Times5} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes5(e.target.value)  }} />,
+    { key:'5', procedurenum:'程序5',procedure:props.remotepro.jobFile[4].name===''?'未设置':props.remotepro.jobFile[4].name,nums:<Input disabled={ Showallipt } value={Times5} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes5(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(4)  }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(4)}} >取消选择</Button> </div> )  },
-    { key:'6', procedurenum:'程序6',procedure:props.remotepro.jobFile[5].name==''?'未设置':props.remotepro.jobFile[5].name,nums:<Input disabled={ Showallipt } value={Times6} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes6(e.target.value)  }} />,
+    { key:'6', procedurenum:'程序6',procedure:props.remotepro.jobFile[5].name===''?'未设置':props.remotepro.jobFile[5].name,nums:<Input disabled={ Showallipt } value={Times6} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes6(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(5)  }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(5)}} >取消选择</Button> </div> )  },
-    { key:'7', procedurenum:'程序7',procedure:props.remotepro.jobFile[6].name==''?'未设置':props.remotepro.jobFile[6].name,nums:<Input disabled={ Showallipt } value={Times7} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes7(e.target.value)  }} />,
+    { key:'7', procedurenum:'程序7',procedure:props.remotepro.jobFile[6].name===''?'未设置':props.remotepro.jobFile[6].name,nums:<Input disabled={ Showallipt } value={Times7} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes7(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(6)  }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(6)}} >取消选择</Button> </div> )  },
-    { key:'8', procedurenum:'程序8',procedure:props.remotepro.jobFile[7].name==''?'未设置':props.remotepro.jobFile[7].name,nums:<Input disabled={ Showallipt } value={Times8} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes8(e.target.value)  }} />,
+    { key:'8', procedurenum:'程序8',procedure:props.remotepro.jobFile[7].name===''?'未设置':props.remotepro.jobFile[7].name,nums:<Input disabled={ Showallipt } value={Times8} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes8(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(6)  }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(7)}} >取消选择</Button> </div> )  },
-    { key:'9', procedurenum:'程序9',procedure:props.remotepro.jobFile[8].name==''?'未设置':props.remotepro.jobFile[8].name,nums:<Input disabled={ Showallipt } value={Times9} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes9(e.target.value)  }} />,
+    { key:'9', procedurenum:'程序9',procedure:props.remotepro.jobFile[8].name===''?'未设置':props.remotepro.jobFile[8].name,nums:<Input disabled={ Showallipt } value={Times9} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes9(e.target.value)  }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(7)  }}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(8)}} >取消选择</Button> </div> )  },
-    { key:'10', procedurenum:'程序10',procedure:props.remotepro.jobFile[9].name==''?'未设置':props.remotepro.jobFile[9].name,nums:<Input disabled={ Showallipt } value={Times10} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes10(e.target.value) }} />,
+    { key:'10', procedurenum:'程序10',procedure:props.remotepro.jobFile[9].name===''?'未设置':props.remotepro.jobFile[9].name,nums:<Input disabled={ Showallipt } value={Times10} style={{ width: 200, height:"30px" }} onChange={(e)=>{ setTimes10(e.target.value) }} />,
     operation:( <div style={{ display:"flex",justifyContent:"space-around" }}><Button disabled={ Showallipt } style={{ height:"30px" }} onClick = {()=>{ setIOVisible(true) ;setSelectNum(9)}}>选择程序</Button>  <Button disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{ unselect(9)}} >取消选择</Button> </div> )  },
   ];
 
@@ -91,8 +91,9 @@ function Remotepro(props) {
     // 使用循环来渲染Modbus的表格内容
     props.Moproce.jobnamelist.map((v,i)=>{
       Mudata.push(
-        {key:i ,procedurenum:props.Moproce.startprogramid+i, procedure:v==''?'未设置':v, operation:<Button  disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{setModbusvisible(true) ;setModbusSelectNum(props.Moproce.startprogramid+i) ;setSelectNum(i)}}  >选择程序</Button> },
+        {key:i ,procedurenum:props.Moproce.startprogramid+i, procedure:v===''?'未设置':v, operation:<Button  disabled={ Showallipt } style={{ height:"30px" }} onClick={()=>{setModbusvisible(true) ;setModbusSelectNum(props.Moproce.startprogramid+i) ;setSelectNum(i)}}  >选择程序</Button> },
       )
+      return Mudata;
     })
     setMudbusColumns(MuColumns)
     setMudbusdatas(Mudata)
@@ -104,7 +105,7 @@ function Remotepro(props) {
   // Modbus页面页数发生改变时获取数据
   useEffect(()=>{
     let DataList = ''
-    if( PageNum==1 ){
+    if( PageNum===1 ){
       DataList = {
         robot:props.currentRobot,
         startprogramid:PageNum,
@@ -118,11 +119,11 @@ function Remotepro(props) {
       }
     }
     sendMSGtoController("EXTERN_PROGRAM_INQUIRE",DataList)
-  },[PageNum])
+  },[PageNum,props.currentRobot])
   // 查询IO程序
   useEffect(()=>{
     sendMSGtoController("REMOTE_JOBFILE_INQUIRE",{ robot: props.currentRobot })
-  },[])
+  },[props.currentRobot])
   // 数据改变后更改输入框内的值
   useEffect(()=>{
     setTimes1(props.remotepro.jobFile[0].times)
@@ -196,6 +197,7 @@ function Remotepro(props) {
       Projectdata.push(
         { key:i, projectname:v.name, settime:v.date }
       )
+      return Projectdata;
     })
     setProjectColumns(ProjectColumn)
     setProjectdatas(Projectdata)
@@ -310,11 +312,11 @@ function Remotepro(props) {
           pagination={false}
           columns={ProjectColumns}
           dataSource={Projectdatas}
-          scroll={ {y:window.screen.height * 0.3 }}
+          scroll={ {y:window.screen.height * 0.3} } 
           size={'middle'}
           rowClassName={(record, index) => {
-            {/* 根据点击的是哪一行来改变颜色 */}
-            return index == bkid ? "ant-table-row-selected" : "";
+            /* 根据点击的是哪一行来改变颜色 */
+            return index === bkid ? "ant-table-row-selected" : "";
           }}
           onRow={(record,index) => {
             return {
@@ -342,8 +344,8 @@ function Remotepro(props) {
           dataSource={Projectdatas}
           scroll={ {y:window.screen.height * 0.3 }}
           rowClassName={(record, index) => {
-            {/* 根据点击的是哪一行来改变颜色 */}
-            return index == bkid ? "ant-table-row-selected" : "";
+            /* 根据点击的是哪一行来改变颜色 */
+            return index === bkid ? "ant-table-row-selected" : "";
           }}
           onRow={(record , index) => {
             return {

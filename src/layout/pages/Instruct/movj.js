@@ -32,6 +32,7 @@ function Movj(props) {
     }
   };
   const posSum = x();
+  console.log(props)
   //把指令的数据传送到抽屉里输入框
   useEffect(() => {
     let para;
@@ -52,7 +53,7 @@ function Movj(props) {
           DEC: para.DEC,
         });
 
-      }else if(props.programSeletedRow.length ==1){
+      }else if(props.programSeletedRow.length ===1){
           para = props.programSeletedRow[0].paras;
           props.form.setFieldsValue({
             POS: para.POS,
@@ -62,7 +63,7 @@ function Movj(props) {
             DEC: para.DEC,
           });
   
-      }else if(props.programSeletedRow.length ==0){
+      }else if(props.programSeletedRow.length ===0){
         message.error("请选择指令进行修改")
       }
     } else {
@@ -76,7 +77,7 @@ function Movj(props) {
       });
     }
 
-  }, [props.row, props.insertOrChange, props.form]);
+  }, [props.row, props.insertOrChange, props.form, props.programSeletedRow]);
   
   const onFinish = (value) => {
     let pos;
@@ -126,15 +127,15 @@ function Movj(props) {
     } else {
       //根据num来判断插入的是哪一行
        let num = 1
-      if( props.programSeletedRow.length == 0 ){
+      if( props.programSeletedRow.length === 0 ){
         props.selectmodalnum.splice(1)
-        if(props.program.instruct == undefined){
+        if(props.program.instruct === undefined){
           num = 1
         }else{
           num = props.program.instruct.length 
         }
       }else{
-        if(props.selectmodalnum.length == 2){
+        if(props.selectmodalnum.length === 2){
           num = 1
           props.selectmodalnum.splice(1)
         }else{

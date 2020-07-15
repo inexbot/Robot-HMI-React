@@ -7,9 +7,7 @@ import Movl from "../Instruct/movl";
 import Movc from "../Instruct/movc";
 import MovcA from "../Instruct/movca";
 import Movs from "../Instruct/movs";
-import { sendMSGtoController } from "service/network";
 import { connect } from "dva";
-import { message } from "antd";
 
 const mapStateToProps = (state) => {
   return {
@@ -30,18 +28,13 @@ function ChangeInstructValue(props) {
   // console.log(props.changeName)
   useEffect(() => {
     let getCurrentPosition = setInterval(() => {
-      let data = {
-        robot: props.currentRobot,
-        coord: props.currentCoordinate,
-      };
-      // console.log(data)
-      // sendMSGtoController("CURRENTPOS_INQUIRE", data);
+
     }, 1000);
     return () => {
       clearInterval(getCurrentPosition);
     };
   }, []);
-  if(props.programSeletedRow.length == 1 ){
+  if(props.programSeletedRow.length === 1 ){
     switch (name) {
       case "MOVJ":
         return (

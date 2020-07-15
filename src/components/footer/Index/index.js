@@ -79,6 +79,8 @@ function Footer(props) {
     props.robot2OpenedProgram,
     props.robot3OpenedProgram,
     props.robot4OpenedProgram,
+    props
+
   ]);
   useEffect(() => {
     if (props.operaMode === 2) {

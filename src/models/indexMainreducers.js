@@ -2,7 +2,7 @@
 import {
   sendMSGtoController,
 } from "service/network";
-import { notification, message as showMessage, Button , message } from "antd";
+import { notification, message as showMessage, message } from "antd";
 
 /* 接收到当前机器人后发的 */
 function sendCheckCurrentRobotState(robot) {
@@ -346,7 +346,7 @@ export const indexMainreducers = {
           let Num = 0
           for( let key in _state.conveyor.Setsite.position){
             Num++
-            if(Num == action.data.type){
+            if(Num === action.data.type){
               _state.conveyor.Setsite.position[key] = action.data.value
               return _state
             }
@@ -360,11 +360,11 @@ export const indexMainreducers = {
         // 标定取坐标
         inquireDiscernOne(state, action){
           let _state = JSON.parse(JSON.stringify(state))
-          if(action.data.posNum == 1){
+          if(action.data.posNum === 1){
             _state.conveyor.Conveyorsign.ConveyorOne = action.data
-          }else if(action.data.posNum == 2){
+          }else if(action.data.posNum === 2){
             _state.conveyor.Conveyorsign.ConveyorTwo = action.data
-          }else if(action.data.posNum == 3){
+          }else if(action.data.posNum === 3){
             _state.conveyor.Conveyorsign.ConveyorThree = action.data
           }
           return _state
@@ -412,7 +412,7 @@ export const indexMainreducers = {
         // 位置调试查询
         inquirePlacedebugdata(state, action){
           let _state = JSON.parse(JSON.stringify(state))
-          if(action.data.excursion == undefined || action.data.currentPos == undefined ){
+          if(action.data.excursion === undefined || action.data.currentPos === undefined ){
             message.warning('此工艺号和传送带工艺号查询到的数据为空');
           }else{
             _state.vision.PlacedebugList = action.data
@@ -447,7 +447,7 @@ export const indexMainreducers = {
         // 查询远程模式预约执行状态
         inquireIOlongPattern(state, action){
           let _state = JSON.parse(JSON.stringify(state)) 
-          if(action.data.queue==undefined){
+          if(action.data.queue===undefined){
             // message.warning('没有程序在运行');
           }else{
             _state.IO_longPattern.longPattern = action.data

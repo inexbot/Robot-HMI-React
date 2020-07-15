@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
-  Select,
-  Divider,
   Input,
 } from "antd";
 import { connect } from "dva";
@@ -80,6 +76,7 @@ function ConveyorsignThree(props) {
           <img
             src="../images/conveyorsign.png"
             style={{ width: "400px", margin: "10px 0 0 20px " }}
+            alt="图片"
           />
         </div>
       </div>

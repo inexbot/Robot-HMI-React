@@ -39,24 +39,6 @@ function ProjectComponent(props) {
   const openProgram = () => {
     // console.log(props.selectedProgram[0])
     // localStorage.setItem("procedure",JSON.stringify(props.selectedProgram[0]))
-    let robot = currentRobot;
-    let Robot = "";
-    switch (robot) {
-      case 1:
-        Robot = "Robot1";
-        break;
-      case 2:
-        Robot = "Robot2";
-        break;
-      case 3:
-        Robot = "Robot3";
-        break;
-      case 4:
-        Robot = "Robot4";
-        break;
-      default:
-        return;
-    }
     const openprogram = {
       robot: currentRobot,
       project: selectedProject,

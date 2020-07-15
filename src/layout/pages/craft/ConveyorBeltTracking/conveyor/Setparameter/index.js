@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import {
-  Table,
-  Button,
-  notification,
-  ConfigProvider,
   Select,
   Steps,
-  message,
 } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { connect } from "dva";

@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
-  Select,
-  Divider,
   Input,
 } from "antd";
 import { connect } from "dva";
@@ -33,7 +29,7 @@ function SensorOne(props) {
       "TRACK_CONVEYOR_SENSORPOS_CALIBRATION_INQUIRE",
       dataList
     );
-  }, [props.dataSoures.conveyorID]);
+  }, [props.dataSoures.conveyorID,props.currentRobot]);
 
   const columns = [
     { title: "参数", dataIndex: "name" },
@@ -114,7 +110,7 @@ function SensorOne(props) {
           <Table pagination={false} columns={columns} dataSource={data} />
         </div>
         <div style={{ width: "42%", margin: "10px 0 0 20px"}}>
-          <img src="../images/sensorsign.png" style={{ width: "100%" }} />
+          <img src="../images/sensorsign.png" style={{ width: "100%" }} alt="图片" />
           <div style={{ marginTop: 20,textAlign:"center" }}>
             <Button
               type="primary"

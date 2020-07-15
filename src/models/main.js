@@ -7,7 +7,7 @@ import {
   PORT,
   sendMSGtoController,
 } from "service/network";
-import { notification, message as showMessage, Button , message } from "antd";
+import { notification, message as showMessage, Button } from "antd";
 import { controllerConfig } from "./default/controllerconfig";
 import { robotStatus } from "./default/robotstatus";
 import { robotParameter } from "./default/robotParameter";
@@ -350,6 +350,7 @@ export default {
               type:"realtimeencodervalue",
               data:dataString,
             })
+            break;
           case "4813":
             dispatch({
               type:"inquireDiscernOne",

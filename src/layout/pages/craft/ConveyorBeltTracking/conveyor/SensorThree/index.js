@@ -1,12 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
-  Table,
   Button,
-  notification,
-  ConfigProvider,
-  Select,
-  Divider,
-  Input,
 } from "antd";
 import { connect } from "dva";
 import "./index.css";

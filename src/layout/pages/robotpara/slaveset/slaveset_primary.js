@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { Select, Col, Input, Tabs, Row, Table } from "antd";
+import { Select, Input, Tabs, Table } from "antd";
 import { connect } from "dva";
-import { servoAmount } from "./slaveset_header";
 import { useState } from "react";
 import './slaveset.module.less'
-import { sendMSGtoController } from "service/network";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -17,25 +15,12 @@ const mapStateToProps = (state) => {
 };
 
 function SlaveSetPrimary(props) {
-  const [ state, setState] = useState({
-    primaryRobotActiveKey: "robot1",
-    primaryJointActiveKey: "J1",
-  });
   const [ RobotNum, setRobotNum ] = useState(0)
   const [ RobotTyleNumChildren, setRobotTyleNumChildren ] = useState('')
   const [ axisNumChildren, setaxisNumChildren ] = useState('')
   const [ axisNum, setaxisNum ] = useState(0)
-  const [ SalveRobotAxle, setSalveRobotAxle ] = useState(props.axis)
-  const [ RobotSelect, setRobotSelect ] = useState(props.Robot.sum)
-
-  const servoSelectOption = (servoAmount) => {
-    const options = [];
-    for (let i = 0; i < servoAmount.length; i++) {
-      options.push(<Option key={i + 1}>{"伺服-" + (i + 1)}</Option>);
-    }
-    return options;
-  };
-  // console.log(SalveRobotAxle)
+  const [ SalveRobotAxle,  ] = useState(props.axis)
+  const [ RobotSelect, ] = useState(props.Robot.sum)
 
   const RobotNumChildren = [];
   //定义从动轴1的表格
@@ -89,7 +74,7 @@ function SlaveSetPrimary(props) {
               columns = { OneColumns }
               dataSource = { OneDate }
               pagination={false}
-              style={ axisNum == 0? { width:'40%', marginTop:'20px', opacity:'0' } : { width:'40%', marginTop:'20px', opacity:'1' } }
+              style={ axisNum === 0? { width:'40%', marginTop:'20px', opacity:'0' } : { width:'40%', marginTop:'20px', opacity:'1' } }
               size="small"
             >
             </Table>
@@ -98,7 +83,7 @@ function SlaveSetPrimary(props) {
               columns = { TwoColumns }
               dataSource = { TwoDate }
               pagination={false}
-              style={ axisNum == 2? { width:'40%', marginTop:'20px', marginLeft:'10%', opacity:'1' } : { width:'40%', marginTop:'20px', marginLeft:'10%', opacity:'0' }}
+              style={ axisNum === 2? { width:'40%', marginTop:'20px', marginLeft:'10%', opacity:'1' } : { width:'40%', marginTop:'20px', marginLeft:'10%', opacity:'0' }}
               size="small"
             >
             </Table>
@@ -127,14 +112,14 @@ function SlaveSetPrimary(props) {
     }
     setRobotTyleNumChildren(RobotTyleNum)
     setaxisNumChildren(axisTypeNum)
-  },[RobotNum,axisNum])
+  },[RobotNum,axisNum,OneColumns,OneDate,SalveRobotAxle,TwoColumns,TwoDate,props.Robot])
 
 
 
   for(let i = 0; i < RobotSelect; i++){
     RobotNumChildren.push(
       <TabPane tab={`机器人${i+1}`} key={i+1}  >
-        <Tabs defaultActiveKey="1" tabBarGutter={0}  tabBarStyle={ RobotNum == i ? { display:'block' } : { display:'none' }} >
+        <Tabs defaultActiveKey="1" tabBarGutter={0}  tabBarStyle={ RobotNum === i ? { display:'block' } : { display:'none' }} >
           {RobotTyleNumChildren}
           {axisNumChildren}
         </Tabs>

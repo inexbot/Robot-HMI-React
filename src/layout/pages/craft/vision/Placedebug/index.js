@@ -4,15 +4,9 @@ import ConTitle from "components/title";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
-  Input,
-  Modal,
 } from "antd";
 import { connect } from "dva";
-import { useHistory } from "react-router-dom";
 import "./placedebug.module.less";
 import { sendMSGtoController } from "service/network";
 
@@ -25,7 +19,6 @@ const mapStateToProps = (state) => {
 
 function Scope(props) {
   console.log(props.PlacedebugList);
-  const [valueChange, setValueChange] = useState(true);
   const [VisionOriginPos, setVisionOriginPos] = useState(
     props.PlacedebugList.originPos
   );
@@ -38,7 +31,6 @@ function Scope(props) {
   const { Option } = Select;
   const cameraNumchildren = [];
   const conveyorNumchildren = [];
-  let history = useHistory();
   for (let i = 0; i < 9; i++) {
     cameraNumchildren.push(<Option key={i}>{i}</Option>);
     conveyorNumchildren.push(<Option key={i}>{i}</Option>);
@@ -51,12 +43,12 @@ function Scope(props) {
       conveyorNum: Number(PlacedebugConveyorNum),
     };
     sendMSGtoController("VISION_DEBUGGING_POS_INQUIRE", dataList);
-  }, [PlacedebugNum, PlacedebugConveyorNum]);
+  }, [PlacedebugNum, PlacedebugConveyorNum,props.currentRobot]);
 
   useEffect(() => {
     setVisionOriginPos(props.PlacedebugList.originPos);
     setVisionCurrentPos(props.PlacedebugList.currentPos);
-  }, [props.PlacedebugList]);
+  }, [props.PlacedebugList,props.currentRobot]);
 
   const cameracolumns = [
     { title: "原始点位", dataIndex: "site" },
@@ -82,7 +74,7 @@ function Scope(props) {
         <Button
           type="primary"
           style={
-            PitchOn == i
+            PitchOn === i
               ? {
                   width: "50%",
                   height: "100%",
@@ -100,7 +92,7 @@ function Scope(props) {
             console.log(PitchOn);
             if (PitchOn < 0) {
               setPitchOn(i);
-            } else if (PitchOn == i) {
+            } else if (PitchOn === i) {
               setPitchOn(-1);
             } else {
               setPitchOn(i);
@@ -121,7 +113,7 @@ function Scope(props) {
         <Button
           type="primary"
           style={
-            PitchOn == i + 10
+            PitchOn === i + 10
               ? {
                   width: "50%",
                   height: "100%",
@@ -138,7 +130,7 @@ function Scope(props) {
           onClick={() => {
             if (PitchOn < 0) {
               setPitchOn(i + 10);
-            } else if (PitchOn == i + 10) {
+            } else if (PitchOn === i + 10) {
               setPitchOn(-1);
             } else {
               setPitchOn(i + 10);

@@ -101,22 +101,22 @@ function Ioremote(props) {
     { title:'备注', dataIndex:'remark' }
   )
   RobotData1.push(
-    { key:'1', fun:'启动', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.start==0?'无':'' } > <Option key='1' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport1==0?'0':'1' } onChange={( value )=>{ setRobotport1( Number(value)) ; Robot.inValue.start=Number(value)   } } > <Option key='1' value={0} > 0 </Option> <Option key='2' value={1} > 1 </Option> </Select>,remark:`机器人${RobotNum}启动` },
-    { key:'2', fun:'停止', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.stop==0?'无':'' } > <Option key='2' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport2==0?'0':'1' } onChange={(value)=>{ setRobotport2(Number(value)) ; Robot.inValue.stop=Number(value) }} > <Option key='2' value={0} > 0 </Option> <Option key='3' value={1} > 1 </Option> </Select>,remark:`机器人${RobotNum}停止` },
-    { key:'3', fun:'暂停', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.pause==0?'无':'' } > <Option key='3' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport3==0?'0':'1' } onChange={(value)=>{ setRobotport3(Number(value)) ; Robot.inValue.pause=Number(value) }} > <Option key='3' value={0} > 0 </Option> <Option key='4' value={1} > 1 </Option> </Select>,remark:`机器人${RobotNum}暂停` },
-    { key:'4', fun:'清除报警', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.faultReset==0?'无':'' } > <Option key='4' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport4==0?'0':'1' } onChange={(value)=>{ setRobotport4(Number(value)) ; Robot.inValue.faultReset=Number(value) }} > <Option key='4' value={0} > 0 </Option> <Option key='5' value={1} > 1 </Option> </Select>,remark:`清除机器人${RobotNum}伺服错误` },
-    { key:'5', fun:'预约并启动', DIN:<Select disabled={ isDisabled } value='无' > <Option key='5' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport5==0?'0':'1' } onChange={(value)=>{ setRobotport5(Number(value)) ; Robot.inValue.reserveIsStart=Number(value) }} > <Option key='2' value={0} > 0 </Option> <Option key='5' value={1} > 1 </Option> </Select>,remark:`预约IO后将自动启动运行` },
+    { key:'1', fun:'启动', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.start===0?'无':'' } > <Option key='1' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport1===0?'0':'1' } onChange={( value )=>{ setRobotport1( Number(value)) ; Robot.inValue.start=Number(value)   } } > <Option key='1' value={0} > 0 </Option> <Option key='2' value={1} > 1 </Option> </Select>,remark:`机器人${RobotNum}启动` },
+    { key:'2', fun:'停止', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.stop===0?'无':'' } > <Option key='2' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport2===0?'0':'1' } onChange={(value)=>{ setRobotport2(Number(value)) ; Robot.inValue.stop=Number(value) }} > <Option key='2' value={0} > 0 </Option> <Option key='3' value={1} > 1 </Option> </Select>,remark:`机器人${RobotNum}停止` },
+    { key:'3', fun:'暂停', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.pause===0?'无':'' } > <Option key='3' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport3===0?'0':'1' } onChange={(value)=>{ setRobotport3(Number(value)) ; Robot.inValue.pause=Number(value) }} > <Option key='3' value={0} > 0 </Option> <Option key='4' value={1} > 1 </Option> </Select>,remark:`机器人${RobotNum}暂停` },
+    { key:'4', fun:'清除报警', DIN:<Select disabled={ isDisabled } value={ props.Ioremote.inPort.faultReset===0?'无':'' } > <Option key='4' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport4===0?'0':'1' } onChange={(value)=>{ setRobotport4(Number(value)) ; Robot.inValue.faultReset=Number(value) }} > <Option key='4' value={0} > 0 </Option> <Option key='5' value={1} > 1 </Option> </Select>,remark:`清除机器人${RobotNum}伺服错误` },
+    { key:'5', fun:'预约并启动', DIN:<Select disabled={ isDisabled } value='无' > <Option key='5' value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ Robotport5===0?'0':'1' } onChange={(value)=>{ setRobotport5(Number(value)) ; Robot.inValue.reserveIsStart=Number(value) }} > <Option key='2' value={0} > 0 </Option> <Option key='5' value={1} > 1 </Option> </Select>,remark:`预约IO后将自动启动运行` },
   )
   for( let i = 0; i < 5; i++ ){
     RobotData1.push(
-      { key:`${i+6}`, fun:`远程IO程序${i+1}`,DIN:<Select disabled={ isDisabled } value={ props.Ioremote.program[i].port==0?'无':'' } > <Option key={ i+6 } value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ RobotportList[i]==0?'0':'1' } onChange={( value )=>{  setRobotportList[i](Number(value)) ;Robot.program[i].value = Number(value)  }} > <Option key={ i+7 } value={0} > 0 </Option> <Option key={ i+1 } value={1} > 1 </Option> </Select>,
-       remark: props.Ioremote.program[i].name==""?'未设置':props.Ioremote.program[i].name  }
+      { key:`${i+6}`, fun:`远程IO程序${i+1}`,DIN:<Select disabled={ isDisabled } value={ props.Ioremote.program[i].port===0?'无':'' } > <Option key={ i+6 } value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ RobotportList[i]===0?'0':'1' } onChange={( value )=>{  setRobotportList[i](Number(value)) ;Robot.program[i].value = Number(value)  }} > <Option key={ i+7 } value={0} > 0 </Option> <Option key={ i+1 } value={1} > 1 </Option> </Select>,
+       remark: props.Ioremote.program[i].name===""?'未设置':props.Ioremote.program[i].name  }
     )
   }
   for( let i = 5; i < 10; i++ ){
     RobotData2.push(
-      { key:`${i+6}`, fun:`远程IO程序${i+1}`,DIN:<Select disabled={ isDisabled } value={ props.Ioremote.program[i].port==0?'无':'' } > <Option key={ i+6 } value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ RobotportList[i]==0?'0':'1' } onChange={( value )=>{  setRobotportList[i](Number(value)) ;Robot.program[i].value = Number(value)  }} > <Option key={ i+7 } value={0} > 0 </Option> <Option key={ i+1 } value={1} > 1 </Option> </Select>,
-       remark: props.Ioremote.program[i].name==""?'未设置':props.Ioremote.program[i].name  }
+      { key:`${i+6}`, fun:`远程IO程序${i+1}`,DIN:<Select disabled={ isDisabled } value={ props.Ioremote.program[i].port===0?'无':'' } > <Option key={ i+6 } value={0} > 无 </Option> </Select>, port:<Select disabled={ isDisabled } value={ RobotportList[i]===0?'0':'1' } onChange={( value )=>{  setRobotportList[i](Number(value)) ;Robot.program[i].value = Number(value)  }} > <Option key={ i+7 } value={0} > 0 </Option> <Option key={ i+1 } value={1} > 1 </Option> </Select>,
+       remark: props.Ioremote.program[i].name===""?'未设置':props.Ioremote.program[i].name  }
     )
   }
 
@@ -151,20 +151,20 @@ function Ioremote(props) {
           <TabPane tab={`机器人1`} key='1' style={{ }}>
             <Table
               columns={RobotColumn}
-              dataSource={Robotpage == 1?RobotData1:RobotData2 }
+              dataSource={Robotpage === 1?RobotData1:RobotData2 }
               pagination={false}
             >
             </Table>
-            <Pagination style={{ float:'right',marginRight:'10%' }} defaultCurrent={1} total={10} total={15} onChange = {( page,pageSize )=>{  setRobotpage(page) }} ></Pagination>
+            <Pagination style={{ float:'right',marginRight:'10%' }} defaultCurrent={1}  total={15} onChange = {( page,pageSize )=>{  setRobotpage(page) }} ></Pagination>
           </TabPane>
           <TabPane tab={`机器人2`} key='2' style={{  }}>
             <Table
               columns={RobotColumn}
-              dataSource={Robotpage == 1?RobotData1:RobotData2 }
+              dataSource={Robotpage === 1?RobotData1:RobotData2 }
               pagination={false}
             >
             </Table>
-            <Pagination style={{ float:'right',marginRight:'10%' }} defaultCurrent={1} total={10} total={15} onChange = {( page,pageSize )=>{  setRobotpage(page) }} ></Pagination>
+            <Pagination style={{ float:'right',marginRight:'10%' }} defaultCurrent={1}  total={15} onChange = {( page,pageSize )=>{  setRobotpage(page) }} ></Pagination>
           </TabPane>
         </Tabs>
       </div>

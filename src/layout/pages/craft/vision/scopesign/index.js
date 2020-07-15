@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
-  Select,
-  Divider,
   Input,
-  Modal
 } from "antd";
 import { connect } from "dva";
 import { useHistory } from 'react-router-dom';
@@ -23,7 +18,6 @@ import { sendMSGtoController} from "service/network";
   };
 
   function Scopesign(props) {
-    const [valueChange, setValueChange] = useState(true)
 
     const [VisionMaxX,setVisionMaxX] = useState(props.ScopeList.maxX)
     const [VisionMaxY,setVisionMaxY] = useState(props.ScopeList.maxY)
@@ -63,11 +57,8 @@ import { sendMSGtoController} from "service/network";
       return () =>{
         clearInterval(gainSet)
       }
-    },[])
+    },[props.currentRobot])
 
-    useEffect(()=>{
-
-    },[])
 
     return(
       <div style={{ background:"#fff",marginTop:"-30px",zIndex:"2",position:"relative",width:"100%",height:"1000px",overflowY:"hidden"  }}>

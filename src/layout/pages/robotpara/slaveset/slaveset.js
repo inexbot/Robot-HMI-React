@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SwapLeftOutlined, SwapRightOutlined } from "@ant-design/icons";
-import { Button, Col, Select, Alert, Row, Input } from "antd";
-import { servoAmount, ENIname, ENIstate } from "./slaveset_header";
+import { Button, Col, Select, Alert, Row } from "antd";
+import { servoAmount } from "./slaveset_header";
 import { sendMSGtoController } from "service/network";
 import { connect } from "dva";
 import SlaveSetRobot from "./slaveset_robot";
@@ -162,7 +162,7 @@ function SlaveSet(props) {
             </div>
             <p>{intl.get("需要的ENI文件名")}：</p>
             <Alert message={SlaveENIname.ENIName} type="info" />
-            <p style={{ paddingTop: 6 }}>{SlaveENIname.isHaveENI == -1? " 未识别到ENI，未连接伺服  " : "已识别到ENI，已连接伺服"}</p>
+            <p style={{ paddingTop: 6 }}>{SlaveENIname.isHaveENI === -1? " 未识别到ENI，未连接伺服  " : "已识别到ENI，已连接伺服"}</p>
             <div  className='slaveset-table'>
               <table border="2" >
                 <tbody >

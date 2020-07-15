@@ -3,16 +3,7 @@
  * 引入ChangeInstructValue、instructType两个方法和变量
  */
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Row,
-  Col,
-  Button,
-  Drawer,
-  Form,
-  Modal,
-  message,
-  InputNumber,
-  Tooltip,
+import { Row, Col, Button, Drawer, Form, Modal, message, InputNumber, Tooltip,
 } from "antd";
 import { connect } from "dva";
 import {
@@ -113,7 +104,7 @@ function ProgramComponent(props) {
         <div>
           <p>
             是否确认删除第
-            {props.programSeletedRow.length == 0 ? "1" : hang.join("、")}行指令
+            {props.programSeletedRow.length === 0 ? "1" : hang.join("、")}行指令
           </p>
         </div>
       ),
@@ -201,14 +192,14 @@ function ProgramComponent(props) {
     let hang = props.dataList.map((value) => {
       return value.order;
     });
-    if (hang.length == 1) {
+    if (hang.length === 1) {
       let moveData = {
         line: hang[0],
         direction: res,
       };
       sendMSGtoServer("MOVE_COMMAND", moveData);
       Modal.destroyAll();
-    } else if (hang.length == 0) {
+    } else if (hang.length === 0) {
       message.error("请选择想要移动的指令");
     } else if (hang.length > 1) {
       message.error("一次只能移动一个指令");
@@ -233,7 +224,7 @@ function ProgramComponent(props) {
               props.dataList.splice(0);
               props.dataList.push(props.pargamList[num - 2]);
             }
-            if (props.dataList[0].order == 1) {
+            if (props.dataList[0].order === 1) {
               setBanButtontop(true);
               setBanButtonbtm(false);
             } else {
@@ -261,7 +252,7 @@ function ProgramComponent(props) {
               props.dataList.push(props.pargamList[num]);
             }
 
-            if (props.dataList[0].order == props.program.instruct.length - 1) {
+            if (props.dataList[0].order === props.program.instruct.length - 1) {
               setBanButtonbtm(true);
               setBanButtontop(false);
             } else {
@@ -309,13 +300,13 @@ function ProgramComponent(props) {
                   let hang = props.dataList.map((value) => {
                     return value.order;
                   });
-                  if (hang[0] == props.program.instruct.length - 1) {
+                  if (hang[0] === props.program.instruct.length - 1) {
                     setBanButtonbtm(true);
                   } else {
                     setBanButtonbtm(false);
                   }
 
-                  if (hang[0] == 1) {
+                  if (hang[0] === 1) {
                     setBanButtontop(true);
                   } else {
                     setBanButtontop(false);
@@ -333,7 +324,7 @@ function ProgramComponent(props) {
               className="proMoreBtn"
               size="large"
               onClick={() => {
-                if (props.programSeletedRow.length == 0) {
+                if (props.programSeletedRow.length === 0) {
                   copyerror();
                 } else {
                   copysuccess();
@@ -376,7 +367,7 @@ function ProgramComponent(props) {
         <InputNumber
           min={1}
           max={
-            props.program.instruct == undefined
+            props.program.instruct === undefined
               ? 3
               : props.program.instruct.length
           }
@@ -458,9 +449,9 @@ function ProgramComponent(props) {
             {/* 点击插入按钮 */}
             <Button
               onClick={() => {
-                if (props.programSeletedRow.length == 1) {
-                  if (props.programSeletedRow[0].key == 1) {
-                    if (insertOrChange == "insert") {
+                if (props.programSeletedRow.length === 1) {
+                  if (props.programSeletedRow[0].key === 1) {
+                    if (insertOrChange === "insert") {
                       setShowModal(true);
                     } else {
                       onFinish();
@@ -468,8 +459,8 @@ function ProgramComponent(props) {
                   } else {
                     onFinish();
                   }
-                } else if (props.programSeletedRow.length == 0) {
-                  if (insertOrChange == "insert") {
+                } else if (props.programSeletedRow.length === 0) {
+                  if (insertOrChange === "insert") {
                     onFinish();
                   } else {
                     message.error("请选择想要修改的指令");
@@ -488,7 +479,7 @@ function ProgramComponent(props) {
       >
         <ChangeInstructValue
           changeName={
-            props.dataList.length == 1
+            props.dataList.length === 1
               ? props.dataList[0].insName
               : props.selectedName
           }

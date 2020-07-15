@@ -61,7 +61,7 @@ function VirtualTable(props) {
   })
   
   const renderVirtualList = (rawData, { scrollbarSize, ref, onScroll }) => {
-    if (props.pargram.instruct == undefined) {
+    if (props.pargram.instruct === undefined) {
       rawData.splice(0);
     }
 
@@ -110,9 +110,10 @@ function VirtualTable(props) {
                 if( props.programallButton.length > 1){
                   message.error("请先取消全选")
                 }else{
-                  if (rawData[0].moreBtn == false) {
+                  if (rawData[0].moreBtn === false) {
                     rawData.map((item, index) => {
                       item.select = false;
+                      return item.select;
                     })
                     rawData[rowIndex].select = !rawData[rowIndex].select;
                     setAddnum(addnum + 1);
@@ -121,15 +122,17 @@ function VirtualTable(props) {
                       if (item.select) {
                         props.List.push(item);
                       }
+                      return props.List;
                     });
-                  } else if (rawData[0].moreBtn == true) {
+                  } else if (rawData[0].moreBtn === true) {
                     rawData[rowIndex].select = !rawData[rowIndex].select;
                     setAddnum(addnum + 1);
                     props.List.splice(0);
                     props.dataSource.map((item, index) => {
-                      if (item.select == true) {
+                      if (item.select === true) {
                         props.List.push(item);
                       }
+                      return props.List;
                     });
                   }
                 }
@@ -182,18 +185,20 @@ function VirtualTable(props) {
               if( props.programallButton.length > 1){
                 message.success("如果全选打开了，需要关闭全选才可以点击单选或反选")
               }else{
-                if (column[1].title.props.children[3] == "") {
+                if (column[1].title.props.children[3] === "") {
                   setAddnum(addnum + 1);
                 } else if (column[1].title.props.children[3].props) {
                   dataList.map((item, index) => {
                     item.select = !item.select;
                     setAddnum(addnum + 1);
+                    return addnum
                   });
                   props.List.splice(0);
                   props.dataSource.map((item, index) => {
-                    if (item.select == true) {
+                    if (item.select === true) {
                       props.List.push(item);
                     }
+                    return props.List;
                   });
                 }
               }

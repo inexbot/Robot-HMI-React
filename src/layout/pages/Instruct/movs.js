@@ -44,7 +44,7 @@ function Movs(props) {
       ACC: para.ACC,
       DEC: para.DEC,
     });
-  }, [props.row, props.insertOrChange, props.form]);
+  }, [props.row, props.insertOrChange, props.form, props.program.instruct]);
   const onFinish = (value) => {
     let pos;
     let posType;

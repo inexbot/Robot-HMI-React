@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
   Input,
   Modal,
 } from "antd";
@@ -65,13 +62,7 @@ function Basic(props) {
     setTime(props.dataSoure.compensation.time);
     setEncoderVal(props.dataSoure.compensation.encoderVal);
   }, [
-    props.dataSoure.conveyor.maxEncoderVal,
-    props.dataSoure.conveyor.minEncoderVal,
-    props.dataSoure.conveyor.encoderDirection,
-    props.dataSoure.conveyor.encoderResolution,
-    props.dataSoure.conveyor.speed,
-    props.dataSoure.conveyor.userCoord,
-    props.dataSoure.conveyor.checkSpeed,
+    props.dataSoure,
     showemptyModal,
   ]);
   const { Option } = Select;
@@ -87,14 +78,14 @@ function Basic(props) {
   for (let i = -1; i < 2; i++) {
     if (i != 0) {
       encoderDirectionNumchildren.push(
-        <Option key={i}>{i == 1 ? "正向" : "反向"}</Option>
+        <Option key={i}>{i === 1 ? "正向" : "反向"}</Option>
       );
     }
   }
   const checkSpeedNumchildren = [];
   for (let i = 0; i < 2; i++) {
     checkSpeedNumchildren.push(
-      <Option key={i}>{i == 0 ? "机器人立即结束" : "机器人继续运行"}</Option>
+      <Option key={i}>{i === 0 ? "机器人立即结束" : "机器人继续运行"}</Option>
     );
   }
   const userCoordNumchildren = [];
@@ -113,7 +104,7 @@ function Basic(props) {
     return () => {
       clearInterval(gainSet);
     };
-  }, [props.dataSoure.conveyorID]);
+  }, [props.dataSoure.conveyorID, props.currentRobot]);
 
   const columns = [
     { title: "参数", dataIndex: "name" },
@@ -183,12 +174,12 @@ function Basic(props) {
       money: Iptdsb ? (
         <Input
           disabled={Iptdsb}
-          value={encoderDirection == 1 ? "正向" : "反向"}
+          value={encoderDirection === 1 ? "正向" : "反向"}
         />
       ) : (
         <Select
           disabled={Iptdsb}
-          defaultValue={encoderDirection == 1 ? "正向" : "反向"}
+          defaultValue={encoderDirection === 1 ? "正向" : "反向"}
           onChange={(e) => {
             setEncoderDirection(e);
           }}
@@ -236,12 +227,12 @@ function Basic(props) {
       money: Iptdsb ? (
         <Input
           disabled={Iptdsb}
-          value={checkSpeed == 0 ? "机器人立即结束" : "机器人继续运行"}
+          value={checkSpeed === 0 ? "机器人立即结束" : "机器人继续运行"}
         />
       ) : (
         <Select
           disabled={Iptdsb}
-          defaultValue={checkSpeed == 0 ? "机器人立即结束" : "机器人继续运行"}
+          defaultValue={checkSpeed === 0 ? "机器人立即结束" : "机器人继续运行"}
           onChange={(e) => {
             setCheckSpeed(e);
           }}

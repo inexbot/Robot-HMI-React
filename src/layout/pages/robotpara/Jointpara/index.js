@@ -132,6 +132,37 @@ function Jointpara(props) {
    *  渲染TabPane内容
    */
   useEffect(() => {
+    const content = (joint) => {
+      return (
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <Form.Item
+                    name={`joint${joint}PosSWLimit`}
+                    label={intl.get("正限位")}
+                    help={intl.get("关节参数/正限位说明")}
+                  >
+                    <Input disabled={isDisabled} />
+                  </Form.Item>
+                </td>
+                <td></td>
+                <td>
+                  <Form.Item
+                    name={`joint${joint}NegSWLimit`}
+                    label={intl.get("反限位")}
+                    help={intl.get("关节参数/反限位说明")}
+                  >
+                    <Input disabled={isDisabled} />
+                  </Form.Item>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    };
     const setTab = (SUM) => {
       let renderTabs = [];
       for (let i = 1; i <= SUM; i++) {
@@ -144,7 +175,7 @@ function Jointpara(props) {
       setTabs(renderTabs);
     };
     setTab(sum);
-  }, [sum, isDisabled]);
+  },[sum, isDisabled]);
   /*
    *  自动将获取的参数填入
    */
@@ -210,147 +241,7 @@ function Jointpara(props) {
       sm: { span: 12 },
     },
   };
-  const content = (joint) => {
-    return (
-      <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <Form.Item
-                  name={`joint${joint}PosSWLimit`}
-                  label={intl.get("正限位")}
-                  help={intl.get("关节参数/正限位说明")}
-                >
-                  <Input disabled={isDisabled} />
-                </Form.Item>
-              </td>
-              <td></td>
-              <td>
-                <Form.Item
-                  name={`joint${joint}NegSWLimit`}
-                  label={intl.get("反限位")}
-                  help={intl.get("关节参数/反限位说明")}
-                >
-                  <Input disabled={isDisabled} />
-                </Form.Item>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      // <Row>
-      //   <Col span={11} offset={1}>
-      //     <Form.Item
-      //       name={`joint${joint}PosSWLimit`}
-      //       label={intl.get("正限位")}
-      //       help={intl.get("关节参数/正限位说明")}
-      //     >
-      //       <Input disabled={isDisabled} style={{ width: "180px" }} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}ReducRatio`}
-      //       label={intl.get("减速比")}
-      //       help={intl.get("关节参数/减速比说明")}
-      //     >
-      //       <Input disabled={isDisabled} style={{ width: "180px" }} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}RatedRotSpeed`}
-      //       label={intl.get("额定正转速")}
-      //       help={intl.get("关节参数/额定正转速说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}MaxRotSpeed`}
-      //       label={intl.get("最大正转速")}
-      //       help={intl.get("关节参数/最大正转速说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}RatedVel`}
-      //       label={intl.get("额定正速度")}
-      //       help={intl.get("关节参数/额定正速度说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}MaxAcc`}
-      //       label={intl.get("最大加速度")}
-      //       help={intl.get("关节参数/最大加速度说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}Direction`}
-      //       label={intl.get("模型方向")}
-      //       help={intl.get("关节参数/模型方向说明")}
-      //     >
-      //       <Select style={{ width: "180px" }} disabled={isDisabled}>
-      //         <Option value={1}>1</Option>
-      //         <Option value={-1}>-1</Option>
-      //       </Select>
-      //     </Form.Item>
-      //   </Col>
-      //   <Col span={12}>
-      //     <Form.Item
-      //       name={`joint${joint}NegSWLimit`}
-      //       label={intl.get("反限位")}
-      //       help={intl.get("关节参数/反限位说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}EncoderResolution`}
-      //       label={intl.get("编码器位数")}
-      //       help={intl.get("关节参数/编码器位数说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}RatedDeRotSpeed`}
-      //       label={intl.get("额定反转速")}
-      //       help={intl.get("关节参数/额定反转速说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}MaxDeRotSpeed`}
-      //       label={intl.get("最大反转速")}
-      //       help={intl.get("关节参数/最大反转速说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}DeRatedVel`}
-      //       label={intl.get("额定反速度")}
-      //       help={intl.get("关节参数/额定反速度说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}MaxDecel`}
-      //       label={intl.get("最大减速度")}
-      //       help={intl.get("关节参数/最大减速度说明")}
-      //     >
-      //       <Input style={{ width: "180px" }} disabled={isDisabled} />
-      //     </Form.Item>
-      //     <Form.Item
-      //       name={`joint${joint}AxisDirection`}
-      //       label={intl.get("关节实际方向")}
-      //       help={intl.get("关节参数/关节实际方向说明")}
-      //     >
-      //       <Select style={{ width: "180px" }} disabled={isDisabled}>
-      //         <Option value={1}>1</Option>
-      //         <Option value={-1}>-1</Option>
-      //       </Select>
-      //     </Form.Item>
-      //   </Col>
-      // </Row>
-    );
-  };
+
   return (
     <div>
       {/* 头部 */}

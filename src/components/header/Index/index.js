@@ -46,7 +46,7 @@ function Header(props) {
     if (props.operaMode === 2) {
       history.push("/Program");
     }
-  }, [props.operaMode]);
+  }, [props.operaMode,history]);
   useEffect(() => {
     switch (props.opened) {
       case -1:

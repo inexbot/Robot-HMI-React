@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import { Tabs, Button, Upload, message } from "antd";
+import { Tabs, Button, Upload } from "antd";
 import ConTitle from "components/title";
 import { connect } from "dva";
-import { sendMSGtoController , sendMSGtoServer } from "service/network";
 import { UploadOutlined } from "@ant-design/icons";
+import { sendMSGtoServer } from "service/network";
 
 const { TabPane } = Tabs;
 
@@ -18,20 +18,20 @@ const mapStateToProps = (state) => {
 };
 
 function RecoverAndBackup (props) {
-  const [ version, setVersion] = useState("20.02.04.11");
-  const [ udiskState, setUdiskState] = useState("未插入");
+  const [ version ] = useState("20.02.04.11");
+  const [ udiskState ] = useState("未插入");
   const [ fileList, setFileList] = useState([]);
   const [ uploading, setUploading] = useState(props.showUploading);
-  const [ WhetherUp, setWhetherUp ] = useState(props.Uploading)
+  const [ , setWhetherUp ] = useState(props.Uploading)
   const [ FormDatas, setFormDatas ] = useState('')
   
-  var totalPieces;
-  // first 2045
-  var bytesPerPiece = 2731 ;
+  // var totalPieces;
+  // // first 2045
+  // var bytesPerPiece = 2731 ;
   useEffect(()=>{
-    let dataList = {
-      version:"v1.0-rc1-67-gf34dae7"
-    }
+    // let dataList = {
+    //   version:"v1.0-rc1-67-gf34dae7"
+    // }
     // sendMSGtoController("VERSIONNUM_INQUIRE",dataList)
   },[])
   // console.log(props)
@@ -104,7 +104,7 @@ function RecoverAndBackup (props) {
 
   useEffect(()=>{
     // let appls = []
-    if( props.Uploading == 'no' ){
+    if( props.Uploading === 'no' ){
 
       // 使用字符串的方式来分包上传文件
       // if( FormDatas != '' ){
@@ -167,9 +167,6 @@ function RecoverAndBackup (props) {
     },
     fileList,
 
-  };
-  const updateSystem = () => {
-    return;
   };
   const exportJobs = () => {
     return;

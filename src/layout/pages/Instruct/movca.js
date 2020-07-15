@@ -47,7 +47,7 @@ function MovcA(props) {
       DEC: para.DEC,
       SPIN: para.SPIN,
     });
-  }, [props.row, props.insertOrChange, props.form]);
+  }, [props.row, props.insertOrChange, props.form,props.program.instruct]);
   const onFinish = (value) => {
     let pos;
     let posType;

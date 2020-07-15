@@ -46,7 +46,7 @@ function Movc(props) {
       ACC: para.ACC,
       DEC: para.DEC,
     });
-  }, [props.row, props.insertOrChange, props.form]);
+  }, [props.row, props.insertOrChange, props.form, props.program.instruct]);
   const onFinish = (value) => {
     let pos;
     let posType;
@@ -80,10 +80,10 @@ function Movc(props) {
             // console.log(props)
             let num = 1
             //  console.log(props.programSeletedRow.length)
-            if( props.programSeletedRow.length == 0 ){
+            if( props.programSeletedRow.length === 0 ){
               props.selectmodalnum.splice(1)
               // console.log(props.program.instruct)
-              if(props.program.instruct == undefined){
+              if(props.program.instruct === undefined){
                 num = 1
               }else{
                 num = props.program.instruct.length 
@@ -92,7 +92,7 @@ function Movc(props) {
       
             }else{
               // console.log(props.selectmodalnum)
-              if(props.selectmodalnum.length == 2){
+              if(props.selectmodalnum.length === 2){
                 num = 1
                 props.selectmodalnum.splice(1)
               }else{

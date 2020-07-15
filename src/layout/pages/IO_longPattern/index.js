@@ -2,15 +2,9 @@ import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
-  Input,
-  Modal
 } from "antd";
 import { connect } from "dva";
-import { useHistory } from 'react-router-dom';
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./IO_longPattern-module.less"
@@ -67,14 +61,14 @@ function IO_longPattern(props){
   ];
   // 定义data
   const data = []
-  if( props.longPattern.current == undefined ){
+  if( props.longPattern.current === undefined ){
     data.push(
       {station:'',name:"无",times:'',count:'',status:5}
     )
   }else{
     data.push(
       { key: "1", name:"当前运行",  station: props.longPattern.current.station, programName: props.longPattern.current.name,operationNum:props.longPattern.current.times,operationNums:props.longPattern.current.count,
-      status:props.longPattern.current.status ==0?"无预约": props.longPattern.current.status ==1?"预约中":props.longPattern.current.status ==2?"运行中":props.longPattern.current.status ==3?"已预约":props.longPattern.current.status==4?"程序暂停":''  },
+      status:props.longPattern.current.status ===0?"无预约": props.longPattern.current.status ===1?"预约中":props.longPattern.current.status ===2?"运行中":props.longPattern.current.status ===3?"已预约":props.longPattern.current.status===4?"程序暂停":''  },
     )
   }
   console.log(props.longPattern.queue.length-1)
@@ -88,7 +82,7 @@ function IO_longPattern(props){
     }else{
       data.push(
         { key: `${i+2}`, name:`队列${i+1}`,  station:props.longPattern.queue[i].station, programName: props.longPattern.queue[i].name,operationNum:props.longPattern.queue[i].times,operationNums:props.longPattern.queue[i].count,
-        status:props.longPattern.queue[i].status ==0?"无预约": props.longPattern.queue[i].status ==1?"预约中":props.longPattern.queue[i].status ==2?"运行中":props.longPattern.queue[i].status ==3?"已预约":props.longPattern.queue[i].status==4?"程序暂停":''  },
+        status:props.longPattern.queue[i].status ===0?"无预约": props.longPattern.queue[i].status ===1?"预约中":props.longPattern.queue[i].status ===2?"运行中":props.longPattern.queue[i].status ===3?"已预约":props.longPattern.queue[i].status===4?"程序暂停":''  },
       )
     }
   }
@@ -109,8 +103,8 @@ function IO_longPattern(props){
         </div>
         <div className="header-hint-r">
           {/* 使用三元运算符来判断获Modbus和IO模块的连接状态 */}
-          <p>Modbus:  <span style={{ marginLeft:"25px" }}>{props.longStatus.ModbusConnect==0?"未连接":"已连接"}</span> </p>
-          <p>I/O模块: <span style={{ marginLeft:"30px" }}>{props.longStatus.ExternIOConnect==0?"未连接":"已连接"}</span> </p>
+          <p>Modbus:  <span style={{ marginLeft:"25px" }}>{props.longStatus.ModbusConnect===0?"未连接":"已连接"}</span> </p>
+          <p>I/O模块: <span style={{ marginLeft:"30px" }}>{props.longStatus.ExternIOConnect===0?"未连接":"已连接"}</span> </p>
         </div>
       </div>
       {/* 表格 */}

@@ -17,7 +17,6 @@ function Turning(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [buttonCharacter, setButtonCharacter] = useState("修改");
   const [buttonType, setButtonType] = useState("primary");
-  let robotName = "机器人";
   const change = () => {
     if (isDisabled === true) {
       setIsDisabled(false);

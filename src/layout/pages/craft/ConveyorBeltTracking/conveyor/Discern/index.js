@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
   Input,
   Modal,
 } from "antd";
@@ -27,9 +24,6 @@ function Disern(props) {
   const [showemptyModal, setShowemptyModal] = useState(false);
   const [showcopyModal, setshowcopyModal] = useState(false);
   const [Iptdsb, setIptdsb] = useState(true);
-  const [DisernconveyorID, setDisernConveyorID] = useState(
-    props.dataSoure.conveyorID
-  );
   const [Diserntype, setDiserntype] = useState(props.dataSoure.detectSrc.type);
   const [DisernvisionID, setDisernvisionID] = useState(
     props.dataSoure.detectSrc.visionID
@@ -58,7 +52,7 @@ function Disern(props) {
       conveyorID: props.dataSoures.conveyorID,
     };
     sendMSGtoController("TRACK_CONVEYOR_POSCHECKPARAM_INQUIRE", dataList);
-  }, [props.dataSoures.conveyorID]);
+  }, [props.dataSoures.conveyorID,props.currentRobot]);
 
   useEffect(() => {
     setDiserntype(props.dataSoure.detectSrc.type);
@@ -68,7 +62,7 @@ function Disern(props) {
     setDisernidentype(props.dataSoure.identification.type);
     setDisernidencommunication(props.dataSoure.identification.communication);
     setDisernidensensorTrg(props.dataSoure.identification.sensorTrg);
-  }, [props.dataSoure.conveyorID, Iptdsb]);
+  }, [props.dataSoure.conveyorID, Iptdsb,props.dataSoure]);
 
   useEffect(() => {
     setIptdsb(true);

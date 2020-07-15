@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Skeleton, Col, Input, Select } from "antd";
 import { router } from "dva";
 import { connect } from "dva";
@@ -20,19 +20,6 @@ function GroundRail(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [buttonCharacter, setButtonCharacter] = useState("修改");
   const [buttonType, setButtonType] = useState("primary");
-  const [robotName, setRobotName] = useState("机器人1");
-  useEffect(() => {
-    var robot = props.outerActivedRobot;
-    if (robot === "robot1") {
-      setRobotName("机器人1");
-    } else if (robot === "robot2") {
-      setRobotName("机器人2");
-    } else if (robot === "robot3") {
-      setRobotName("机器人3");
-    } else if (robot === "robot4") {
-      setRobotName("机器人4");
-    }
-  }, [props.outerActivedRobot]);
 
   const change = () => {
     if (isDisabled === true) {

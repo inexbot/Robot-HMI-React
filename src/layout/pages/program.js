@@ -4,7 +4,7 @@
  */
 import React, { useState, useEffect } from "react";
 import intl from "react-intl-universal";
-import { Table, Button, notification, ConfigProvider, Select } from "antd";
+import { Button, notification, ConfigProvider } from "antd";
 import VirtualTable from "../../components/table";
 import { connect } from "dva";
 import { renderInstruct } from "./Program_instruct_header/index";
@@ -41,16 +41,16 @@ const customizeRenderEmpty = () => (
 
 function Program(props) {
   const [selectedRow, setSelectedRow] = useState(0);
-  const [selectedName, setSelectedName] = useState(0);
-  const [multiSelection, setMultiSelection] = useState([]);
+  const [selectedName, ] = useState(0);
+  const [multiSelection, ] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
   const [moreBtn, setMoreBtn] = useState(false);
   const [forbid, setForbid] = useState(false);
   const [agai, setAgai] = useState(0);
   const [allList, setAllList] = useState(0);
-  const [rowSelection, setRowSelection] = useState(null);
+  const [rowSelection, ] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
-  const [isBulk, setIsBulk] = useState(0);
+  const [isBulk, ] = useState(0);
   
   const selectAll = () => {
     setAllList(1);
@@ -118,7 +118,7 @@ function Program(props) {
   );
   useEffect(() => {
     props.List.splice(0);
-  }, [moreBtn]);
+  }, [moreBtn, props.List]);
   // 用来构建标签页
   const columns = [
     {
@@ -178,7 +178,7 @@ function Program(props) {
         dataSource = [];
       } else {
         instruct.map((value, index) => {
-          if (index == 0) {
+          if (index === 0) {
           } else {
             if (instruct.length === 0) {
               return value;
@@ -242,12 +242,13 @@ function Program(props) {
               }
             }
           }
+          return dataSource
         });
         // 把过滤出来的数据存入dataSourceMain
         setDataSourceMain(dataSource)
       }
     }
-  }, [props.program, allList, moreBtn, moreButton,VirtualTable]);
+  }, [props.program, allList, moreBtn, moreButton, agai]);
   let comp = (
     <ProgramComponent
       selectedName={selectedName}
@@ -267,9 +268,7 @@ function Program(props) {
         setAComponent(comp);
         setHeadButtonDisplay("inline");
       }
-    },
-    [props.operaMode],
-    [dataSourceMain]
+    }, [props.operaMode,dataSourceMain, comp]
   );
 
   return (

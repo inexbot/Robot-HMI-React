@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
   Input,
   Modal,
 } from "antd";
@@ -47,7 +44,7 @@ function Sensorsign(props) {
       conveyorID: props.dataSoures.conveyorID,
     };
     sendMSGtoController("TRACK_CONVEYOR_SENSORPOS_INQUIRE", dataList);
-  }, [props.dataSoures.conveyorID]);
+  }, [props.dataSoures.conveyorID,props.currentRobot,]);
 
   const handleChange = (value) => {
     setCopycraftNum(Number(value));

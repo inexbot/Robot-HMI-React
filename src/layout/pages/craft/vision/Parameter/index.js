@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
-  Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
   Input,
-  Modal,
   Switch,
   Radio,
 } from "antd";
 import { connect } from "dva";
-import { useHistory } from "react-router-dom";
 import intl from "react-intl-universal";
 import ConTitle from "components/title";
 import "./parameter.module.less";
@@ -32,7 +26,7 @@ function Parameter(props) {
   const [triggermbtn4, setTriggerbtn4] = useState(false);
   const [allIpt, setAllIpt] = useState(true);
   const [showSave, setShowSave] = useState(false);
-  const [clientorsave, setClientorsave] = useState(false);
+  const [clientorsave, ] = useState(false);
   const [clientNum, setClientNum] = useState(true);
   const [clientway, setClientway] = useState(true);
   const [ethernetway, setEthernetway] = useState(false);
@@ -102,19 +96,14 @@ function Parameter(props) {
   );
 
   const [copycraftNum, setCopycraftNum] = useState(1);
-
-  // 查询视觉参数
-
-  const sendinquireparameterdata = () => {};
   // 改变数据
   useEffect(() => {
-    // sendinquireparameterdata()
     let dataList = {
       robot: props.currentRobot,
       visionNum: copycraftNum,
     };
     sendMSGtoController("VISION_PARAMETER_INQUIRE", dataList);
-  }, [copycraftNum]);
+  }, [copycraftNum,props.currentRobot]);
 
   useEffect(() => {
     setVisionServer(props.parameterList.socket.server);
@@ -139,30 +128,29 @@ function Parameter(props) {
     setVisionIntervals(props.parameterList.trigger.intervals);
     setVisionCurrentName(props.parameterList.cameraList.currentName);
 
-    setTriggerbtn1(props.parameterList.trigger.triggerMode == 1 ? true : false);
-    setTriggerbtn2(props.parameterList.trigger.triggerMode == 2 ? true : false);
+    setTriggerbtn1(props.parameterList.trigger.triggerMode === 1 ? true : false);
+    setTriggerbtn2(props.parameterList.trigger.triggerMode === 2 ? true : false);
     setTriggerbtn3(props.parameterList.trigger.triggerOnce ? true : false);
     setTriggerbtn4(props.parameterList.trigger.triggerOnce ? false : true);
 
-    // setEthernetway(props.parameterList.trigger.triggerMode==1? true : false)
+    // setEthernetway(props.parameterList.trigger.triggerMode===1? true : false)
     // setConditiontime(props.parameterList.trigger.triggerOnce? true : false)
   }, [props.parameterList]);
 
   const { Option } = Select;
   const cameraNumchildren = [];
-  let history = useHistory();
   for (let i = 0; i < 9; i++) {
     cameraNumchildren.push(<Option key={i}>{i}</Option>);
   }
   const userNumchildren = [];
   for (let i = 0; i < 10; i++) {
-    userNumchildren.push(<Option key={i}>{i == 0 ? "不使用" : i}</Option>);
+    userNumchildren.push(<Option key={i}>{i === 0 ? "不使用" : i}</Option>);
   }
 
   const cameratypeNumchildren = [];
   for (let i = 0; i < 2; i++) {
     cameratypeNumchildren.push(
-      <Option key={i}>{i == 0 ? "客户端" : "服务端"}</Option>
+      <Option key={i}>{i === 0 ? "客户端" : "服务端"}</Option>
     );
   }
 
@@ -174,7 +162,7 @@ function Parameter(props) {
   const angleUnitNumchildren = [];
   for (let i = 0; i < 2; i++) {
     angleUnitNumchildren.push(
-      <Option key={i}> {i == 0 ? "角度" : "弧度"}</Option>
+      <Option key={i}> {i === 0 ? "角度" : "弧度"}</Option>
     );
   }
 
@@ -194,21 +182,21 @@ function Parameter(props) {
   };
 
   useEffect(() => {
-    if (triggermbtn1 == true) {
+    if (triggermbtn1 === true) {
       setClientway(false);
-    } else if (triggermbtn1 == false) {
+    } else if (triggermbtn1 === false) {
       setClientway(true);
     }
 
-    if (triggermbtn2 == true) {
+    if (triggermbtn2 === true) {
       setEthernetway(false);
-    } else if (triggermbtn2 == false) {
+    } else if (triggermbtn2 === false) {
       setEthernetway(true);
     }
 
-    if (triggermbtn4 == true) {
+    if (triggermbtn4 === true) {
       setConditiontime(false);
-    } else if (triggermbtn4 == false) {
+    } else if (triggermbtn4 === false) {
       setConditiontime(true);
     }
   }, [
@@ -219,19 +207,10 @@ function Parameter(props) {
     VisionTriggerOnce,
   ]);
 
-  const showclientorsave = (value) => {
-    // console.log(value)
-    if (value == 0) {
-      setClientorsave(true);
-    } else if (value == 1) {
-      setClientorsave(false);
-    }
-  };
-
   const showclientnumChange = (value) => {
-    if (value == 1) {
+    if (value === 1) {
       setClientNum(true);
-    } else if (value == 2) {
+    } else if (value === 2) {
       setClientNum(false);
     }
   };
@@ -333,7 +312,7 @@ function Parameter(props) {
             </div>
             <div>
               类型:
-              {allIpt == true ? (
+              {allIpt === true ? (
                 <Input
                   disabled={allIpt}
                   value={VisionCurrentName}
@@ -358,14 +337,14 @@ function Parameter(props) {
             {allIpt ? (
               <Input
                 disabled={allIpt}
-                value={VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum}
+                value={VisionUserCoordNum === 0 ? "不使用" : VisionUserCoordNum}
                 style={{ width: 180 }}
               />
             ) : (
               <Select
                 disabled={allIpt}
                 defaultValue={
-                  VisionUserCoordNum == 0 ? "不使用" : VisionUserCoordNum
+                  VisionUserCoordNum === 0 ? "不使用" : VisionUserCoordNum
                 }
                 onChange={(value) => {
                   setVisionUserCoordNum(value);
@@ -434,13 +413,13 @@ function Parameter(props) {
                   {allIpt ? (
                     <Input
                       disabled={allIpt}
-                      value={VisionServer == true ? "客户端" : "服务端"}
+                      value={VisionServer === true ? "客户端" : "服务端"}
                       style={{ width: 100, marginLeft: "15px" }}
                     />
                   ) : (
                     <Select
                       disabled={allIpt}
-                      defaultValue={VisionServer == true ? "客户端" : "服务端"}
+                      defaultValue={VisionServer === true ? "客户端" : "服务端"}
                       onChange={(value) => {
                         setVisionServer(value);
                       }}
@@ -594,10 +573,10 @@ function Parameter(props) {
                   onClick={(e) => {
                     console.log(e.target.checked);
                     if (triggermbtn1) {
-                    } else if (triggermbtn1 == false) {
+                    } else if (triggermbtn1 === false) {
                       setTriggerbtn1(true);
                     }
-                    if (e.target.checked == true) {
+                    if (e.target.checked === true) {
                       setTriggerbtn2(false);
                       setVisionTriggerMode(1);
                     }
@@ -621,10 +600,10 @@ function Parameter(props) {
                   onClick={(e) => {
                     console.log(e.target.checked);
                     if (triggermbtn2) {
-                    } else if (triggermbtn2 == false) {
+                    } else if (triggermbtn2 === false) {
                       setTriggerbtn2(true);
                     }
-                    if (e.target.checked == true) {
+                    if (e.target.checked === true) {
                       setTriggerbtn1(false);
                       setVisionTriggerMode(2);
                     }
@@ -653,10 +632,10 @@ function Parameter(props) {
                   onClick={(e) => {
                     console.log(e.target.checked);
                     if (triggermbtn3) {
-                    } else if (triggermbtn3 == false) {
+                    } else if (triggermbtn3 === false) {
                       setTriggerbtn3(true);
                     }
-                    if (e.target.checked == true) {
+                    if (e.target.checked === true) {
                       setTriggerbtn4(false);
                       setVisionTriggerOnce(true);
                     }
@@ -672,10 +651,10 @@ function Parameter(props) {
                   onClick={(e) => {
                     console.log(e.target.checked);
                     if (triggermbtn4) {
-                    } else if (triggermbtn4 == false) {
+                    } else if (triggermbtn4 === false) {
                       setTriggerbtn4(true);
                     }
-                    if (e.target.checked == true) {
+                    if (e.target.checked === true) {
                       setTriggerbtn3(false);
                       setVisionTriggerOnce(false);
                     }
@@ -703,14 +682,14 @@ function Parameter(props) {
                 {allIpt ? (
                   <Input
                     disabled={allIpt}
-                    value={VisionAngleUnit == 0 ? "角度" : "弧度"}
+                    value={VisionAngleUnit === 0 ? "角度" : "弧度"}
                     style={{ width: 100 }}
                     className="text-lm"
                   />
                 ) : (
                   <Select
                     disabled={allIpt}
-                    defaultValue={VisionAngleUnit == 0 ? "角度" : "弧度"}
+                    defaultValue={VisionAngleUnit === 0 ? "角度" : "弧度"}
                     onChange={(value) => {
                       setVisionAngleUnit(Number(value));
                       console.log(value);
@@ -723,77 +702,6 @@ function Parameter(props) {
                 )}
               </div>
             </div>
-            {/* <div className="parameter-content-rBtn">
-              {showSave ? (
-                <Button
-                  size="large"
-                  type="primary"
-                  style={{
-                    background: "#45b97c",
-                    marginLeft: "2px",
-                    border: "none",
-                  }}
-                  onClick={() => {
-                    setAllIpt(true);
-                    setShowSave(false);
-                    let dataList = {
-                      robot: props.currentRobot,
-                      visionNum: copycraftNum,
-                      cameraType: "customize",
-                      vision: {
-                        socket: {
-                          IP: VisionIp,
-                          portOne: Number(VisionPortOne),
-                          server: Number(VisionServer),
-                          portTwo: Number(VisionPortTwo),
-                          portNum: Number(VisionPortNum),
-                        },
-                        protocol: {
-                          endMark: VisionEndMark,
-                          singleTarget: VisionSinleTarget,
-                          height: VisionHeight,
-                          frameHeader: VisionFrameHeader,
-                          separator: VisionSeparator,
-                          failFlag: VisionFailFlag,
-                          successFlag: VisionSuccessFlag,
-                          timeOut: Number(VisionTimeOut),
-                          angleUnit: VisionAngleUnit,
-                        },
-                        trigger: {
-                          triggerMode: Number(VisionTriggerMode),
-                          triggerStr: VisionTriggerStr,
-                          IOPort: Number(VisionIOPort),
-                          triggerOnce: VisionTriggerOnce,
-                          intervals: VisionIntervals,
-                        },
-                        userCoordNum: Number(VisionUserCoordNum),
-                      },
-                    };
-
-                    sendMSGtoController("VISION_PARAMETER_SET", dataList);
-                    console.log(dataList);
-                  }}
-                >
-                  保存
-                </Button>
-              ) : (
-                <Button
-                  size="large"
-                  type="primary"
-                  style={{
-                    background: "#f36c21",
-                    marginLeft: "2px",
-                    border: "none",
-                  }}
-                  onClick={() => {
-                    setAllIpt(false);
-                    setShowSave(true);
-                  }}
-                >
-                  修改
-                </Button>
-              )}
-            </div> */}
           </div>
         </div>
       </div>

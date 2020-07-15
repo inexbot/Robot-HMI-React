@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { Col, Tabs, Select, Row, Table, Input } from "antd";
+import { Tabs, Select, Table } from "antd";
 import { connect } from "dva";
 import './slaveset.module.less'
-import { servoAmount } from "./slaveset_header";
 import { useState } from "react";
-import { sendMSGtoController } from "service/network";
 const { Option } = Select;
 const { TabPane } = Tabs;
 
@@ -17,9 +15,8 @@ const mapStateToProps = (state) => {
 };
 
 function SlaveSetRobot(props) {
-  const [ RobotServo, setRobotServo] = useState("虚拟伺服")
   const [ RobotNum, setRobotNum ] = useState(props.Robot.sum)
-  const [ RobotType, setRobotType ] = useState(props.Robot.robot[0].robotType)
+  const [ RobotType, ] = useState(props.Robot.robot[0].robotType)
   const [ RobotTypeNum, setRobotTypeNum ] = useState(6)
   const [ RobotAxisNum, setRobotAxisNum ] = useState(1)
   const [ RobotAxisGroupNum1, setRobotAxisGroupNum1 ] = useState(0)
@@ -30,16 +27,6 @@ function SlaveSetRobot(props) {
   const [ AxisColumns, setAxisColumns ] = useState('')
   const [ AxisDatas, setAxisDatas ] = useState('')
 
-
-
-  // 伺服选择下拉框的内容生成
-  const servoSelectOption = (servoAmount) => {
-    const options = [];
-    for (let i = 0; i < servoAmount.length; i++) {
-      options.push(<Option key={i + 1}>{"伺服-" + (i + 1)}</Option>);
-    }
-    return options;
-  };
   const callback = () =>{
     console.log('sss')
     // setRobotNum()
@@ -192,7 +179,7 @@ function SlaveSetRobot(props) {
     setTypeColumns(TypeColumn)
     setTypeDatas(TypeData)
     console.log(TypeColumn,TypeData)
-  },[RobotTypeNum])
+  },[RobotTypeNum,props.isDisabled])
 
   // 从动轴组数
   useEffect(()=>{
@@ -208,11 +195,11 @@ function SlaveSetRobot(props) {
         { key:`${i+1}`,  name:`组${i+1}`,servo: 
           <Select key={i+1} disabled={props.isDisabled} style={{ width:'100%' }} defaultValue={1} onChange={(value)=>{
             console.log(value)
-            if( i==0 ){
+            if( i===0 ){
               setRobotAxisGroupNum1(value)
-            }else if( i==1 ){
+            }else if( i===1 ){
               setRobotAxisGroupNum2(value)
-            }else if( i==2 ){
+            }else if( i===2 ){
               setRobotAxisGroupNum3(value)
             }
           }} > 
@@ -221,13 +208,13 @@ function SlaveSetRobot(props) {
             <Option key='5' value={3} >地轨</Option>
           </Select>,
           // 表格子内容使用三元运算符来判断
-          children: i == 0? RobotAxisGroupNum1 == 1?[ {
+          children: i === 0? RobotAxisGroupNum1 === 1?[ {
               key:`${i+1}`,
               name:`轴`,
               servo:
               <Select defaultValue='虚拟伺服' ><Option value={0}>虚拟伺服</Option></Select>
             },
-          ] : RobotAxisGroupNum1 == 2? [
+          ] : RobotAxisGroupNum1 === 2? [
             {
               key:`${(i+1)}`,
               name:`轴1`,
@@ -247,13 +234,13 @@ function SlaveSetRobot(props) {
               servo:
               <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
             }
-          ]: i==1? RobotAxisGroupNum2 == 1?[ {
+          ]: i===1? RobotAxisGroupNum2 === 1?[ {
             key:`${i+1}`,
             name:`轴`,
             servo:
             <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
           },
-        ] : RobotAxisGroupNum2 == 2? [
+        ] : RobotAxisGroupNum2 === 2? [
           {
             key:`${(i+1)}`,
             name:`轴1`,
@@ -273,13 +260,13 @@ function SlaveSetRobot(props) {
             servo:
             <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
           }
-        ]: RobotAxisGroupNum3 == 1?[ {
+        ]: RobotAxisGroupNum3 === 1?[ {
           key:`${i+1}`,
           name:`轴`,
           servo:
           <Select defaultValue='虚拟伺服'><Option value={0}>虚拟伺服</Option></Select>
         },
-        ] : RobotAxisGroupNum3 == 2? [
+        ] : RobotAxisGroupNum3 === 2? [
           {
             key:`${(i+1)}`,
             name:`轴1`,
@@ -305,7 +292,7 @@ function SlaveSetRobot(props) {
     }
     setAxisColumns(AxisColumn)
     setAxisDatas(AxisData)
-  },[RobotAxisNum,RobotAxisGroupNum1,RobotAxisGroupNum2,RobotAxisGroupNum3])
+  },[RobotAxisNum,RobotAxisGroupNum1,RobotAxisGroupNum2,RobotAxisGroupNum3,props.isDisabled])
 
   // 机器人
   return (

@@ -52,7 +52,7 @@ function SafeConfig(props) {
     form.setFieldsValue({
       forceInput: 11,
     });
-  }, []);
+  }, [form]);
   const switch1 = (checked) => {
     if (checked === true) {
       setDisabled1(false);

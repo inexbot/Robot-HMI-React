@@ -4,15 +4,10 @@ import ConTitle from "components/title";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
   Input,
-  Modal,
 } from "antd";
 import { connect } from "dva";
-import { useHistory } from "react-router-dom";
 import "./place.module.less";
 import { sendMSGtoController } from "service/network";
 
@@ -65,7 +60,7 @@ function Place(props) {
       visionNum: PlaceNum,
     };
     sendMSGtoController("VISION_POS_PARAMETER_INQUIRE", dataList);
-  }, [PlaceNum]);
+  }, [PlaceNum,props.currentRobot]);
 
   useEffect(() => {
     setVisionDatumPoint(props.PlaceList.position.datumPoint);
@@ -82,16 +77,15 @@ function Place(props) {
 
   const { Option } = Select;
   const cameraNumchildren = [];
-  let history = useHistory();
   for (let i = 0; i < 9; i++) {
     cameraNumchildren.push(<Option key={i}>{i}</Option>);
   }
 
   const DirectionNumchildren = [];
   for (let i = -1; i < 2; i++) {
-    if (i != 0) {
+    if (i !== 0) {
       DirectionNumchildren.push(
-        <Option key={i}>{i == -1 ? "负方向" : "正方向"}</Option>
+        <Option key={i}>{i === -1 ? "负方向" : "正方向"}</Option>
       );
     }
   }
@@ -376,7 +370,7 @@ function Place(props) {
                 <Input
                   disabled={allIpt}
                   className="text-w"
-                  value={VisionAngleDirection == -1 ? "负方向" : "正方向"}
+                  value={VisionAngleDirection === -1 ? "负方向" : "正方向"}
                 />
               </div>
             ) : (
@@ -384,7 +378,7 @@ function Place(props) {
                 角度方向:
                 <Select
                   defaultValue={
-                    VisionAngleDirection == -1 ? "负方向" : "正方向"
+                    VisionAngleDirection === -1 ? "负方向" : "正方向"
                   }
                   className="text-w"
                   onChange={(value) => {

@@ -57,7 +57,7 @@ export async function sendMSGtoServer(command, data) {
   //   console.log('这是一个文件')
   // }
   data === ""
-    ? console.error("发送数据为空") : dataLength >= 1024? message.push(data)  : data.append == undefined?  message.push(JSON.stringify(data)) : message.push(data)  ;
+    ? console.error("发送数据为空") : dataLength >= 1024? message.push(data)  : data.append === undefined?  message.push(JSON.stringify(data)) : message.push(data)  ;
   // console.log(data)
     try {
       if (ws.readyState === 1) {

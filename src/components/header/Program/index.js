@@ -3,13 +3,10 @@ import intl from "react-intl-universal";
 import "../Index/index.css";
 import { Select } from "antd";
 import { connect } from "dva";
-import { sendMSGtoController, sendMSGtoServer } from "service/network";
+import { sendMSGtoController } from "service/network";
 
 const { Option } = Select;
 
-function handleChangemode(value) {
-  console.log(`selected ${value}`);
-}
 const mapStateToProps = (state) => {
   return {
     operaMode: state.index.robotStatus.operaMode,
@@ -21,7 +18,7 @@ const mapStateToProps = (state) => {
   };
 };
 function Program(props) {
-  const [programState, setProgramState] = useState("Stop");
+  const [programState,] = useState("Stop");
   const [pName, setPName] = useState("");
   const [pSuffixname, setPSuffixname] = useState("");
   useEffect(() => {
@@ -42,6 +39,7 @@ function Program(props) {
     props.robot2CurrentProgram,
     props.robot3CurrentProgram,
     props.robot4CurrentProgram,
+    props
   ]);
   const sendProgram = (value) => {
     switch (value) {

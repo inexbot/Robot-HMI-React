@@ -10,7 +10,6 @@ import {
   Modal,
   Button,
   Input,
-  InputNumber,
   Tooltip,
   message,
 } from "antd";
@@ -164,8 +163,6 @@ function Project(props) {
   useEffect(() => {
     let tabs = [];
     let keyOfTabs = 1;
-    let page = "";
-    let pageSize = 1;
     // 对接收到的数据进行第一次遍历，用来获取标签页标签名
     if (props.project === undefined || props.project.length === 0) {
       setTabPanel(
@@ -179,13 +176,16 @@ function Project(props) {
     let programName = "";
     const changeName = (e) => {
       programName = e.target.value;
-      props.project.map((item, index) => {
-        item.program.map((item, index) => {
-          if (programName + ".JBR" == item.name) {
+      props.project.map((item) => {
+        item.program.map((item) => {
+          if (programName + ".JBR" === item.name) {
             message.error("此程序名已存在");
+            return item;
           } else {
+            return item;
           }
         });
+        return item;
       });
     };
 
@@ -233,11 +233,14 @@ function Project(props) {
                             newProgramName = e.target.value;
                             props.project.map((item, index) => {
                               item.program.map((item, index) => {
-                                if (newProgramName + ".JBR" == item.name) {
+                                if (newProgramName + ".JBR" === item.name) {
                                   message.error("此程序名已存在");
+                                  return item;
                                 } else {
+                                  return item;
                                 }
                               });
+                              return item;
                             });
                           }}
                         />
@@ -281,7 +284,7 @@ function Project(props) {
         <TabPane tab={value.name} key={keyOfTabs}>
           <Table
             rowClassName={(record, index) => {
-              return index == bkid ? "ant-table-row-selected" : "";
+              return index === bkid ? "ant-table-row-selected" : "";
             }}
             dataSource={dataSource}
             rowSelection={rowSelection}
@@ -307,14 +310,11 @@ function Project(props) {
       return value;
     });
     setTabPanel(tabs);
-  }, [props.project, rowSelection, selectedProgram]);
+  }, [props.project, rowSelection, selectedProgram,bkid,columns,deleteSingleProgram,onshow,props.currentRobot]);
   useEffect((value) => {
-    if (props.project == undefined) {
+    if (props.project === undefined) {
     } else {
-      let page = 0;
-      let pageSize = 10;
-      let obj = "";
-      obj = props.project[0].program.slice(page * 10, page + pageSize - 1);
+
     }
   });
   const deleteMoreButton = () => {

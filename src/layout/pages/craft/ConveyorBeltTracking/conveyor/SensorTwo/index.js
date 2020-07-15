@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
-  Select,
-  Divider,
   Input,
 } from "antd";
 import { connect } from "dva";
@@ -30,7 +26,7 @@ function SensorTwo(props) {
       conveyorID: props.dataSoures.conveyorID,
     };
     sendMSGtoController("TRACK_CONVEYOR_SENSOR_GRABGESTURE_INQUIRE", dataList);
-  }, [props.dataSoures.conveyorID]);
+  }, [props.dataSoures.conveyorID,props.currentRobot]);
 
   const columns = [
     { title: "参数", dataIndex: "name" },

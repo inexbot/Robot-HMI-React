@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  Table,
-  Button,
-  notification,
-  ConfigProvider,
-  Select,
   Steps,
-  message,
-  Divider
 } from "antd";
 import { connect } from "dva";
 import asyncComponents from "../../../../AsyncComponents";
-import { HashRouter, NavLink, Route, Switch, useHistory, useLocation} from "react-router-dom";
+import { HashRouter, Route, Switch, useHistory} from "react-router-dom";
 
 
 const Parameter = asyncComponents(() => import("./Parameter"))
@@ -36,13 +29,13 @@ const mapStateToProps = (state) => {
     const onChange = current => {
       console.log(current)
       setCurrent(current)
-      if(current == 0){
+      if(current === 0){
         history.push("/vision/parameter")
-      }else if(current == 1){
+      }else if(current === 1){
         history.push("/vision/scope")
-      }else if(current == 2){
+      }else if(current === 2){
         history.push("/vision/place")
-      }else if(current == 3){
+      }else if(current === 3){
         history.push("/vision/placedebug")
       }
     } 

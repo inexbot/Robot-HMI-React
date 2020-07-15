@@ -9,7 +9,6 @@ import ParaFrame from "./components/paraframe";
 import Log from "./components/log";
 import { connect } from "dva";
 import "./App.css";
-import { sendMSGtoServer } from "service/network";
 
 // locale data
 const locales = {

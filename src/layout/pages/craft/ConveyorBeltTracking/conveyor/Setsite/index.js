@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
-  notification,
-  ConfigProvider,
   Select,
-  Divider,
   Input,
   Modal,
 } from "antd";
@@ -57,7 +54,7 @@ function Setsite(props) {
     setTrackRangeZMin(props.Setsite.position.trackRangeZMin);
     setTrackRangeZMax(props.Setsite.position.trackRangeZMax);
     setGrabheight(props.Setsite.position.grabheight);
-  }, [props.Setsite.conveyorID]);
+  }, [props.Setsite.conveyorID,props.Setsite]);
 
   const { Option } = Select;
   const conveyorNumchildren = [];
@@ -70,7 +67,7 @@ function Setsite(props) {
       conveyorID: props.dataSoure.conveyorID,
     };
     sendMSGtoController("TRACK_CONVEYOR_POSITION_INQUIRE", dataList);
-  }, [props.dataSoure.conveyorID]);
+  }, [props.dataSoure.conveyorID,props.currentRobot]);
 
   const handleChange = (value) => {
     setCopycraftNum(Number(value));
@@ -312,6 +309,7 @@ function Setsite(props) {
           <img
             src="../images/setsite.png"
             style={{ width: "340px", marginLeft: 20 }}
+            alt="图片"
           />
           <div style={{ textAlign: "center" }}>
             <Button

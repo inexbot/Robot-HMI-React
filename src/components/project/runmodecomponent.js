@@ -2,8 +2,8 @@
  * 程序界面右下方的“插入指令，修改指令”等功能的组件
  * 引入ChangeInstructValue、instructType两个方法和变量
  */
-import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Button, Input, Form, Modal } from "antd";
+import React, { useState, useEffect} from "react";
+import { Button, Input, Form } from "antd";
 import { connect } from "dva"; 
 import "./programcomponent.css";
 import { sendMSGtoController } from "service/network";
@@ -25,7 +25,7 @@ function RunModeComponent(props) {
     form.setFieldsValue({
       index: props.index,
     });
-  }, [props.index]);
+  }, [props.index,form]);
   const changeIndex = (value) => {
     let indexData = {
       robot: props.currentRobot,
