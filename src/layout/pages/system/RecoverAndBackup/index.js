@@ -69,6 +69,10 @@ function RecoverAndBackup (props) {
     reader.onload = function(ev) { // 文件读取成功完成时触发
         var dataURL = this.result; // 获得文件读取成功后的DataURL,也就是base64编码
         setFormDatas(dataURL)
+        var startNum = dataURL.indexOf('base64,');
+        startNum = startNum*1+7;
+        var baseStr = dataURL.slice(startNum);
+        console.log(baseStr);
         console.log(dataURL)
     }
 
@@ -100,7 +104,7 @@ function RecoverAndBackup (props) {
 
   useEffect(()=>{
     // let appls = []
-    if( props.Uploading == 'yes' ){
+    if( props.Uploading == 'no' ){
 
       // 使用字符串的方式来分包上传文件
       // if( FormDatas != '' ){
@@ -131,11 +135,11 @@ function RecoverAndBackup (props) {
       //   // console.log(FormDatas.length)
       //   // console.log(FormDatas.toString())
 
-      //   // console.log(dataList)
+      // //   // console.log(dataList)
         
-      // //   // for(let i = 1;i <= FormDatas.length/2097152; i++ ){
-      // //   //   console.log(i)
-      // //   // }
+      // // //   // for(let i = 1;i <= FormDatas.length/2097152; i++ ){
+      // // //   //   console.log(i)
+      // // //   // }
       // }
       // sendMSGtoServer("UPLOADING_UPGRADE_SYSTEM",FormDatas)
 
