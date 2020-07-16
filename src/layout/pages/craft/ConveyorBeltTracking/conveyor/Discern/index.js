@@ -77,7 +77,7 @@ function Disern(props) {
   for (let i = 0; i <= 2; i++) {
     detectionNumchildren.push(
       <Option key={i}>
-        {i == 0 ? "视觉" : i == 1 ? "数字IO" : "全局变量"}
+        {i === 0 ? "视觉" : i === 1 ? "数字IO" : "全局变量"}
       </Option>
     );
   }
@@ -98,19 +98,19 @@ function Disern(props) {
   const identificationNumchildren = [];
   for (let i = 0; i < 2; i++) {
     identificationNumchildren.push(
-      <Option key={i}>{i == 0 ? "视觉" : "传感器"}</Option>
+      <Option key={i}>{i === 0 ? "视觉" : "传感器"}</Option>
     );
   }
   const sensorTrgNumchildren = [];
   for (let i = 0; i < 2; i++) {
     sensorTrgNumchildren.push(
-      <Option key={i}>{i == 0 ? "低电平触发" : "高电平触发"}</Option>
+      <Option key={i}>{i === 0 ? "低电平触发" : "高电平触发"}</Option>
     );
   }
   const communicationNumchildren = [];
   for (let i = 0; i < 2; i++) {
     communicationNumchildren.push(
-      <Option key={i}>{i == 0 ? "以太网" : "Modbus"}</Option>
+      <Option key={i}>{i === 0 ? "以太网" : "Modbus"}</Option>
     );
   }
 
@@ -134,7 +134,7 @@ function Disern(props) {
             setDiserntype(value);
           }}
           defaultValue={
-            Diserntype == 0 ? "视觉" : Diserntype == 1 ? "数字IO" : "全局变量"
+            Diserntype === 0 ? "视觉" : Diserntype === 1 ? "数字IO" : "全局变量"
           }
         >
           {detectionNumchildren}
@@ -152,16 +152,16 @@ function Disern(props) {
             setSignalSource(value);
           }}
           defaultValue={
-            Diserntype == 0
+            Diserntype === 0
               ? DisernvisionID
-              : Diserntype == 1
+              : Diserntype === 1
               ? DisernDI_capturePos
               : DisernglobalVar
           }
         >
-          {Diserntype == 0
+          {Diserntype === 0
             ? visinoIDrNumchildren
-            : Diserntype == 1
+            : Diserntype === 1
             ? DI_capturePosNumchildren
             : globalVarNumchildren}
         </Select>
@@ -177,7 +177,7 @@ function Disern(props) {
           onChange={(value) => {
             setDisernidentype(value);
           }}
-          defaultValue={Disernidentype == 0 ? "视觉" : "传感器"}
+          defaultValue={Disernidentype === 0 ? "视觉" : "传感器"}
         >
           {identificationNumchildren}
         </Select>
@@ -193,7 +193,7 @@ function Disern(props) {
           onChange={(value) => {
             setDisernidencommunication(value);
           }}
-          defaultValue={Disernidencommunication == 0 ? "以太网" : "Modbus"}
+          defaultValue={Disernidencommunication === 0 ? "以太网" : "Modbus"}
         >
           {communicationNumchildren}
         </Select>
@@ -209,7 +209,7 @@ function Disern(props) {
           onChange={(value) => {
             setDisernidensensorTrg(value);
           }}
-          defaultValue={DisernidensensorTrg == 0 ? "低电平触发" : "高电平触发"}
+          defaultValue={DisernidensensorTrg === 0 ? "低电平触发" : "高电平触发"}
         >
           {sensorTrgNumchildren}
         </Select>
@@ -225,7 +225,7 @@ function Disern(props) {
         <Input
           disabled
           value={
-            Diserntype == 0 ? "视觉" : Diserntype == 1 ? "数字IO" : "全局变量"
+            Diserntype === 0 ? "视觉" : Diserntype === 1 ? "数字IO" : "全局变量"
           }
         />
       ),
@@ -238,9 +238,9 @@ function Disern(props) {
         <Input
           disabled
           value={
-            Diserntype == 0
+            Diserntype === 0
               ? DisernvisionID
-              : Diserntype == 1
+              : Diserntype === 1
               ? DisernDI_capturePos
               : DisernglobalVar
           }
@@ -251,7 +251,7 @@ function Disern(props) {
     {
       key: "3",
       name: "工件识别方式",
-      money: <Input disabled value={Disernidentype == 0 ? "视觉" : "传感器"} />,
+      money: <Input disabled value={Disernidentype === 0 ? "视觉" : "传感器"} />,
       address: "视觉/传感器",
     },
     {
@@ -260,7 +260,7 @@ function Disern(props) {
       money: (
         <Input
           disabled
-          value={Disernidencommunication == 0 ? "以太网" : "Modbus"}
+          value={Disernidencommunication === 0 ? "以太网" : "Modbus"}
         />
       ),
       address: "以太网/Modbus",
@@ -271,7 +271,7 @@ function Disern(props) {
       money: (
         <Input
           disabled
-          value={DisernidensensorTrg == 0 ? "低电平触发" : "高电平触发"}
+          value={DisernidensensorTrg === 0 ? "低电平触发" : "高电平触发"}
         />
       ),
       address: "",
@@ -295,7 +295,7 @@ function Disern(props) {
               type="primary"
               onClick={() => {
                 let dataList = {};
-                if (Diserntype == 0) {
+                if (Diserntype === 0) {
                   dataList = {
                     robot: props.currentRobot,
                     conveyorID: props.dataSoures.conveyorID,
@@ -309,7 +309,7 @@ function Disern(props) {
                       sensorTrg: Number(DisernidensensorTrg),
                     },
                   };
-                } else if (Diserntype == 1) {
+                } else if (Diserntype === 1) {
                   dataList = {
                     robot: props.currentRobot,
                     conveyorID: props.dataSoures.conveyorID,
@@ -323,7 +323,7 @@ function Disern(props) {
                       sensorTrg: Number(DisernidensensorTrg),
                     },
                   };
-                } else if (Diserntype == 2) {
+                } else if (Diserntype === 2) {
                   dataList = {
                     robot: props.currentRobot,
                     conveyorID: props.dataSoures.conveyorID,

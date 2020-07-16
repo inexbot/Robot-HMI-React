@@ -5,16 +5,13 @@ import {
   Select,
   Steps,
 } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
 import { connect } from "dva";
 import asyncComponents from "../../../../../../AsyncComponents";
 import {
   HashRouter,
-  NavLink,
   Route,
   Switch,
   useHistory,
-  useLocation,
 } from "react-router-dom";
 import "./index.css";
 import { sendMSGtoController } from "service/network";
@@ -48,44 +45,24 @@ function Setparameter(props) {
   const onChange = (current) => {
     console.log(current);
     setCurrent(current);
-    if (current == 0) {
+    if (current === 0) {
       history.push("/setparameter/basic");
-    } else if (current == 1) {
+    } else if (current === 1) {
       history.push("/setparameter/discern");
-    } else if (current == 2) {
+    } else if (current === 2) {
       history.push("/setparameter/conveyorsign");
-    } else if (current == 3) {
+    } else if (current === 3) {
       history.push("/setparameter/sensorsign");
-    } else if (current == 4) {
+    } else if (current === 4) {
       history.push("/setparameter/setsite");
     }
   };
 
-  const steps = [
-    { title: "基本信息", path: "/setparameter/basic" },
-    { title: "识别参数", path: "/setparameter/discern" },
-    { title: "传送带标定", path: "/setparameter/conveyorsign" },
-    { title: "传感器标定", path: "/setparameter/sensorsign" },
-    { title: "位置设置", path: "/setparameter/setsite" },
-  ];
-
-  const [conveyorNum, setConveyorNum] = useState();
-  const next = () => {
-    setCurrent(current + 1);
-  };
-  const prev = () => {
-    setCurrent(current - 1);
-  };
-
+  const [conveyorNum, ] = useState();
   const conveyorNumchildren = [];
   for (let i = 1; i < 10; i++) {
     conveyorNumchildren.push(<Option key={i}>{i}</Option>);
   }
-
-  const handleSizeChange = (e) => {
-    setConveyorNum(e.target.value);
-  };
-
   const handleChange = (value) => {
     let dataList = {
       robot: props.currentRobot,

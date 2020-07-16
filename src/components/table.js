@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 };
 
 function VirtualTable(props) {
-  const [dataList, setDataList] = useState([]);
+  const [dataList, setDataList] = useState('');
   const { columns, scroll, className } = props;
   const [addnum, setAddnum] = useState(0);
   const [tableWidth, setTableWidth] = useState(0);
@@ -80,7 +80,7 @@ function VirtualTable(props) {
         }}
         height={scroll.y}
         rowCount={rawData.length}
-        rowHeight={() => 65}
+        rowHeight={() => 60}
         width={tableWidth}
         onScroll={({ scrollLeft }) => {
           onScroll({
@@ -90,7 +90,7 @@ function VirtualTable(props) {
       >
         {({ columnIndex, rowIndex, style }) => {
           let styleod = { background: "#e6f7ff" };
-          let stylesh = { lineHeight: "50px", ...style };
+          let stylesh = { lineHeight: "20px", ...style };
           let stylebd = {
             ...style,
             ...styleod,
@@ -158,8 +158,6 @@ function VirtualTable(props) {
       });
     }
   };
-
-
 
   return (
     <ResizeObserver

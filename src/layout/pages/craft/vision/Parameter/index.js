@@ -264,7 +264,7 @@ function Parameter(props) {
                           triggerStr: VisionTriggerStr,
                           IOPort: Number(VisionIOPort),
                           triggerOnce: VisionTriggerOnce,
-                          intervals: VisionIntervals,
+                          intervals: Number(VisionIntervals),
                         },
                         userCoordNum: Number(VisionUserCoordNum),
                       },

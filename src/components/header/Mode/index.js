@@ -23,6 +23,9 @@ function Mode(props) {
   const [mode, setMode] = useState("Teach");
   const [rightSelect, setRightSelect] = useState();
 
+
+  useEffect(() => {
+    
   let rightSelection = {
     teach: (
       <Select
@@ -47,8 +50,6 @@ function Mode(props) {
       </Select>
     ),
   };
-
-  useEffect(() => {
     switch (props.operaMode) {
       case 0:
         setMode("Teach");

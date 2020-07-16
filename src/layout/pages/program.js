@@ -41,17 +41,13 @@ const customizeRenderEmpty = () => (
 
 function Program(props) {
   const [selectedRow, setSelectedRow] = useState(0);
-  const [selectedName, ] = useState(0);
-  const [multiSelection, ] = useState([]);
   const [dataSourceMain, setDataSourceMain] = useState([]);
   const [moreBtn, setMoreBtn] = useState(false);
   const [forbid, setForbid] = useState(false);
-  const [agai, setAgai] = useState(0);
   const [allList, setAllList] = useState(0);
   const [rowSelection, ] = useState(null);
   const [headButtonDisplay, setHeadButtonDisplay] = useState("inline");
-  const [isBulk, ] = useState(0);
-  
+  let agai = false
   const selectAll = () => {
     setAllList(1);
     props.programallButton.push({b:2})
@@ -85,8 +81,8 @@ function Program(props) {
     );
   };
   const agaiMore = () => {
-
-    setAgai(true);
+    // setAgai(true);
+    agai = true
     setAgaiButton(
       <Button disabled={moreBtn} onClick={cancelagaiMore}>
         反选
@@ -94,8 +90,8 @@ function Program(props) {
     );
   };
   const cancelagaiMore = () => {
-
-    setAgai(false);
+    agai = false
+    // setAgai(false);
     setAgaiButton(
       <Button disabled={moreBtn} onClick={agaiMore}>
         反选
@@ -248,28 +244,27 @@ function Program(props) {
         setDataSourceMain(dataSource)
       }
     }
-  }, [props.program, allList, moreBtn, moreButton, agai]);
-  let comp = (
-    <ProgramComponent
-      selectedName={selectedName}
-      selectedRow={selectedRow}
-      multiSelection={[multiSelection]}
-      isBulk={isBulk}
-    />
-  );
+  }, [props.program, allList, moreBtn, moreButton,agai]);
+
   
   const [aComponent, setAComponent] = useState();
-  useEffect(
-    () => {
-      if (props.operaMode === 2) {
-        setAComponent(<RunModeComponent />);
-        setHeadButtonDisplay("none");
-      } else {
-        setAComponent(comp);
-        setHeadButtonDisplay("inline");
-      }
-    }, [props.operaMode,dataSourceMain, comp]
-  );
+  useEffect(() => {
+    let comp = (
+      <ProgramComponent
+        selectedName={0}
+        selectedRow={selectedRow}
+        multiSelection={[]}
+        isBulk={0}
+      />
+    );
+    if (props.operaMode === 2) {
+      setAComponent(<RunModeComponent />);
+      setHeadButtonDisplay("none");
+    } else {
+      setAComponent(comp);
+      setHeadButtonDisplay("inline");
+    }
+  }, [props.operaMode,dataSourceMain,selectedRow]);
 
   return (
     <div>

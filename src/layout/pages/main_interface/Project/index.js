@@ -72,32 +72,8 @@ function Project(props) {
   const deleteMultiProgram = () => {
     confirm(modalConfigDeleteMultiProgram);
   };
-  const handleOkDeleteSingleProgram = (name) => {
-    let deleteData = {
-      robot: props.currentRobot,
-      isbulk: isBulk,
-      jobname: [name],
-    };
-    sendMSGtoServer("DELETE_PROGRAM", deleteData);
-    cancelSelectMore();
-    Modal.destroyAll();
-  };
   const handleCancelDeleteSingleProgram = () => {
     Modal.destroyAll();
-  };
-  const deleteSingleProgram = (name) => {
-    confirm({
-      title: "确认",
-      onOk: handleOkDeleteSingleProgram.bind(this, name),
-      onCancel: handleCancelDeleteSingleProgram,
-      destroyOnClose: true,
-      content: (
-        <div>
-          <p>是否确认删除程序</p>
-          <p>{name}</p>
-        </div>
-      ),
-    });
   };
   useEffect(() => {
     sendMSGtoServer("Project", { robot: props.currentRobot });
@@ -121,49 +97,49 @@ function Project(props) {
     },
   };
 
-  //确认修改
-
-  const selectMore = () => {
-    setRowSelectrion(rows);
-    setIsBulk(1);
-    setMoreButton(<Button onClick={cancelSelectMore}>取消多选</Button>);
-  };
   const cancelSelectMore = () => {
     setRowSelectrion();
     setIsBulk(0);
     setMoreButton(<Button onClick={selectMore}>多选</Button>);
   };
+  //确认修改
+  const selectMore = () => {
+    setRowSelectrion(rows);
+    setIsBulk(1);
+    setMoreButton(<Button onClick={cancelSelectMore}>取消多选</Button>);
+  };
+
 
   const [moreButton, setMoreButton] = useState(
     <Button onClick={selectMore}>多选</Button>
   );
-  const columns = [
-    {
-      title: (
-        <div>
-          {intl.get("程序名")}
-          {moreButton}
-        </div>
-      ),
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: intl.get("修改时间"),
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "更多操作",
-      dataIndex: "more",
-      key: "more",
-    },
-  ];
 
   useEffect(() => {
     let tabs = [];
     let keyOfTabs = 1;
     // 对接收到的数据进行第一次遍历，用来获取标签页标签名
+    const columns = [
+      {
+        title: (
+          <div>
+            {intl.get("程序名")}
+            {moreButton}
+          </div>
+        ),
+        dataIndex: "name",
+        key: "name",
+      },
+      {
+        title: intl.get("修改时间"),
+        dataIndex: "date",
+        key: "date",
+      },
+      {
+        title: "更多操作",
+        dataIndex: "more",
+        key: "more",
+      },
+    ];
     if (props.project === undefined || props.project.length === 0) {
       setTabPanel(
         <TabPane tab={"无工程"} key="0">
@@ -189,6 +165,31 @@ function Project(props) {
       });
     };
 
+    const handleOkDeleteSingleProgram = (name) => {
+      let deleteData = {
+        robot: props.currentRobot,
+        isbulk: isBulk,
+        jobname: [name],
+      };
+      sendMSGtoServer("DELETE_PROGRAM", deleteData);
+      // cancelSelectMore();
+      Modal.destroyAll();
+    };
+    const deleteSingleProgram = (name) => {
+      confirm({
+        title: "确认",
+        onOk: handleOkDeleteSingleProgram.bind(this, name),
+        onCancel: handleCancelDeleteSingleProgram,
+        destroyOnClose: true,
+        content: (
+          <div>
+            <p>是否确认删除程序</p>
+            <p>{name}</p>
+          </div>
+        ),
+      });
+    };
+  
     //点击修改弹出模态框
     const showamendName = (name) => {
       confirm({
@@ -310,7 +311,7 @@ function Project(props) {
       return value;
     });
     setTabPanel(tabs);
-  }, [props.project, rowSelection, selectedProgram,bkid,columns,deleteSingleProgram,onshow,props.currentRobot]);
+  }, [props.project, rowSelection, selectedProgram,bkid,onshow,isBulk,moreButton,props.currentRobot]);
   useEffect((value) => {
     if (props.project === undefined) {
     } else {

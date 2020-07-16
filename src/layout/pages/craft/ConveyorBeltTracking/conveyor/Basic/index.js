@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Table,
   Button,
@@ -18,11 +18,12 @@ const mapStateToProps = (state) => {
 };
 
 function Basic(props) {
-  const [copycraftNum, setCopycraftNum] = useState(1);
-  const [showSave, setShowSave] = useState(false);
-  const [showemptyModal, setShowemptyModal] = useState(false);
-  const [showcopyModal, setshowcopyModal] = useState(false);
-  const [Iptdsb, setIptdsb] = useState(true);
+  const [ copycraftNum, setCopycraftNum] = useState(1);
+  const [ showSave, setShowSave] = useState(false);
+  const [ showemptyModal, setShowemptyModal] = useState(false);
+  const [ showcopyModal, setshowcopyModal] = useState(false);
+  const [ Iptdsb, setIptdsb] = useState(true);
+  const [ Uploding, setUploding ] = useState(true)
   const [minEncoderVal, setMinEncoderVal] = useState(
     props.dataSoure.conveyor.minEncoderVal
   );
@@ -76,7 +77,7 @@ function Basic(props) {
   };
   const encoderDirectionNumchildren = [];
   for (let i = -1; i < 2; i++) {
-    if (i != 0) {
+    if (i !== 0) {
       encoderDirectionNumchildren.push(
         <Option key={i}>{i === 1 ? "正向" : "反向"}</Option>
       );
@@ -101,10 +102,15 @@ function Basic(props) {
       };
       sendMSGtoController("TRACK_CONVEYOR_REALTIME_INQUIRE", dataList);
     }, 1000);
+    if( Uploding === false ){
+      clearInterval(gainSet);
+    }else{
+      
+    }
     return () => {
       clearInterval(gainSet);
     };
-  }, [props.dataSoure.conveyorID, props.currentRobot]);
+  }, [props.dataSoure.conveyorID, props.currentRobot,Uploding]);
 
   const columns = [
     { title: "参数", dataIndex: "name" },
@@ -314,6 +320,7 @@ function Basic(props) {
                 sendMSGtoController("SET_THE_CONVEYOR_PARAMETERS", dataList);
                 setShowSave(false);
                 setIptdsb(true);
+                setUploding(true)
               }}
             >
               保存
@@ -331,6 +338,7 @@ function Basic(props) {
               onClick={() => {
                 setShowSave(false);
                 setIptdsb(true);
+                setUploding(true)
               }}
             >
               取消
@@ -344,6 +352,7 @@ function Basic(props) {
             onClick={() => {
               setShowSave(true);
               setIptdsb(false);
+              setUploding(false)
             }}
           >
             修改
