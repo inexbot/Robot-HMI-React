@@ -33,6 +33,7 @@ const ConveyorFour = asyncComponents(() => import("../ConveyorFour"));
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
+    conveyorID: state.index.conveyor.conveyorID
   };
 };
 
@@ -64,6 +65,10 @@ function Setparameter(props) {
     conveyorNumchildren.push(<Option key={i}>{i}</Option>);
   }
   const handleChange = (value) => {
+    props.dispatch({
+      type:'index/setparameterNum',
+      data:Number(value),
+    })
     let dataList = {
       robot: props.currentRobot,
       conveyorID: Number(value),
@@ -99,8 +104,8 @@ function Setparameter(props) {
           工艺号:
           <Select
             size={conveyorNum}
-            defaultValue="请选择工艺号"
-            onChange={handleChange}
+            defaultValue={props.conveyorID}
+            onChange={handleChange} 
             style={{ width: 200 ,marginLeft:10}}
           >
             {conveyorNumchildren}

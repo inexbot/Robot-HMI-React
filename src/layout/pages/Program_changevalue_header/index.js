@@ -26,15 +26,15 @@ function ChangeInstructValue(props) {
     name = props.insertName;
   }
   // console.log(props.changeName)
-  useEffect(() => {
-    let getCurrentPosition = setInterval(() => {
+  // useEffect(() => {
+  //   let getCurrentPosition = setInterval(() => {
 
-    }, 1000);
-    return () => {
-      clearInterval(getCurrentPosition);
-    };
-  }, []);
-  if(props.programSeletedRow.length === 1 ){
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(getCurrentPosition);
+  //   };
+  // }, []);
+  // if(props.programSeletedRow.length === 1 ){
     switch (name) {
       case "MOVJ":
         return (
@@ -88,20 +88,20 @@ function ChangeInstructValue(props) {
           </div>
         );
     }
-  }else{
-    console.log(props)
-    let nums = props.programSeletedRow.map((index)=>{
-      return index
-    })
-    return (
-      <Movj
-        row={nums}
-        form={props.form}
-        insertOrChange={props.insertOrChange}
-        setClose={props.setClose}
-      />
-    );
-  }
+  // }else{
+  //   console.log(props)
+  //   let nums = props.programSeletedRow.map((index)=>{
+  //     return index
+  //   })
+  //   return (
+  //     <Movj
+  //       row={nums}
+  //       form={props.form}
+  //       insertOrChange={props.insertOrChange}
+  //       setClose={props.setClose}
+  //     />
+  //   );
+  // }
 
 }
 export default connect(mapStateToProps)(ChangeInstructValue);

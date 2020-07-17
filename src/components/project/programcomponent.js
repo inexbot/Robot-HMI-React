@@ -3,8 +3,7 @@
  * 引入ChangeInstructValue、instructType两个方法和变量
  */
 import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Button, Drawer, Form, Modal, message, InputNumber, Tooltip,
-} from "antd";
+import { Row, Col, Button, Drawer, Form, Modal, message, InputNumber, Tooltip, } from "antd";
 import { connect } from "dva";
 import {
   PlusOutlined,

@@ -19,31 +19,31 @@ const mapStateToProps = (state) => {
 };
 
 function Disern(props) {
-  const [copycraftNum, setCopycraftNum] = useState(1);
-  const [showSave, setShowSave] = useState(false);
-  const [showemptyModal, setShowemptyModal] = useState(false);
-  const [showcopyModal, setshowcopyModal] = useState(false);
-  const [Iptdsb, setIptdsb] = useState(true);
-  const [Diserntype, setDiserntype] = useState(props.dataSoure.detectSrc.type);
-  const [DisernvisionID, setDisernvisionID] = useState(
+  const [ copycraftNum, setCopycraftNum] = useState(1);
+  const [ showSave, setShowSave] = useState(false);
+  const [ showemptyModal, setShowemptyModal] = useState(false);
+  const [ showcopyModal, setshowcopyModal] = useState(false);
+  const [ Iptdsb, setIptdsb] = useState(true);
+  const [ Diserntype, setDiserntype] = useState(props.dataSoure.detectSrc.type);
+  const [ DisernvisionID, setDisernvisionID] = useState(
     props.dataSoure.detectSrc.visionID
   );
-  const [DisernDI_capturePos, setDisernDI_capturePos] = useState(
+  const [ DisernDI_capturePos, setDisernDI_capturePos] = useState(
     props.dataSoure.detectSrc.DI_capturePos
   );
-  const [DisernglobalVar, setDisernglobalVar] = useState(
+  const [ DisernglobalVar, setDisernglobalVar] = useState(
     props.dataSoure.detectSrc.globalVar
   );
-  const [Disernidentype, setDisernidentype] = useState(
+  const [ Disernidentype, setDisernidentype] = useState(
     props.dataSoure.identification.type
   );
-  const [Disernidencommunication, setDisernidencommunication] = useState(
+  const [ Disernidencommunication, setDisernidencommunication] = useState(
     props.dataSoure.identification.communication
   );
-  const [DisernidensensorTrg, setDisernidensensorTrg] = useState(
+  const [ DisernidensensorTrg, setDisernidensensorTrg] = useState(
     props.dataSoure.identification.sensorTrg
   );
-  const [signalSource, setSignalSource] = useState("");
+  const [ signalSource, setSignalSource] = useState("");
   const { Option } = Select;
 
   useEffect(() => {
@@ -62,12 +62,17 @@ function Disern(props) {
     setDisernidentype(props.dataSoure.identification.type);
     setDisernidencommunication(props.dataSoure.identification.communication);
     setDisernidensensorTrg(props.dataSoure.identification.sensorTrg);
-  }, [props.dataSoure.conveyorID, Iptdsb,props.dataSoure]);
+  }, [props.dataSoure.conveyorID,props.dataSoure ]);
 
   useEffect(() => {
     setIptdsb(true);
     setShowSave(false);
   }, [props.dataSoure.conveyorID]);
+
+  // // 工件检测变化时信号源参数变化
+  // useEffect(()=>{
+  //   set
+  // })
 
   const conveyorNumchildren = [];
   for (let i = 1; i < 10; i++) {
@@ -132,6 +137,7 @@ function Disern(props) {
           style={{ width: "200px" }}
           onChange={(value) => {
             setDiserntype(value);
+            console.log(Diserntype)
           }}
           defaultValue={
             Diserntype === 0 ? "视觉" : Diserntype === 1 ? "数字IO" : "全局变量"
@@ -151,23 +157,13 @@ function Disern(props) {
           onChange={(value) => {
             setSignalSource(value);
           }}
-          defaultValue={
-            Diserntype === 0
-              ? DisernvisionID
-              : Diserntype === 1
-              ? DisernDI_capturePos
-              : DisernglobalVar
-          }
+          defaultValue={ Diserntype === 0 ? DisernvisionID : Diserntype === 1 ? DisernDI_capturePos : DisernglobalVar }
         >
-          {Diserntype === 0
-            ? visinoIDrNumchildren
-            : Diserntype === 1
-            ? DI_capturePosNumchildren
-            : globalVarNumchildren}
+          {Diserntype === 0 ? visinoIDrNumchildren : Diserntype === 1 ? DI_capturePosNumchildren : globalVarNumchildren}
         </Select>
       ),
       address: "视觉工艺号/IO端口号/变量",
-    },
+    }, 
     {
       key: "3",
       name: "工件识别方式",
@@ -347,7 +343,8 @@ function Disern(props) {
                   "TRACK_CONVEYOR_POSCHECKPARAM_SET",
                   dataList
                 );
-                // setIptdsb(true)
+                setIptdsb(true)
+                setShowSave(false);
               }}
             >
               保存

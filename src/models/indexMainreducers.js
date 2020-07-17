@@ -234,9 +234,7 @@ export const indexMainreducers = {
           let currentRobot = _state.robotStatus.currentRobot;
           _state.program = action.data.program;
           _state.robotStatus[`robot${currentRobot}OpenedProgram`] = true;
-          _state.robotStatus[`robot${currentRobot}CurrentProgram`] =
-            action.data.program.name;
-          console.log(_state);
+          _state.robotStatus[`robot${currentRobot}CurrentProgram`] = action.data.program.name;
           return _state;
         },
         /* 接收当前位置 */
@@ -527,7 +525,13 @@ export const indexMainreducers = {
         inquireIoremote(state, action){
           let _state = JSON.parse(JSON.stringify(state));
           _state.Ioremote = action.data
-          return _state
+          return _state;
+        },
+        // 传送带参数工艺号修改
+        setparameterNum(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          _state.conveyor.conveyorID = action.data
+          return _state;
         }
     }
 }

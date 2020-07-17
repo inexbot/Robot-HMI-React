@@ -32,7 +32,6 @@ function Movj(props) {
     }
   };
   const posSum = x();
-  console.log(props)
   //把指令的数据传送到抽屉里输入框
   useEffect(() => {
     let para;
@@ -44,7 +43,6 @@ function Movj(props) {
           ACC: 0,
           DEC: 0,
         }
-
         props.form.setFieldsValue({
           POS: para.POS,
           VJ: para.VJ,
@@ -125,6 +123,7 @@ function Movj(props) {
       
       
     } else {
+      console.log(props.programSeletedRow.length,props.selectmodalnum,props.program.instruct)
       //根据num来判断插入的是哪一行
        let num = 1
       if( props.programSeletedRow.length === 0 ){
@@ -143,7 +142,7 @@ function Movj(props) {
         }
       }
       let sendInsert = {
-        line: parseInt(props.row + num),
+        line: parseInt(num),
         modifystate: 0,
         name: "MOVJ",
         postype: posType,

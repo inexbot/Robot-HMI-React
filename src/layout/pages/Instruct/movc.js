@@ -77,29 +77,29 @@ function Movc(props) {
       props.setClose();
       return;
     } else {
-            // console.log(props)
-            let num = 1
-            //  console.log(props.programSeletedRow.length)
-            if( props.programSeletedRow.length === 0 ){
-              props.selectmodalnum.splice(1)
-              // console.log(props.program.instruct)
-              if(props.program.instruct === undefined){
-                num = 1
-              }else{
-                num = props.program.instruct.length 
-                // console.log(num)
-              }
-      
-            }else{
-              // console.log(props.selectmodalnum)
-              if(props.selectmodalnum.length === 2){
-                num = 1
-                props.selectmodalnum.splice(1)
-              }else{
-                num =  props.programSeletedRow[0].key + 1
-              }
-      
-            }
+      // console.log(props)
+      let num = 1
+      //  console.log(props.programSeletedRow.length)
+      if( props.programSeletedRow.length === 0 ){
+        props.selectmodalnum.splice(1)
+        // console.log(props.program.instruct)
+        if(props.program.instruct === undefined){
+          num = 1
+        }else{
+          num = props.program.instruct.length 
+          // console.log(num)
+        }
+
+      }else{
+        // console.log(props.selectmodalnum)
+        if(props.selectmodalnum.length === 2){
+          num = 1
+          props.selectmodalnum.splice(1)
+        }else{
+          num =  props.programSeletedRow[0].key + 1
+        }
+
+      }
       let sendInsert = {
         line: parseInt(props.row + num),
         modifystate: 0,
