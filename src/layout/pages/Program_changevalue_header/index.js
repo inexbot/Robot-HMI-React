@@ -7,6 +7,7 @@ import Movl from "../Instruct/movl";
 import Movc from "../Instruct/movc";
 import MovcA from "../Instruct/movca";
 import Movs from "../Instruct/movs";
+import Changes from "../Instruct/changes"
 import { connect } from "dva";
 
 const mapStateToProps = (state) => {
@@ -21,20 +22,14 @@ function ChangeInstructValue(props) {
   console.log(props)
   let name;
   if (props.insertOrChange === "change") {
-      name = props.changeName;
+    name = props.changeName;
+
   } else if (props.insertOrChange === "insert") {
     name = props.insertName;
-  }
-  // console.log(props.changeName)
-  // useEffect(() => {
-  //   let getCurrentPosition = setInterval(() => {
 
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(getCurrentPosition);
-  //   };
-  // }, []);
-  // if(props.programSeletedRow.length === 1 ){
+  }
+
+  if(props.programSeletedRow.length <= 1 ){
     switch (name) {
       case "MOVJ":
         return (
@@ -88,20 +83,33 @@ function ChangeInstructValue(props) {
           </div>
         );
     }
-  // }else{
-  //   console.log(props)
-  //   let nums = props.programSeletedRow.map((index)=>{
-  //     return index
-  //   })
-  //   return (
-  //     <Movj
-  //       row={nums}
-  //       form={props.form}
-  //       insertOrChange={props.insertOrChange}
-  //       setClose={props.setClose}
-  //     />
-  //   );
-  // }
+
+  }else{
+    console.log(props)
+    let nums = props.programSeletedRow.map((index)=>{
+      return index
+    })
+    console.log(nums)
+    return (
+      <Changes
+        row={nums}
+        form={props.form}
+        insertOrChange={props.insertOrChange}
+        setClose={props.setClose}
+      />
+    );
+  }
+  // console.log(props.changeName)
+  // useEffect(() => {
+  //   let getCurrentPosition = setInterval(() => {
+
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(getCurrentPosition);
+  //   };
+  // }, []);
+  console.log(name)
+  console.log(props.programSeletedRow)
 
 }
 export default connect(mapStateToProps)(ChangeInstructValue);
