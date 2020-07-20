@@ -35,6 +35,7 @@ function MovcA(props) {
   useEffect(() => {
     let para;
     if (props.insertOrChange === "change") {
+      // console.log(props.program.instruct[props.row])
       para = props.program.instruct[props.row].para;
     } else {
       para = insertDefaultValue;
@@ -78,6 +79,7 @@ function MovcA(props) {
       };
       sendMSGtoServer("INSERT_COMMAND", sendData);
       props.setClose();
+      console.log(sendData)
       return;
     } else {
       let sendInsert = {
@@ -95,6 +97,7 @@ function MovcA(props) {
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
+      console.log(sendInsert)
     }
   };
   return (

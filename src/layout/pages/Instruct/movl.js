@@ -14,13 +14,13 @@ const mapStateToProps = (state) => {
 };
 const insertDefaultValue = {
   POS: "new",
-  VJ: 40,
+  V: 40,
   PL: 5,
   ACC: 10,
   DEC: 10,
 };
 
-function Movj(props) {
+function Movl(props) {
   const x = () => {
     if (
       props.program.var !== undefined &&
@@ -38,29 +38,28 @@ function Movj(props) {
     if (props.insertOrChange === "change") {
       if(props.programSeletedRow.length  > 1){
         para = {
-          VJ: 0,
+          V: 0,
           PL: 0,
           ACC: 0,
           DEC: 0,
         }
         props.form.setFieldsValue({
           POS: para.POS,
-          VJ: para.VJ,
+          V: para.V,
           PL: para.PL,
           ACC: para.ACC,
           DEC: para.DEC,
         });
 
       }else if(props.programSeletedRow.length ===1){
-          para = props.programSeletedRow[0].paras;
-          props.form.setFieldsValue({
-            POS: para.POS,
-            VJ: para.VJ,
-            PL: para.PL,
-            ACC: para.ACC,
-            DEC: para.DEC,
-          });
-  
+        para = props.programSeletedRow[0].paras;
+        props.form.setFieldsValue({
+          POS: para.POS,
+          V: para.V,
+          PL: para.PL,
+          ACC: para.ACC,
+          DEC: para.DEC,
+        });
       }else if(props.programSeletedRow.length ===0){
         message.error("请选择指令进行修改")
       }
@@ -68,13 +67,12 @@ function Movj(props) {
       para = insertDefaultValue;
       props.form.setFieldsValue({
         POS: para.POS,
-        VJ: para.VJ,
+        V: para.V,
         PL: para.PL,
         ACC: para.ACC,
         DEC: para.DEC,
       });
     }
-
   }, [props.row, props.insertOrChange, props.form, props.programSeletedRow]);
   
   const onFinish = (value) => {
@@ -97,7 +95,7 @@ function Movj(props) {
         })
         let sendData = {
           selectlines:nums,
-          VJ: parseFloat(value.VJ),
+          V: parseFloat(value.V),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
@@ -112,7 +110,7 @@ function Movj(props) {
           postype: posType,
           posname: posName,
           POS: pos,
-          VJ: parseFloat(value.VJ),
+          V: parseFloat(value.V),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
@@ -148,7 +146,7 @@ function Movj(props) {
         postype: posType,
         posname: posName,
         POS: pos,
-        VJ: parseFloat(value.VJ),
+        V: parseFloat(value.V),
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
@@ -176,8 +174,8 @@ function Movj(props) {
        <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
       </Form.Item>} 
       <Form.Item
-        name="VJ"
-        label="VJ"
+        name="V"
+        label="V"
         rules={[
           {
             required: true,
@@ -222,4 +220,4 @@ function Movj(props) {
     </Form>
   );
 }
-export default connect(mapStateToProps)(Movj);
+export default connect(mapStateToProps)(Movl);

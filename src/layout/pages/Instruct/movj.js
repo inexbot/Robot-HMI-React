@@ -50,17 +50,15 @@ function Movj(props) {
           ACC: para.ACC,
           DEC: para.DEC,
         });
-
       }else if(props.programSeletedRow.length ===1){
-          para = props.programSeletedRow[0].paras;
-          props.form.setFieldsValue({
-            POS: para.POS,
-            VJ: para.VJ,
-            PL: para.PL,
-            ACC: para.ACC,
-            DEC: para.DEC,
-          });
-  
+        para = props.programSeletedRow[0].paras;
+        props.form.setFieldsValue({
+          POS: para.POS,
+          VJ: para.VJ,
+          PL: para.PL,
+          ACC: para.ACC,
+          DEC: para.DEC,
+        });
       }else if(props.programSeletedRow.length ===0){
         message.error("请选择指令进行修改")
       }
@@ -120,8 +118,6 @@ function Movj(props) {
         sendMSGtoServer("INSERT_COMMAND", sendData);
         props.setClose();
       }
-      
-      
     } else {
       console.log(props.programSeletedRow.length,props.selectmodalnum,props.program.instruct)
       //根据num来判断插入的是哪一行
@@ -174,7 +170,7 @@ function Movj(props) {
         ]}
       >
        <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
-      </Form.Item>} 
+      </Form.Item>}
       <Form.Item
         name="VJ"
         label="VJ"
