@@ -135,7 +135,7 @@ function Jointpara(props) {
     const content = (joint) => {
       return (
         <div>
-          <table>
+          <table style={{width:"90%",marginLeft:"5%"}}>
             <tbody>
               <tr>
                 <td>

@@ -1,4 +1,9 @@
 .recoverandbackup .ant-tabs {
-    border-radius: 10px;
+    text-align: center;
   }
   
+
+  .recoverandbackup .ant-tabs .back-btn{
+    width: 200px;
+    height: 40px;
+  }

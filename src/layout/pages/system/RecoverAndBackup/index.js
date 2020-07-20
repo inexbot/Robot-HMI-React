@@ -5,6 +5,7 @@ import ConTitle from "components/title";
 import { connect } from "dva";
 import { UploadOutlined } from "@ant-design/icons";
 import { sendMSGtoServer } from "service/network";
+import "./index.css";
 
 const { TabPane } = Tabs;
 
@@ -193,13 +194,14 @@ function RecoverAndBackup (props) {
       />
       {/* 主要内容 */}
       <div className="recoverandbackup">
-        <p>U盘状态：{udiskState}</p>
+        <p style={{paddingTop:10}}></p>
+        <p style={{marginLeft:40}}>U盘状态：{udiskState}</p>
         <Tabs defaultActiveKey="1" style={{ background: "white" }}>
           <TabPane tab="升级系统" key="1">
             <p>当前软件版本：{version}</p>
             <div>
               <Upload {...inquireVersionNum}>
-                <Button>
+                <Button className="back-btn" type="primary">
                   <UploadOutlined /> 选择文件
                 </Button>
               </Upload>
@@ -209,16 +211,17 @@ function RecoverAndBackup (props) {
                 disabled={fileList.length === 0}
                 loading={uploading}
                 style={{ marginTop: 16 }}
+                className="back-btn"
               >
                 {uploading ? "上传中,请勿做其它操作" : "点击上传"}
               </Button>
             </div>
           </TabPane>
           <TabPane tab="程序" key="2">
-            <Button onClick={exportJobs}>导出程序</Button>
-            <div>
+            <Button onClick={exportJobs} className="back-btn">导出程序</Button>
+            <div style={{paddingTop:20}}>
               <Upload {...inquireVersionNum}>
-                <Button>
+                <Button className="back-btn">
                   <UploadOutlined /> 导入程序
                 </Button>
               </Upload>
@@ -228,18 +231,19 @@ function RecoverAndBackup (props) {
                 disabled={fileList.length === 0}
                 loading={uploading}
                 style={{ marginTop: 16 }}
+                className="back-btn"
               >
                 {uploading ? "Uploading" : "Start Upload"}
               </Button>
             </div>
           </TabPane>
-          <TabPane tab="参数" key="3">
-            <Button onClick={exportParameter}>导出参数</Button>
-            <Button onClick={importParameter}>导入参数</Button>
+          <TabPane tab="参数" key="3" style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
+            <div><Button onClick={exportParameter} className="back-btn">导出参数</Button></div>
+            <div style={{paddingTop:20}}><Button onClick={importParameter} className="back-btn">导入参数</Button></div>
           </TabPane>
-          <TabPane tab="系统" key="4">
-            <Button onClick={backupSystem}>备份系统</Button>
-            <Button onClick={recoverSystem}>恢复系统</Button>
+          <TabPane tab="系统" key="4" style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
+            <div><Button onClick={backupSystem} className="back-btn">备份系统</Button></div>
+            <div style={{paddingTop:20}}><Button onClick={recoverSystem} className="back-btn">恢复系统</Button></div>
           </TabPane>
         </Tabs>
       </div>

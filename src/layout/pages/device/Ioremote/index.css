@@ -18,7 +18,7 @@
 .ioremote table tr td, .iostatushint table tr td, .IOReset table tr td, .IOWarning table tr td{
     width: 120px;
     text-align: center;
-    padding: 6px 10px 4px 10px;
+    padding: 3px 10px 3px 10px;
     border-bottom: 1px #9FDDF5 solid;
 }
 

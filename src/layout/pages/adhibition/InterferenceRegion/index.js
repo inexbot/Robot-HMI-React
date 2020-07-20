@@ -130,6 +130,7 @@ function InterferenceRegion(props) {
             </p>
           </Col>
           <Col span={7}>
+          <p style={{ height: 20 }}> </p>
             <div>
               <Form.Item
                 name="preRobot"

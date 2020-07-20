@@ -292,7 +292,7 @@ function Remotepro(props) {
                 dataSource={Mudbusdatas}
               />
               {/* 分页器 */}
-            <Pagination defaultCurrent={PageNum} total={300} showQuickJumper pageSizeOptions={['10']}  onChange={(page,pageSize)=>{
+            <Pagination style={{textAlign:"center"}} defaultCurrent={PageNum} total={300} showQuickJumper pageSizeOptions={['10']}  onChange={(page,pageSize)=>{
               setPageNum(page)
             }} />
           </TabPane>
