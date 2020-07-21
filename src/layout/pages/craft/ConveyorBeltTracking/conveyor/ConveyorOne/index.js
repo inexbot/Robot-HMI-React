@@ -100,11 +100,8 @@ function ConveyorsignOne(props) {
               conveyorID: props.dataSoures.conveyorID,
               posNum: 1,
             };
-            sendMSGtoController(
-              "TRACK_CONVEYOR_USERCOORD_CALIBRATION",
-              dataList
-            );
-            sendMSGtoController("RACK_CONVEYOR_CALIBRATION_INQUIRE", dataList);
+            sendMSGtoController( "TRACK_CONVEYOR_USERCOORD_CALIBRATION", dataList );
+            sendMSGtoController( "RACK_CONVEYOR_CALIBRATION_INQUIRE", dataList);
           }}
         >
           标定

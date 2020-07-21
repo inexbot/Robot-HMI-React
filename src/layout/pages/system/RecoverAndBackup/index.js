@@ -4,7 +4,7 @@ import { Tabs, Button, Upload } from "antd";
 import ConTitle from "components/title";
 import { connect } from "dva";
 import { UploadOutlined } from "@ant-design/icons";
-import { sendMSGtoServer } from "service/network";
+import { sendMSGtoServer, sendMSGtoController } from "service/network";
 import "./index.css";
 
 const { TabPane } = Tabs;
@@ -30,10 +30,10 @@ function RecoverAndBackup (props) {
   // // first 2045
   // var bytesPerPiece = 2731 ;
   useEffect(()=>{
-    // let dataList = {
-    //   version:"v1.0-rc1-67-gf34dae7"
-    // }
-    // sendMSGtoController("VERSIONNUM_INQUIRE",dataList)
+    let dataList = {
+      version:"v1.0-rc1-67-gf34dae7"
+    }
+    sendMSGtoController("VERSIONNUM_INQUIRE",dataList)
   },[])
   // console.log(props)
 

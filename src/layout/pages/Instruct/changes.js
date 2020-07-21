@@ -21,14 +21,14 @@ function Changes(props) {
 
   // 把指令的数据传送到抽屉里的输入框
   useEffect(()=>{
-    let para;
-    para = {
-      V: 0,
-      VJ: 0,
-      PL: 0,
-      Acc: 0,
-      DEC: 0,
-    }
+    // let para;
+    // para = {
+    //   V: 0,
+    //   VJ: 0,
+    //   PL: 0,
+    //   Acc: 0,
+    //   DEC: 0,
+    // }
     props.form.setFieldsValue({
       V: 0,
       POS: 0,
@@ -39,12 +39,12 @@ function Changes(props) {
     })
   },[props.form])
   const onFinish= (value) => {
-    let pos;
-    let posType;
-    let posName;
-    pos = value.POS;
-    posType = 1;
-    posName = null;
+    // let pos;
+    // let posType;
+    // let posName;
+    // pos = value.POS;
+    // posType = 1;
+    // posName = null;
     let nums = props.programSeletedRow.map((index)=>{
         return index.order
     });
@@ -69,7 +69,10 @@ function Changes(props) {
       data5 = ''
     }
     let sendData = {selectlines:nums, ...data1,...data2,...data3,...data4,...data5, }
-    sendMSGtoServer("AMEND_COMMAND", sendData);
+    if( Ipt1===false && Ipt2===false && Ipt3===false && Ipt4===false && Ipt5===false ){
+    }else{
+      sendMSGtoServer("AMEND_COMMAND", sendData);
+    }
     props.setClose();
   }
   // 使用按钮来控制参数是否修改  

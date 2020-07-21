@@ -1,7 +1,7 @@
 /*
  * 修改指令的入口，在这里决定右侧页面显示的是哪个文件
  */
-import React, { useEffect } from "react";
+import React from "react";
 import Movj from "../Instruct/movj";
 import Movl from "../Instruct/movl";
 import Movc from "../Instruct/movc";
@@ -108,8 +108,8 @@ function ChangeInstructValue(props) {
   //     clearInterval(getCurrentPosition);
   //   };
   // }, []);
-  console.log(name)
-  console.log(props.programSeletedRow)
+  // console.log(name)
+  // console.log(props.programSeletedRow)
 
 }
 export default connect(mapStateToProps)(ChangeInstructValue);

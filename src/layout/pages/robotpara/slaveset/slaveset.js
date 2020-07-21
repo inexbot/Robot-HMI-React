@@ -36,6 +36,7 @@ function SlaveSet(props) {
     sendMSGtoController("DRIVENSHAFT_INQUIRE","");
     sendMSGtoController("ROBOTTYPE_AXISMAP_INQUIRE","");
     sendMSGtoController("ENINAME_INQUIRE","");
+    // sendMSGtoController("SLAVETYPE_LIST_INQUIRE","")
   }, []);
 
   useEffect(()=>{

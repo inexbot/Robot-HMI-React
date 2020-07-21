@@ -42,8 +42,8 @@ function Setsite(props) {
   const [trackRangeZMax, setTrackRangeZMax] = useState(
     props.Setsite.position.trackRangeZMax
   );
-  const [grabheight, setGrabheight] = useState(
-    props.Setsite.position.grabheight
+  const [receLatestPos, setReceLatestPos] = useState(
+    props.Setsite.position.receLatestPos
   );
 
   useEffect(() => {
@@ -53,7 +53,7 @@ function Setsite(props) {
     setTrackRangeYMax(props.Setsite.position.trackRangeYMax);
     setTrackRangeZMin(props.Setsite.position.trackRangeZMin);
     setTrackRangeZMax(props.Setsite.position.trackRangeZMax);
-    setGrabheight(props.Setsite.position.grabheight);
+    setReceLatestPos(props.Setsite.position.receLatestPos);
   }, [props.Setsite.conveyorID,props.Setsite]);
 
   const { Option } = Select;
@@ -219,9 +219,9 @@ function Setsite(props) {
       money: (
         <Input
           disabled={Iptdsb}
-          value={grabheight}
+          value={receLatestPos}
           onChange={(e) => {
-            setGrabheight(e.target.value);
+            setReceLatestPos(e.target.value);
           }}
         />
       ),
@@ -256,7 +256,7 @@ function Setsite(props) {
                     trackRangeYMax: Number(trackRangeYMax),
                     trackRangeZMin: Number(trackRangeZMin),
                     trackRangeZMax: Number(trackRangeZMax),
-                    grabheight: Number(grabheight),
+                    receLatestPos: Number(receLatestPos),
                   },
                 };
                 sendMSGtoController("TRACK_CONVEYOR_POSITION_SET", dataList);

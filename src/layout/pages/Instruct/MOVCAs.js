@@ -18,6 +18,7 @@ const insertDefaultValue = {
   PL: 5,
   ACC: 10,
   DEC: 10,
+  SPIN: 0,
 };
 
 function Movc(props) {
