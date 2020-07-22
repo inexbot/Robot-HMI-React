@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { renderPosOption, newPos } from "./renderPos";
-import { Form, Input, Select } from "antd";
+import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
 const { Option } = Select;
@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
   return {
     program: state.index.program,
     currentPos: state.index.robotStatus.pos,
+    programSeletedRow: state.App.programSeletedRow,
+    selectmodalnum: state.App.selectmodalnum
   };
 };
 const insertDefaultValue = {
@@ -20,7 +22,6 @@ const insertDefaultValue = {
 };
 
 function MovcA(props) {
-
   const x = () => {
     if (
       props.program.var !== undefined &&
@@ -32,23 +33,53 @@ function MovcA(props) {
     }
   };
   const posSum = x();
+  //把指令的数据传送到抽屉里输入框
   useEffect(() => {
     let para;
     if (props.insertOrChange === "change") {
-      // console.log(props.program.instruct[props.row])
-      para = props.program.instruct[props.row].para;
+      if(props.programSeletedRow.length  > 1){
+        para = {
+          V: 0,
+          PL: 0,
+          ACC: 0,
+          DEC: 0,
+          SPIN: 0,
+        }
+        props.form.setFieldsValue({
+          POS: para.POS,
+          V: para.V,
+          PL: para.PL,
+          ACC: para.ACC,
+          DEC: para.DEC,
+          SPIN: para.SPIN,
+        });
+      }else if(props.programSeletedRow.length ===1){
+        para = props.programSeletedRow[0].paras;
+        props.form.setFieldsValue({
+          POS: para.POS,
+          V: para.V,
+          PL: para.PL,
+          ACC: para.ACC,
+          DEC: para.DEC,
+          SPIN: para.SPIN,
+        });
+      }else if(props.programSeletedRow.length ===0){
+        message.error("请选择指令进行修改")
+      }
     } else {
       para = insertDefaultValue;
+      props.form.setFieldsValue({
+        POS: para.POS,
+        V: para.V,
+        PL: para.PL,
+        ACC: para.ACC,
+        DEC: para.DEC,
+        SPIN: para.SPIN,
+      });
     }
-    props.form.setFieldsValue({
-      POS: para.POS,
-      V: para.V,
-      PL: para.PL,
-      ACC: para.ACC,
-      DEC: para.DEC,
-      SPIN: para.SPIN,
-    });
-  }, [props.row, props.insertOrChange, props.form,props.program.instruct]);
+
+  }, [props.row, props.insertOrChange, props.form, props.programSeletedRow]);
+  
   const onFinish = (value) => {
     let pos;
     let posType;
@@ -62,28 +93,59 @@ function MovcA(props) {
       posType = 1;
       posName = null;
     }
-    console.log(value);
     if (props.insertOrChange === "change") {
-      let sendData = {
-        line: parseInt(props.row),
-        modifystate: 1,
-        name: "MOVCA",
-        postype: posType,
-        posname: posName,
-        POS: pos,
-        V: parseFloat(value.V),
-        ACC: parseFloat(value.ACC),
-        DEC: parseFloat(value.DEC),
-        PL: parseInt(value.PL),
-        SPIN: parseInt(value.SPIN),
-      };
-      sendMSGtoServer("INSERT_COMMAND", sendData);
-      props.setClose();
-      console.log(sendData)
-      return;
+      if( props.programSeletedRow.length >= 2){
+        let nums = props.programSeletedRow.map((index)=>{
+          return index.order
+        })
+        let sendData = {
+          selectlines:nums,
+          V: parseFloat(value.V),
+          ACC: parseFloat(value.ACC),
+          DEC: parseFloat(value.DEC),
+          PL: parseInt(value.PL),
+          SPIN: parseInt(value.SPIN)
+        }
+        sendMSGtoServer("AMEND_COMMAND", sendData);
+        props.setClose();
+      }else{ 
+        let sendData = {
+          line: parseInt(props.programSeletedRow[0].order),
+          modifystate: 1,
+          name: "MOVCA",
+          postype: posType,
+          posname: posName,
+          POS: pos,
+          V: parseFloat(value.V),
+          ACC: parseFloat(value.ACC),
+          DEC: parseFloat(value.DEC),
+          PL: parseInt(value.PL),
+          SPIN: parseInt(value.SPIN)
+        };
+        sendMSGtoServer("INSERT_COMMAND", sendData);
+        props.setClose();
+      }
     } else {
+      console.log(props.programSeletedRow.length,props.selectmodalnum,props.program.instruct)
+      //根据num来判断插入的是哪一行
+       let num = 1
+      if( props.programSeletedRow.length === 0 ){
+        props.selectmodalnum.splice(1)
+        if(props.program.instruct === undefined){
+          num = 1
+        }else{
+          num = props.program.instruct.length 
+        }
+      }else{
+        if(props.selectmodalnum.length === 2){
+          num = 1
+          props.selectmodalnum.splice(1)
+        }else{
+          num =  props.programSeletedRow[0].key + 1
+        }
+      }
       let sendInsert = {
-        line: parseInt(props.row + 1),
+        line: parseInt(num),
         modifystate: 0,
         name: "MOVCA",
         postype: posType,
@@ -93,11 +155,10 @@ function MovcA(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
-        SPIN: parseInt(value.SPIN),
+        SPIN: parseInt(value.SPIN)
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
-      console.log(sendInsert)
     }
   };
   return (
@@ -107,7 +168,7 @@ function MovcA(props) {
       layout="inline"
       onFinish={onFinish}
     >
-      <Form.Item
+       {props.programSeletedRow.length > 1 ? " " : <Form.Item
         name="POS"
         label="POS"
         rules={[
@@ -116,8 +177,8 @@ function MovcA(props) {
           },
         ]}
       >
-        <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
-      </Form.Item>
+       <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
+      </Form.Item>}
       <Form.Item
         name="V"
         label="V"

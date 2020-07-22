@@ -509,4 +509,5 @@ export const CommandList = {
     // 接收IO远程控制
     IO_CONTROL_RESPOND:0x2f03,
 
+
 };

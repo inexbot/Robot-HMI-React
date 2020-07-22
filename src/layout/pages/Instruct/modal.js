@@ -3,13 +3,11 @@ import { renderPosOption, newPos } from "./renderPos";
 import { Form, Input, Select } from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
-
+const { Option } = Select;
 const mapStateToProps = (state) => {
   return {
     program: state.index.program,
     currentPos: state.index.robotStatus.pos,
-    programSeletedRow: state.App.programSeletedRow,
-    selectmodalnum: state.App.selectmodalnum
   };
 };
 const insertDefaultValue = {
@@ -21,7 +19,8 @@ const insertDefaultValue = {
   SPIN: 0,
 };
 
-function Movc(props) {
+function MovcA(props) {
+
   const x = () => {
     if (
       props.program.var !== undefined &&
@@ -36,6 +35,7 @@ function Movc(props) {
   useEffect(() => {
     let para;
     if (props.insertOrChange === "change") {
+      // console.log(props.program.instruct[props.row])
       para = props.program.instruct[props.row].para;
     } else {
       para = insertDefaultValue;
@@ -46,8 +46,9 @@ function Movc(props) {
       PL: para.PL,
       ACC: para.ACC,
       DEC: para.DEC,
+      SPIN: para.SPIN,
     });
-  }, [props.row, props.insertOrChange, props.form, props.program.instruct]);
+  }, [props.row, props.insertOrChange, props.form,props.program.instruct]);
   const onFinish = (value) => {
     let pos;
     let posType;
@@ -61,11 +62,12 @@ function Movc(props) {
       posType = 1;
       posName = null;
     }
+    console.log(value);
     if (props.insertOrChange === "change") {
       let sendData = {
         line: parseInt(props.row),
         modifystate: 1,
-        name: "MOVC",
+        name: "MOVCA",
         postype: posType,
         posname: posName,
         POS: pos,
@@ -73,33 +75,16 @@ function Movc(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
+        SPIN: parseInt(value.SPIN),
       };
       sendMSGtoServer("INSERT_COMMAND", sendData);
       props.setClose();
       return;
     } else {
-      let num = 1
-      if( props.programSeletedRow.length === 0 ){
-        props.selectmodalnum.splice(1)
-        if(props.program.instruct === undefined){
-          num = 1
-        }else{
-          num = props.program.instruct.length 
-        }
-
-      }else{
-        if(props.selectmodalnum.length === 2){
-          num = 1
-          props.selectmodalnum.splice(1)
-        }else{
-          num =  props.programSeletedRow[0].key + 1
-        }
-
-      }
       let sendInsert = {
-        line: parseInt(props.row + num),
+        line: parseInt(props.row + 1),
         modifystate: 0,
-        name: "MOVC",
+        name: "MOVCA",
         postype: posType,
         posname: posName,
         POS: pos,
@@ -107,10 +92,11 @@ function Movc(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
+        SPIN: parseInt(value.SPIN),
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
-      props.programSeletedRow.splice(0)
       props.setClose();
+      console.log(sendInsert)
     }
   };
   return (
@@ -175,7 +161,22 @@ function Movc(props) {
       >
         <Input style={{ width: 200 }} />
       </Form.Item>
+      <Form.Item
+        name="SPIN"
+        label="SPIN"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Select style={{ width: 200 }}>
+          <Option value={0}>0</Option>
+          <Option value={1}>1</Option>
+          <Option value={2}>2</Option>
+        </Select>
+      </Form.Item>
     </Form>
   );
 }
-export default connect(mapStateToProps)(Movc);
+export default connect(mapStateToProps)(MovcA);

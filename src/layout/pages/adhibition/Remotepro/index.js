@@ -119,6 +119,7 @@ function Remotepro(props) {
       }
     }
     sendMSGtoController("EXTERN_PROGRAM_INQUIRE",DataList)
+   
   },[PageNum,props.currentRobot])
   // 查询IO程序
   useEffect(()=>{

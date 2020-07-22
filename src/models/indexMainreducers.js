@@ -532,6 +532,6 @@ export const indexMainreducers = {
           let _state = JSON.parse(JSON.stringify(state));
           _state.conveyor.conveyorID = action.data
           return _state;
-        }
+        },
     }
 }
