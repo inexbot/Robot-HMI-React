@@ -180,3 +180,11 @@ function MovcA(props) {
   );
 }
 export default connect(mapStateToProps)(MovcA);
+
+
+alls:[
+  {cmd:{axis:0,coord:'RF',logout:false,posidname:"",posidtype:0,positionId:4653062,type:89,varname:"D004"},pos:6,time:"2020.07.23 10:40:26"},
+  {cmd:{axis:0,coord:'RF',logout:false,posidname:"P$GI006",posidtype:1,positionId:0,type:89,varname:"GD004"},pos:5,time:"2020.07.23 10:40:12"},
+  {cmd:{axis:0,coord:'RF',logout:false,posidname:"G$GI019",posidtype:1,positionId:0,type:89,varname:"GD009"},pos:7,time:"2020.07.23 10:40:37"},
+  {cmd:{axis:0,coord:'RF',logout:false,posidname:"G$I004",posidtype:1,positionId:0,type:89,varname:"GD002"},pos:8,time:"2020.07.23 10:40:59"}
+]

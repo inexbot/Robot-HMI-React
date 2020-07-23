@@ -90,7 +90,11 @@ const Setparameter = asyncComponents(() => import("./layout/pages/craft/Conveyor
 const Vision = asyncComponents(() => import("./layout/pages/craft/vision"));
 
 // IO远程模式界面
-const IO_longPattern = asyncComponents(() => import ("./layout/pages/IO_longPattern"))
+const IO_longPattern = asyncComponents(() => import ("./layout/pages/IO_longPattern"));
+
+// 变量
+const GlobalLocation = asyncComponents(() => import ("./layout/pages/location/GlobalLocation"));
+const GlobalNumberical = asyncComponents(() => import ("./layout/pages/location/GlobalNumberical"))
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
@@ -161,6 +165,10 @@ function Router(props) {
 
         {/* IO远程模式界面 */}
         <RouterDom.Route path="/iolongPatter" component={IO_longPattern} />
+
+        {/* 变量 */}
+        <RouterDom.Route path ="/GlobalLocation" component={GlobalLocation}/>
+        <RouterDom.Route path ="/GlobalNumberical" component={GlobalNumberical}/>
       </RouterDom.Switch>
     </App>
   );

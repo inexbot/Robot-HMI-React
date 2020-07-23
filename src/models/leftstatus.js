@@ -21,6 +21,7 @@ export default {
   reducers: {
     changeLeftState(state, action) {
       let _state = JSON.parse(JSON.stringify(state));
+      console.log(action.data)
       _state.currentState = action.data;
       return _state;
     },

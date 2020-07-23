@@ -7,6 +7,16 @@ import Movl from "../Instruct/movl";
 import Movc from "../Instruct/movc";
 import MovcA from "../Instruct/movca";
 import Movs from "../Instruct/movs";
+import Imov from "../Instruct/imov";
+import MovcaDouble from "../Instruct/movcadouble";
+import MovcDouble from "../Instruct/movcdouble";
+import Movcext from "../Instruct/movcext";
+import MovjDouble from "../Instruct/movjdouble";
+import Movjext from "../Instruct/movjext";
+import MovlDouble from "../Instruct/movldouble";
+import Movlext from "../Instruct/movlext";
+import Samov from "../Instruct/samov"
+
 import Changes from "../Instruct/changes"
 import { connect } from "dva";
 
@@ -70,6 +80,87 @@ function ChangeInstructValue(props) {
       case "MOVS":
         return (
           <Movs
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "IMOV":
+        return (
+          <Imov
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVCADOUBLE":
+        return (
+          <MovcaDouble
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVCDOUBLE":
+        return (
+          <MovcDouble
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVCEXT":
+        return (
+          <Movcext
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVJDOUBLE":
+        return (
+          <MovjDouble
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVJEXT":
+        return (
+          <Movjext
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVLDOUBLE":
+        return (
+          <MovlDouble
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "MOVLEXT":
+        return (
+          <Movlext
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        );
+      case "SAMOV":
+        return (
+          <Samov
             row={props.row}
             form={props.form}
             insertOrChange={props.insertOrChange}
