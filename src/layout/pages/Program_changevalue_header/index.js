@@ -214,6 +214,7 @@ export const instructType = [
       "MOVC",
       "MOVCA",
       "IMOVE",
+      "IMOV",
       "MOVS",
       "MOVABS",
       "MOVJEXT",

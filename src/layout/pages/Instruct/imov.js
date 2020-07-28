@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { renderPosOption, newPos } from "./renderPos";
+import React, { useEffect, useState } from "react";
+// import { renderPosOption, newPos } from "./renderPos";
 import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -21,6 +21,13 @@ const insertDefaultValue = {
 };
 
 function Imov(props) {
+  const [ PosValue, setPosValue ] = useState('')
+
+  const { Option } = Select;
+  let cameraNumchildren = []
+  for (let i = 0; i < 9; i++) {
+    cameraNumchildren.push(<Option key={i } value={'S00'+i}>{'S00'+i}</Option>);
+  }
   const x = () => {
     if (
       props.program.var !== undefined &&
@@ -38,6 +45,7 @@ function Imov(props) {
     if (props.insertOrChange === "change") {
       if(props.programSeletedRow.length  > 1){
         para = {
+          POS: PosValue,
           V: 0,
           PL: 0,
           ACC: 0,
@@ -82,11 +90,12 @@ function Imov(props) {
     if (value.POS === "new") {
       pos = props.currentPos;
       posType = 0;
-      posName = newPos(posSum);
+      // posName = newPos(posSum);
+      posName = PosValue
     } else {
       pos = value.POS;
       posType = 1;
-      posName = null;
+      posName = PosValue;
     }
     if (props.insertOrChange === "change") {
       if( props.programSeletedRow.length >= 2){
@@ -169,7 +178,7 @@ function Imov(props) {
           },
         ]}
       >
-       <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
+       <Select style={{ width: 200 }} onChange={(value)=>{ setPosValue(value) }}>{cameraNumchildren}</Select>
       </Form.Item>}
       <Form.Item
         name="V"

@@ -32,6 +32,7 @@ function Movj(props) {
     }
   };
   const posSum = x();
+  console.log(posSum)
   //把指令的数据传送到抽屉里输入框
   useEffect(() => {
     let para;
@@ -82,7 +83,6 @@ function Movj(props) {
     if (value.POS === "new") {
       pos = props.currentPos;
       posType = 0;
-      posName = newPos(posSum);
     } else {
       pos = value.POS;
       posType = 1;

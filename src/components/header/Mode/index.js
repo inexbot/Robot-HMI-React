@@ -6,6 +6,7 @@ import { connect } from "dva";
 import { useEffect } from "react";
 import { useState } from "react";
 import { sendMSGtoController } from "service/network";
+import { useHistory } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -23,7 +24,7 @@ function Mode(props) {
   const [mode, setMode] = useState("Teach");
   const [rightSelect, setRightSelect] = useState();
 
-
+  let history = useHistory();
   useEffect(() => {
     
   let rightSelection = {
@@ -85,6 +86,9 @@ function Mode(props) {
           mode: 1,
         };
         sendMSGtoController("OPERATION_MODE_SET", data3);
+        history.push({
+          pathname: "/iolongPatter",
+        });
         break;
       default:
         console.error("模式", value, "错误");
