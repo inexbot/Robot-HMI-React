@@ -40,6 +40,18 @@ function SlaveSet(props) {
   }, []);
 
   useEffect(()=>{
+    let DataList = {
+      robot:[{
+        robotType:"R_GENERAL_6S",
+        servoMap:[0,0,0,0,0,0],
+        syncMap:[0],
+        syncNum:1}],
+        sum:1
+      }
+    sendMSGtoController('DRIVENSHAFT_SET',DataList)
+  },[])
+
+  useEffect(()=>{
     setSlaveENIname(props.ENIname)
   },[props.ENIname])
 

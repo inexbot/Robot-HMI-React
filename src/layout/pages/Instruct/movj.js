@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { renderPosOption, newPos } from "./renderPos";
+import { renderPosOption, } from "./renderPos";
 import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";

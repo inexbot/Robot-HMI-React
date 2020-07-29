@@ -16,8 +16,9 @@ const mapStateToProps = (state) => {
 };
 
 function RunModeComponent(props) {
-  const [count, setCount] = useState(0);
-  const [form] = Form.useForm();
+  const [ count, setCount] = useState(0);
+  const [ form] = Form.useForm();
+  const [ OpNum, setOpNum ] = useState(0)
   useEffect(() => {
     setCount(props.count);
   }, [props.count]);
@@ -27,6 +28,7 @@ function RunModeComponent(props) {
     });
   }, [props.index,form]);
   const changeIndex = (value) => {
+    console.log(value)
     let indexData = {
       robot: props.currentRobot,
       index: value.index,
@@ -34,21 +36,30 @@ function RunModeComponent(props) {
     sendMSGtoController("CYCLE_INDEX_SET", indexData);
   };
   const setTime = (value) => {
+    setOpNum( value )
     let indexData = {
       robot: props.currentRobot,
       index: value,
     };
     sendMSGtoController("CYCLE_INDEX_SET", indexData);
   };
+  const OpChange = () => {
+    let indexData = {
+      robot: props.currentRobot,
+      index: Number(OpNum),
+    };
+    sendMSGtoController("CYCLE_INDEX_SET", indexData);
+  }
+
   return (
     <div className='progcomponent'>
       <div className='progmore'>
         <Form form={form} onFinish={changeIndex}>
           运行次数
           <Form.Item name='index' label={`${count}/`}>
-            <Input />
+            <Input value={ OpNum } onChange={( e )=>{ setOpNum(e.target.value) }} />
           </Form.Item>
-          <Button>设置</Button>
+          <Button onClick={OpChange} >设置</Button>
           <br />
           <Button onClick={setTime.bind(this, 1)}>单次运行</Button>
           <Button onClick={setTime.bind(this, 0)}>循环运行</Button>

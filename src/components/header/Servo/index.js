@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
     currentRobot: state.index.robotStatus.currentRobot,
     currentRobotServoState: state.index.robotStatus.currentRobotServoState,
     deadmanState: state.index.robotStatus.deadmanState,
+    robotStatus:state.index.robotStatus
   };
 };
 function Servo(props) {

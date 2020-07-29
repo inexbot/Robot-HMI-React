@@ -20,6 +20,10 @@ export const CommandList = {
     robot:1, //机器人号
     coord:0  //0关节，1直角，2工具，3用户
   } */
+  // 查询机器人运行状态
+  ROBGROUP_STATE_INQUIRE:0x9102,
+  // 收到查询机器人运行状态
+  ROBGROUP_STATE_RESPOND:0x9103,
 
   COORD_MODE_SET: 0x2201,
   /* 上电
@@ -441,6 +445,8 @@ export const CommandList = {
     
     // 从站配置查询机器人轴数
     DRIVENSHAFT_INQUIRE:0x2e18,
+    // 从站配置配置机器人
+    DRIVENSHAFT_SET:0x2e14,
 
     // 返回从站配置查询机器人轴数
     DRIVENSHAFT_RESPOND:0x2e19,

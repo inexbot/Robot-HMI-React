@@ -489,6 +489,18 @@ export default {
               data:dataString
             })
             break;
+          case "9103":
+            dispatch({
+              type:"inquirerobgroup",
+              data:dataString
+            })
+            break;
+          case "3501":
+            dispatch({
+              type:"inquireoperationnum",
+              data:dataString
+            })
+            break;
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);

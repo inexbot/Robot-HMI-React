@@ -1,10 +1,8 @@
-import React from "react";
+import React,{ useEffect, useState } from "react";
 import intl from "react-intl-universal";
 import { Menu, Dropdown, Slider, Row, Col, InputNumber } from "antd";
 import "../Index/index.css";
 import { connect } from "dva";
-import { useState } from "react";
-import { useEffect } from "react";
 import { sendMSGtoController } from "service/network";
 
 const mapStateToProps = state => {
@@ -15,8 +13,9 @@ const mapStateToProps = state => {
 };
 
 function HandleSpeed(props) {
-  const [inputValue, setInputValue] = useState(1);
-  const [visible, setVisible] = useState(false);
+  const [ inputValue, setInputValue] = useState(1);
+  const [ visible, setVisible] = useState(false);
+  const [ Vvalue, setVvalue ] = useState(1)
 
   useEffect(() => {
     setInputValue(props.handleSpeed);
@@ -32,13 +31,33 @@ function HandleSpeed(props) {
     setVisible(flag);
   };
 
-  const onChange = value => {
+  const SlionChange = value => {
+    let speedData = {
+      robot: props.currentRobot,
+      speed: Vvalue
+    };
+    sendMSGtoController("SPEED_SET", speedData);
+    props.dispatch({
+      type:"index/sethandleSpeed",
+      data:Vvalue
+    })
+  };
+  const IptChange = value => { 
+    setVvalue(value)
     let speedData = {
       robot: props.currentRobot,
       speed: value
     };
     sendMSGtoController("SPEED_SET", speedData);
-  };
+    props.dispatch({
+      type:"index/sethandleSpeed",
+      data:value
+    })
+  }
+  const Vchanges = value => {
+    setVvalue(value)
+  }
+
   const menu = (
     <Menu onClick={handleMenuClick} style={{width:240}}>
       <Menu.Item key="1">
@@ -47,15 +66,16 @@ function HandleSpeed(props) {
             <Slider
               min={1}
               max={100}
-              onChange={onChange}
-              value={typeof inputValue === "number" ? inputValue : 0}
+              onChange={Vchanges}
+              onAfterChange={SlionChange}
+              value={Vvalue}
             />
           </Col>
           <Col span={4}>
             <InputNumber
               style={{ marginLeft: 16 }}
               value={inputValue}
-              onChange={onChange}
+              onChange={IptChange}
               max={100}
               min={1}
             />

@@ -28,17 +28,17 @@ function Imov(props) {
   for (let i = 0; i < 9; i++) {
     cameraNumchildren.push(<Option key={i } value={'S00'+i}>{'S00'+i}</Option>);
   }
-  const x = () => {
-    if (
-      props.program.var !== undefined &&
-      props.program.var.position !== undefined
-    ) {
-      return props.program.var.position;
-    } else {
-      return [];
-    }
-  };
-  const posSum = x();
+  // const x = () => {
+  //   if (
+  //     props.program.var !== undefined &&
+  //     props.program.var.position !== undefined
+  //   ) {
+  //     return props.program.var.position;
+  //   } else {
+  //     return [];
+  //   }
+  // };
+  // const posSum = x();
   //把指令的数据传送到抽屉里输入框
   useEffect(() => {
     let para;
@@ -81,7 +81,7 @@ function Imov(props) {
       });
     }
 
-  }, [props.row, props.insertOrChange, props.form, props.programSeletedRow]);
+  }, [props.row, props.insertOrChange, props.form, props.programSeletedRow,PosValue]);
   
   const onFinish = (value) => {
     let pos;

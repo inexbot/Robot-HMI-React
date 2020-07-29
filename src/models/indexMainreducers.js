@@ -533,5 +533,30 @@ export const indexMainreducers = {
           _state.conveyor.conveyorID = action.data
           return _state;
         },
+        // 修改手动速度
+        sethandleSpeed(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          state.robotStatus.handleSpeed = action.data;
+          return _state;
+        },
+        // 修改运行速度
+        setrunningSpeed(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          state.robotStatus.runningSpeed = action.data;
+          return _state;
+        },
+        // 收到查询机器人状态
+        inquirerobgroup(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          state.robotStatus.continueRun = action.data.continueRun;
+          return _state;
+        },
+        // 接收当前运行到每一行
+        inquireoperationnum(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          console.log(action.data)
+          state.robotStatus.operationNum = action.data.num
+          return _state;
+        }
     }
 }
