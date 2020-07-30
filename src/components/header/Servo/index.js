@@ -44,14 +44,14 @@ function Servo(props) {
           robot: props.currentRobot,
           status: 0,
         };
-        sendMSGtoController("SERVO_STATUS_SET", servoData1);
+        sendMSGtoController("JOBEXE_MODE_SET", servoData1);
         break;
       case "Ready":
         let servoData2 = {
           robot: props.currentRobot,
           status: 1,
         };
-        sendMSGtoController("SERVO_STATUS_SET", servoData2);
+        sendMSGtoController("JOBEXE_MODE_SET", servoData2);
         break;
       default:
         break;

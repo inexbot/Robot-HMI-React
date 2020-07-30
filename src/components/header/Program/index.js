@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
   };
 };
 function Program(props) {
-  const [programState,] = useState("Stop");
+  const [programState, setprogramState ] = useState("Stop");
   const [pName, setPName] = useState("");
   const [pSuffixname, setPSuffixname] = useState("");
   useEffect(() => {
@@ -41,6 +41,10 @@ function Program(props) {
     props.robot4CurrentProgram,
     props
   ]);
+
+  // useEffect(()=>{
+
+  // },[programState])
   const sendProgram = (value) => {
     switch (value) {
       case "Run":
@@ -52,18 +56,23 @@ function Program(props) {
           conntinueRun: 0,
         };
         sendMSGtoController("JOBSEND_DONE", pData);
+        setprogramState('Run')
         break;
       case "Stop":
         let sData = {
           robot: props.currentRobot,
+          type:1,
         };
         sendMSGtoController("STOP_JOB_RUN", sData);
+        setprogramState('Stop')
         break;
       case "Pause":
         let psData = {
           robot: props.currentRobot,
+          type:0,
         };
         sendMSGtoController("STOP_JOB_RUN", psData);
+        setprogramState('Pause')
         break;
       default:
         break;

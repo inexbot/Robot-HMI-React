@@ -17,6 +17,7 @@ function handleChangeOperatemode(value) {
 const mapStateToProps = (state) => {
   return {
     operaMode: state.index.robotStatus.operaMode,
+    currentRobot: state.index.robotStatus.currentRobot
   };
 };
 
@@ -67,6 +68,12 @@ function Mode(props) {
         break;
     }
   }, [props.operaMode]);
+  useEffect(()=>{
+    let dataList = {
+      robot:props.currentRobot,
+    }
+    sendMSGtoController("CURRENT_ROBOT_SPEED_INQUIRE",dataList)
+  },[props.operaMode,props.currentRobot])
   const handleChangemode = (value) => {
     switch (value) {
       case "Teach":

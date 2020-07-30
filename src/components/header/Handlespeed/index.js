@@ -13,13 +13,19 @@ const mapStateToProps = state => {
 };
 
 function HandleSpeed(props) {
-  const [ inputValue, setInputValue] = useState(1);
   const [ visible, setVisible] = useState(false);
   const [ Vvalue, setVvalue ] = useState(1)
 
   useEffect(() => {
-    setInputValue(props.handleSpeed);
+    setVvalue(props.handleSpeed);
   }, [props.handleSpeed]);
+
+  useEffect(()=>{
+    let dataList = {
+      robot:props.currentRobot,
+    }
+    sendMSGtoController("CURRENT_ROBOT_SPEED_INQUIRE",dataList)
+  },[props.currentRobot])
 
   const handleMenuClick = e => {
     if (e.key === "3") {
@@ -74,7 +80,7 @@ function HandleSpeed(props) {
           <Col span={4}>
             <InputNumber
               style={{ marginLeft: 16 }}
-              value={inputValue}
+              value={Vvalue}
               onChange={IptChange}
               max={100}
               min={1}
@@ -93,7 +99,7 @@ function HandleSpeed(props) {
       className="handle"
     >
       <button className="ant-dropdown-link">
-        {intl.get("手动速度")} {inputValue}%
+        {intl.get("手动速度")} {Vvalue}%
       </button>
     </Dropdown>
   );

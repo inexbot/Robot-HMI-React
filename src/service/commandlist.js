@@ -97,6 +97,8 @@ export const CommandList = {
   data:{
     "robot":1
   }   */
+  // 停止当前运行的程序
+  JOBEXE_MODE_SET:0x2401,
 
   STOP_JOB_RUN: 0x2503,
   /* 切换机器人

@@ -14,14 +14,13 @@ const mapStateToProps = state => {
 };
 
 function Runspeed(props) {
-  const [inputValue, setInputValue] = useState(1);
   const [visible, setVisible] = useState(false);
   const [ Vvalue, setVvalue ] = useState(1)
 
   useEffect(() => {
-    setInputValue(props.runningSpeed);
+    setVvalue(props.runningSpeed);
   }, [props.runningSpeed]);
-
+  
   const handleMenuClick = (e) => {
     if (e.key === "3") {
       setVisible(false);
@@ -58,8 +57,6 @@ function Runspeed(props) {
   const Vchanges = value => {
     setVvalue(value)
   }
-
-
   const menu = (
     <Menu onClick={handleMenuClick} style={{ width: 240 }}>
       <Menu.Item key="1">
@@ -77,7 +74,7 @@ function Runspeed(props) {
           <Col span={4}>
             <InputNumber
               style={{ marginLeft: 16 }}
-              value={inputValue}
+              value={Vvalue}
               onChange={IptChange}
               max={100}
               min={1}
@@ -95,7 +92,7 @@ function Runspeed(props) {
       trigger={["click"]}
     >
       <button className="ant-dropdown-link">
-        {intl.get("运行速度")} {inputValue.toString()}%
+        {intl.get("运行速度")} {Vvalue.toString()}%
       </button>
     </Dropdown>
   );

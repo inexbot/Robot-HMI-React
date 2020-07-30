@@ -155,8 +155,6 @@ export default {
         console.group("接收到控制器数据");
         console.log("命令字", command);
         console.log("数据", dataString);
-
-        
         console.groupEnd();
         switch (command) {
           case "4303":
@@ -496,10 +494,10 @@ export default {
             })
             break;
           case "3501":
-            dispatch({
-              type:"inquireoperationnum",
-              data:dataString
-            })
+            // dispatch({
+            //   type:"inquireoperationnum",
+            //   data:dataString
+            // })
             break;
           case "2b03":
             if (dataString.data === "unInitFinish") {

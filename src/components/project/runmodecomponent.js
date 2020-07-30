@@ -55,14 +55,17 @@ function RunModeComponent(props) {
     <div className='progcomponent'>
       <div className='progmore'>
         <Form form={form} onFinish={changeIndex}>
-          运行次数
+          <span style={{ marginLeft:"20%" }}>运行次数</span>
           <Form.Item name='index' label={`${count}/`}>
-            <Input value={ OpNum } onChange={( e )=>{ setOpNum(e.target.value) }} />
+            <Input value={ OpNum } style={{ }} onChange={( e )=>{ setOpNum(e.target.value) }} />
+            <Button onClick={OpChange} type='primary' >设置</Button>
           </Form.Item>
-          <Button onClick={OpChange} >设置</Button>
+
           <br />
-          <Button onClick={setTime.bind(this, 1)}>单次运行</Button>
-          <Button onClick={setTime.bind(this, 0)}>循环运行</Button>
+          <div style={{ display:'flex',justifyContent:'space-around' }} >
+            <Button type='primary' onClick={setTime.bind(this, 1)}>单次运行</Button>
+            <Button type='primary' onClick={setTime.bind(this, 0)}>循环运行</Button>
+          </div>
         </Form>
       </div>
     </div>

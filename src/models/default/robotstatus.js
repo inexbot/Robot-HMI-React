@@ -64,5 +64,5 @@ export const robotStatus = {
   robot4OpenedProgram: false,
   robot4CurrentProgram: "",
   continueRun:-1,
-  operationNum:0,
+  operationNum:-1,
 };

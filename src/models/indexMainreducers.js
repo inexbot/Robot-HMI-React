@@ -554,7 +554,6 @@ export const indexMainreducers = {
         // 接收当前运行到每一行
         inquireoperationnum(state, action){
           let _state = JSON.parse(JSON.stringify(state));
-          console.log(action.data)
           state.robotStatus.operationNum = action.data.num
           return _state;
         }

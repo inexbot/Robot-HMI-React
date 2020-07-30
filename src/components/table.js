@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
     programBoth: state.App.programBoth,
     programList: state.App.programList,
     programallButton: state.App.allButton,
-    robotStatus: state.index.robotStatus
+    robotStatus: state.index.robotStatus,
   };
 };
 
@@ -22,7 +22,6 @@ function VirtualTable(props) {
   const { columns, scroll, className } = props;
   const [ addnum, setAddnum] = useState(0);
   const [ tableWidth, setTableWidth] = useState(0);
-  const [ robotRunningStatus, setrobotRunningStatus ] = useState(props.robotStatus.currentRobotRunningState)
   const widthColumnCount = columns.filter(({ width }) => !width).length;
   const mergedColumns = columns.map((column) => {
     if (column.width) {
@@ -30,10 +29,6 @@ function VirtualTable(props) {
     }
     return { ...column, width: Math.floor(tableWidth / widthColumnCount) };
   });
-  useEffect(()=>{
-    console.log( props.robotStatus.currentRobotRunningState )
-    setrobotRunningStatus(props.robotStatus.currentRobotRunningState)
-  },[props.robotStatus])
   useEffect(() => {
     props.programList.splice(0);
     props.programList.push(...props.dataSource);
@@ -101,7 +96,6 @@ function VirtualTable(props) {
             ...styleod,
             ...stylesh,
           };
-
           return (
             <div
               className={classNames("virtual-table-cell", {
@@ -109,7 +103,7 @@ function VirtualTable(props) {
                   columnIndex === mergedColumns.length - 1,
               })}
               //根据select来显示选中时候的样式
-              style={  rawData[rowIndex].select ? stylebd : stylesh}
+              style={ rawData[rowIndex].select ? stylebd : stylesh}
               onClick={(e) => {
                 //点击每一行
                 if( props.programallButton.length > 1){
