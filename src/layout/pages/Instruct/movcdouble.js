@@ -13,9 +13,9 @@ const mapStateToProps = (state) => {
   };
 };
 const insertDefaultValue = {
-  POS: "new",
+  E: "new",
   V: 40,
-  PL: 5,
+  TIME:0,
   ACC: 10,
   DEC: 10,
 };
@@ -39,23 +39,23 @@ function Movcdouble(props) {
       if(props.programSeletedRow.length  > 1){
         para = {
           V: 0,
-          PL: 0,
+          TIME:0,
           ACC: 0,
           DEC: 0,
         }
         props.form.setFieldsValue({
-          POS: para.POS,
+          E: para.E,
           V: para.V,
-          PL: para.PL,
+          TIME:0,
           ACC: para.ACC,
           DEC: para.DEC,
         });
       }else if(props.programSeletedRow.length ===1){
         para = props.programSeletedRow[0].paras;
         props.form.setFieldsValue({
-          POS: para.POS,
+          E: para.E,
           V: para.V,
-          PL: para.PL,
+          TIME: para.TIME,
           ACC: para.ACC,
           DEC: para.DEC,
         });
@@ -65,9 +65,9 @@ function Movcdouble(props) {
     } else {
       para = insertDefaultValue;
       props.form.setFieldsValue({
-        POS: para.POS,
+        E: para.E,
         V: para.V,
-        PL: para.PL,
+        TIME: para.TIME,
         ACC: para.ACC,
         DEC: para.DEC,
       });
@@ -98,7 +98,7 @@ function Movcdouble(props) {
           V: parseFloat(value.V),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
-          PL: parseInt(value.PL),
+          TIME: parseFloat(value.TIME),
         }
         sendMSGtoServer("AMEND_COMMAND", sendData);
         props.setClose();
@@ -109,11 +109,11 @@ function Movcdouble(props) {
           name: "MOVCDOUBLE",
           postype: posType,
           posname: posName,
-          POS: pos,
+          E: pos,
           V: parseFloat(value.V),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
-          PL: parseInt(value.PL),
+          TIME: parseFloat(value.TIME),
         };
         sendMSGtoServer("INSERT_COMMAND", sendData);
         props.setClose();
@@ -143,11 +143,11 @@ function Movcdouble(props) {
         name: "MOVCDOUBLE",
         postype: posType,
         posname: posName,
-        POS: pos,
+        E: pos,
         V: parseFloat(value.V),
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
-        PL: parseInt(value.PL),
+        TIME: parseFloat(value.TIME),
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
@@ -161,8 +161,8 @@ function Movcdouble(props) {
       onFinish={onFinish}
     >
        {props.programSeletedRow.length > 1 ? " " : <Form.Item
-        name="POS"
-        label="POS"
+        name="E"
+        label="E"
         rules={[
           {
             required: true,
@@ -174,17 +174,6 @@ function Movcdouble(props) {
       <Form.Item
         name="V"
         label="V"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input style={{ width: 200 }} />
-      </Form.Item>
-      <Form.Item
-        name="PL"
-        label="PL"
         rules={[
           {
             required: true,
@@ -207,6 +196,17 @@ function Movcdouble(props) {
       <Form.Item
         name="DEC"
         label="DEC"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input style={{ width: 200 }} />
+      </Form.Item>
+      <Form.Item
+        name="TIME"
+        label="TIME"
         rules={[
           {
             required: true,

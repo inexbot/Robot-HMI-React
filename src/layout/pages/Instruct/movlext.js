@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { renderPosOption, newPos } from "./renderPos";
+import { ErenderPosOption, EnewPos } from "./renderPos";
 import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -19,6 +19,7 @@ const insertDefaultValue = {
   ACC: 10,
   DEC: 10,
   SYNC: 0,
+  TIME: 0,
 };
 
 function Movlext(props) {
@@ -44,6 +45,7 @@ function Movlext(props) {
           ACC: 0,
           DEC: 0,
           SYNC: 0,
+          TIME: 0,
         }
         props.form.setFieldsValue({
           POS: para.POS,
@@ -51,7 +53,8 @@ function Movlext(props) {
           PL: para.PL,
           ACC: para.ACC,
           DEC: para.DEC,
-          SYNC: para.SYNC
+          SYNC: para.SYNC,
+          TIME: para.TIME
         });
 
       }else if(props.programSeletedRow.length ===1){
@@ -63,6 +66,7 @@ function Movlext(props) {
           ACC: para.ACC,
           DEC: para.DEC,
           SYNC: para.SYNC,
+          TIME: para.TIME
         });
       }else if(props.programSeletedRow.length ===0){
         message.error("请选择指令进行修改")
@@ -75,7 +79,8 @@ function Movlext(props) {
         PL: para.PL,
         ACC: para.ACC,
         DEC: para.DEC,
-        SYNC: para.SYNC
+        SYNC: para.SYNC,
+        TIME: para.TIME
       });
     }
   }, [props.row, props.insertOrChange, props.form, props.programSeletedRow]);
@@ -87,7 +92,7 @@ function Movlext(props) {
     if (value.POS === "new") {
       pos = props.currentPos;
       posType = 0;
-      posName = newPos(posSum);
+      posName = EnewPos(posSum);
     } else {
       pos = value.POS;
       posType = 1;
@@ -105,6 +110,7 @@ function Movlext(props) {
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
           SYNC: parseInt(value.SYNC),
+          TIME: parseInt(value.TIME)
         }
         sendMSGtoServer("AMEND_COMMAND", sendData);
         props.setClose();
@@ -121,6 +127,7 @@ function Movlext(props) {
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
           SYNC: parseInt(value.SYNC),
+          TIME: parseInt(value.TIME)
         };
         sendMSGtoServer("INSERT_COMMAND", sendData);
         props.setClose();
@@ -158,6 +165,7 @@ function Movlext(props) {
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
         SYNC: parseInt(value.SYNC),
+        TIME: parseInt(value.TIME)
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
@@ -179,7 +187,7 @@ function Movlext(props) {
           },
         ]}
       >
-       <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
+       <Select style={{ width: 200 }}>{ErenderPosOption(posSum)}</Select>
       </Form.Item>} 
       <Form.Item
         name="V"
@@ -217,6 +225,17 @@ function Movlext(props) {
       <Form.Item
         name="DEC"
         label="DEC"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input style={{ width: 200 }} />
+      </Form.Item>
+      <Form.Item
+        name="TIME"
+        label="TIME"
         rules={[
           {
             required: true,

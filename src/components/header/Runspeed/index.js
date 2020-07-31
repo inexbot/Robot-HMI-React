@@ -9,7 +9,8 @@ import { sendMSGtoController } from "service/network";
 const mapStateToProps = state => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
-    runningSpeed: state.index.robotStatus.runningSpeed
+    runningSpeed: state.index.robotStatus.runningSpeed,
+    operaMode: state.index.robotStatus.operaMode
   };
 };
 
@@ -20,7 +21,6 @@ function Runspeed(props) {
   useEffect(() => {
     setVvalue(props.runningSpeed);
   }, [props.runningSpeed]);
-  
   const handleMenuClick = (e) => {
     if (e.key === "3") {
       setVisible(false);
@@ -28,7 +28,13 @@ function Runspeed(props) {
   };
 
   const handleVisibleChange = (flag) => {
-    setVisible(flag);
+    if(props.operaMode === 2){
+      setVisible(flag);
+    }else if( props.operaMode === 1 ){
+      setVisible(flag);
+    }else{
+      
+    }
   };
 
   const SlionChange = value => {

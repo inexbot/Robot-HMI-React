@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
   };
 };
 const insertDefaultValue = {
-  POS: "new",
+  E: "new",
   V: 40,
   PL: 5,
   ACC: 10,
@@ -40,15 +40,15 @@ function MovcAdouble(props) {
       if(props.programSeletedRow.length  > 1){
         para = {
           V: 0,
-          PL: 0,
+          TIME: 0,
           ACC: 0,
           DEC: 0,
           SPIN: 0,
         }
         props.form.setFieldsValue({
-          POS: para.POS,
+          E: para.E,
           V: para.V,
-          PL: para.PL,
+          TIME: para.TIME,
           ACC: para.ACC,
           DEC: para.DEC,
           SPIN: para.SPIN,
@@ -56,9 +56,9 @@ function MovcAdouble(props) {
       }else if(props.programSeletedRow.length ===1){
         para = props.programSeletedRow[0].paras;
         props.form.setFieldsValue({
-          POS: para.POS,
+          E: para.E,
           V: para.V,
-          PL: para.PL,
+          TIME: para.TIME,
           ACC: para.ACC,
           DEC: para.DEC,
           SPIN: para.SPIN,
@@ -69,9 +69,9 @@ function MovcAdouble(props) {
     } else {
       para = insertDefaultValue;
       props.form.setFieldsValue({
-        POS: para.POS,
+        E: para.E,
         V: para.V,
-        PL: para.PL,
+        TIME: para.TIME,
         ACC: para.ACC,
         DEC: para.DEC,
         SPIN: para.SPIN,
@@ -84,12 +84,12 @@ function MovcAdouble(props) {
     let pos;
     let posType;
     let posName;
-    if (value.POS === "new") {
+    if (value.E === "new") {
       pos = props.currentPos;
       posType = 0;
       posName = newPos(posSum);
     } else {
-      pos = value.POS;
+      pos = value.E;
       posType = 1;
       posName = null;
     }
@@ -103,7 +103,7 @@ function MovcAdouble(props) {
           V: parseFloat(value.V),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
-          PL: parseInt(value.PL),
+          TIME: parseInt(value.TIME),
           SPIN: parseInt(value.SPIN)
         }
         sendMSGtoServer("AMEND_COMMAND", sendData);
@@ -115,11 +115,11 @@ function MovcAdouble(props) {
           name: "MOVCADOUBLE",
           postype: posType,
           posname: posName,
-          POS: pos,
+          E: pos,
           V: parseFloat(value.V),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
-          PL: parseInt(value.PL),
+          TIME: parseInt(value.TIME),
           SPIN: parseInt(value.SPIN)
         };
         sendMSGtoServer("INSERT_COMMAND", sendData);
@@ -150,11 +150,11 @@ function MovcAdouble(props) {
         name: "MOVCADOUBLE",
         postype: posType,
         posname: posName,
-        POS: pos,
+        E: pos,
         V: parseFloat(value.V),
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
-        PL: parseInt(value.PL),
+        TIME: parseInt(value.TIME),
         SPIN: parseInt(value.SPIN)
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
@@ -169,8 +169,8 @@ function MovcAdouble(props) {
       onFinish={onFinish}
     >
        {props.programSeletedRow.length > 1 ? " " : <Form.Item
-        name="POS"
-        label="POS"
+        name="E"
+        label="E"
         rules={[
           {
             required: true,
@@ -182,17 +182,6 @@ function MovcAdouble(props) {
       <Form.Item
         name="V"
         label="V"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input style={{ width: 200 }} />
-      </Form.Item>
-      <Form.Item
-        name="PL"
-        label="PL"
         rules={[
           {
             required: true,
@@ -233,10 +222,21 @@ function MovcAdouble(props) {
         ]}
       >
         <Select style={{ width: 200 }}>
-          <Option value={0}>0</Option>
-          <Option value={1}>1</Option>
-          <Option value={2}>2</Option>
+          <Option value={0}>姿态不转</Option>
+          <Option value={1}>六轴不变</Option>
+          <Option value={2}>六轴旋转</Option>
         </Select>
+      </Form.Item>
+      <Form.Item
+        name="TIME"
+        label="TIME"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input style={{ width: 200 }} />
       </Form.Item>
     </Form>
   );

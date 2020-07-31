@@ -57,15 +57,12 @@ function Speed(props) {
   }, [props.row, props.insertOrChange, props.form, props.programSeletedRow]);
   
   const onFinish = (value) => {
-    let pos;
     let posType;
     let posName;
     if (value.POS === "new") {
-      pos = props.currentPos;
       posType = 0;
       posName = newPos(posSum);
     } else {
-      pos = value.POS;
       posType = 1;
       posName = null;
     }

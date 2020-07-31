@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { renderPosOption, newPos } from "./renderPos";
+import { ErenderPosOption, EnewPos } from "./renderPos";
 import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -13,11 +13,11 @@ const mapStateToProps = (state) => {
   };
 };
 const insertDefaultValue = {
-  POS: "new",
+  E: "new",
   VJ: 40,
-  PL: 5,
   ACC: 10,
   DEC: 10,
+  TIME: 0,
 };
 
 function Movjdouble(props) {
@@ -39,25 +39,25 @@ function Movjdouble(props) {
       if(props.programSeletedRow.length  > 1){
         para = {
           VJ: 0,
-          PL: 0,
           ACC: 0,
           DEC: 0,
+          TIME: 0,
         }
         props.form.setFieldsValue({
-          POS: para.POS,
+          E: para.E,
           VJ: para.VJ,
-          PL: para.PL,
           ACC: para.ACC,
           DEC: para.DEC,
+          TIME: para.TIME,
         });
       }else if(props.programSeletedRow.length ===1){
         para = props.programSeletedRow[0].paras;
         props.form.setFieldsValue({
-          POS: para.POS,
+          E: para.E,
           VJ: para.VJ,
-          PL: para.PL,
           ACC: para.ACC,
           DEC: para.DEC,
+          TIME: para.TIME,
         });
       }else if(props.programSeletedRow.length ===0){
         message.error("请选择指令进行修改")
@@ -65,11 +65,11 @@ function Movjdouble(props) {
     } else {
       para = insertDefaultValue;
       props.form.setFieldsValue({
-        POS: para.POS,
+        E: para.E,
         VJ: para.VJ,
-        PL: para.PL,
         ACC: para.ACC,
         DEC: para.DEC,
+        TIME: para.TIME,
       });
     }
 
@@ -79,12 +79,12 @@ function Movjdouble(props) {
     let pos;
     let posType;
     let posName;
-    if (value.POS === "new") {
+    if (value.E === "new") {
       pos = props.currentPos;
       posType = 0;
-      posName = newPos(posSum);
+      posName = EnewPos(posSum);
     } else {
-      pos = value.POS;
+      pos = value.E;
       posType = 1;
       posName = null;
     }
@@ -98,7 +98,7 @@ function Movjdouble(props) {
           VJ: parseFloat(value.VJ),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
-          PL: parseInt(value.PL),
+          TIME: parseFloat(value.TIME),
         }
         sendMSGtoServer("AMEND_COMMAND", sendData);
         props.setClose();
@@ -109,11 +109,11 @@ function Movjdouble(props) {
           name: "MOVJDOUBLE",
           postype: posType,
           posname: posName,
-          POS: pos,
+          E: pos,
           VJ: parseFloat(value.VJ),
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
-          PL: parseInt(value.PL),
+          TIME: parseFloat(value.TIME),
         };
         sendMSGtoServer("INSERT_COMMAND", sendData);
         props.setClose();
@@ -143,11 +143,11 @@ function Movjdouble(props) {
         name: "MOVJDOUBLE",
         postype: posType,
         posname: posName,
-        POS: pos,
+        E: pos,
         VJ: parseFloat(value.VJ),
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
-        PL: parseInt(value.PL),
+        TIME: parseFloat(value.TIME), 
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
@@ -161,30 +161,19 @@ function Movjdouble(props) {
       onFinish={onFinish}
     >
        {props.programSeletedRow.length > 1 ? " " : <Form.Item
-        name="POS"
-        label="POS"
+        name="E"
+        label="E"
         rules={[
           {
             required: true,
           },
         ]}
       >
-       <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
+       <Select style={{ width: 200 }}>{ErenderPosOption(posSum)}</Select>
       </Form.Item>}
       <Form.Item
         name="VJ"
         label="VJ"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input style={{ width: 200 }} />
-      </Form.Item>
-      <Form.Item
-        name="PL"
-        label="PL"
         rules={[
           {
             required: true,
@@ -207,6 +196,17 @@ function Movjdouble(props) {
       <Form.Item
         name="DEC"
         label="DEC"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input style={{ width: 200 }} />
+      </Form.Item>
+      <Form.Item
+        name="TIME"
+        label="TIME"
         rules={[
           {
             required: true,

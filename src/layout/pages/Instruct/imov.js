@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-// import { renderPosOption, newPos } from "./renderPos";
+import React, { useEffect, } from "react";
+import { renderPosOption, newPos } from "./renderPos";
 import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -21,31 +21,31 @@ const insertDefaultValue = {
 };
 
 function Imov(props) {
-  const [ PosValue, setPosValue ] = useState('')
+  // const [ PosValue, setPosValue ] = useState('')
 
   const { Option } = Select;
   let cameraNumchildren = []
   for (let i = 0; i < 9; i++) {
     cameraNumchildren.push(<Option key={i } value={'S00'+i}>{'S00'+i}</Option>);
   }
-  // const x = () => {
-  //   if (
-  //     props.program.var !== undefined &&
-  //     props.program.var.position !== undefined
-  //   ) {
-  //     return props.program.var.position;
-  //   } else {
-  //     return [];
-  //   }
-  // };
-  // const posSum = x();
+  const x = () => {
+    if (
+      props.program.var !== undefined &&
+      props.program.var.position !== undefined
+    ) {
+      return props.program.var.position;
+    } else {
+      return [];
+    }
+  };
+  const posSum = x();
   //把指令的数据传送到抽屉里输入框
   useEffect(() => {
     let para;
     if (props.insertOrChange === "change") {
       if(props.programSeletedRow.length  > 1){
         para = {
-          POS: PosValue,
+          POS: posSum,
           V: 0,
           PL: 0,
           ACC: 0,
@@ -81,7 +81,7 @@ function Imov(props) {
       });
     }
 
-  }, [props.row, props.insertOrChange, props.form, props.programSeletedRow,PosValue]);
+  }, [props.row, props.insertOrChange, props.form, props.programSeletedRow,posSum]);
   
   const onFinish = (value) => {
     let pos;
@@ -89,13 +89,13 @@ function Imov(props) {
     let posName;
     if (value.POS === "new") {
       pos = props.currentPos;
-      posType = 0;
-      // posName = newPos(posSum);
-      posName = PosValue
+      // posType = 0;
+      posName = newPos(posSum);
+      posName = posSum
     } else {
       pos = value.POS;
       posType = 1;
-      posName = PosValue;
+      posName = posSum;
     }
     if (props.insertOrChange === "change") {
       if( props.programSeletedRow.length >= 2){
@@ -108,6 +108,7 @@ function Imov(props) {
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
+          B: 'BF'
         }
         sendMSGtoServer("AMEND_COMMAND", sendData);
         props.setClose();
@@ -123,12 +124,13 @@ function Imov(props) {
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
+          B: 'BF'
         };
         sendMSGtoServer("INSERT_COMMAND", sendData);
         props.setClose();
       }
     } else {
-      console.log(props.programSeletedRow.length,props.selectmodalnum,props.program.instruct)
+      console.log(props.programSeletedRow.length,props.selectmodalnum,props.program.instruct,posSum)
       //根据num来判断插入的是哪一行
        let num = 1
       if( props.programSeletedRow.length === 0 ){
@@ -157,6 +159,7 @@ function Imov(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
+        B: 'BF'
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
@@ -178,8 +181,19 @@ function Imov(props) {
           },
         ]}
       >
-       <Select style={{ width: 200 }} onChange={(value)=>{ setPosValue(value) }}>{cameraNumchildren}</Select>
+       <Select style={{ width: 200 }} >{renderPosOption(posSum)}</Select>
       </Form.Item>}
+      <Form.Item
+        name="B"
+        label="B"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input style={{ width: 200 }} />
+      </Form.Item>
       <Form.Item
         name="V"
         label="V"

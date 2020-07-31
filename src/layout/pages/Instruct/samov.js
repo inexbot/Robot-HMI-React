@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { renderPosOption, newPos } from "./renderPos";
+import { RrenderPosOption, RnewPos } from "./renderPos";
 import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -18,6 +18,7 @@ const insertDefaultValue = {
   PL: 5,
   ACC: 10,
   DEC: 10,
+  TIME: 0,
 };
 
 function Samov(props) {
@@ -42,6 +43,7 @@ function Samov(props) {
           PL: 0,
           ACC: 0,
           DEC: 0,
+          TIME: 0,
         }
         props.form.setFieldsValue({
           POS: para.POS,
@@ -49,6 +51,7 @@ function Samov(props) {
           PL: para.PL,
           ACC: para.ACC,
           DEC: para.DEC,
+          TIME :para.TIME,
         });
 
       }else if(props.programSeletedRow.length ===1){
@@ -59,6 +62,7 @@ function Samov(props) {
           PL: para.PL,
           ACC: para.ACC,
           DEC: para.DEC,
+          TIME :para.TIME,
         });
       }else if(props.programSeletedRow.length ===0){
         message.error("请选择指令进行修改")
@@ -71,6 +75,7 @@ function Samov(props) {
         PL: para.PL,
         ACC: para.ACC,
         DEC: para.DEC,
+        TIME :para.TIME,
       });
     }
   }, [props.row, props.insertOrChange, props.form, props.programSeletedRow]);
@@ -82,7 +87,7 @@ function Samov(props) {
     if (value.POS === "new") {
       pos = props.currentPos;
       posType = 0;
-      posName = newPos(posSum);
+      posName = RnewPos(posSum);
     } else {
       pos = value.POS;
       posType = 1;
@@ -99,6 +104,7 @@ function Samov(props) {
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
+          TIME: parseInt(value.TIME)
         }
         sendMSGtoServer("AMEND_COMMAND", sendData);
         props.setClose();
@@ -114,6 +120,7 @@ function Samov(props) {
           ACC: parseFloat(value.ACC),
           DEC: parseFloat(value.DEC),
           PL: parseInt(value.PL),
+          TIME: parseInt(value.TIME)
         };
         sendMSGtoServer("INSERT_COMMAND", sendData);
         props.setClose();
@@ -150,6 +157,7 @@ function Samov(props) {
         ACC: parseFloat(value.ACC),
         DEC: parseFloat(value.DEC),
         PL: parseInt(value.PL),
+        TIME: parseInt(value.TIME)
       };
       sendMSGtoServer("INSERT_COMMAND", sendInsert);
       props.setClose();
@@ -171,8 +179,19 @@ function Samov(props) {
           },
         ]}
       >
-       <Select style={{ width: 200 }}>{renderPosOption(posSum)}</Select>
+       <Select style={{ width: 200 }}>{RrenderPosOption(posSum)}</Select>
       </Form.Item>} 
+      <Form.Item
+        name="B"
+        label="B"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input style={{ width: 200 }} />
+      </Form.Item>
       <Form.Item
         name="V"
         label="V"
@@ -209,6 +228,17 @@ function Samov(props) {
       <Form.Item
         name="DEC"
         label="DEC"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input style={{ width: 200 }} />
+      </Form.Item>
+      <Form.Item
+        name="TIME"
+        label="TIME"
         rules={[
           {
             required: true,

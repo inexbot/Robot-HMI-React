@@ -15,7 +15,8 @@ import MovjDouble from "../Instruct/movjdouble";
 import Movjext from "../Instruct/movjext";
 import MovlDouble from "../Instruct/movldouble";
 import Movlext from "../Instruct/movlext";
-import Samov from "../Instruct/samov"
+import Samov from "../Instruct/samov";
+import Speed from "../Instruct/speed";
 
 import Changes from "../Instruct/changes"
 import { connect } from "dva";
@@ -29,7 +30,6 @@ const mapStateToProps = (state) => {
 };
 
 function ChangeInstructValue(props) {
-  console.log(props)
   let name;
   if (props.insertOrChange === "change") {
     name = props.changeName;
@@ -167,6 +167,15 @@ function ChangeInstructValue(props) {
             setClose={props.setClose}
           />
         );
+      case "SPEED":
+        return (
+          <Speed
+            row={props.row}
+            form={props.form}
+            insertOrChange={props.insertOrChange}
+            setClose={props.setClose}
+          />
+        )
       default:
         return (
           <div>
@@ -226,6 +235,11 @@ export const instructType = [
       "MOVCASYNC",
       "MOVCOMM",
       "SPEED",
+      "MOVJDOUBLE",
+      "MOVLDOUBLE",
+      "MOVCDOUBLE",
+      "MOVCADOUBLE",
+
     ],
   },
   {

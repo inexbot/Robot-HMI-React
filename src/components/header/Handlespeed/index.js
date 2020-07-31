@@ -8,7 +8,8 @@ import { sendMSGtoController } from "service/network";
 const mapStateToProps = state => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
-    handleSpeed: state.index.robotStatus.handleSpeed
+    handleSpeed: state.index.robotStatus.handleSpeed,
+    operaMode: state.index.robotStatus.operaMode
   };
 };
 
@@ -34,7 +35,9 @@ function HandleSpeed(props) {
   };
 
   const handleVisibleChange = flag => {
-    setVisible(flag);
+    if(props.operaMode === 0){
+      setVisible(flag);
+    }
   };
 
   const SlionChange = value => {

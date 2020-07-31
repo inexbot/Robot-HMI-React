@@ -169,6 +169,7 @@ function Router(props) {
         {/* 变量 */}
         <RouterDom.Route path ="/GlobalLocation" component={GlobalLocation}/>
         <RouterDom.Route path ="/GlobalNumberical" component={GlobalNumberical}/>
+
       </RouterDom.Switch>
     </App>
   );
