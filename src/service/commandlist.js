@@ -516,6 +516,20 @@ export const CommandList = {
 
     // 接收IO远程控制
     IO_CONTROL_RESPOND:0x2f03,
+    
+    // 全局变量查询
+    GLOBAL_POSITION_INQUIRE:0x5605,
 
+    // 接收全局变量查询
+    GLOBAL_POSITION_RESPOUND:0x5606,
+
+    // 接收当前位置
+    CURRENTPOS_RESPOND:0x2a03,
+
+    // 修改全局变量
+    GLOBAL_POSITION_SET:0x5604,
+
+    // 机器人运动至此
+    GO_POSITION:0x3003,
 
 };

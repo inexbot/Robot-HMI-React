@@ -24,6 +24,7 @@ import { IO_longPattern } from "./default/IO_longPattern"
 import { remotepro } from "./default/remotepro"
 import { Backup } from "./default/Backup"
 import { Ioremote } from "./default/Ioremote"
+import { location } from "./default/location"
  
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -83,7 +84,8 @@ export default {
     IO_longPattern,
     remotepro,
     Backup,
-    Ioremote
+    Ioremote,
+    location
   },
 
   subscriptions: {
@@ -498,6 +500,12 @@ export default {
             //   type:"inquireoperationnum",
             //   data:dataString
             // })
+            break;
+          case "5606":
+            dispatch({
+              type:"inquireGlobalLocation",
+              data:dataString
+            })
             break;
           case "2b03":
             if (dataString.data === "unInitFinish") {

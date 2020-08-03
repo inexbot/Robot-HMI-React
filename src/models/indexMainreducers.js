@@ -554,9 +554,20 @@ export const indexMainreducers = {
         // 接收当前运行到每一行
         inquireoperationnum(state, action){
           let _state = JSON.parse(JSON.stringify(state));
-          _state.robotStatus.operationNum = action.data.num
+          _state.robotStatus.operationNum = action.data.num;
+          return _state;
+        },
+        // 接收查询全局变量
+        inquireGlobalLocation(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          _state.location.GlobalLocationObj = action.data;
+          return _state;
+        },
+        // 写入当前位置
+        writelocation(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          _state.location.GlobalLocationObj.posValue = action.data;
           return _state;
         }
-
     }
 }
