@@ -507,6 +507,12 @@ export default {
               data:dataString
             })
             break;
+          case "560c":
+            dispatch({
+              type:"inquireGlobalNumberical",
+              data:dataString
+            })
+            break;
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);

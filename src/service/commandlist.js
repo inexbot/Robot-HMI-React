@@ -532,4 +532,13 @@ export const CommandList = {
     // 机器人运动至此
     GO_POSITION:0x3003,
 
+    // 查询一个全局变量
+    GLOBAL_VARIANT_INQUIRE:0x560b,
+
+    // 接收查询一个全局变量
+    GLOBAL_VARIANT_RESPOUND:0x560c,
+
+    // 修改一个全局变量
+    GLOBAL_VARIANT_SET:0x5607,
+
 };

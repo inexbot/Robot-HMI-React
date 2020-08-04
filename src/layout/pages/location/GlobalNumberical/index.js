@@ -2,10 +2,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Tabs, Button, Input, Table, Pagination, message } from "antd"
 import { connect } from "dva";
 import "./index.module.css";
+import { sendMSGtoController } from "service/network";
 
 const mapStateToProps = (state) => {
   return {
-    
+    currentRobot: state.index.robotStatus.currentRobot,
+    GlobalNumbericalObj: state.index.location.GlobalNumbericalObj
   }
 }
 
@@ -22,6 +24,8 @@ function GlobalNumberical(props){
   const [ BjIndex, setBjIndex ] = useState(-1);
   const [ valueChange, setValueChange] = useState(true);
   const [ ShowAllIpt, setShouAllIpt ] = useState(true)
+  const [ VarbalType, setVarbalType ] = useState(2);
+  const [ yelowSum, setyelowSum ] = useState(0);
   const { TabPane } = Tabs;
 
   // 点击整数型表格的变量名使之变颜色
@@ -33,6 +37,52 @@ function GlobalNumberical(props){
       setBjIndex(value)
     }
   },[BjIndex])
+
+  useEffect(()=>{
+    let varName = [];
+    if( VarbalType === 2 ){
+      for(let i = IntSizeNum-9; i <= IntSizeNum; i++ ){
+        if( i < 10 ){
+          varName.push(`GI00${i}`)
+        }else if( i < 100 ){
+          varName.push(`GI0${i}`)
+        }else{
+          varName.push(`GI${i}`)
+        }
+      }
+    }else if( VarbalType === 3 ){
+      for(let i = ReaSizeNum-9; i <= ReaSizeNum; i++ ){
+        if( i < 10 ){
+          varName.push(`GD00${i}`)
+        }else if( i < 100 ){
+          varName.push(`GD0${i}`)
+        }else{
+          varName.push(`GD${i}`)
+        }
+      }
+    }else if( VarbalType === 1 ){
+      for(let i = BolSizeNum-9; i <= BolSizeNum; i++ ){
+        if( i < 10 ){
+          varName.push(`GB00${i}`)
+        }else if( i < 100 ){
+          varName.push(`GB0${i}`)
+        }else{
+          varName.push(`GB${i}`)
+        }
+      }
+    }
+    let inquireGlobal = setInterval(() => {
+      sendMSGtoController("GLOBAL_VARIANT_INQUIRE",{ varName:varName[yelowSum],varType:VarbalType })
+      setyelowSum(yelowSum+1)
+    },300);
+    if( yelowSum > 9 ){
+      clearInterval(inquireGlobal)
+    }
+    return () => {
+      clearInterval(inquireGlobal)
+    }
+
+  },[VarbalType,IntSizeNum,ReaSizeNum,BolSizeNum,yelowSum])
 
   // 整数型表格的渲染
   useEffect(()=>{
@@ -51,13 +101,15 @@ function GlobalNumberical(props){
         name:i<10?<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GI00{i}</Button>
         :i<100?<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GI0{i}</Button>
         :<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GI{i}</Button>,
-        value:<Input style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }}   disabled={ ShowAllIpt === true? true: BjIndex === i? false : true }/>,
-        annotation:<Input style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }}   disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } /> }
+        value:<Input value={i<11?props.GlobalNumbericalObj[i-1].varValue:props.GlobalNumbericalObj[i-(IntSizeNum-10)-1].varValue}
+         style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }}   disabled={ ShowAllIpt === true? true: BjIndex === i? false : true }/>,
+        annotation:<Input value={i<11?props.GlobalNumbericalObj[i-1].varNote:props.GlobalNumbericalObj[i-(IntSizeNum-10)-1].varNote}
+         style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }}   disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } /> }
       )
     }
     setIntColumns(columns);
     setIntDatas(datas);
-  },[IntSizeNum,BjIndex,ShowAllIpt,nameChangeBj])
+  },[IntSizeNum,BjIndex,ShowAllIpt,nameChangeBj,props.GlobalNumbericalObj])
   // 实数型表格的渲染
   useEffect(()=>{
     let columns = [];
@@ -75,13 +127,16 @@ function GlobalNumberical(props){
         name:i<10?<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GD00{i}</Button>
         :i<100?<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GD0{i}</Button>
         :<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GD{i}</Button>,
-        value:<Input value={ 0 } style={{ borderTop:'none',borderLeft:'none',borderRight:'none'}} disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } />,
-        annotation:<Input style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }} value='这里是注释' disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } /> }
+        value:<Input value={i<11?props.GlobalNumbericalObj[i-1].varValue:props.GlobalNumbericalObj[i-(ReaSizeNum-10)-1].varValue}
+         style={{ borderTop:'none',borderLeft:'none',borderRight:'none'}} disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } />,
+        annotation:<Input value={i<11?props.GlobalNumbericalObj[i-1].varNote:props.GlobalNumbericalObj[i-(ReaSizeNum-10)-1].varNote}
+         style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }} disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } /> }
       )
     }
     setReaColumns(columns);
     setReaDatas(datas);
-  },[ReaSizeNum,BjIndex,ShowAllIpt,nameChangeBj])
+    console.log(props.GlobalNumbericalObj)
+  },[ReaSizeNum,BjIndex,ShowAllIpt,nameChangeBj,props.GlobalNumbericalObj,ReaSizeNum])
   // 布尔型表格的渲染
   useEffect(()=>{
     let columns = [];
@@ -100,15 +155,18 @@ function GlobalNumberical(props){
         name:i<10?<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GB00{i}</Button>
         :i<100?<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GB0{i}</Button>
         :<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i) }>GB{i}</Button>,
-        value:<Input value={ 0 } style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }} disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } />,
-        annotation:<Input style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }} value='这里是注释' disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } /> }
+        value:<Input value={i<11?Number(props.GlobalNumbericalObj[i-1].varValue):Number(props.GlobalNumbericalObj[i-(BolSizeNum-10)-1].varValue)}
+        style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }} disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } />,
+        annotation:<Input value={i<11?props.GlobalNumbericalObj[i-1].varNote:props.GlobalNumbericalObj[i-(BolSizeNum-10)-1].varNote}
+         style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }} disabled={ ShowAllIpt === true? true: BjIndex === i? false : true } /> }
       )
     }
     setBolColumns(columns);
     setBolDatas(datas);
-  },[BolSizeNum,BjIndex,ShowAllIpt,nameChangeBj])
+  },[BolSizeNum,BjIndex,ShowAllIpt,nameChangeBj,props.GlobalNumbericalObj,BolSizeNum])
   const callback = (key) => {
-    console.log(key);
+    setyelowSum(0)
+    setVarbalType(Number(key))
     setValueChange(true);
     setShouAllIpt(true);
   }
@@ -171,8 +229,8 @@ function GlobalNumberical(props){
           </div>
         </div>
       )}
-    <Tabs defaultActiveKey="1" onChange={callback}>
-      <TabPane tab="整数型" key="1">
+    <Tabs defaultActiveKey="2" onChange={callback}>
+      <TabPane tab="整数型" key="2">
         <Table
           columns={IntColumns}
           dataSource={IntDatas}
@@ -183,14 +241,16 @@ function GlobalNumberical(props){
         <Pagination
           current={IntSizeNum/10}
           pageSize={10}
+          pageSizeOptions={[10]}
           showQuickJumper={true}
           total={990}
           onChange={( page)=>{
             setIntSizeNum(page*10)
+                  setyelowSum(0)
           }}
           />
       </TabPane>
-      <TabPane tab="实数型" key="2">
+      <TabPane tab="实数型" key="3">
       <Table
           columns={ReaColumns}
           dataSource={ReaDatas}
@@ -202,13 +262,14 @@ function GlobalNumberical(props){
           current={ReaSizeNum/10}
           pageSize={10}
           showQuickJumper={true}
+          pageSizeOptions={[10]}
           total={990}
           onChange={( page)=>{
             setReaSizeNum(page*10)
           }}
           />
       </TabPane>
-      <TabPane tab="布尔型" key="3">
+      <TabPane tab="布尔型" key="1">
       <Table
           columns={BolColumns}
           dataSource={BolDatas}
@@ -220,6 +281,7 @@ function GlobalNumberical(props){
           current={BolSizeNum/10}
           pageSize={10}
           showQuickJumper={true}
+          pageSizeOptions={[10]}
           total={990}
           onChange={( page)=>{
             setBolSizeNum(page*10)

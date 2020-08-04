@@ -126,7 +126,7 @@ function GlobalLocation(props){
       { key:'6', name:Name[5], value:<Input disabled={ShowAllIpt} value={PostValue6} onChange={(e)=>{ setPostValue6(e.target.value) }} /> },
     )
     setVarDatas(VarData);
-  },[PostValue1,PostValue2,PostValue3,PostValue4,PostValue5,PostValue6,ShowAllIpt,props.GlobalLocationObj])
+  },[PostValue1,PostValue2,PostValue3,PostValue4,PostValue5,PostValue6,ShowAllIpt,props.GlobalLocationObj.posValue])
 
   // 渲染当前位置表格
   useEffect(()=>{
@@ -229,10 +229,10 @@ function GlobalLocation(props){
             </div>
             <div style={{ width:'100%' }}>
               <div style={{ display:'flex'}}>
-                <p style={{ width:'5%',marginTop:'10px',marginLeft:'20px' }}>注释:</p><Input  disabled={ ShowAllIpt === true? true : false} value={TitAnno} onChange={(e)=>{
+                <p style={{ width:'5%',marginTop:'10px',marginLeft:'20px' }}>注释:</p><Input disabled={ ShowAllIpt === true? true : false} value={TitAnno} onChange={(e)=>{
                   setTitAnno(e.target.value)
                 }}
-                 style={{ height:'40px' }} placeholder="Basic usage" />
+                 style={{ height:'40px' }} placeholder="" />
               </div>
               <div style={{ display:'flex',background:'white' }}>
                 <div style={{ width:'50%',height:'450px',}}>

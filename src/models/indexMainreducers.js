@@ -1,7 +1,5 @@
 
-import {
-  sendMSGtoController,
-} from "service/network";
+import { sendMSGtoController, } from "service/network";
 import { notification, message as showMessage, message } from "antd";
 
 /* 接收到当前机器人后发的 */
@@ -567,6 +565,16 @@ export const indexMainreducers = {
         writelocation(state, action){
           let _state = JSON.parse(JSON.stringify(state));
           _state.location.GlobalLocationObj.posValue = action.data;
+          return _state;
+        },
+        // 查询一个全局变量
+        inquireGlobalNumberical(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          if(Number(action.data.varName.slice(4,6)) >0 ){
+            _state.location.GlobalNumbericalObj[Number(action.data.varName.slice(4,6))-1] = action.data
+          }else{ 
+            _state.location.GlobalNumbericalObj[9] = action.data
+          }
           return _state;
         }
     }
