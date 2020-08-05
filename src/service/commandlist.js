@@ -541,4 +541,31 @@ export const CommandList = {
     // 修改一个全局变量
     GLOBAL_VARIANT_SET:0x5607,
 
+    // 查询DOUT状态
+    GPIO_DOUT_INQUIRE:0x3602,
+
+    // 返回查询DOUT状态
+    GPIO_DOUT_RESPOND:0x3603,
+
+    // 查询DIN状态
+    GPIO_DIN_INQUIRE:0x3605,
+
+    // 收到查询DIN状态
+    GPIO_DIN_RESPOND:0x3506,
+
+    // 设置AOUT
+    ANALOG_OUT_SET:0x3607,
+
+    // 查询AOUT状态
+    ANALOG_OUT_INQUIRE:0x3608,
+
+    // 收到查询AOUT状态
+    ANALOG_OUT_RESPOND:0x3609,
+
+    // 查询DIN状态
+    ANALOG_IN_INQUIRE:0x360A,
+
+    // 收到查询DIN状态
+    ANALOG_IN_RESPOND:0x360B,
+    
 };

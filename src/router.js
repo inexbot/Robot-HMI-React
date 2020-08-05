@@ -92,9 +92,13 @@ const Vision = asyncComponents(() => import("./layout/pages/craft/vision"));
 // IO远程模式界面
 const IO_longPattern = asyncComponents(() => import ("./layout/pages/IO_longPattern"));
 
-// 变量
+// 变量页面
 const GlobalLocation = asyncComponents(() => import ("./layout/pages/location/GlobalLocation"));
 const GlobalNumberical = asyncComponents(() => import ("./layout/pages/location/GlobalNumberical"))
+
+// 状态页面
+const Imexport = asyncComponents(() => import ("./layout/pages/state/Imexport"))
+
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
@@ -170,6 +174,8 @@ function Router(props) {
         <RouterDom.Route path ="/GlobalLocation" component={GlobalLocation}/>
         <RouterDom.Route path ="/GlobalNumberical" component={GlobalNumberical}/>
 
+        {/* 状态 */}
+        <RouterDom.Route path ="/Imexport" component={Imexport}/>
       </RouterDom.Switch>
     </App>
   );
