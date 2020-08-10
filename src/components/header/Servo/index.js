@@ -36,22 +36,24 @@ function Servo(props) {
       default:
         break;
     }
+    console.log(props.currentRobotServoState)
   }, [props.currentRobotServoState]);
   const handleChangemode = (value) => {
+    console.log(props.currentRobotServoState,value)
     switch (value) {
       case "Stop":
         let servoData1 = {
           robot: props.currentRobot,
           status: 0,
         };
-        sendMSGtoController("JOBEXE_MODE_SET", servoData1);
+        sendMSGtoController("SERVO_STATUS_SET", servoData1);
         break;
       case "Ready":
         let servoData2 = {
           robot: props.currentRobot,
           status: 1,
         };
-        sendMSGtoController("JOBEXE_MODE_SET", servoData2);
+        sendMSGtoController("SERVO_STATUS_SET", servoData2);
         break;
       default:
         break;

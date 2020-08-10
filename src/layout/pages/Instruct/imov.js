@@ -89,7 +89,7 @@ function Imov(props) {
     let posName;
     if (value.POS === "new") {
       pos = props.currentPos;
-      // posType = 0;
+      posType = 0;
       posName = newPos(posSum);
       posName = posSum
     } else {

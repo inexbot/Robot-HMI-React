@@ -551,7 +551,7 @@ export const CommandList = {
     GPIO_DIN_INQUIRE:0x3605,
 
     // 收到查询DIN状态
-    GPIO_DIN_RESPOND:0x3506,
+    GPIO_DIN_RESPOND:0x3606,
 
     // 设置AOUT
     ANALOG_OUT_SET:0x3607,
@@ -562,10 +562,21 @@ export const CommandList = {
     // 收到查询AOUT状态
     ANALOG_OUT_RESPOND:0x3609,
 
-    // 查询DIN状态
-    ANALOG_IN_INQUIRE:0x360A,
+    // 查询AIN状态
+    ANALOG_IN_INQUIRE:0x360a,
 
-    // 收到查询DIN状态
-    ANALOG_IN_RESPOND:0x360B,
+    // 收到查询AIN状态
+    ANALOG_IN_RESPOND:0x360b,
+
+    // 修改DOUT状态
+    GPIO_DOUT_SET:0x3601,
+
+    // 查询电机速度
+    CURRENTVEL_INQUIRE:0x2a04,
+
+    // 查询点击扭矩
+    CURRENTTORQ_INQUIR:0x2a06,
+
+    
     
 };

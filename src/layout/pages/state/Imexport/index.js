@@ -6,6 +6,7 @@ import { sendMSGtoController } from "service/network";
 const mapStateToProps = (state) => {
   return {
     currentRobot: state.index.robotStatus.currentRobot,
+    Imexport: state.index.mainState.Imexport,
   };
 };
 
@@ -14,21 +15,39 @@ function Imexport(props){
   const [ DataSourceTwo, setDataSourceTwo ] = useState('');
   const [ Columns, setColumns ] = useState('');
   const [ KeySum, setKeySum ] = useState(1);
+  const [ nowValue, setnowValue ] = useState(props.Imexport.status)
 
   const { TabPane } = Tabs;
 
   // 点击标签页
   const callback = (key) =>{
-    console.log(key)
     setKeySum(Number(key))
+
   }
+  // 更新数据
+  useEffect(()=>{
+    setnowValue(props.Imexport.status)
+  },[props.Imexport.status])
+  const onChange = useCallback((i,checked)=>{
+    let DataList = { 
+      port:i+1,
+      status:Number(checked),
+    }
+    sendMSGtoController("GPIO_DOUT_SET",DataList)
+  },[])
+
   // 获取数据
   useEffect(()=>{
-    
-  })
-  const onChange = useCallback((checked)=>{
-    console.log(checked)
-  },[])
+    if( KeySum === 1 ){
+      sendMSGtoController("GPIO_DIN_INQUIRE",'')
+    }else if( KeySum === 2 ){
+      sendMSGtoController("GPIO_DOUT_INQUIRE",'')
+    }else if( KeySum === 3 ){
+      sendMSGtoController("ANALOG_IN_INQUIRE",'')
+    }else if( KeySum === 4 ){
+      sendMSGtoController("ANALOG_OUT_INQUIRE",'')
+    }
+  },[KeySum])
 
   // 渲染表格
   useEffect(()=>{
@@ -40,6 +59,7 @@ function Imexport(props){
     );
     setColumns(columns);
   },[])
+
   useEffect(()=>{
     let Onedata = [];
     let Twodata = [];
@@ -62,28 +82,28 @@ function Imexport(props){
       if(i < 8 ){
         if( KeySum === 2 ){
           Onedata.push(
-            {key:`${i+1}`, name:Name, type:Type, value:(<Switch defaultChecked={false} onChange={onChange} />) }
+            {key:`${i+1}`, name:Name, type:Type, value:(<Switch defaultChecked={nowValue[i]} onChange={onChange.bind(null,i)} />) }
           )
         }else{
           Onedata.push(
-              {key:`${i+1}`, name:Name, type:Type, value:'0' }
+              {key:`${i+1}`, name:Name, type:Type, value:nowValue[i] }
             )
         }
       }else{
         if( KeySum === 2 ){
           Twodata.push(
-            {key:`${i+1}`, name:Name, type:Type, value:(<Switch defaultChecked={false} onChange={onChange} />) }
+            {key:`${i+1}`, name:Name, type:Type, value:(<Switch defaultChecked={nowValue[i]} onChange={onChange.bind(null,i)} />) }
           )
         }else{
           Twodata.push(
-            {key:`${i+1}`, name:Name, type:Type, value:'0' }
+            {key:`${i+1}`, name:Name, type:Type, value:nowValue[i] }
           )
         }
       }
     };
     setDataSourceOne(Onedata);
     setDataSourceTwo(Twodata);
-  },[KeySum,onChange])
+  },[KeySum,onChange,nowValue])
   return(
     <div>
       <Tabs defaultActiveKey="1" onChange={callback}>

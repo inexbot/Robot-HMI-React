@@ -33,10 +33,8 @@ function ChangeInstructValue(props) {
   let name;
   if (props.insertOrChange === "change") {
     name = props.changeName;
-
   } else if (props.insertOrChange === "insert") {
     name = props.insertName;
-
   }
 
   if(props.programSeletedRow.length <= 1 ){

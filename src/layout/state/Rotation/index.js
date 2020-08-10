@@ -1,70 +1,55 @@
 import React, { useEffect } from "react";
-import echarts from "echarts/lib/echarts";
-import "echarts/lib/chart/bar";
+import echarts from 'echarts/lib/echarts';
 function Rotation() {
   useEffect(() => {
+    var seriesLabel = {
+      normal: {
+          show: true,
+          textBorderColor: '#333',
+          textBorderWidth: 2
+      }
+    }
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById("charts7"));
     // 绘制图表
     myChart.setOption({
       tooltip: {
-        trigger: "axis",
+        trigger: 'axis',
         axisPointer: {
-          // 坐标轴指示器，坐标轴触发有效
-          type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
-        },
+            type: 'shadow'
+        }
       },
       legend: {
-        data: ["实际扭矩", "实际最大扭矩"],
+          data: ['转速(转/min)', '最大转速(转/min)']
       },
       grid: {
-        left: "3%",
-        right: "4%",
-        bottom: "3%",
-        containLabel: true,
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
       },
       xAxis: {
-        type: "value",
+          type: 'value',
+          boundaryGap: [0, 0.01]
       },
       yAxis: {
-        type: "category",
-        data: [
-          "J1",
-          "J2",
-          "J3",
-          "J4",
-          "J5",
-          "J6",
-          "J1",
-          "O2",
-          "O3",
-          "O4",
-          "O5",
-          "O6",
-        ],
+          type: 'category',
+          data: ['01', 'j6', 'j5', 'j4', 'j3', 'j2', 'j1']
       },
       series: [
         {
-          name: "实际扭矩",
-          type: "bar",
-          stack: "总量",
-          label: {
-            show: true,
-            position: "insideRight",
-          },
-          data: [320, 302, 301, 334, 390, 330, 320, 302, 301, 334, 390, 330],
+            name: '转速(转/min)',
+            type: 'bar',
+            data: [10, 50, 40, 30, 20, 10,20],
+            label: seriesLabel,
         },
         {
-          name: "实际最大扭矩",
-          type: "bar",
-          stack: "总量",
-          label: {
-            show: true,
-            position: "insideRight",
-          },
-          data: [120, 132, 101, 134, 90, 230, 120, 132, 101, 134, 90, 230],
-        },
-      ],
+            name: '最大转速(转/min)',
+            type: 'bar',
+            data: [60, 40, 9, 5, 30, 20,20],
+            label: seriesLabel,
+        }
+      ]
     });
   }, []);
   return (

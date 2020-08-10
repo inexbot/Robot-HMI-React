@@ -576,6 +576,19 @@ export const indexMainreducers = {
             _state.location.GlobalNumbericalObj[9] = action.data
           }
           return _state;
+        },
+        // 查询DinDout状态
+        inquireDindouttype(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          console.log(_state.mainState.Imexport,action.data)
+          _state.mainState.Imexport = action.data
+          return _state;
+        },
+        // 查询AinAout状态
+        inquireAinaouttype(state, action){
+          let _state = JSON.parse(JSON.stringify(state));
+          _state.mainState.Imexport.status = action.data.value
+          return _state;
         }
     }
 }

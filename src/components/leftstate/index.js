@@ -1,12 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 import "./index.css";
 import { connect } from "dva";
+import {  Modal } from "antd";
+
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/legend';
 import QuickControl from "../../layout/state/Quickontrol";
 import Servo from "../../layout/state/Servo";
 import System from "../../layout/state/System";
 import Produce from "../../layout/state/Produce";
 import Welding from "../../layout/state/Welding";
-import Torque from "../../layout/state/Torque";
 import Overproof from "../../layout/state/Overproof";
 import Rotation from "../../layout/state/Rotation";
 import IOFunction from "../../layout/state/Iofunction";
@@ -15,7 +18,7 @@ import Position from "../../layout/state/Position";
 import Jog from "layout/state/Jog";
 import DragPlayback from "layout/state/Dragplayback";
 import LocalPosition from "layout/state/Localposition";
-
+import Torque from "../../layout/state/Torque";
 const mapStateToProps = (state) => {
   return {
     currentState: state.LeftStatus.currentState,
@@ -23,6 +26,8 @@ const mapStateToProps = (state) => {
 };
 
 function LeftState(props) {
+  const [ Visible, setVisible ] = useState(true)
+
   const renderState = () => {
     let state = props.currentState;
     switch (state) {

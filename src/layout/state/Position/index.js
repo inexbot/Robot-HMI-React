@@ -17,7 +17,9 @@ function Position() {
     390,
     330
   ]);
-
+  // 当前位置返回的数据
+  //  let acc = {coord:0,deg:0,pos:[0.0,0.0,0.0,0.0,0.0,0.0,0.0],posDeg:[0.0,0.0,0.0,0.0,0.0,0.0,0.0],robot:1}
+ 
   useEffect(() => {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById("charts4"));

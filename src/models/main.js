@@ -17,14 +17,15 @@ import { robotEncrypt } from "./default/robotencrypt";
 import { IOConfig } from "./default/ioconfig";
 import { IOName } from "./default/ioname";
 import { conveyor } from "./default/conveyor";
-import { vision } from "./default/vision"
-import { slaveSertCommit } from "./default/slaveSetCommit"
-import { indexMainreducers } from "./indexMainreducers"
-import { IO_longPattern } from "./default/IO_longPattern"
-import { remotepro } from "./default/remotepro"
-import { Backup } from "./default/Backup"
-import { Ioremote } from "./default/Ioremote"
-import { location } from "./default/location"
+import { vision } from "./default/vision";
+import { slaveSertCommit } from "./default/slaveSetCommit";
+import { indexMainreducers } from "./indexMainreducers";
+import { IO_longPattern } from "./default/IO_longPattern";
+import { remotepro } from "./default/remotepro";
+import { Backup } from "./default/Backup";
+import { Ioremote } from "./default/Ioremote";
+import { location } from "./default/location";
+import { mainState } from "./default/mainstate";
  
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -85,7 +86,8 @@ export default {
     remotepro,
     Backup,
     Ioremote,
-    location
+    location,
+    mainState
   },
 
   subscriptions: {
@@ -510,6 +512,20 @@ export default {
           case "560c":
             dispatch({
               type:"inquireGlobalNumberical",
+              data:dataString
+            })
+            break;
+          case "3603":
+          case "3606":
+            dispatch({
+              type:"inquireDindouttype",
+              data:dataString
+            })
+            break;
+          case "3609":
+          case "360b":
+            dispatch({
+              type:"inquireAinaouttype",
               data:dataString
             })
             break;
