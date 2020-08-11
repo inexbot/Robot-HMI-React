@@ -1,6 +1,26 @@
 import React, { useEffect } from "react";
 import echarts from 'echarts/lib/echarts';
-function Torque() {
+import { connect } from "dva";
+import { sendMSGtoController } from "service/network";
+
+const mapStateToProps = (state)=>{
+  return{
+    MotorTorque: state.index.mainState.MotorTorque,
+    currentRobot: state.index.robotStatus.currentRobot,
+  }
+}
+
+function Torque( props ) {
+  // 实时获取数据
+  useEffect(()=>{
+    let inquireTorque = setInterval(() => {
+      sendMSGtoController("CURRENTTORQ_INQUIR",{robot:props.currentRobot})
+    }, 500);
+    return()=>{
+      clearInterval(inquireTorque)
+    }
+  },[props.currentRobot])
+  // 渲染柱状图
   useEffect(() => {
     var seriesLabel = {
       normal: {
@@ -40,18 +60,22 @@ function Torque() {
         {
             name: '扭矩(%)',
             type: 'bar',
-            data: [10, 50, 40, 30, 20, 10,20],
+            data: [props.MotorTorque.torq[6],props.MotorTorque.torq[5],props.MotorTorque.torq[4],
+              props.MotorTorque.torq[3],props.MotorTorque.torq[2],props.MotorTorque.torq[1],props.MotorTorque.torq[0],
+            ],
             label: seriesLabel,
         },
         {
             name: '最大扭矩(%)',
             type: 'bar',
-            data: [60, 40, 9, 5, 30, 20,20],
+            data: [props.MotorTorque.maxTorq[6],props.MotorTorque.maxTorq[5],props.MotorTorque.maxTorq[4],
+              props.MotorTorque.maxTorq[3],props.MotorTorque.maxTorq[2],props.MotorTorque.maxTorq[1],props.MotorTorque.maxTorq[0]
+            ],
             label: seriesLabel,
         }
       ]
     });
-  }, []);
+  }, [props.MotorTorque]);
   return (
     <div className="quick-control-state">
       <h1>电机扭矩</h1>
@@ -59,4 +83,4 @@ function Torque() {
     </div>
   );
 }
-export default Torque;
+export default connect(mapStateToProps)(Torque) ;

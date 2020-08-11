@@ -1,8 +1,6 @@
-import React,{useState} from "react";
+import React from "react";
 import "./index.css";
 import { connect } from "dva";
-import {  Modal } from "antd";
-
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/legend';
 import QuickControl from "../../layout/state/Quickontrol";
@@ -26,8 +24,6 @@ const mapStateToProps = (state) => {
 };
 
 function LeftState(props) {
-  const [ Visible, setVisible ] = useState(true)
-
   const renderState = () => {
     let state = props.currentState;
     switch (state) {

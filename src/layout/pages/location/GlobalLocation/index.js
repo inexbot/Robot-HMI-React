@@ -258,17 +258,17 @@ function GlobalLocation(props){
                   }}>机器人运动至此</Button>
                 </div>
                 <div style={{ width:'50%',background:'white' }}>
-                  <Tabs defaultActiveKey="1" onChange={callback} tabBarGutter={1} centered={true}>
-                    <TabPane tab='关节' key='1'>
+                  <Tabs defaultActiveKey={NowloaNum} onChange={callback} tabBarGutter={1} centered={true}>
+                    <TabPane tab='关节' key={1}>
                       {NowTable}
                     </TabPane>
-                    <TabPane tab='直角' key='2'>
+                    <TabPane tab='直角' key={2}>
                       {NowTable}
                     </TabPane>
-                    <TabPane tab='工具' key='3'>
+                    <TabPane tab='工具' key={3}>
                       {NowTable}
                     </TabPane>
-                    <TabPane tab='用户' key='4'>
+                    <TabPane tab='用户' key={4}>
                       {NowTable}
                     </TabPane>
                   </Tabs>

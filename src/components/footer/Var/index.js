@@ -4,6 +4,7 @@ import "./index.css";
 import { ProjectOutlined } from "@ant-design/icons";
 import { Button, Menu, Dropdown } from "antd";
 import { connect } from "dva";
+import { useHistory } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => {
 };
 
 function Var(props) {
+  let history = useHistory();
   const changeLeft = (state) => {
     props.dispatch({
       type: "LeftStatus/changeLeftState",
@@ -20,19 +22,20 @@ function Var(props) {
   };
   const mountLeft = (value) => {
     let key = value.key;
-    document.getElementById("leftframe").style.display = "block";
     switch (key) {
       case "0":
         changeLeft("LocalPosition");
+        document.getElementById("leftframe").style.display = "block";
         break;
       case "1":
         changeLeft("value");
+        document.getElementById("leftframe").style.display = "block";
         break;
       case "2":
-        changeLeft("globalPosition");
+        history.push('/GlobalLocation')
         break;
       case "3":
-        changeLeft("globalValue");
+        history.push('/GlobalNumberical')
         break;
       default:
         return null;
@@ -40,12 +43,12 @@ function Var(props) {
   };
   const menu = (
     <Menu onClick={mountLeft}>
-      <Menu.Item key="0">
+      {/* <Menu.Item key="0">
         <p>{intl.get("局部位置")}</p>
       </Menu.Item>
       <Menu.Item key="1">
         <p>{intl.get("局部数值")}</p>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item key="2">
         <p>{intl.get("全局位置")}</p>
       </Menu.Item>

@@ -238,7 +238,6 @@ export const indexMainreducers = {
         /* 接收当前位置 */
         receiveCurrentPos(state, action) {
           let _state = JSON.parse(JSON.stringify(state));
-          // console.log(_state.robotStatus.pos, action.data.pos)
           _state.robotStatus.pos = action.data.pos;
           _state.robotStatus.posDeg = action.data.posDeg;
           return _state;
@@ -571,24 +570,35 @@ export const indexMainreducers = {
         inquireGlobalNumberical(state, action){
           let _state = JSON.parse(JSON.stringify(state));
           if(Number(action.data.varName.slice(4,6)) >0 ){
-            _state.location.GlobalNumbericalObj[Number(action.data.varName.slice(4,6))-1] = action.data
+            _state.location.GlobalNumbericalObj[Number(action.data.varName.slice(4,6))-1] = action.data;
           }else{ 
-            _state.location.GlobalNumbericalObj[9] = action.data
+            _state.location.GlobalNumbericalObj[9] = action.data;
           }
           return _state;
         },
         // 查询DinDout状态
         inquireDindouttype(state, action){
           let _state = JSON.parse(JSON.stringify(state));
-          console.log(_state.mainState.Imexport,action.data)
-          _state.mainState.Imexport = action.data
+          _state.mainState.Imexport = action.data;
           return _state;
         },
         // 查询AinAout状态
         inquireAinaouttype(state, action){
           let _state = JSON.parse(JSON.stringify(state));
-          _state.mainState.Imexport.status = action.data.value
+          _state.mainState.Imexport.status = action.data.value;
           return _state;
+        },
+        // 查询电机速度
+        inquireMotorSpeed(state, action){
+          let _state = JSON.parse(JSON.stringify(state));     
+          _state.mainState.MotorSpeed = action.data;
+          return _state
+        },
+        // 查询电机扭矩
+        inquireMotorTorque(state, action){
+          let _state = JSON.parse(JSON.stringify(state));   
+          _state.mainState.MotorTorque = action.data;
+          return _state
         }
     }
 }

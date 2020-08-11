@@ -36,10 +36,8 @@ function Servo(props) {
       default:
         break;
     }
-    console.log(props.currentRobotServoState)
   }, [props.currentRobotServoState]);
   const handleChangemode = (value) => {
-    console.log(props.currentRobotServoState,value)
     switch (value) {
       case "Stop":
         let servoData1 = {

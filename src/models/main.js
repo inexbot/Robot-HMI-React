@@ -529,6 +529,18 @@ export default {
               data:dataString
             })
             break;
+          case "2a05":
+            dispatch({
+              type:"inquireMotorSpeed",
+              data:dataString
+            })
+            break;
+          case "2a07":
+            dispatch({
+              type:"inquireMotorTorque",
+              data:dataString
+            })
+            break;
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);

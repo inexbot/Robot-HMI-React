@@ -31,13 +31,13 @@ export const paraIndex = [
             authority: "管理员",
             modeDisplay:config.modeDisplay["IO预约"],
           },
-          {
-            type: "para",
-            name: "Modbus程序",
-            link: "/ModbusPro",
-            authority: "管理员",
-            modeDisplay:config.modeDisplay["Modbus程序"],
-          }
+          // {
+          //   type: "para",
+          //   name: "Modbus程序",
+          //   link: "/ModbusPro",
+          //   authority: "管理员",
+          //   modeDisplay:config.modeDisplay["Modbus程序"],
+          // }
         ]
       },
       {
@@ -101,13 +101,13 @@ export const paraIndex = [
             authority: "技术员",
             modeDisplay:config.modeDisplay["状态提示"],
           },
-          {
-            type: "para",
-            name: "安全设置",
-            link: "/IOSafe",
-            authority: "管理员",
-            modeDisplay:config.modeDisplay["安全设置"],
-          },
+          // {
+          //   type: "para",
+          //   name: "安全设置",
+          //   link: "/IOSafe",
+          //   authority: "管理员",
+          //   modeDisplay:config.modeDisplay["安全设置"],
+          // },
           {
             type: "para",
             name: "IO复位",
@@ -145,20 +145,20 @@ export const paraIndex = [
         authority: "技术员",
         modeDisplay:config.modeDisplay["传送带参数"]
       },
-      {
-        type: "para",
-        name: "通讯设置",
-        link: "/ConnectionSet",
-        authority: "管理员",
-        modeDisplay:config.modeDisplay["通讯设置"]
-      },
-      {
-        type: "para",
-        name: "数据传输",
-        link: "/DataTrans",
-        authority: "管理员",
-        modeDisplay:config.modeDisplay["数据传输"]
-      }
+      // {
+      //   type: "para",
+      //   name: "通讯设置",
+      //   link: "/ConnectionSet",
+      //   authority: "管理员",
+      //   modeDisplay:config.modeDisplay["通讯设置"]
+      // },
+      // {
+      //   type: "para",
+      //   name: "数据传输",
+      //   link: "/DataTrans",
+      //   authority: "管理员",
+      //   modeDisplay:config.modeDisplay["数据传输"]
+      // }
     ]
   },
   {
@@ -241,20 +241,20 @@ export const paraIndex = [
     index: "系统参数",
     className: "ParaFrameSys",
     paras: [
-      {
-        type: "para",
-        name: "版本升级",
-        link: "/Update",
-        authority: "管理员",
-        modeDisplay:config.modeDisplay["版本升级"]
-      },
-      {
-        type: "para",
-        name: "配置向导",
-        link: "/ConfigureWizard",
-        authority: "管理员",
-        modeDisplay:config.modeDisplay["配置向导"]
-      },
+      // {
+      //   type: "para",
+      //   name: "版本升级",
+      //   link: "/Update",
+      //   authority: "管理员",
+      //   modeDisplay:config.modeDisplay["版本升级"]
+      // },
+      // {
+      //   type: "para",
+      //   name: "配置向导",
+      //   link: "/ConfigureWizard",
+      //   authority: "管理员",
+      //   modeDisplay:config.modeDisplay["配置向导"]
+      // },
       {
         type: "para",
         name: "语言切换",
@@ -262,20 +262,20 @@ export const paraIndex = [
         authority: "技术员",
         modeDisplay:config.modeDisplay["语言切换"]
       },
-      {
-        type: "para",
-        name: "修改配置",
-        link: "/Configure",
-        authority: "管理员",
-        modeDisplay:config.modeDisplay["修改配置"]
-      },
-      {
-        type: "para",
-        name: "清空程序",
-        link: "/ClearPro",
-        authority: "管理员",
-        modeDisplay:config.modeDisplay["清空程序"]
-      },
+      // {
+      //   type: "para",
+      //   name: "修改配置",
+      //   link: "/Configure",
+      //   authority: "管理员",
+      //   modeDisplay:config.modeDisplay["修改配置"]
+      // },
+      // {
+      //   type: "para",
+      //   name: "清空程序",
+      //   link: "/ClearPro",
+      //   authority: "管理员",
+      //   modeDisplay:config.modeDisplay["清空程序"]
+      // },
       {
         type: "para",
         name: "校准屏幕",
@@ -297,13 +297,13 @@ export const paraIndex = [
         authority: "厂家",
         modeDisplay:config.modeDisplay["控制器密钥"]
       },
-      {
-        type: "para",
-        name: "恢复出厂设置",
-        link: "/Restore",
-        authority: "管理员",
-        modeDisplay:config.modeDisplay["恢复出厂设置"]
-      }
+      // {
+      //   type: "para",
+      //   name: "恢复出厂设置",
+      //   link: "/Restore",
+      //   authority: "管理员",
+      //   modeDisplay:config.modeDisplay["恢复出厂设置"]
+      // }
     ]
   }
 ];

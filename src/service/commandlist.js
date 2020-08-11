@@ -574,9 +574,8 @@ export const CommandList = {
     // 查询电机速度
     CURRENTVEL_INQUIRE:0x2a04,
 
-    // 查询点击扭矩
+    // 查询电机扭矩
     CURRENTTORQ_INQUIR:0x2a06,
 
-    
     
 };

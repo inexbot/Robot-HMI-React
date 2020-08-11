@@ -1,6 +1,27 @@
 import React, { useEffect } from "react";
 import echarts from 'echarts/lib/echarts';
-function Rotation() {
+import { connect } from "dva"
+import { sendMSGtoController } from "service/network";
+
+const mapStateToProps = (state) =>{
+  return{
+    MotorSpeed: state.index.mainState.MotorSpeed,
+    currentRobot: state.index.robotStatus.currentRobot,
+  }
+}
+
+function Rotation(props) {
+  // 实时获取数据
+  useEffect(()=>{
+    let inquireTorque = setInterval(() => {
+      sendMSGtoController("CURRENTVEL_INQUIRE",{robot:props.currentRobot})
+    }, 500);
+    return()=>{
+      clearInterval(inquireTorque)
+    }
+  },[props.currentRobot])
+
+  // 渲染柱状图
   useEffect(() => {
     var seriesLabel = {
       normal: {
@@ -40,18 +61,22 @@ function Rotation() {
         {
             name: '转速(转/min)',
             type: 'bar',
-            data: [10, 50, 40, 30, 20, 10,20],
+            data: [props.MotorSpeed.vel[6],props.MotorSpeed.vel[5],props.MotorSpeed.vel[4],
+              props.MotorSpeed.vel[3],props.MotorSpeed.vel[2],props.MotorSpeed.vel[1],props.MotorSpeed.vel[0],
+            ],
             label: seriesLabel,
         },
         {
             name: '最大转速(转/min)',
             type: 'bar',
-            data: [60, 40, 9, 5, 30, 20,20],
+            data: [props.MotorSpeed.maxVel[6],props.MotorSpeed.maxVel[5],props.MotorSpeed.maxVel[4],
+              props.MotorSpeed.maxVel[3],props.MotorSpeed.maxVel[2],props.MotorSpeed.maxVel[1],props.MotorSpeed.maxVel[0]
+            ],
             label: seriesLabel,
         }
       ]
     });
-  }, []);
+  }, [props.MotorSpeed]);
   return (
     <div className="quick-control-state">
       <h1>电机转速</h1>
@@ -59,4 +84,4 @@ function Rotation() {
     </div>
   );
 }
-export default Rotation;
+export default connect(mapStateToProps)(Rotation);
