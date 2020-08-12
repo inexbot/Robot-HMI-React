@@ -70,24 +70,27 @@ function IOReset(props) {
                   </Select>
                 </Col>
                 <Col span={6}>
-                  <Form.Item
-                    name="preRobot"
-                    label={intl.get("碰撞示教")}
-                    className="dynamic2"
-                    rules={[
-                      {
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <Switch
-                      checkedChildren="开"
-                      unCheckedChildren="关"
-                      disabled={isDisabled}
-                      style={{ width: 40 }}
-                      defaultChecked
-                    />
-                  </Form.Item>
+                  <Form>
+                    <Form.Item
+                      name="preRobot"
+                      label={intl.get("碰撞示教")}
+                      className="dynamic2"
+                      valuePropName='checked'
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}
+                    >
+                      <Switch
+                        checkedChildren="开"
+                        unCheckedChildren="关"
+                        disabled={isDisabled}
+                        style={{ width: 40 }}
+                        defaultChecked
+                      />
+                    </Form.Item>
+                  </Form>
                 </Col>
               </Row>
             </div>

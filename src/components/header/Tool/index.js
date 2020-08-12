@@ -57,6 +57,7 @@ function Tool(props) {
   }, [props.currentTool]);
 
   const handleChangemode = value => {
+    console.log(value)
     switch (value) {
       case "Tool0":
         let toolData0 = {

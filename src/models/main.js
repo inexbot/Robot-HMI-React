@@ -541,6 +541,12 @@ export default {
               data:dataString
             })
             break;
+          case "3807":
+            dispatch({
+              type:"inquireToohands",
+              data:dataString
+            })
+            break;
           case "2b03":
             if (dataString.data === "unInitFinish") {
               receiveCheckServerState(false);

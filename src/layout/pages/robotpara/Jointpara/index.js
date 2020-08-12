@@ -247,7 +247,7 @@ function Jointpara(props) {
       {/* 头部 */}
       <ConTitle
         title={intl.get("关节参数")}
-        subtitle={intl.get("机器人关节参数设置")}
+        subtitle='机器人关节参数设置'
       />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">

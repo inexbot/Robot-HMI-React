@@ -78,7 +78,7 @@ function SafeConfig(props) {
       {/* 头部 */}
       <ConTitle
         title={intl.get("安全配置")}
-        subtitle={intl.get("协作机器人安全配置")}
+        subtitle="协作机器人安全配置"
       />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
@@ -95,7 +95,7 @@ function SafeConfig(props) {
                 <Card title={`第一级减速设置`}>
                   <Row>
                     <Col span={12}>
-                      <Form.Item name="switch1" label="启用">
+                      <Form.Item name="switch1" label="启用" valuePropName='checked'>
                         <Switch onClick={switch1} />
                       </Form.Item>
                     </Col>
@@ -132,7 +132,7 @@ function SafeConfig(props) {
                 <Card title={`第二级减速设置`}>
                   <Row>
                     <Col span={12}>
-                      <Form.Item name="switch2" label="启用">
+                      <Form.Item name="switch2" label="启用" valuePropName='checked'>
                         <Switch onClick={switch2} disabled={disabled1} />
                       </Form.Item>
                     </Col>
@@ -154,7 +154,7 @@ function SafeConfig(props) {
                     </Col>
                     <Col span={12}>
                       <Form.Item
-                        name="maxSpeed1"
+                        name="maxSpeed2"
                         label="空间最大速度"
                         help="mm/s"
                       >
@@ -171,7 +171,7 @@ function SafeConfig(props) {
             <TabPane tab="碰撞检测" key="2">
               <div style={{ height: "450px", overflow: "scroll" }}>
                 <Card title="运动碰撞检测">
-                  <Form.Item name="touch1switch" label="开关">
+                  <Form.Item name="touch1switch" label="开关" valuePropName='checked'>
                     <Switch />
                   </Form.Item>
 
@@ -202,7 +202,7 @@ function SafeConfig(props) {
                   </Row>
                 </Card>
                 <Card title="点动碰撞检测">
-                  <Form.Item name="touch2switch" label="开关">
+                  <Form.Item name="touch2switch" label="开关" valuePropName='checked'>
                     <Switch />
                   </Form.Item>
                   <Row>
@@ -234,7 +234,7 @@ function SafeConfig(props) {
                 <Card title="碰撞回退与自恢复">
                   <Row>
                     <Col span={12}>
-                      <Form.Item name="backSwitch" label="碰撞回退开关">
+                      <Form.Item name="backSwitch" label="碰撞回退开关" valuePropName='checked'>
                         <Switch />
                       </Form.Item>
                     </Col>
@@ -256,7 +256,7 @@ function SafeConfig(props) {
                   </Row>
                   <Row>
                     <Col span={12}>
-                      <Form.Item name="recoverSwitch" label="碰撞自恢复开关">
+                      <Form.Item name="recoverSwitch" label="碰撞自恢复开关" valuePropName='checked'>
                         <Switch />
                       </Form.Item>
                     </Col>

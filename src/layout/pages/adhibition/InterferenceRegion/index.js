@@ -130,48 +130,51 @@ function InterferenceRegion(props) {
             </p>
           </Col>
           <Col span={7}>
-          <p style={{ height: 20 }}> </p>
-            <div>
-              <Form.Item
-                name="preRobot"
-                className="user1"
-                label={intl.get("工艺号")}
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select disabled={isDisabled}>
-                  <Option value="Tool1">{intl.get("工具手")}1</Option>
-                  <Option value="Tool2">{intl.get("工具手")}2</Option>
-                  <Option value="Tool3">{intl.get("工具手")}3</Option>
-                  <Option value="Tool4">{intl.get("工具手")}4</Option>
-                  <Option value="Tool5">{intl.get("工具手")}5</Option>
-                  <Option value="Tool6">{intl.get("工具手")}6</Option>
-                </Select>
-              </Form.Item>
-            </div>
-            <div>
-              <Form.Item
-                name="preRobot"
-                label={intl.get("干涉区使能")}
-                className="user1"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Switch
-                  checkedChildren="开"
-                  unCheckedChildren="关"
-                  style={{ width: 40 }}
-                  defaultChecked
-                  disabled={isDisabled}
-                />
-              </Form.Item>
-            </div>
+            <p style={{ height: 20 }}> </p>
+            <Form>
+              <div>
+                <Form.Item
+                  name="preRobot1"
+                  className="user1"
+                  label={intl.get("工艺号")}
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Select disabled={isDisabled}>
+                    <Option value="Tool1">{intl.get("工具手")}1</Option>
+                    <Option value="Tool2">{intl.get("工具手")}2</Option>
+                    <Option value="Tool3">{intl.get("工具手")}3</Option>
+                    <Option value="Tool4">{intl.get("工具手")}4</Option>
+                    <Option value="Tool5">{intl.get("工具手")}5</Option>
+                    <Option value="Tool6">{intl.get("工具手")}6</Option>
+                  </Select>
+                </Form.Item>
+              </div>
+              <div>
+                <Form.Item
+                  name="preRobot2"
+                  label={intl.get("干涉区使能")}
+                  className="user1"
+                  valuePropName='checked'
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Switch
+                    checkedChildren="开"
+                    unCheckedChildren="关"
+                    style={{ width: 40 }}
+                    defaultChecked
+                    disabled={isDisabled}
+                  />
+                </Form.Item>
+              </div>
+            </Form>
           </Col>
         </Row>
       </div>

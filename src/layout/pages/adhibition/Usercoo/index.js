@@ -45,26 +45,26 @@ function Usercoo(props) {
         <Row style={{width:"100%"}}>
           <Col span={20} offset={2}>
             <div style={{ paddingBottom: 10 }}>
-              <p>
+              <div>
                 <span>{intl.get("当前用户坐标")}:</span>
                 <Select
                   defaultValue="无"
                   style={{ width: 200, margin: 20 }}
                   disabled={isDisabled}
                 >
-                  <Option value="tool0">{intl.get("无")}</Option>
-                  <Option value="tool1">{intl.get("用户坐标")}1</Option>
-                  <Option value="tool2">{intl.get("用户坐标")}2</Option>
-                  <Option value="tool3">{intl.get("用户坐标")}3</Option>
-                  <Option value="tool4">{intl.get("用户坐标")}4</Option>
-                  <Option value="tool5">{intl.get("用户坐标")}5</Option>
-                  <Option value="tool6">{intl.get("用户坐标")}6</Option>
-                  <Option value="tool7">{intl.get("用户坐标")}7</Option>
-                  <Option value="tool8">{intl.get("用户坐标")}8</Option>
-                  <Option value="tool9">{intl.get("用户坐标")}9</Option>
+                  <Option key='1' value="tool0">{intl.get("无")}</Option>
+                  <Option key='2' value="tool1">{intl.get("用户坐标")}1</Option>
+                  <Option key='3' value="tool2">{intl.get("用户坐标")}2</Option>
+                  <Option key='4' value="tool3">{intl.get("用户坐标")}3</Option>
+                  <Option key='5' value="tool4">{intl.get("用户坐标")}4</Option>
+                  <Option key='6' value="tool5">{intl.get("用户坐标")}5</Option>
+                  <Option key='7' value="tool6">{intl.get("用户坐标")}6</Option>
+                  <Option key='8' value="tool7">{intl.get("用户坐标")}7</Option>
+                  <Option key='9' value="tool8">{intl.get("用户坐标")}8</Option>
+                  <Option key='10' value="tool9">{intl.get("用户坐标")}9</Option>
                 </Select>
-              </p>
-              <p>
+              </div>
+              <div>
                 <Button
                   style={{ width: 160 }}
                   type="primary"
@@ -72,10 +72,11 @@ function Usercoo(props) {
                 >
                   {intl.get("选中")}
                 </Button>
-              </p>
+              </div> 
             </div>
             <div className="usertab">
               <table>
+                <tbody>
                 <tr align="center">
                   <td>X{intl.get("轴")}</td>
                   <td>
@@ -142,6 +143,7 @@ function Usercoo(props) {
                   </td>
                   <td>mm</td>
                 </tr>
+                </tbody>
               </table>
             </div>
           </Col>

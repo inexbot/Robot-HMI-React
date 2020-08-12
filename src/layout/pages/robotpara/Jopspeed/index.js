@@ -206,7 +206,7 @@ function JogSpeed(props) {
         <div className="jogspeed2">
           <p className="p1">{intl.get("点动灵敏度")}</p>
           <Input disabled={isDisabled} style={{width:200}}/>
-          <p className="p2">{intl.get("默认值0.001")}</p>
+          <p className="p2">默认值0.001</p>
         </div>
       </div>
     </div>

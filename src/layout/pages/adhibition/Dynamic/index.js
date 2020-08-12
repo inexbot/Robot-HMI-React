@@ -136,43 +136,47 @@ function Dynami(props) {
                 </Form>
               </Col>
               <Col span={10} offset={1}>
-                <Form.Item
-                  name="preRobot"
-                  label={intl.get("拖动示教")}
-                  className="dynamic2"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Switch
-                    checkedChildren="开"
-                    unCheckedChildren="关"
-                    style={{ width: 40 }}
-                    defaultChecked
-                  />
-                </Form.Item>
-                <Form.Item
-                  name="preRobot"
-                  label={intl.get("碰撞示教")}
-                  className="dynamic2"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Switch
-                    checkedChildren="开"
-                    unCheckedChildren="关"
-                    style={{ width: 40 }}
-                    defaultChecked
-                  />
-                </Form.Item>
-                <Button type="primary" style={{ margin: 20 }}>
-                  {intl.get("碰撞清除")}
-                </Button>
+                <Form>
+                  <Form.Item
+                    name="preRobot1"
+                    label={intl.get("拖动示教")}
+                    className="dynamic2"
+                    valuePropName='checked'
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <Switch
+                      checkedChildren="开"
+                      unCheckedChildren="关"
+                      style={{ width: 40 }}
+                      defaultChecked
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name="preRobot2"
+                    label={intl.get("碰撞示教")}
+                    className="dynamic2"
+                    valuePropName='checked'
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <Switch
+                      checkedChildren="开"
+                      unCheckedChildren="关"
+                      style={{ width: 40 }}
+                      defaultChecked
+                    />
+                  </Form.Item>
+                  <Button type="primary" style={{ margin: 20 }}>
+                    {intl.get("碰撞清除")}
+                  </Button>
+                </Form>
               </Col>
             </Row>
           </TabPane>

@@ -190,7 +190,7 @@ function RecoverAndBackup (props) {
       {/* 头部 */}
       <ConTitle
         title={intl.get("恢复与备份")}
-        subtitle={intl.get("恢复与备份小标题")}
+        subtitle="恢复与备份小标题"
       />
       {/* 主要内容 */}
       <div className="recoverandbackup">

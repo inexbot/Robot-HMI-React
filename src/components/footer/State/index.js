@@ -23,7 +23,7 @@ function State(props) {
   };
   const mountLeft = (value) => {
     let key = value.key;
-    document.getElementById("leftframe").style.display = "block";
+
     switch (key) {
       // case "0":
       //   changeLeft("System");
@@ -39,9 +39,11 @@ function State(props) {
       //   break;
       case "4":
         changeLeft("Torque");
+        document.getElementById("leftframe").style.display = "block";
         break;
       case "5":
         changeLeft("Rotation");
+        document.getElementById("leftframe").style.display = "block";
         break;
       // case "6":
       //   changeLeft("IOFunction");
@@ -55,12 +57,14 @@ function State(props) {
         break;
       case "9":
         changeLeft("Position");
+        document.getElementById("leftframe").style.display = "block";
         break;
       // case "10":
       //   changeLeft("Quickcontrol");
       //   break;
       case "11":
         changeLeft("Jog");
+        document.getElementById("leftframe").style.display = "block";
         break;
       default:
         return null;

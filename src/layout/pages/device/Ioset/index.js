@@ -76,7 +76,7 @@ function IOSet(props) {
                             </Row>
                         </div>
                         <div style={{ marginTop: 20 }}>
-                            <p>
+                            <div>
                                 <span>
                                     {intl.get("虚拟IO数量")} ：
                                 </span>
@@ -85,7 +85,7 @@ function IOSet(props) {
                                     <Option value="1">1</Option>
                                     <Option value="2">2</Option>
                                 </Select>
-                            </p>
+                            </div>
                             <Row>
                                 <Col span={11} className="card">
                                     <img src="../../../images/card2.png" style={{ width: "100%" }} alt="" />

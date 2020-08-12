@@ -28,6 +28,7 @@ function Position(props) {
       coord:NowloaNum,
       robot:props.currentRobot
     }
+    sendMSGtoController("CURRENTPOS_INQUIRE",dataList)
     let TimeSert = setInterval(() => {
       sendMSGtoController("CURRENTPOS_INQUIRE",dataList)
     }, 600);

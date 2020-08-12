@@ -577,5 +577,7 @@ export const CommandList = {
     // 查询电机扭矩
     CURRENTTORQ_INQUIR:0x2a06,
 
-    
+    // 查询工具手参数
+    TOOLPARAMETER_INQUIRE:0x3806,
+
 };

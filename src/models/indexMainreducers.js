@@ -599,6 +599,12 @@ export const indexMainreducers = {
           let _state = JSON.parse(JSON.stringify(state));   
           _state.mainState.MotorTorque = action.data;
           return _state
+        },
+        // 查询工具手参数
+        inquireToohands(state, action){
+          let _state = JSON.parse(JSON.stringify(state));   
+          _state.Toohands.value = action.data
+          return _state
         }
     }
 }

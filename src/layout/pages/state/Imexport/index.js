@@ -22,19 +22,24 @@ function Imexport(props){
   // 点击标签页
   const callback = (key) =>{
     setKeySum(Number(key))
-
   }
   // 更新数据
   useEffect(()=>{
     setnowValue(props.Imexport.status)
-  },[props.Imexport.status])
+  },[props.Imexport])
   const onChange = useCallback((i,checked)=>{
     let DataList = { 
       port:i+1,
       status:Number(checked),
     }
     sendMSGtoController("GPIO_DOUT_SET",DataList)
-  },[])
+    if( checked === false ){
+      nowValue.splice(i,1,0)
+    }else{
+      nowValue.splice(i,1,1)
+    }
+    setnowValue([...nowValue])
+  },[nowValue])
 
   // 获取数据
   useEffect(()=>{
@@ -82,7 +87,7 @@ function Imexport(props){
       if(i < 8 ){
         if( KeySum === 2 ){
           Onedata.push(
-            {key:`${i+1}`, name:Name, type:Type, value:(<Switch defaultChecked={nowValue[i]} onChange={onChange.bind(null,i)} />) }
+            {key:`${i+1}`, name:Name, type:Type, value:(<Switch checked={nowValue[i]} onChange={onChange.bind(null,i)} />) }
           )
         }else{
           Onedata.push(
@@ -92,7 +97,7 @@ function Imexport(props){
       }else{
         if( KeySum === 2 ){
           Twodata.push(
-            {key:`${i+1}`, name:Name, type:Type, value:(<Switch defaultChecked={nowValue[i]} onChange={onChange.bind(null,i)} />) }
+            {key:`${i+1}`, name:Name, type:Type, value:(<Switch checked={nowValue[i]} onChange={onChange.bind(null,i)} />) }
           )
         }else{
           Twodata.push(

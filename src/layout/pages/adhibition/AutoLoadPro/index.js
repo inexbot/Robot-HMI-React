@@ -50,68 +50,72 @@ function AutoLoadPro(props) {
       <div className="autoLoadpro">
         <Row>
           <Col span={10} className="autoLoad">
-            <div>
-              <Form.Item
-                name="preRobot"
-                label={intl.get("安全使能")}
-                className="autoLoad_hei"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Switch
-                  checkedChildren="开"
-                  unCheckedChildren="关"
-                  style={{ width: 40 }}
-                  defaultChecked
-                  disabled={isDisabled}
-                />
-              </Form.Item>
-            </div>
-            <div>
-              <Form.Item
-                name="L1"
-                label={intl.get("运行速度")}
-                className="autoLoad_hei"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input disabled={isDisabled} />
-              </Form.Item>
-            </div>
-            <div>
-              <Form.Item
-                name="L2"
-                label={intl.get("运行次数")}
-                className="autoLoad_hei"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input disabled={isDisabled} />
-              </Form.Item>
-            </div>
-            <div>
-              <Form.Item
-                name="L3"
-                label={intl.get("运行程序")}
-                className="autoLoad_hei"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <p>未设置</p>
-              </Form.Item>
-            </div>
+            <Form>
+              <div>
+                <Form.Item
+                  name="preRobot"
+                  label={intl.get("安全使能")}
+                  className="autoLoad_hei"
+                  valuePropName='checked'
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Switch
+                    checkedChildren="开"
+                    unCheckedChildren="关"
+                    style={{ width: 40 }}
+                    defaultChecked
+                    disabled={isDisabled}
+                  />
+                </Form.Item>
+              </div>
+              <div>
+                <Form.Item
+                  name="L1"
+                  label={intl.get("运行速度")}
+                  className="autoLoad_hei"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input disabled={isDisabled} />
+                </Form.Item>
+              </div>
+              <div>
+                <Form.Item
+                  name="L2"
+                  label={intl.get("运行次数")}
+                  className="autoLoad_hei"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input disabled={isDisabled} />
+                </Form.Item>
+              </div>
+              <div>
+                <Form.Item
+                  name="L3"
+                  label={intl.get("运行程序")}
+                  className="autoLoad_hei"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <p>未设置</p>
+                </Form.Item>
+                
+              </div>
+            </Form>
           </Col>
         </Row>
         <Row>

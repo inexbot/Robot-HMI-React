@@ -82,6 +82,9 @@ function TeachLayout(props) {
   useEffect(() => {
     form.setFieldsValue({
       axis1: props.pos[0],
+      axis8: props.pos[0],
+      axis9: props.pos[0],
+      axis10: props.pos[0],
       axis2: props.pos[1],
       axis3: props.pos[2],
       axis4: props.pos[3],
@@ -142,8 +145,8 @@ function TeachLayout(props) {
     <div>
       {/* 头部 */}
       <ConTitle
-        title={intl.get("控制")}
-        subtitle={intl.get("机器人控制操作")}
+        title="控制"
+        subtitle="机器人控制操作"
       />
       {/* 悬浮按钮 */}
       <div className="hoverButton1">
@@ -340,7 +343,7 @@ function TeachLayout(props) {
                         >
                           -
                         </Button>
-                        <Form.Item name="axis1">
+                        <Form.Item name="axis8">
                           <Input disabled={true} />
                         </Form.Item>
                         <Button
@@ -364,7 +367,7 @@ function TeachLayout(props) {
                         >
                           -
                         </Button>
-                        <Form.Item name="axis1">
+                        <Form.Item name="axis9">
                           <Input disabled={true} />
                         </Form.Item>
                         <Button
@@ -428,7 +431,7 @@ function TeachLayout(props) {
                             >
                               -
                             </Button>
-                            <Form.Item name="axis1">
+                            <Form.Item name="axis10">
                               <Input disabled={true} />
                             </Form.Item>
                             <Button

@@ -39,7 +39,7 @@ function Language() {
       {/* 主要内容 */}
       <div className="Language">
         <div style={{ paddingBottom: 10, paddingTop:30 }}>
-          <p style={{textAlign:"center"}}>
+          <div style={{textAlign:"center"}}>
             <span>{intl.get("选择语言")}:</span>
             <Select
               defaultValue={localStorage.getItem("lang")}
@@ -50,7 +50,7 @@ function Language() {
               <Option value="zh-CN">中文/Chinese</Option>
               <Option value="en-US">英文/English</Option>
             </Select>
-          </p>
+          </div>
         </div>
       </div>
     </div>
