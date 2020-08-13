@@ -56,78 +56,52 @@ function Tool(props) {
       }
   }, [props.currentTool]);
 
+  const handChange = (curToo) =>{
+    let toolData = {
+      robot: props.currentRobot,
+      curToolNum: curToo
+    };
+    if( curToo === 0 ){
+      sendMSGtoController("TOOLNUMBER_SWITCH", toolData);
+    }else{
+      sendMSGtoController("TOOLNUMBER_SWITCH", toolData);
+      sendMSGtoController("TOOLPARAMETER_INQUIRE",{toolNum:curToo})
+    }
+
+  }
+
   const handleChangemode = value => {
     console.log(value)
     switch (value) {
       case "Tool0":
-        let toolData0 = {
-          robot: props.currentRobot,
-          curToolNum: 0
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData0);
+        handChange(0)
         break;
       case "Tool1":
-        let toolData1 = {
-          robot: props.currentRobot,
-          curToolNum: 1
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData1);
+        handChange(1)
         break;
       case "Tool2":
-        let toolData2 = {
-          robot: props.currentRobot,
-          curToolNum: 2
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData2);
+        handChange(2)
         break;
       case "Tool3":
-        let toolData3 = {
-          robot: props.currentRobot,
-          curToolNum: 3
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData3);
+        handChange(3)
         break;
       case "Tool4":
-        let toolData4 = {
-          robot: props.currentRobot,
-          curToolNum: 4
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData4);
+        handChange(4)
         break;
       case "Tool5":
-        let toolData5 = {
-          robot: props.currentRobot,
-          curToolNum: 5
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData5);
+        handChange(5)
         break;
       case "Tool6":
-        let toolData6 = {
-          robot: props.currentRobot,
-          curToolNum: 6
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData6);
+        handChange(6)
         break;
       case "Tool7":
-        let toolData7 = {
-          robot: props.currentRobot,
-          curToolNum: 7
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData7);
+        handChange(7)
         break;
       case "Tool8":
-        let toolData8 = {
-          robot: props.currentRobot,
-          curToolNum: 8
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData8);
+        handChange(8)
         break;
       case "Tool9":
-        let toolData9 = {
-          robot: props.currentRobot,
-          curToolNum: 9
-        };
-        sendMSGtoController("TOOLNUMBER_SWITCH", toolData9);
+        handChange(9)
         break;
         default:
           break;

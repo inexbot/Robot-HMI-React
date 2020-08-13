@@ -580,4 +580,7 @@ export const CommandList = {
     // 查询工具手参数
     TOOLPARAMETER_INQUIRE:0x3806,
 
+    // 设置工具手参数
+    TOOLPARAMETER_SET:0x3805,
+
 };

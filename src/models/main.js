@@ -26,6 +26,7 @@ import { Backup } from "./default/Backup";
 import { Ioremote } from "./default/Ioremote";
 import { location } from "./default/location";
 import { mainState } from "./default/mainstate";
+import { Toohands } from "./default/Toohands";
  
 const Setting = {
   inquireFailedRetryTime: 1000,
@@ -87,7 +88,8 @@ export default {
     Backup,
     Ioremote,
     location,
-    mainState
+    mainState,
+    Toohands
   },
 
   subscriptions: {

@@ -170,7 +170,7 @@ function GlobalNumberical(props){
       { key:i,
         name:<Button type='primary' style={BjIndex === i?GRstyle:YLstyle} onClick={ nameChangeBj.bind(null,i,TypeName) }>{TypeName}</Button>,
         value:<Input value={i<11?VarbalType===1?Number(GlobalNumbericalObj[i-1].varValue):String(GlobalNumbericalObj[i-1].varValue)
-          :VarbalType===1?Number(GlobalNumbericalObj[i-1].varValue):String(GlobalNumbericalObj[i-(IntSizeNum-10)-1].varValue)}
+          :VarbalType===1?Number(GlobalNumbericalObj[(i+9)%10].varValue):String(GlobalNumbericalObj[i-(IntSizeNum-10)-1].varValue)}
         style={{ borderTop:'none',borderLeft:'none',borderRight:'none' }}  disabled={ ShowAllIpt === true? true: BjIndex === i? false : true }
         onChange={(e)=>{IptChangeValue(e,i,TypeName)}}
         />,
@@ -239,6 +239,17 @@ function GlobalNumberical(props){
               清除
             </Button>
           </div>
+          <div className="hoverButton3">
+            <Button size="large" shape="circle" onClick={(e) => {
+                setValueChange(true);
+                setShouAllIpt(true);
+              }}
+              type="primary"
+              style={{ background: "#45b97c", border: "none" }}
+            >
+              取消
+            </Button>
+          </div>
           <div className="hoverButton1">
             <Button size="large" shape="circle" onClick={(e) => {
                 setValueChange(true);
@@ -283,10 +294,15 @@ function GlobalNumberical(props){
         showQuickJumper={true}
         total={990}
         onChange={( page)=>{
-          setIntSizeNum(page*10)
-          setyelowSum(0)
-          setValueChange(true);
-          setShouAllIpt(true);
+          if( valueChange === false ){
+
+          }else{
+            setIntSizeNum(page*10)
+            setyelowSum(0)
+            setValueChange(true);
+            setShouAllIpt(true);
+          }
+
         }}
       />
     </div>

@@ -603,7 +603,7 @@ export const indexMainreducers = {
         // 查询工具手参数
         inquireToohands(state, action){
           let _state = JSON.parse(JSON.stringify(state));   
-          _state.Toohands.value = action.data
+          _state.Toohands.value = action.data;
           return _state
         }
     }
