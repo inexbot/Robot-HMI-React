@@ -37,7 +37,7 @@ function JogSpeed(props) {
       </div>
       {/* 主要内容 */}
       <div className="jogspeed">
-        <Tabs defaultActiveKey="1">
+        <Tabs defaultActiveKey="1" style={{ width:'88vw' }}>
           <TabPane tab={intl.get("关节")} key="1" className="jog_tab">
             <Tabs
               defaultActiveKey="1"

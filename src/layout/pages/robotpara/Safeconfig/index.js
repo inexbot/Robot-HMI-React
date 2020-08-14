@@ -181,7 +181,7 @@ function SafeConfig(props) {
                         <Slider
                           min={1}
                           max={100}
-                          onChange={onChange1}
+                          onAfterChange={onChange1}
                           value={
                             typeof inputValue1 === "number" ? inputValue1 : 0
                           }
@@ -193,7 +193,7 @@ function SafeConfig(props) {
                         <InputNumber
                           style={{ marginLeft: 16 }}
                           value={inputValue1}
-                          onChange={onChange1}
+                          onAfterChange={onChange1}
                           max={100}
                           min={1}
                         />
@@ -211,7 +211,7 @@ function SafeConfig(props) {
                         <Slider
                           min={1}
                           max={100}
-                          onChange={onChange2}
+                          onAfterChange={onChange2}
                           value={
                             typeof inputValue2 === "number" ? inputValue2 : 0
                           }
@@ -223,7 +223,7 @@ function SafeConfig(props) {
                         <InputNumber
                           style={{ marginLeft: 16 }}
                           value={inputValue2}
-                          onChange={onChange2}
+                          onAfterChange={onChange2}
                           max={100}
                           min={1}
                         />

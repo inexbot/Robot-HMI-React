@@ -24,6 +24,9 @@ const AutoLoadPro = asyncComponents(() => import("./layout/pages/adhibition/Auto
 const RobotRange = asyncComponents(() => import("./layout/pages/adhibition/RobotRange") );
 const InterferenceRegion = asyncComponents(() => import("./layout/pages/adhibition/InterferenceRegion") );
 const Dynamic = asyncComponents(() => import("./layout/pages/adhibition/Dynamic") );
+const SevenTdema = asyncComponents(() => import("./layout/pages/adhibition/demarcate/SevenTdema") );
+const TwentyTdema = asyncComponents(() => import("./layout/pages/adhibition/demarcate/TwentyTdema") );
+const Userdema = asyncComponents(() => import("./layout/pages/adhibition/demarcate/Userdema") );
 
 // 外设参数
 const IORemote = asyncComponents(() => import("./layout/pages/device/Ioremote") );
@@ -128,6 +131,10 @@ function Router(props) {
         <RouterDom.Route path="/robotRange" component={RobotRange} />
         <RouterDom.Route path="/interferenceRegion" component={InterferenceRegion} />
         <RouterDom.Route path="/dynamic" component={Dynamic} />
+        <RouterDom.Route path="/sevenTdema" component={SevenTdema} />
+        <RouterDom.Route path="/twentyTdema" component={TwentyTdema} />
+        <RouterDom.Route path="/userdema" component={Userdema} />
+
         {/* 外设参数 */}
         <RouterDom.Route path="/IORemote" component={IORemote} />
         <RouterDom.Route path="/IOStatusHint" component={IOStatusHint} />

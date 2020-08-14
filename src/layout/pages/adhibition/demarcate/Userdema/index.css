@@ -1,0 +1,35 @@
+.Toolhands,.Usercoo{
+    text-align: center;
+    padding-top: 30px;
+}
+.Toolhands .ant-tabs,.Usercoo .ant-tabs{
+    border-radius: 10px;
+}
+
+.Toolhands .tooltab {
+    padding-top: 20px;
+    border-top: 1px solid #cccccc;
+}
+.Usercoo .usertab {
+    padding-top: 20px;
+    border-top: 1px solid #cccccc;
+}
+
+.Toolhands .tooltab table,.Usercoo .usertab table{
+    margin: 0 auto;
+}
+
+.Toolhands table tr th, .Toolhands table tr td,.Usercoo table tr th, .Usercoo table tr td {
+    padding: 10px 30px;
+}
+
+.linkButton{
+    position: absolute;
+    top: 180px;
+    right: 100px;
+    z-index: 999;
+  }
+
+  .linkButton button{
+    margin-left: 10px;
+  }

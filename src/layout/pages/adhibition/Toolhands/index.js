@@ -85,12 +85,13 @@ function Toolhands(props) {
     }else{
       if(el === '7'){
         console.log('点击了7点标定')
+        history.push('/sevenTdema')
 
       }else{
         console.log('点击了20点标定')
+        history.push('/twentyTdema')
       }
     }
-
   };
   // 渲染表格
   useEffect(()=>{
