@@ -44,6 +44,7 @@ function ProjectComponent(props) {
       project: selectedProject,
       jobname: selectedProgram[0],
     };
+    console.log(selectedProject,selectedProgram[0])
     sendMSGtoServer("openProgram", openprogram);
     history.push("/Program");
     // console.log(props.program)
