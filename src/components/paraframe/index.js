@@ -45,6 +45,7 @@ function ParaFrame(props) {
 
   const renderFrame = () => {
     return paraIndex.map((value) => {
+      console.log(paraIndex)
       return (
         <div className={value.className} key={value.className}>
           <ul>
