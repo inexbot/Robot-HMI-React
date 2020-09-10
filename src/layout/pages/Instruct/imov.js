@@ -91,11 +91,10 @@ function Imov(props) {
       pos = props.currentPos;
       posType = 0;
       posName = newPos(posSum);
-      posName = posSum
     } else {
-      pos = value.POS;
+      pos = null;
       posType = 1;
-      posName = posSum;
+      posName = value.POS;
     }
     if (props.insertOrChange === "change") {
       if( props.programSeletedRow.length >= 2){

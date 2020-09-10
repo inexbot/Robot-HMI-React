@@ -58,9 +58,9 @@ function MovcA(props) {
       posType = 0;
       posName = newPos(posSum);
     } else {
-      pos = value.POS;
+      pos = null;
       posType = 1;
-      posName = null;
+      posName =  value.POS;
     }
     console.log(value);
     if (props.insertOrChange === "change") {

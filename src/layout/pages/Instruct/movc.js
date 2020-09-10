@@ -84,9 +84,9 @@ function Movc(props) {
       posType = 0;
       posName = newPos(posSum);
     } else {
-      pos = value.POS;
+      pos = null; 
       posType = 1;
-      posName = null;
+      posName = value.POS;
     }
     if (props.insertOrChange === "change") {
       if( props.programSeletedRow.length >= 2){

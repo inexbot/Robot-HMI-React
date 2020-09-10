@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { renderPosOption, } from "./renderPos";
+import { renderPosOption, newPos } from "./renderPos";
 import { Form, Input, Select, message} from "antd";
 import { connect } from "dva";
 import { sendMSGtoServer } from "service/network";
@@ -83,12 +83,14 @@ function Movj(props) {
     if (value.POS === "new") {
       pos = props.currentPos;
       posType = 0;
+      posName = newPos(posSum);
     } else {
-      pos = value.POS;
+      pos = null;
       posType = 1;
-      posName = null;
+      posName = value.POS;
     }
     if (props.insertOrChange === "change") {
+      console.log('ssssssssssss')
       if( props.programSeletedRow.length >= 2){
         let nums = props.programSeletedRow.map((index)=>{
           return index.order
